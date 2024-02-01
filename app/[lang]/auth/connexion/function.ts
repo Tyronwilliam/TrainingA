@@ -9,15 +9,20 @@ export const handleSubmission = async (
   router: AppRouterInstance
 ) => {
   startSubmission();
-  const result = await signIn("credentials", {
-    email: values?.email,
-    password: values?.password,
-    redirect: false,
-  });
-  if (result?.error) {
-    finishSubmission(result?.error);
-  } else {
-    finishSubmission();
-    router.push("/");
+  try {
+    const result = await signIn("credentials", {
+      email: values?.email,
+      password: values?.password,
+      redirect: false,
+    });
+    if (result?.error) {
+      finishSubmission(result?.error);
+    } else {
+      finishSubmission();
+      router.push("/");
+    }
+  } catch (err) {
+    console.log(err);
+    finishSubmission("An error occurred");
   }
 };

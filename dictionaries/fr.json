@@ -60,13 +60,16 @@
     "formEvent": {
       "send": "Envoyer",
       "processing": "Envoi en cours",
-      "connexion": "Se connecter"
+      "connexion": "Se connecter",
+      "validate": "Validé",
+      "submit": "Soumettre"
     },
     "accueil": "Accueil"
   },
   "general": {
     "form": {
-      "password": "Mot de passe"
+      "password": "Mot de passe",
+      "passwordConfirmation": "Confirmation du mot de passe"
     }
   },
   "footer": {
@@ -83,8 +86,17 @@
     "nav": [
       {
         "label": "Mot de passe oublié ?",
-        "link": "fr/forgot-password"
+        "link": "forgot-password"
       }
     ]
+  },
+  "forgot": {
+    "h1": "Mot de passe oublié ?",
+    "p": "Veuillez entrer votre adresse email pour recevoir un email de réinitialisation.",
+    "emailSend": "Un mail vous a été expédié. Vous devriez le recevoir dans quelques minutes."
+  },
+  "reset": {
+    "h1": "Réinitialiser le mot de passe",
+    "passwordConfirmation": "Confirmation du mot de passe"
   }
 }

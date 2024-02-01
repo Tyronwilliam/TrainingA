@@ -38,11 +38,8 @@ export const handleSubmit = async (
       const response = await sendContactMail(values);
       handleSubmissionResponse(response, finishSubmission);
     } catch (error: any) {
-      console.error(
-        "Une erreur s'est produite lors de la requête:",
-        error.message
-      );
-      finishSubmission("Une erreur est survenue");
+      console.error(error.message);
+      finishSubmission("An error occurred");
     }
   } else {
     finishSubmission("Google n'autorise pas l'envoie de votre mail");

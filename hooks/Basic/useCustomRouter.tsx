@@ -1,8 +1,9 @@
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const useCustomRouter = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const routerPushTo = (arg: string) => {
     console.log("CLICK", arg);
@@ -12,7 +13,7 @@ const useCustomRouter = () => {
     }
     return router.push(`${pathname}/${arg}`);
   };
-  return { router, pathname, routerPushTo };
+  return { router, pathname, routerPushTo, searchParams };
 };
 
 export default useCustomRouter;

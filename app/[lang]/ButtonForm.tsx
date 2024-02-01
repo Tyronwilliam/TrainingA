@@ -20,12 +20,11 @@ const ButtonForm = ({
     <button
       type="submit"
       className={classNames({
-        "boutonSlideCommon shrink-0 text-lg max-w-[120px] w-full radius p-2.5 ":
-          formik.isValid && !isSubmitting,
-        "border-white border-[1px] shrink-0 text-lg max-w-[120px] w-full radius	p-2.5 opacity-50":
-          !formik.isValid,
-        "border-white border-[1px] shrink-0 text-lg max-w-[180px] w-full radius	p-2.5 opacity-50":
-          isSubmitting && formik.isValid,
+        "shrink-0 text-lg max-w-[120px] w-full radius p-2.5 border-[1px] border-white":
+          true,
+        boutonSlideCommon: formik.isValid && !isSubmitting,
+        "opacity-50": !formik.isValid,
+        "max-w-[180px] opacity-50": isSubmitting && formik.isValid,
       })}
       disabled={!formik.isValid || isSubmitting}
     >

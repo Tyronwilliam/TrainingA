@@ -1,3 +1,4 @@
+import useToggle from "@/hooks/Basic/useToggle";
 import classNames from "classnames";
 import { FormikProps } from "formik";
 import { FaEye } from "react-icons/fa";
@@ -44,19 +45,16 @@ export const InputString = ({
     </div>
   );
 };
-type InputPasswordPropsWithShow = Omit<InputLabelProps, "placeholder"> & {
-  show: boolean;
-  toggleShow: () => void;
-};
+type InputPasswordPropsWithShow = Omit<InputLabelProps, "placeholder">;
 
 export const InputPassword = ({
   id,
   formik,
   label,
-  show,
-  toggleShow,
   requis,
 }: InputPasswordPropsWithShow) => {
+  const { toggle, open } = useToggle();
+
   const errorText =
     formik.errors && formik.touched[id] && formik.errors[id]
       ? formik.errors[id]?.toString()
@@ -74,21 +72,21 @@ export const InputPassword = ({
         <input
           className="grow "
           data-testid="input__value"
-          type={`${show ? "text" : "password"}`}
+          type={`${open ? "text" : "password"}`}
           id={id}
           name={id}
           onChange={formik.handleChange}
           value={`${formik.values[id]}`}
           onBlur={formik.handleBlur}
         />{" "}
-        {show ? (
+        {open ? (
           <FaEyeSlash
-            onClick={toggleShow}
+            onClick={toggle}
             className="cursor-pointer w-5 h-5  absolute right-0 z-50"
           />
         ) : (
           <FaEye
-            onClick={toggleShow}
+            onClick={toggle}
             className="cursor-pointer w-5 h-5  absolute right-0 z-50"
           />
         )}

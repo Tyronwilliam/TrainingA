@@ -11,3 +11,12 @@ export interface FormikConnexionProps {
   email: string;
   password: string;
 }
+export type FormikForgotPropsWithoutPassword = Omit<
+  FormikConnexionProps,
+  "password"
+>;
+
+export interface FormikResetPasswordProps {
+  password: string;
+  passwordConfirmation: string;
+}

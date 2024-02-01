@@ -60,13 +60,16 @@
     "formEvent": {
       "send": "Send",
       "processing": "Processing",
-      "connexion": "Log in"
+      "connexion": "Log in",
+      "validate": "Validé",
+      "submit": "Submit"
     },
     "accueil": "Home"
   },
   "general": {
     "form": {
-      "password": "Password"
+      "password": "Password",
+      "passwordConfirmation": "Confirm password"
     }
   },
   "footer": {
@@ -84,8 +87,17 @@
     "nav": [
       {
         "label": "Forgot your password?",
-        "link": "en/forgot-password"
+        "link": "forgot-password"
       }
     ]
+  },
+  "forgot": {
+    "h1": "Forgot your password?",
+    "p": "Please enter your email address to receive a reset email.",
+    "emailSend": "An e-mail has been sent to you. You should receive it in a few minutes."
+  },
+  "reset": {
+    "h1": "Reset password",
+    "passwordConfirmation": "Confirm password"
   }
 }

@@ -4,14 +4,12 @@ import {
   InputString,
   TextArea,
 } from "@/app/InputLabel";
-import Spinner from "@/app/Spinner";
 import { Dictionary } from "@/types/dictionary";
 import { FormikContactProps } from "@/types/formulaire";
-import classNames from "classnames";
 import { FormikProps } from "formik";
 import ButtonForm from "../ButtonForm";
 
-interface ContactFormProps {
+export interface ContactFormProps {
   formik: FormikProps<FormikContactProps>;
   dictionary: Dictionary;
   isSubmitting: boolean;

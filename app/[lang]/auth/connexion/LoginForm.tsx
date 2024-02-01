@@ -50,8 +50,6 @@ const LoginForm = ({ dictionary }: { dictionary: Dictionary }) => {
         id={"password"}
         formik={formik}
         label={dictionary.general.form.password}
-        show={open}
-        toggleShow={toggle}
       />{" "}
       <ErrorInput errorText={submitError} />
       <Link href={`${dictionary?.connexion?.nav[0].link}`} className="text-lg">
