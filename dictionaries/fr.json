@@ -1,0 +1,85 @@
+{
+  "header": {
+    "title": "Agence Graziani",
+    "nav": [
+      {
+        "label": "Talents",
+        "link": "choix/genre"
+      },
+      {
+        "label": "A propos",
+        "link": "a-propos"
+      },
+      {
+        "label": "Contactez-nous",
+        "link": "contact"
+      },
+      {
+        "label": "Mon profil",
+        "link": "auth/profil"
+      },
+      {
+        "label": "Se connecter",
+        "link": "auth/connexion"
+      }
+    ],
+    "lang": ["fr", "en"]
+  },
+  "home": {
+    "bouton": [
+      {
+        "label": "INSCRIS-TOI",
+        "link": "/inscription"
+      }
+    ],
+    "logOut": "déconnexion"
+  },
+  "about": {
+    "title": "A propos.",
+    "sian": "L'Agence Graziani",
+    "p1": "n'est pas une agence de mannequin ou de comédien. C'est une agence qui répond à des offres de casting et de réalisation et qui en plus, via ce site, propose une base de données de talents privée accessible aux professionnels du cinéma (réalisateurs et producteurs). ",
+    "p2": "propose un service complet de réalisation et de casting sur toute la France. ",
+    "p3": "Naïs Graziani a notamment réalisé des clips (le 3ème Oeil & Alonzo), 20 épisodes de la série « Plus Belle La Vie », une série pour le Palais de Tokyo, des courts métrages primés et est actuellement en plein développement de son premier long-métrage.",
+    "p4": "Naïs est également directrice de casting. Elle a notamment travaillé sur des séries comme « Caïd » (Netflix), « Narvalo » (Canal+), « Terrain Sensible » (Arte), « Validé » saison 2 (Canal+) ou sur des longs métrages comme « Youssef Salem a du succès », « Omar la fraise », « Houria » (figu), « Bac Nord » (figu). Elle a également travaillé sur des pubs Lancôme, Tinder, Ricard, Skyn, EDF ou des clips pour Tiakola, Kungs etc. ",
+    "p5": "Sa spécialité est le casting sauvage. L'objectif est de mettre en lumière tous types de profils. L'inclusion et la bienveillance représentent l'agence Graziani.",
+    "p6": "Le cinéma parle à tout le monde et de tout le monde."
+  },
+  "contact": {
+    "label": {
+      "lastname": "Nom",
+      "firstname": "Prénom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "companyName": "Nom de l'entreprise",
+      "subject": "Sujet",
+      "message": "Message"
+    },
+    "formEvent": "Merci d'avoir pris contact avec nous, nous vous répondrons dans les meilleurs délais."
+  },
+  "cta": {
+    "formEvent": {
+      "send": "Envoyer",
+      "processing": "Envoi en cours",
+      "connexion": "Se connecter"
+    },
+    "accueil": "Accueil"
+  },
+  "general": {
+    "form": {
+      "password": "Mot de passe"
+    }
+  },
+  "footer": {
+    "termcondition": "Termes & Conditions",
+    "google": {
+      "span1": "Ce site est protégé par reCAPTCHA et Google.",
+      "link1": "Politique de confidentialité",
+      "link2": "Conditions d'utilisation",
+      "span2": "appliquées.",
+      "and": "et"
+    }
+  },
+  "connexion": {
+    "passwordForgot": "Mot de passe oublié ?"
+  }
+}

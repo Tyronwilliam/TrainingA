@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  color: white;
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+@layer base {
+  li {
+    transition: transform 0.3s ease-in-out;
+    display: inline-block;
+    position: relative;
+    font-weight: 300;
+    cursor: pointer;
+  }
+
+  li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    height: 2px;
+    width: 0;
+    background-color: black;
+    transition: width 0.3s ease-in-out;
+    border-bottom: 1px solid white;
+  }
+
+  li:hover::after {
+    width: 100%;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+  input {
+    font-size: 16px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.651);
+    border-radius: 5px;
+    padding: 15px 6px;
+    color: white;
+
+    &::placeholder {
+      color: white;
+      opacity: 0.5;
+    }
+    &:focus {
+      color: white;
+      border-color: white;
+      border-bottom: 1px solid white;
+      outline: none !important;
+    }
+  }
+  input[type="date"] {
+    color: white;
+    color-scheme: dark;
+  }
+  label {
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  textarea {
+    resize: none;
+    background: none;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px;
+    &:focus {
+      color: white;
+      border-color: white;
+      border: none;
+      border-bottom: 1px solid white;
+      outline: none !important;
+    }
+  }
+  select {
+    padding: 15px 6px;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 30px;
+    min-height: 50px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.651);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 52px;
+    overflow: auto;
+    option {
+      color: black;
+    }
+    &:focus {
+      outline: none !important;
+    }
+  }
+}
+@layer utilities {
+  .box__input {
+    width: 100%;
+    max-width: 280px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+  }
+  .boutonSlide {
+    transition: all 0.5s ease-in-out;
+    background-position: top left;
+    background: linear-gradient(to top left, black 50%, white 50%);
+    background-size: 200% 200%;
+    border: 1px solid black;
+    cursor: pointer;
+    &:hover {
+      transition: all 0.5s ease-in-out;
+      background: linear-gradient(to bottom right, white 50%, black 50%);
+      background-position: bottom right;
+      background-size: 200% 200%;
+      border: 1px solid white;
+      color: white;
+    }
+  }
+  .boutonSlideCommon {
+    transition: all 0.5s ease-in-out;
+    background-position: top left;
+    background: linear-gradient(to top left, white 50%, black 50%);
+    background-size: 200% 200%;
+    border: 1px solid white;
+    cursor: pointer;
+    &:hover {
+      transition: all 0.5s ease-in-out;
+      background: linear-gradient(to bottom right, black 50%, white 50%);
+      background-position: bottom right;
+      background-size: 200% 200%;
+      border: 1px solid black;
+      color: black;
+    }
+  }
+  .radius {
+    border-radius: 5px;
+  }
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 28px;
+    height: 28px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

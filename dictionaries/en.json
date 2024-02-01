@@ -1,0 +1,85 @@
+{
+  "header": {
+    "title": "Agency Graziani",
+    "nav": [
+      {
+        "label": "Talents",
+        "link": "en/choix/genre"
+      },
+      {
+        "label": "About us",
+        "link": "en/a-propos"
+      },
+      {
+        "label": "Contact us",
+        "link": "en/contact"
+      },
+      {
+        "label": "My account",
+        "link": "en/auth/profil"
+      },
+      {
+        "label": "Sign in",
+        "link": "en/auth/connexion"
+      }
+    ],
+    "lang": ["fr", "en"]
+  },
+  "home": {
+    "bouton": [
+      {
+        "label": "Sign Up",
+        "link": "en/inscription"
+      }
+    ],
+    "logOut": "Log Out"
+  },
+  "about": {
+    "title": "About US.",
+    "sian": "The Graziani Agency",
+    "p1": "is not a modeling or acting agency. It's an agency that responds to casting and directing offers and, via this site, offers a private talent database accessible to film professionals (directors and producers).",
+    "p2": "agency offers a complete production and casting service throughout France.",
+    "p3": "Naïs Graziani has directed music videos (le 3ème Oeil & Alonzo), 20 episodes of the series « Plus Belle La Vie », a series for the Palais de Tokyo, award-winning short films and is currently developing her first feature film.",
+    "p4": "Naïs is also a casting director. Her casting credits include series such as « Caïd » (Netflix), « Narvalo » (Canal+), « Terrain Sensible » (Arte), « Validé » saison 2 (Canal+) and feature films such as « Youssef Salem a du succès », « Omar la fraise », « Houria » (figu), « Bac Nord » (figu). She has also worked on commercials for Lancôme, Tinder, Ricard, Skyn, EDF and music videos for Tiakola, Kungs and others.",
+    "p5": "Her specialty is wild casting. The aim is to bring all types of profiles to light. Inclusion and benevolence represent the Graziani agency.",
+    "p6": "Cinema speaks to everyone and about everyone."
+  },
+  "contact": {
+    "label": {
+      "lastname": "lastname",
+      "firstname": "firstname",
+      "email": "Email",
+      "phone": "phone",
+      "companyName": "Company name",
+      "subject": "Subject",
+      "message": "Message"
+    },
+    "formEvent": "Thank you for contacting us, we'll get back to you as soon as possible."
+  },
+  "cta": {
+    "formEvent": {
+      "send": "Send",
+      "processing": "Processing",
+      "connexion": "Log in"
+    },
+    "accueil": "Home"
+  },
+  "general": {
+    "form": {
+      "password": "Password"
+    }
+  },
+  "footer": {
+    "termcondition": "Terms & Conditions",
+    "google": {
+      "span1": "This site is protected by reCAPTCHA and Google.",
+      "link1": "Privacy Policy",
+      "link2": "Terms of Use",
+      "span2": "applied.",
+      "and": "and"
+    }
+  },
+  "connexion": {
+    "passwordForgot": "Forgot your password?"
+  }
+}
