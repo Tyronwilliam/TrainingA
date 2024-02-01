@@ -1,18 +1,15 @@
 import { NavBar } from "@/app/Navigation";
+import { getDictionary } from "@/get-disctionary";
 import { Locale } from "@/i18n-config";
 import Curtain from "../Curtain";
-import VideoHome from "./VideoHome";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { ButtonHome } from "./ButtonHome";
-import { getDictionary } from "@/get-disctionary";
+import VideoHome from "./VideoHome";
 
 export default async function Home({
   params: { lang },
 }: {
   params: { lang: Locale };
 }) {
-  const session = await getServerSession(authOptions);
   const dictionary = await getDictionary(lang);
 
   return (
@@ -27,7 +24,7 @@ export default async function Home({
           style={{ height: "calc(100vh - 90px)" }}
         >
           <VideoHome />
-          <ButtonHome dictionary={dictionary} session={session} />
+          <ButtonHome dictionary={dictionary} />
         </div>
         <Curtain />
       </main>

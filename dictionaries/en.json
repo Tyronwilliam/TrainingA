@@ -79,7 +79,13 @@
       "and": "and"
     }
   },
+
   "connexion": {
-    "passwordForgot": "Forgot your password?"
+    "nav": [
+      {
+        "label": "Forgot your password?",
+        "link": "en/forgot-password"
+      }
+    ]
   }
 }

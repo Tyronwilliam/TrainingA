@@ -1,4 +1,3 @@
-"use client";
 import { Dictionary } from "@/types/dictionary";
 import Link from "next/link";
 import React from "react";

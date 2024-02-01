@@ -38,7 +38,7 @@ export default async function ContactPage({
   return (
     <>
       <PreviousNavHistory />
-      <main className="w-full min-h-full h-fit m-auto pt-5  flex flex-col">
+      <main className="w-full min-h-full h-fit m-auto mb-10 pt-5  flex flex-col">
         {CurrentView}
         <ContactFormLayout dictionary={dictionary} />
       </main>

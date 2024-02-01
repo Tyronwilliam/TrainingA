@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { FormikProps } from "formik";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
@@ -7,12 +8,14 @@ type InputLabelProps = {
   formik: FormikProps<any>;
   label: string;
   placeholder: string;
+  requis?: boolean;
 };
 export const InputString = ({
   id,
   formik,
   label,
   placeholder,
+  requis,
 }: InputLabelProps) => {
   const errorText =
     formik.errors && formik.touched[id] && formik.errors[id]
@@ -21,7 +24,12 @@ export const InputString = ({
 
   return (
     <div className="box__input" data-testid="input">
-      <label htmlFor={id}>{label}</label>
+      <Label
+        requis={requis}
+        label={label}
+        errorText={errorText}
+        value={`${formik.values[id]}`}
+      />
       <input
         data-testid="input__value"
         type={`${id === "email" ? "email" : "string"}`}
@@ -47,6 +55,7 @@ export const InputPassword = ({
   label,
   show,
   toggleShow,
+  requis,
 }: InputPasswordPropsWithShow) => {
   const errorText =
     formik.errors && formik.touched[id] && formik.errors[id]
@@ -55,7 +64,12 @@ export const InputPassword = ({
 
   return (
     <div className="box__input" data-testid="input">
-      <label htmlFor={id}>{label}</label>
+      <Label
+        requis={requis}
+        label={label}
+        errorText={errorText}
+        value={`${formik.values[id]}`}
+      />
       <div className="flex items-center w-full relative">
         <input
           className="grow "
@@ -92,6 +106,7 @@ export const TextArea = ({
   formik,
   label,
   classStyle,
+  requis,
 }: InputLabelPropsWithCustomClass) => {
   const errorText =
     formik.touched[id] && formik.errors[id]
@@ -100,7 +115,12 @@ export const TextArea = ({
 
   return (
     <div className={`box__input ${classStyle}`} data-testid="textArea">
-      <label htmlFor={id}>{label}</label>
+      <Label
+        requis={requis}
+        label={label}
+        errorText={errorText}
+        value={`${formik.values[id]}`}
+      />
       <textarea
         id={id}
         name={id}
@@ -124,6 +144,7 @@ export const InputNumber = ({
   label,
   limitNumber,
   placeholder,
+  requis,
 }: InputLabelPropsWithLimit) => {
   const errorText =
     formik.touched[id] && formik.errors[id]
@@ -132,7 +153,12 @@ export const InputNumber = ({
 
   return (
     <div className="box__input" data-testid="input_number">
-      <label htmlFor={id}>{label}</label>
+      <Label
+        requis={requis}
+        label={label}
+        errorText={errorText}
+        value={`${formik.values[id]}`}
+      />
       <input
         type="number"
         id={id}
@@ -164,5 +190,32 @@ export const ErrorInput = ({
     </div>
   ) : (
     ""
+  );
+};
+
+const Label = ({
+  label,
+  requis,
+  errorText,
+  value,
+}: {
+  label: string;
+  requis?: boolean;
+  errorText: string | undefined;
+  value: string | number | undefined;
+}) => {
+  return (
+    <label>
+      {label}:
+      {requis && (
+        <span
+          className={classNames({
+            "text-red-500": errorText || value === "",
+          })}
+        >
+          *
+        </span>
+      )}{" "}
+    </label>
   );
 };

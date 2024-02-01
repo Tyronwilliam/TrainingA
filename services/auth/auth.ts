@@ -5,28 +5,18 @@ interface LoginCredentials {
   password: string;
 }
 export const sendLoginRequest = async (data: LoginCredentials) => {
-  try {
-    return await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/auth/local`,
-      data
-    );
-  } catch (error: any) {
-    console.log(error, "ERROR LOGIN");
-    return error;
-  }
+  return await axios
+    .post(`${process.env.NEXT_PUBLIC_API_URL}/auth/local`, data)
+    .then((res) => res)
+    .catch((err) => err);
 };
 export const getUserProfile = async (jwt: string) => {
-  try {
-    return await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/me?populate=*`,
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      }
-    );
-  } catch (error) {
-    console.log(error, "ERROR GET PROFILE");
-    return error;
-  }
+  return await axios
+    .get(`${process.env.NEXT_PUBLIC_API_URL}/users/me?populate=*`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+    .then((res) => res)
+    .catch((err) => err);
 };

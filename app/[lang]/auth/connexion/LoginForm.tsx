@@ -1,46 +1,68 @@
 "use client";
-import { InputPassword, InputString } from "@/app/InputLabel";
+import { ErrorInput, InputPassword, InputString } from "@/app/InputLabel";
+import useCustomRouter from "@/hooks/Basic/useCustomRouter";
+import useFormSubmission from "@/hooks/Formulaire/useFormSubmission";
 import { Dictionary } from "@/types/dictionary";
 import {
   ConnexionSchema,
   initialValuesConnexion,
 } from "@/utils/validationConnexion";
 import { useFormik } from "formik";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import ButtonForm from "../../ButtonForm";
+import { handleSubmission } from "./function";
+import useToggle from "@/hooks/Basic/useToggle";
 
 const LoginForm = ({ dictionary }: { dictionary: Dictionary }) => {
-  const [show, setShow] = useState(false);
-
-  const toggleShow = () => {
-    setShow(!show);
-  };
+  const { isSubmitting, submitError, startSubmission, finishSubmission } =
+    useFormSubmission();
+  const { router } = useCustomRouter();
+  const { toggle, open } = useToggle();
   const formik = useFormik({
     initialValues: initialValuesConnexion,
     validationSchema: ConnexionSchema,
-    onSubmit: async (values) => {},
+    onSubmit: async (values) => {
+      handleSubmission(startSubmission, values, finishSubmission, router);
+    },
   });
+  useEffect(() => {
+    (() => formik.validateForm())();
+  }, []);
   return (
-    <form className="flex flex-col items-center justify-center w-full h-fit max-w-[730px] mt-7  gap-6">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        formik.handleSubmit(e);
+      }}
+      className="flex flex-col items-center justify-center w-full h-fit max-w-[730px] mt-7  gap-6"
+    >
       <InputString
         id={"email"}
         formik={formik}
         label={dictionary.contact.label.email}
         placeholder="JohnDoe@exemple.com"
+        requis={true}
       />{" "}
       <InputPassword
+        requis={true}
         id={"password"}
         formik={formik}
         label={dictionary.general.form.password}
-        show={show}
-        toggleShow={toggleShow}
+        show={open}
+        toggleShow={toggle}
       />{" "}
-      <Link href={"/"} className="text-lg">
-        <li>{dictionary?.connexion?.passwordForgot}</li>
+      <ErrorInput errorText={submitError} />
+      <Link href={`${dictionary?.connexion?.nav[0].link}`} className="text-lg">
+        <li>{dictionary?.connexion?.nav[0].label}</li>
       </Link>
-      <button className="boutonSlideCommon p-2 radius">
-        {dictionary?.cta?.formEvent?.connexion}
-      </button>
+      <ButtonForm
+        dictionary={dictionary}
+        formik={formik}
+        isSubmitting={isSubmitting}
+        content={dictionary.cta.formEvent.connexion}
+      />
     </form>
   );
 };

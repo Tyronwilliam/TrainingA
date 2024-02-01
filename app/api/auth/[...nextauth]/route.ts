@@ -24,14 +24,14 @@ export const authOptions: AuthOptions = {
         const res = await sendLoginRequest(data);
         // @ts-ignore
         if (res.status !== 200) {
-          throw new Error("Authentication failed. Invalid credentials.");
+          throw new Error(res?.response?.data?.error?.message);
         }
         // @ts-ignore
         const jwt = await res?.data.jwt;
         const resDataUser = await getUserProfile(jwt);
         // @ts-ignore
         if (resDataUser?.status !== 200) {
-          throw new Error("No user for this email.");
+          throw new Error(resDataUser?.response?.data?.error?.message);
         }
         const {
           Fonction,

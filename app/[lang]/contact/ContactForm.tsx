@@ -9,6 +9,7 @@ import { Dictionary } from "@/types/dictionary";
 import { FormikContactProps } from "@/types/formulaire";
 import classNames from "classnames";
 import { FormikProps } from "formik";
+import ButtonForm from "../ButtonForm";
 
 interface ContactFormProps {
   formik: FormikProps<FormikContactProps>;
@@ -35,18 +36,21 @@ const ContactForm = ({
         formik={formik}
         label={dictionary.contact.label.lastname}
         placeholder="Doe"
+        requis={true}
       />
       <InputString
         id={keys[1]}
         formik={formik}
         label={dictionary.contact.label.firstname}
         placeholder="John"
+        requis={true}
       />
       <InputString
         id={keys[2]}
         formik={formik}
         label={dictionary.contact.label.email}
         placeholder="JohnDoe@exemple.com"
+        requis={true}
       />{" "}
       <InputNumber
         id={keys[3]}
@@ -54,47 +58,35 @@ const ContactForm = ({
         label={dictionary.contact.label.phone}
         limitNumber={10}
         placeholder="0785254463"
+        requis={true}
       />
       <InputString
         id={keys[4]}
         formik={formik}
         label={dictionary.contact.label.companyName}
         placeholder="JohnDoe Agency"
+        requis={true}
       />
       <InputString
         id={keys[5]}
         formik={formik}
         label={dictionary.contact.label.subject}
         placeholder="Casting Plage"
+        requis={true}
       />
       <TextArea
         id={keys[6]}
         formik={formik}
         label={dictionary.contact.label.message}
         classStyle="grow md:basis-full md:max-w-[588px] sm:h-44"
+        requis={true}
       />
-      <button
-        type="submit"
-        className={classNames({
-          "boutonSlideCommon shrink-0 text-lg max-w-[120px] w-full radius p-2.5 ":
-            formik.isValid && !isSubmitting,
-          "border-white border-[1px] shrink-0 text-lg max-w-[120px] w-full radius	p-2.5 opacity-50":
-            !formik.isValid,
-          "border-white border-[1px] shrink-0 text-lg max-w-[180px] w-full radius	p-2.5 opacity-50":
-            isSubmitting && formik.isValid,
-        })}
-        onClick={() => console.log("CLICK")}
-        disabled={!formik.isValid || isSubmitting}
-      >
-        {isSubmitting ? (
-          <div className="flex h-fit items-center justify-center">
-            <Spinner />
-            {dictionary.cta.formEvent.processing}
-          </div>
-        ) : (
-          dictionary.cta.formEvent.send
-        )}
-      </button>
+      <ButtonForm
+        dictionary={dictionary}
+        formik={formik}
+        isSubmitting={isSubmitting}
+        content={dictionary.cta.formEvent.send}
+      />
       <ErrorInput errorText={submitError} />
     </form>
   );

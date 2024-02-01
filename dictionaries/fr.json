@@ -80,6 +80,11 @@
     }
   },
   "connexion": {
-    "passwordForgot": "Mot de passe oublié ?"
+    "nav": [
+      {
+        "label": "Mot de passe oublié ?",
+        "link": "fr/forgot-password"
+      }
+    ]
   }
 }
