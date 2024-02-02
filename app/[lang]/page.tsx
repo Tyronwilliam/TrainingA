@@ -1,9 +1,9 @@
 import { NavBar } from "@/app/Navigation";
 import { getDictionary } from "@/get-disctionary";
 import { Locale } from "@/i18n-config";
-import Curtain from "../Curtain";
-import { ButtonHome } from "./ButtonHome";
-import VideoHome from "./VideoHome";
+import Curtain from "./components/Curtain";
+import { ButtonHome } from "./components/ButtonHome";
+import VideoHome from "./components/VideoHome";
 
 export default async function Home({
   params: { lang },

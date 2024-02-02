@@ -1,6 +1,6 @@
-import HeaderImage from "@/app/HeaderImage";
-import { InputString } from "@/app/InputLabel";
-import PreviousNavHistory from "@/app/PreviousNavHistory";
+import HeaderImage from "@/app/[lang]/components/HeaderImage";
+import { InputString } from "@/app/[lang]/components/form/InputLabel";
+import PreviousNavHistory from "@/app/[lang]/components/PreviousNavHistory";
 import { getDictionary } from "@/get-disctionary";
 import { Locale } from "@/i18n-config";
 import { Metadata } from "next";

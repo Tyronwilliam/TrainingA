@@ -1,6 +1,9 @@
-import { ErrorInput, InputString } from "@/app/InputLabel";
+import {
+  ErrorInput,
+  InputString,
+} from "@/app/[lang]/components/form/InputLabel";
 import React from "react";
-import ButtonForm from "../../ButtonForm";
+import ButtonForm from "../../components/ButtonForm";
 import { ContactFormProps } from "../../contact/ContactForm";
 import { FormikProps } from "formik";
 import { FormikForgotPropsWithoutPassword } from "@/types/formulaire";

@@ -69,7 +69,8 @@
   "general": {
     "form": {
       "password": "Mot de passe",
-      "passwordConfirmation": "Confirmation du mot de passe"
+      "passwordConfirmation": "Confirmation du mot de passe",
+      "select": "Sélectionner"
     }
   },
   "footer": {
@@ -98,5 +99,204 @@
   "reset": {
     "h1": "Réinitialiser le mot de passe",
     "passwordConfirmation": "Confirmation du mot de passe"
+  },
+  "inscription": {
+    "stepOne": {
+      "email": {
+        "label": "Email",
+        "helper": "",
+        "type": "email",
+        "required": true,
+        "placeholder": "john@exemple.com",
+        "id": "email"
+      },
+      "password": {
+        "label": "Créer votre mot de passe",
+        "helper": "",
+        "type": "password",
+        "required": true,
+        "placeholder": "",
+        "id": "password"
+      },
+      "marital": {
+        "label": "Nom marital",
+        "helper": "si marié",
+        "type": "text",
+        "required": false,
+        "placeholder": "Doe",
+        "id": "marital"
+      },
+      "nomDeNaissance": {
+        "label": "Nom de naissance",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "Doe",
+        "id": "nomDeNaissance"
+      },
+      "firstname": {
+        "label": "Prenom",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "John",
+        "id": "firstname"
+      },
+      "gender": {
+        "label": "Genre",
+        "helper": "",
+        "type": "select",
+        "required": true,
+        "placeholder": "",
+        "id": "gender",
+        "options": {
+          "Men": "Homme",
+          "Women": "Femme",
+          "Kid": "Enfant"
+        }
+      },
+      "age": {
+        "label": "Age",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "30",
+        "id": "age",
+        "limit": 3
+      },
+      "dateOfBirth": {
+        "label": "Date de naissance",
+        "helper": "",
+        "type": "date",
+        "required": true,
+        "placeholder": "",
+        "id": "dateOfBirth"
+      },
+      "birthCity": {
+        "label": "Ville de naissance",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "Paris",
+        "id": "birthCity"
+      },
+      "birthPostal": {
+        "label": "Code postal de naissance",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "75000",
+        "id": "birthPostal",
+        "limit": 5
+      },
+      "birthCountry": {
+        "label": "Pays de naissance",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "France",
+        "id": "birthCountry"
+      },
+      "address": {
+        "label": "Adresse actuelle",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "130 rue de l'exemple",
+        "id": "address"
+      },
+      "city": {
+        "label": "Ville",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "Paris",
+        "id": "city"
+      },
+      "postalCode": {
+        "label": "Code postal",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "75000",
+        "id": "postalCode",
+        "limit": 5
+      },
+      "country": {
+        "label": "Pays",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "France",
+        "id": "country"
+      },
+      "nationality": {
+        "label": "Nationalité",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "français",
+        "id": "nationality"
+      },
+      "residencePermit": {
+        "label": "Numéro du titre de séjour",
+        "helper": "A remplir si vous êtes étranger",
+        "type": "number",
+        "required": false,
+        "placeholder": "",
+        "id": "residencePermit",
+        "limit": 20
+      },
+      "phone": {
+        "label": "Téléphone",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "0786085046",
+        "id": "phone",
+        "limit": 10
+      },
+      "socialNumber": {
+        "label": "Numéro de sécurité sociale",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "562354895415658",
+        "id": "socialNumber",
+        "limit": 15
+      },
+      "statut": {
+        "label": "Statut",
+        "helper": "",
+        "type": "select",
+        "required": true,
+        "placeholder": "",
+        "id": "statut",
+        "options": {
+          "Célibataire": "Célibataire",
+          "Marié": "Marié",
+          "Pacsé": "Pacsé",
+          "Concubinage": "Concubinage",
+          "Divorcé": "Divorcé",
+          "Veuf": "Veuf"
+        }
+      },
+      "children": {
+        "label": "Nombre d'enfants à charge",
+        "helper": "Laisser le champs vide si vous n'avez pas d'enfant",
+        "type": "number",
+        "required": false,
+        "placeholder": "",
+        "id": "children"
+      },
+      "retired": {
+        "label": "Retraité",
+        "helper": "Cochez la case si vous êtes retraité",
+        "type": "checkbox",
+        "required": false,
+        "placeholder": "",
+        "id": "retired"
+      }
+    }
   }
 }

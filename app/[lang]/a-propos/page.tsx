@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n-config";
 
-import HeaderImage from "@/app/HeaderImage";
-import PreviousNavHistory from "@/app/PreviousNavHistory";
+import HeaderImage from "@/app/[lang]/components/HeaderImage";
+import PreviousNavHistory from "@/app/[lang]/components/PreviousNavHistory";
 import { getDictionary } from "@/get-disctionary";
 import { Metadata } from "next";
 
@@ -31,7 +31,7 @@ export default async function AboutUs({
 }: {
   params: { lang: Locale };
 }) {
-//   await delay(5000);
+  //   await delay(5000);
 
   const CurrentView = viewImage[lang];
   const dictionary = await getDictionary(lang);

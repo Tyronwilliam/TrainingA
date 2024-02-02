@@ -1,7 +1,7 @@
 import { Dictionary } from "@/types/dictionary";
 import classNames from "classnames";
 import { FormikProps } from "formik";
-import Spinner from "../Spinner";
+import Spinner from "./Spinner";
 
 interface ButtonFormProps {
   isSubmitting: boolean;

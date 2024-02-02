@@ -1,5 +1,9 @@
 "use client";
-import { ErrorInput, InputPassword, InputString } from "@/app/InputLabel";
+import {
+  ErrorInput,
+  InputPassword,
+  InputString,
+} from "@/app/[lang]/components/form/InputLabel";
 import useCustomRouter from "@/hooks/Basic/useCustomRouter";
 import useFormSubmission from "@/hooks/Formulaire/useFormSubmission";
 import { Dictionary } from "@/types/dictionary";
@@ -11,7 +15,7 @@ import { useFormik } from "formik";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import ButtonForm from "../../ButtonForm";
+import ButtonForm from "../../components/ButtonForm";
 import { handleSubmission } from "./function";
 import useToggle from "@/hooks/Basic/useToggle";
 

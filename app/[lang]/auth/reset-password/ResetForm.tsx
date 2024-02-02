@@ -1,7 +1,10 @@
-import { ErrorInput, InputPassword } from "@/app/InputLabel";
+import {
+  ErrorInput,
+  InputPassword,
+} from "@/app/[lang]/components/form/InputLabel";
 import { FormikResetPasswordProps } from "@/types/formulaire";
 import { FormikProps } from "formik";
-import ButtonForm from "../../ButtonForm";
+import ButtonForm from "../../components/ButtonForm";
 import { ContactFormProps } from "../../contact/ContactForm";
 interface ResetFormProps extends Omit<ContactFormProps, "formik"> {
   formik: FormikProps<FormikResetPasswordProps>;

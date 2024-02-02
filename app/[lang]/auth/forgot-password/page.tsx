@@ -1,4 +1,4 @@
-import PreviousNavHistory from "@/app/PreviousNavHistory";
+import PreviousNavHistory from "@/app/[lang]/components/PreviousNavHistory";
 import { getDictionary } from "@/get-disctionary";
 import { Locale } from "@/i18n-config";
 

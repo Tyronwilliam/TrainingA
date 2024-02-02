@@ -11,7 +11,7 @@ const useCustomRouter = () => {
     if (arg === "") {
       return router.push(`${pathname}`);
     }
-    return router.push(`${pathname}/${arg}`);
+    return router.push(`/${arg}`);
   };
   return { router, pathname, routerPushTo, searchParams };
 };

@@ -3,11 +3,11 @@ import {
   InputNumber,
   InputString,
   TextArea,
-} from "@/app/InputLabel";
+} from "@/app/[lang]/components/form/InputLabel";
 import { Dictionary } from "@/types/dictionary";
 import { FormikContactProps } from "@/types/formulaire";
 import { FormikProps } from "formik";
-import ButtonForm from "../ButtonForm";
+import ButtonForm from "../components/ButtonForm";
 
 export interface ContactFormProps {
   formik: FormikProps<FormikContactProps>;

@@ -12,14 +12,9 @@ import { handleSubmit } from "./function";
 import useCustomRouter from "@/hooks/Basic/useCustomRouter";
 
 const ResetFormLayout = ({ dictionary }: { dictionary: Dictionary }) => {
-  const {
-    isSubmitting,
-    submitError,
-    startSubmission,
-    finishSubmission,
-    submitSuccess,
-  } = useFormSubmission();
-  const { router, pathname, routerPushTo, searchParams } = useCustomRouter();
+  const { isSubmitting, submitError, startSubmission, finishSubmission } =
+    useFormSubmission();
+  const { routerPushTo, searchParams } = useCustomRouter();
   const code = searchParams.get("code");
 
   const formik = useFormik({

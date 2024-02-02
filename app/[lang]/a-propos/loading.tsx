@@ -1,4 +1,4 @@
-import Skeleton from "@/app/Skeleton";
+import Skeleton from "@/app/[lang]/components/Skeleton";
 
 export default function LoadingApropos() {
   return (

@@ -69,7 +69,8 @@
   "general": {
     "form": {
       "password": "Password",
-      "passwordConfirmation": "Confirm password"
+      "passwordConfirmation": "Confirm password",
+      "select": "Select"
     }
   },
   "footer": {
@@ -99,5 +100,204 @@
   "reset": {
     "h1": "Reset password",
     "passwordConfirmation": "Confirm password"
+  },
+  "inscription": {
+    "stepOne": {
+      "email": {
+        "label": "Email",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "john@exemple.com",
+        "id": "email"
+      },
+      "password": {
+        "label": "Create your password",
+        "helper": "",
+        "type": "password",
+        "required": true,
+        "placeholder": "",
+        "id": "password"
+      },
+      "marital": {
+        "label": "marital name",
+        "helper": "if married",
+        "type": "text",
+        "required": false,
+        "placeholder": "Doe",
+        "id": "marital"
+      },
+      "nomDeNaissance": {
+        "label": "birthname",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "Doe",
+        "id": "nomDeNaissance"
+      },
+      "firstname": {
+        "label": "firstname",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "John",
+        "id": "firstname"
+      },
+      "gender": {
+        "label": "Gender",
+        "helper": "",
+        "type": "select",
+        "required": true,
+        "placeholder": "",
+        "id": "gender",
+        "options": {
+          "Men": "Men",
+          "Women": "Women",
+          "Kid": "Kid"
+        }
+      },
+      "age": {
+        "label": "Age",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "30",
+        "id": "age",
+        "limit": 3
+      },
+      "dateOfBirth": {
+        "label": "Date of birth",
+        "helper": "",
+        "type": "date",
+        "required": true,
+        "placeholder": "",
+        "id": "dateOfBirth"
+      },
+      "birthCity": {
+        "label": "birth City",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "Paris",
+        "id": "birthCity"
+      },
+      "birthPostal": {
+        "label": "birth Postal Code",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "75000",
+        "id": "birthPostal",
+        "limit": 5
+      },
+      "birthCountry": {
+        "label": "Country of birth",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "France",
+        "id": "birthCountry"
+      },
+      "address": {
+        "label": "Current address",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "130 street of example",
+        "id": "address"
+      },
+      "city": {
+        "label": "City",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "Paris",
+        "id": "city"
+      },
+      "postalCode": {
+        "label": "postal Code",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "75000",
+        "id": "postalCode",
+        "limit": 5
+      },
+      "country": {
+        "label": "Country",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "France",
+        "id": "country"
+      },
+      "nationality": {
+        "label": "Nationality",
+        "helper": "",
+        "type": "text",
+        "required": true,
+        "placeholder": "français",
+        "id": "nationality"
+      },
+      "residencePermit": {
+        "label": "Residence permit number",
+        "helper": "To be completed if you are a foreign national",
+        "type": "number",
+        "required": false,
+        "placeholder": "",
+        "id": "residencePermit",
+        "limit": 20
+      },
+      "phone": {
+        "label": "Phone ",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "0786085046",
+        "id": "phone",
+        "limit": 10
+      },
+      "socialNumber": {
+        "label": "Social security number",
+        "helper": "",
+        "type": "number",
+        "required": true,
+        "placeholder": "562354895415658",
+        "id": "socialNumber",
+        "limit": 15
+      },
+      "statut": {
+        "label": "Status",
+        "helper": "",
+        "type": "select",
+        "required": true,
+        "placeholder": "",
+        "id": "statut",
+        "options": {
+          "Célibataire": "Single",
+          "Marié": "Married",
+          "Pacsé": "Civilunion",
+          "Concubinage": "Cohabiting",
+          "Divorcé": "Divorced",
+          "Veuf": "Widowed"
+        }
+      },
+      "children": {
+        "label": "Number of dependent children",
+        "helper": "Leave blank if you have no children",
+        "type": "number",
+        "required": false,
+        "placeholder": "",
+        "id": "children"
+      },
+      "retired": {
+        "label": "Retired",
+        "helper": "Tick the box if you are retired",
+        "type": "checkbox",
+        "required": false,
+        "placeholder": "",
+        "id": "retired"
+      }
+    }
   }
 }
