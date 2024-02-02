@@ -14,7 +14,7 @@ type InputProps = {
   formik: FormikProps<any>;
   dictionary: Dictionary;
 };
-const Input = ({ inputs, formik, dictionary }: InputProps) => {
+const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
   return (
     <>
       {Object.entries(inputs).map(([key, value]) => {
@@ -78,4 +78,4 @@ const Input = ({ inputs, formik, dictionary }: InputProps) => {
   );
 };
 
-export default Input;
+export default Inputs;

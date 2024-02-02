@@ -1,6 +1,6 @@
 import { Dictionary } from "@/types/dictionary";
 import { StepType } from "@/types/formulaire";
-import Input from "../components/form/Input";
+import Inputs from "../components/form/Inputs";
 
 const StepOne = ({
   dictionary,
@@ -12,7 +12,7 @@ const StepOne = ({
   next: any;
 }) => {
   const inputs: StepType = dictionary?.inscription?.stepOne;
-  return <Input formik={formik} dictionary={dictionary} inputs={inputs} />;
+  return <Inputs formik={formik} dictionary={dictionary} inputs={inputs} />;
 };
 
 export default StepOne;
