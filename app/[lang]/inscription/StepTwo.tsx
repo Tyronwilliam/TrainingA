@@ -1,26 +1,24 @@
-import { InputString } from "@/app/[lang]/components/form/InputLabel";
 import { Dictionary } from "@/types/dictionary";
+import { StepType } from "@/types/formulaire";
 import React from "react";
+import Inputs from "../components/form/Inputs";
 
 const StepTwo = ({
   dictionary,
   formik,
+  next,
 }: {
   dictionary: Dictionary;
   formik: any;
+  next: any;
 }) => {
-  return (
-    <div>
-      {" "}
-      <InputString
-        id={"email"}
-        formik={formik}
-        label={dictionary.contact.label.email}
-        placeholder="Doe@gmail.com"
-        requis={true}
-      />
-    </div>
-  );
+  const intermittentFalse = dictionary?.inscription?.stepTwo.default;
+  const intermittentContent = dictionary?.inscription?.stepTwo.content;
+  const intermittentTrue = { ...intermittentFalse, ...intermittentContent };
+  const inputs: StepType = !formik?.values?.intermittent
+    ? intermittentFalse
+    : intermittentTrue;
+  return <Inputs formik={formik} dictionary={dictionary} inputs={inputs} />;
 };
 
 export default StepTwo;

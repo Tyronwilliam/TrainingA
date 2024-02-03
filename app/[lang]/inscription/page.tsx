@@ -35,7 +35,7 @@ const InscriptionPage = async ({
 
   const dictionary = await getDictionary(lang);
   return (
-    <main>
+    <main className="w-full min-h-full h-fit m-auto mb-10 pt-5  flex flex-col">
       {" "}
       {CurrentView}
       <InscriptionLayout dictionary={dictionary} />

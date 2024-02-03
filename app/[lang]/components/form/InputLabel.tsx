@@ -24,10 +24,10 @@ export const InputString = ({
   placeholder,
   requis,
   type,
-  helpers,
+  helper,
 }: InputLabelProps) => {
   const errorText = checkError(formik, id);
-  const value = formik.values[id];
+  const value = formik.values[id] !== null ? formik.values[id] : "";
   return (
     <div className="box__input" data-testid="input">
       <Label
@@ -48,7 +48,7 @@ export const InputString = ({
         onBlur={formik.handleBlur}
         placeholder={placeholder !== undefined ? placeholder : ""}
       />
-      <p>{helpers}</p>
+      {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -59,6 +59,7 @@ export const InputPassword = ({
   formik,
   label,
   requis,
+  helper,
 }: InputPasswordPropsWithShow) => {
   const { toggle, open } = useToggle();
   const value = formik.values[id];
@@ -94,7 +95,8 @@ export const InputPassword = ({
             className="cursor-pointer w-5 h-5  absolute right-0 z-50"
           />
         )}
-      </div>
+      </div>{" "}
+      {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -106,6 +108,8 @@ export const TextArea = ({
   label,
   classStyle,
   requis,
+  helper,
+  placeholder,
 }: InputLabelPropsWithCustomClass) => {
   const errorText = checkError(formik, id);
   const value = formik.values[id];
@@ -125,7 +129,9 @@ export const TextArea = ({
         value={value}
         onBlur={formik.handleBlur}
         rows={4}
-      ></textarea>
+        placeholder={placeholder}
+      ></textarea>{" "}
+      {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -138,8 +144,9 @@ export const InputNumber = ({
   limitNumber,
   placeholder,
   requis,
+  helper,
 }: InputLabelPropsWithLimit) => {
-  const isNull = formik.values[id] === undefined ? null : formik.values[id];
+  const isNull = formik.values[id] === null ? null : formik.values[id];
   const errorText = checkError(formik, id);
   const value = formik.values[id] || "";
 
@@ -161,7 +168,8 @@ export const InputNumber = ({
         placeholder={placeholder}
         onKeyUp={handleKeyPress}
         onWheel={handleWheel}
-      />
+      />{" "}
+      {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -172,26 +180,30 @@ export const InputCheckBox = ({
   formik,
   label,
   requis,
+  helper,
 }: InputLabelPropsWithCustomClass) => {
   const errorText = checkError(formik, id);
   const value = formik.values[id];
 
   return (
-    <div className="box__input" data-testid="input">
-      <input
-        type={"checkbox"}
-        id={id}
-        name={id}
-        onChange={formik.handleChange}
-        value={value}
-        onBlur={formik.handleBlur}
-      />
-      <Label
-        requis={requis}
-        label={label}
-        errorText={errorText}
-        value={value}
-      />
+    <div className="box__checkbox shrink-0 grow" data-testid="input">
+      <div className="w-full flex gap-2">
+        <Label
+          requis={requis}
+          label={label}
+          errorText={errorText}
+          value={value}
+        />{" "}
+        <input
+          type={"checkbox"}
+          id={id}
+          name={id}
+          onChange={formik.handleChange}
+          value={value}
+          onBlur={formik.handleBlur}
+        />
+      </div>
+      {helper && <p className="text-sm italic">{`(${helper})`}</p>}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -204,6 +216,7 @@ export const InputSelect = ({
   requis,
   options,
   dictionary,
+  helper,
 }: InputSelectPropsWithOptions) => {
   const errorText = checkError(formik, id);
   const value = formik.values[id];

@@ -5,10 +5,12 @@ import {
   InputPassword,
   InputSelect,
   InputString,
+  TextArea,
 } from "./InputLabel";
 import { StepType } from "@/types/formulaire";
 import { FormikProps } from "formik";
 import { Dictionary } from "@/types/dictionary";
+
 type InputProps = {
   inputs: StepType;
   formik: FormikProps<any>;
@@ -18,10 +20,9 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
   return (
     <>
       {Object.entries(inputs).map(([key, value]) => {
-        // Do something with key and value
-        const { label, placeholder, required, type, helpers, limit, options } =
+        const { label, placeholder, required, type, helper, limit, options } =
           value;
- 
+
         return (
           <React.Fragment key={key}>
             {(type === "email" || type === "date" || type === "text") && (
@@ -32,7 +33,7 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
                 placeholder={placeholder}
                 requis={required}
                 type={type}
-                helpers={helpers}
+                helper={helper}
               />
             )}
             {type === "password" && (
@@ -41,6 +42,7 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
                 formik={formik}
                 label={label}
                 requis={required}
+                helper={helper}
               />
             )}
             {type === "number" && (
@@ -51,6 +53,7 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
                 requis={required}
                 limitNumber={limit}
                 placeholder={placeholder}
+                helper={helper}
               />
             )}
             {type === "checkbox" && (
@@ -59,6 +62,8 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
                 formik={formik}
                 label={label}
                 requis={required}
+                helper={helper}
+                placeholder={placeholder}
               />
             )}
             {type === "select" && (
@@ -69,8 +74,26 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
                 requis={required}
                 options={options}
                 dictionary={dictionary}
+                helper={helper}
               />
             )}
+            {type === "textarea" && (
+              <TextArea
+                id={key}
+                formik={formik}
+                label={label}
+                requis={required}
+                helper={helper}
+                placeholder={placeholder}
+              />
+            )}
+            {/* TextArea = ({
+              id,
+              formik,
+              label,
+              classStyle,
+              requis,
+              helper, */}
           </React.Fragment>
         );
       })}

@@ -8,13 +8,10 @@ export type InputLabelProps = {
   placeholder: string;
   requis?: boolean;
   type?: string;
-  helpers?: string;
+  helper?: string;
 };
 export type InputPasswordPropsWithShow = Omit<InputLabelProps, "placeholder">;
-export type InputLabelPropsWithCustomClass = Omit<
-  InputLabelProps,
-  "placeholder"
-> & {
+export type InputLabelPropsWithCustomClass = InputLabelProps & {
   classStyle?: string;
 };
 export type InputLabelPropsWithLimit = InputLabelProps & {

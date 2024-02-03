@@ -1,7 +1,9 @@
 "use client";
 import { Dictionary } from "@/types/dictionary";
 import {
+  StepFourSchema,
   StepOneSchema,
+  StepThreeSchema,
   StepTwoSchema,
   inscriptionInitialValues,
 } from "@/utils/validationInscription";
@@ -9,10 +11,17 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
+import StepThree from "./StepThree";
+import StepFour from "./StepFour";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const validationSchema = [StepOneSchema, StepTwoSchema];
+  const [currentStep, setCurrentStep] = useState(3);
+  const validationSchema = [
+    StepOneSchema,
+    StepTwoSchema,
+    StepThreeSchema,
+    StepFourSchema,
+  ];
 
   const formik = useFormik({
     initialValues: inscriptionInitialValues,
@@ -32,7 +41,9 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   };
   const stepComponents = [
     <StepOne formik={formik} dictionary={dictionary} next={handleNext} />,
-    <StepTwo formik={formik} dictionary={dictionary} />,
+    <StepTwo formik={formik} dictionary={dictionary} next={handleNext} />,
+    <StepThree formik={formik} dictionary={dictionary} next={handleNext} />,
+    <StepFour formik={formik} dictionary={dictionary} next={handleNext} />,
   ];
   useEffect(() => {
     window.scrollTo({
@@ -43,15 +54,20 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   }, []);
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex flex-col flex-wrap items-center justify-center w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-6"
+    >
       {stepComponents[currentStep]}
-      <button
-        className="boutonSlideCommon shrink-0 text-lg max-w-[120px] w-full radius p-2.5 border-[1px] border-white"
-        onClick={() => handleNext()}
-        type="button"
-      >
-        Next
-      </button>
+      <div className="shrink-0 grow basis-full text-center mt-6">
+        <button
+          className="boutonSlideCommon text-lg max-w-[120px] w-full radius p-2.5 border-[1px] border-white"
+          onClick={() => handleNext()}
+          type="button"
+        >
+          Next
+        </button>
+      </div>
     </form>
   );
 };
