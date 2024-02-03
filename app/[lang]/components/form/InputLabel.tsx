@@ -131,7 +131,7 @@ export const TextArea = ({
         rows={4}
         placeholder={placeholder}
       ></textarea>{" "}
-      {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
+      {helper && <p className="text-sm italic">{`(${helper})`}</p>}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -149,7 +149,7 @@ export const InputNumber = ({
   const isNull = formik.values[id] === null ? null : formik.values[id];
   const errorText = checkError(formik, id);
   const value = formik.values[id] || "";
-
+  const limit = limitNumber !== undefined ? limitNumber : 0;
   return (
     <div className="box__input" data-testid="input_number">
       <Label
@@ -162,7 +162,7 @@ export const InputNumber = ({
         type="number"
         id={id}
         name={id}
-        onChange={(e) => limitInputNumber(e, limitNumber, formik, id)}
+        onChange={(e) => limitInputNumber(e, limit, formik, id)}
         value={value}
         onBlur={formik.handleBlur}
         placeholder={placeholder}
@@ -184,9 +184,12 @@ export const InputCheckBox = ({
 }: InputLabelPropsWithCustomClass) => {
   const errorText = checkError(formik, id);
   const value = formik.values[id];
-
+  const specificTarget = classNames({
+    "box__checkbox shrink-0 grow": id !== "agence",
+    "box__checkbox self__unset md:self-baseline": id === "agence",
+  });
   return (
-    <div className="box__checkbox shrink-0 grow" data-testid="input">
+    <div className={specificTarget} data-testid="input">
       <div className="w-full flex gap-2">
         <Label
           requis={requis}
@@ -261,7 +264,14 @@ export const ErrorInput = ({ errorText }: ErrorInputProps) => {
   );
 };
 
-const Label = ({ label, requis, errorText, value }: LabelProps) => {
+export const Label = ({
+  label,
+  requis,
+  errorText,
+  value,
+  length,
+  limit,
+}: LabelProps) => {
   return (
     <label>
       {label}:
@@ -273,6 +283,23 @@ const Label = ({ label, requis, errorText, value }: LabelProps) => {
         >
           *
         </span>
+      )}
+      {length !== undefined && limit !== undefined && (
+        <>
+          <span
+            className={classNames({
+              "text-red-500 ml-2":
+                errorText ||
+                value === "" ||
+                value === null ||
+                length > limit ||
+                length === 0,
+            })}
+          >
+            {length}
+          </span>
+          <span>/{limit}</span>
+        </>
       )}
     </label>
   );

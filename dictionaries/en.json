@@ -638,93 +638,97 @@
     },
     "stepFour": {
       "default": {
-        "defile": {
-          "label": "Catwalk",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "defile"
+        "checkbox": {
+          "defile": {
+            "label": "Catwalk",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "defile"
+          },
+          "danseClassique": {
+            "label": "Classical Dance",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "danseClassique"
+          },
+          "danseContemporaine": {
+            "label": "Contemporary Dance",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "danseContemporaine"
+          },
+          "skate": {
+            "label": "Skateboarding",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "skate"
+          },
+          "sportif": {
+            "label": "Sporty",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "sportif"
+          },
+          "hipHop": {
+            "label": "Hiphop",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "hipHop"
+          },
+          "ski": {
+            "label": "Skiing",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "ski"
+          }
         },
-        "danseClassique": {
-          "label": "Classical Dance",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "danseClassique"
-        },
-        "danseContemporaine": {
-          "label": "Contemporary Dance",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "danseContemporaine"
-        },
-        "hipHop": {
-          "label": "Hiphop",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "hipHop"
-        },
-        "sportif": {
-          "label": "Sporty",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "sportif"
-        },
-        "skate": {
-          "label": "Skateboarding",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "skate"
-        },
-        "ski": {
-          "label": "Skiing",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "ski"
-        },
-        "experiencesTournage": {
-          "label": "specific experience on shoots or filming",
-          "helper": "ex: role or silhouette / film title / director, no need to specify figuration",
-          "type": "textarea",
-          "required": false,
-          "placeholder": "",
-          "id": "experiencesTournage"
-        },
-        "autres": {
-          "label": "Others",
-          "helper": "",
-          "type": "textarea",
-          "required": false,
-          "placeholder": "",
-          "id": "autres"
-        },
-        "agence": {
-          "label": "In Agency",
-          "helper": "If you are part of an agency, check this box",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "agence"
-        },
-        "instagram": {
-          "label": "INSTAGRAM ACCOUNT LINK",
-          "helper": "",
-          "type": "text",
-          "required": false,
-          "placeholder": "",
-          "id": "instagram"
+        "default": {
+          "experiencesTournage": {
+            "label": "specific experience on shoots or filming",
+            "helper": "ex: role or silhouette / film title / director, no need to specify figuration",
+            "type": "textarea",
+            "required": false,
+            "placeholder": "",
+            "id": "experiencesTournage"
+          },
+          "autres": {
+            "label": "Others",
+            "helper": "",
+            "type": "textarea",
+            "required": false,
+            "placeholder": "",
+            "id": "autres"
+          },
+          "instagram": {
+            "label": "INSTAGRAM ACCOUNT LINK",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "",
+            "id": "instagram"
+          },
+          "agence": {
+            "label": "In Agency",
+            "helper": "If you are part of an agency, check this box",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "agence"
+          }
         }
       },
       "content": {
@@ -735,6 +739,66 @@
           "required": false,
           "placeholder": "Agency Graziani / JohnDoe / example@gmail.com",
           "id": "agenceInfos"
+        }
+      }
+    },
+    "stepFive": {
+      "checkbox": {
+        "acteur": {
+          "label": "Actor",
+          "helper": "",
+          "type": "checkbox",
+          "required": false,
+          "placeholder": "",
+          "id": "acteur"
+        },
+        "modele": {
+          "label": "MANNEQUIN",
+          "helper": "",
+          "type": "checkbox",
+          "required": false,
+          "placeholder": "",
+          "id": "modele"
+        },
+        "figuration": {
+          "label": "FIGURATION ACCEPTED",
+          "helper": "",
+          "type": "checkbox",
+          "required": true,
+          "placeholder": "",
+          "id": "figuration"
+        },
+        "silhouette": {
+          "label": "SILHOUETTE ACCEPTED",
+          "helper": "",
+          "type": "checkbox",
+          "required": false,
+          "placeholder": "",
+          "id": "silhouette"
+        }
+      },
+      "default": {
+        "photodepresentation": {
+          "label": "Presentation Photo",
+          "helper": "This photo is the one that will be displayed on our website. Rename your image with \"N. Firstname\"",
+          "type": "photo",
+          "required": true,
+          "placeholder": "",
+          "id": "photodepresentation",
+          "accept": "image/jpg, image/jpeg, image/png",
+          "limit": 1,
+          "multiple": false
+        },
+        "autresphotos": {
+          "label": "YOUR BEST PHOTOS",
+          "helper": "respect a vertical format ONLY. 15 photos max of GOOD QUALITY, including one portrait and one full-length photo. Make sure they are all in the right direction. All NAMED: first letter of surname and first name.",
+          "type": "photo",
+          "required": true,
+          "placeholder": "",
+          "id": "autresphotos",
+          "accept": "image/jpg, image/jpeg, image/png",
+          "limit": 15,
+          "multiple": true
         }
       }
     }

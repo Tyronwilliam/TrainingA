@@ -68,12 +68,22 @@ export interface FormikInscriptionProps {
   agence: boolean;
   instagram: string;
   agenceInfos: string;
+  acteur: boolean;
+  modele: boolean;
+  figuration: boolean;
+  silhouette: boolean;
+  photodepresentation: string;
+  autresphotos: [];
 }
 export interface StepType {
   label: string;
-  helper: string | null;
+  helper: string | undefined;
   type: string;
   required: boolean;
-  placeholder: string | null | undefined;
+  placeholder: string;
   id: string;
+  limit?: number;
+  options?: Record<string, string>;
+  accept?: string;
+  multiple?: boolean;
 }

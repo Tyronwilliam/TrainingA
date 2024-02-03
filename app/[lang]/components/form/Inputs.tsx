@@ -10,9 +10,10 @@ import {
 import { StepType } from "@/types/formulaire";
 import { FormikProps } from "formik";
 import { Dictionary } from "@/types/dictionary";
+import InputPhoto from "./InputPhoto";
 
 type InputProps = {
-  inputs: StepType;
+  inputs: Record<string, StepType>;
   formik: FormikProps<any>;
   dictionary: Dictionary;
 };
@@ -20,8 +21,17 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
   return (
     <>
       {Object.entries(inputs).map(([key, value]) => {
-        const { label, placeholder, required, type, helper, limit, options } =
-          value;
+        const {
+          label,
+          placeholder,
+          required,
+          type,
+          helper,
+          limit,
+          options,
+          accept,
+          multiple,
+        } = value;
 
         return (
           <React.Fragment key={key}>
@@ -85,15 +95,21 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
                 requis={required}
                 helper={helper}
                 placeholder={placeholder}
+                classStyle="main__height"
               />
             )}
-            {/* TextArea = ({
-              id,
-              formik,
-              label,
-              classStyle,
-              requis,
-              helper, */}
+            {type === "photo" && (
+              <InputPhoto
+                id={key}
+                formik={formik}
+                label={label}
+                requis={required}
+                helper={helper}
+                accept={accept}
+                limit={limit}
+                multiple={multiple}
+              />
+            )}
           </React.Fragment>
         );
       })}

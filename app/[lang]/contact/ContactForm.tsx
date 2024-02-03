@@ -78,6 +78,7 @@ const ContactForm = ({
         label={dictionary.contact.label.message}
         classStyle="grow md:basis-full md:max-w-[588px] sm:h-44"
         requis={true}
+        placeholder=""
       />
       <ButtonForm
         dictionary={dictionary}

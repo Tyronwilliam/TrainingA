@@ -15,14 +15,19 @@ export type InputLabelPropsWithCustomClass = InputLabelProps & {
   classStyle?: string;
 };
 export type InputLabelPropsWithLimit = InputLabelProps & {
-  limitNumber: number;
+  limitNumber: number | undefined;
 };
 export type InputSelectPropsWithOptions = Omit<
   InputLabelProps,
   "placeholder"
 > & {
-  options: string[];
+  options: Record<string, string> | undefined;
   dictionary: Dictionary;
+};
+export type InputPhotoProps = Omit<InputLabelProps, "placeholder"> & {
+  limit: number | undefined;
+  accept: string | undefined;
+  multiple: boolean | undefined;
 };
 export type ErrorInputProps = {
   errorText: string | undefined;
@@ -32,4 +37,6 @@ export type LabelProps = {
   requis?: boolean;
   errorText: string | undefined;
   value: string | number | undefined | boolean | null;
+  length?: number;
+  limit?: number;
 };

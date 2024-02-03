@@ -49,6 +49,12 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   agence: false,
   instagram: "",
   agenceInfos: "",
+  acteur: false,
+  modele: false,
+  figuration: false,
+  silhouette: false,
+  photodepresentation: "",
+  autresphotos: [],
 };
 export const StepOneSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -147,15 +153,11 @@ export const StepFiveSchema = Yup.object().shape({
     otherwise: (schema) => schema.optional(),
   }),
 });
-// defile: false,
-// danseClassique: false,
-// danseContemporaine: false,
-// hipHop: false,
-// sportif: false,
-// skate: false,
-// ski: false,
-// experiencesTournage: "",
-// autres: "",
-// agence: false,
-// instagram: "",
-// agenceInfos: "",
+export const StepSixSchema = Yup.object().shape({
+  acteur: Yup.boolean().required("Required"),
+  modele: Yup.boolean().required("Required"),
+  figuration: Yup.boolean().required("Required"),
+  silhouette: Yup.boolean().required("Required"),
+  photodepresentation: Yup.string().required("Required"),
+  autresphotos: Yup.array().required("Required").nonNullable().max(15, "15 photos max"),
+});

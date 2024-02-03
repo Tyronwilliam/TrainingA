@@ -133,6 +133,12 @@ html {
     display: flex;
     flex-direction: column;
   }
+  .box__photo {
+    height: fit-content;
+  }
+  .main__height {
+    height: 240px;
+  }
   .box__checkbox {
     width: 100%;
     max-width: 280px;
@@ -142,6 +148,16 @@ html {
     flex-direction: column;
     justify-content: space-between;
     align-self: baseline;
+  }
+  .self__unset {
+    align-self: unset;
+  }
+  @media screen and (min-width: 600px) {
+    .box__lastChild {
+      .box__checkbox:last-child {
+        max-width: 560px;
+      }
+    }
   }
   .boutonSlide {
     transition: all 0.5s ease-in-out;
