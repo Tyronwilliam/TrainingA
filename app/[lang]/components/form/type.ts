@@ -9,6 +9,7 @@ export type InputLabelProps = {
   requis?: boolean;
   type?: string;
   helper?: string;
+  dictionary?: Dictionary;
 };
 export type InputPasswordPropsWithShow = Omit<InputLabelProps, "placeholder">;
 export type InputLabelPropsWithCustomClass = InputLabelProps & {
@@ -28,6 +29,8 @@ export type InputPhotoProps = Omit<InputLabelProps, "placeholder"> & {
   limit: number | undefined;
   accept: string | undefined;
   multiple: boolean | undefined;
+  isLoadInput?: boolean;
+  setIsLoadInput?: (isLoadInput: boolean) => void;
 };
 export type ErrorInputProps = {
   errorText: string | undefined;

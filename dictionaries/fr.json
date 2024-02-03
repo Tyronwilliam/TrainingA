@@ -70,7 +70,14 @@
     "form": {
       "password": "Mot de passe",
       "passwordConfirmation": "Confirmation du mot de passe",
-      "select": "Sélectionner"
+      "select": "Sélectionner",
+      "helpers": {
+        "autresphotos": "Ajoutez vos photos par groupe de 3 !",
+        "frSysteme": "Notez que les tailles de vêtements sont indiquées en système français."
+      },
+      "errors": {
+        "autresphotos": "3 photos max par ajout"
+      }
     }
   },
   "footer": {

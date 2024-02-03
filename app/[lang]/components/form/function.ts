@@ -1,5 +1,6 @@
 import { FormikProps } from "formik";
 import { ChangeEvent, KeyboardEvent, WheelEvent } from "react";
+import toast from "react-hot-toast";
 
 export const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
   if (e.key === "ArrowUp" || e.key === "ArrowDown") {
@@ -26,4 +27,50 @@ export const limitInputNumber = (
   const cleanedValue = value.replace(/\D/g, "").slice(0, limitNumber);
 
   formik.setFieldValue(id, cleanedValue);
+};
+
+export const handleMultipleFileChange = async (
+  event: React.ChangeEvent<HTMLInputElement>,
+  formik: FormikProps<any>,
+  setIsLoadInput: (value: boolean) => void,
+  error: string,
+  id: string
+) => {
+  setIsLoadInput && setIsLoadInput(true);
+  const selectedFiles: FileList | null = event?.currentTarget?.files;
+  const arrayFile: File[] = [...formik?.values[id]];
+
+  if (selectedFiles) {
+    const arrayOfObjects = Object.values(selectedFiles);
+
+    const filterNonFileObjects = arrayOfObjects?.filter(
+      (file: File) => file instanceof File
+    );
+
+    if (filterNonFileObjects?.length > 3) {
+      toast.error(error);
+    } else {
+      filterNonFileObjects.forEach((object) => {
+        arrayFile.push(object);
+      });
+    }
+    console.log(filterNonFileObjects, "NON FILE");
+
+    await formik.setFieldValue(id, arrayFile);
+    setIsLoadInput && setIsLoadInput(false);
+  }
+};
+export const handleSingleFileChange = async (
+  event: React.ChangeEvent<HTMLInputElement>,
+  formik: FormikProps<any>,
+  setIsLoadInput: (value: boolean) => void,
+  error: string,
+  id: string
+) => {
+  setIsLoadInput && setIsLoadInput(true);
+  const selectedFiles = event?.currentTarget?.files?.[0];
+  await formik.setFieldValue(id, selectedFiles);
+  setIsLoadInput && setIsLoadInput(false);
+
+  console.log(event?.currentTarget?.files?.[0], "SINGLE");
 };

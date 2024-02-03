@@ -5,6 +5,7 @@ const useFormSubmission = () => {
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  const [isLoadInput, setIsLoadInput] = useState(false);
   const startSubmission = () => {
     setIsSubmitting(true);
     setSubmitError("");
@@ -25,6 +26,8 @@ const useFormSubmission = () => {
     finishSubmission,
     submitSuccess,
     setSubmitSuccess,
+    isLoadInput,
+    setIsLoadInput,
   };
 };
 

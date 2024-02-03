@@ -16,8 +16,16 @@ type InputProps = {
   inputs: Record<string, StepType>;
   formik: FormikProps<any>;
   dictionary: Dictionary;
+  isLoadInput?: boolean;
+  setIsLoadInput?: (isLoadInput: boolean) => void;
 };
-const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
+const Inputs = ({
+  inputs,
+  formik,
+  dictionary,
+  isLoadInput,
+  setIsLoadInput,
+}: InputProps) => {
   return (
     <>
       {Object.entries(inputs).map(([key, value]) => {
@@ -108,6 +116,9 @@ const Inputs = ({ inputs, formik, dictionary }: InputProps) => {
                 accept={accept}
                 limit={limit}
                 multiple={multiple}
+                isLoadInput={isLoadInput}
+                setIsLoadInput={setIsLoadInput}
+                dictionary={dictionary}
               />
             )}
           </React.Fragment>

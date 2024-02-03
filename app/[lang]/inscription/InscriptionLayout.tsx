@@ -16,9 +16,21 @@ import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";
+import useFormSubmission from "@/hooks/Formulaire/useFormSubmission";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const [currentStep, setCurrentStep] = useState(4);
+  const frSysteme = dictionary?.general?.form?.helpers?.frSysteme;
+  const {
+    isSubmitting,
+    submitError,
+    startSubmission,
+    finishSubmission,
+    submitSuccess,
+    setSubmitSuccess,
+    isLoadInput,
+    setIsLoadInput,
+  } = useFormSubmission();
   const validationSchema = [
     StepOneSchema,
     StepTwoSchema,
@@ -40,8 +52,8 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     console.log(formik?.errors, "ERRORS");
     console.log(formik?.values, "VALUES");
     if (Object.keys(formik?.errors)?.length === 0) {
-      const stepPlus = currentStep + 1;
-      setCurrentStep(stepPlus);
+      const stepPlusUn = currentStep + 1;
+      setCurrentStep(stepPlusUn);
     }
   };
   const stepComponents = [
@@ -49,7 +61,13 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     <StepTwo formik={formik} dictionary={dictionary} next={handleNext} />,
     <StepThree formik={formik} dictionary={dictionary} next={handleNext} />,
     <StepFour formik={formik} dictionary={dictionary} next={handleNext} />,
-    <StepFive formik={formik} dictionary={dictionary} next={handleNext} />,
+    <StepFive
+      formik={formik}
+      dictionary={dictionary}
+      next={handleNext}
+      isLoadInput={isLoadInput}
+      setIsLoadInput={setIsLoadInput}
+    />,
   ];
   useEffect(() => {
     window.scrollTo({
@@ -64,6 +82,9 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       onSubmit={formik.handleSubmit}
       className="flex flex-col flex-wrap items-center justify-center w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-6"
     >
+      {currentStep === 2 && (
+        <p className="text-lg underline text-center">{frSysteme}</p>
+      )}
       {stepComponents[currentStep]}
       <div className="shrink-0 grow basis-full text-center mt-6">
         <button
@@ -73,7 +94,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
         >
           Next
         </button>
-      </div>
+      </div>{" "}
     </form>
   );
 };

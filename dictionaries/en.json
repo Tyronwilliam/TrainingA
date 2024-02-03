@@ -70,7 +70,14 @@
     "form": {
       "password": "Password",
       "passwordConfirmation": "Confirm password",
-      "select": "Select"
+      "select": "Select",
+      "helpers": {
+        "autresphotos": "Add your photos in groups of 3!",
+        "frSysteme": "Please note that clothing sizes are indicated in the French system."
+      },
+      "errors": {
+        "autresphotos": "3 photos max per add-on"
+      }
     }
   },
   "footer": {

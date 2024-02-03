@@ -185,8 +185,9 @@ export const InputCheckBox = ({
   const errorText = checkError(formik, id);
   const value = formik.values[id];
   const specificTarget = classNames({
-    "box__checkbox shrink-0 grow": id !== "agence",
-    "box__checkbox self__unset md:self-baseline": id === "agence",
+    "box__checkbox self__unset": true,
+    "shrink-0 grow ": id !== "agence",
+    "md:self-baseline": id === "agence" || id === "retired",
   });
   return (
     <div className={specificTarget} data-testid="input">

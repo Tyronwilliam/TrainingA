@@ -15,7 +15,7 @@ const StepTwo = ({
   const intermittentFalse = dictionary?.inscription?.stepTwo.default;
   const intermittentContent = dictionary?.inscription?.stepTwo.content;
   const intermittentTrue = { ...intermittentFalse, ...intermittentContent };
-  const inputs: StepType = !formik?.values?.intermittent
+  const inputs: Record<string, StepType> = !formik?.values?.intermittent
     ? intermittentFalse
     : intermittentTrue;
   return <Inputs formik={formik} dictionary={dictionary} inputs={inputs} />;

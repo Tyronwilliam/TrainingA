@@ -2,6 +2,7 @@
 import Script from "next/script";
 import React from "react";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { Toaster } from "react-hot-toast";
 
 export function GoogleProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -11,7 +12,9 @@ export function GoogleProvider({ children }: { children: React.ReactNode }) {
         id="cookieyes"
         type="text/javascript"
         src="https://cdn-cookieyes.com/client_data/25f157bf1a80fb0cb0b9e79c/script.js"
-      /> */}
+      /> */}{" "}
+    
+        <Toaster />
     </GoogleReCaptchaProvider>
   );
 }

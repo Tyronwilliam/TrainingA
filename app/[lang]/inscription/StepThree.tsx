@@ -11,7 +11,7 @@ const StepThree = ({
   formik: any;
   next: any;
 }) => {
-  const inputs: StepType = dictionary?.inscription?.stepThree;
+  const inputs: Record<string, StepType> = dictionary?.inscription?.stepThree;
   return <Inputs formik={formik} dictionary={dictionary} inputs={inputs} />;
 };
 
