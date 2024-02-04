@@ -17,12 +17,9 @@ import StepFour from "./StepFour";
 import StepOne from "./StepOne";
 import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
+import ButtonForm from "../components/ButtonForm";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
-  const [currentStep, setCurrentStep] = useState(4);
-  const { toggle, open } = useToggle();
-  const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
-  const frSysteme = dictionary?.general?.form?.helpers?.frSysteme;
   const {
     isSubmitting,
     submitError,
@@ -33,6 +30,10 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     isLoadInput,
     setIsLoadInput,
   } = useFormSubmission();
+  const { toggle, open } = useToggle();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
+  const frSysteme = dictionary?.general?.form?.helpers?.frSysteme;
   const validationSchema = [
     StepOneSchema,
     StepTwoSchema,
@@ -91,14 +92,28 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
         <p className="text-lg underline text-center">{frSysteme}</p>
       )}
       {stepComponents[currentStep]}
-      <div className="shrink-0 grow basis-full text-center mt-6">
-        <button
+      <div className="shrink-0 grow basis-full text-center flex flex-wrap items-center justify-center mt-6 gap-4">
+        {/* <button
           className="boutonSlideCommon text-lg max-w-[120px] w-full radius p-2.5 border-[1px] border-white"
           onClick={() => handleNext()}
           type="button"
         >
           Next
-        </button>
+        </button> */}
+        {currentStep > 0 && (
+          <ButtonForm
+            isSubmitting={isSubmitting}
+            formik={formik}
+            dictionary={dictionary}
+            content={dictionary?.cta?.formEvent?.previous}
+          />
+        )}
+        <ButtonForm
+          isSubmitting={isSubmitting}
+          formik={formik}
+          dictionary={dictionary}
+          content={dictionary?.cta?.formEvent?.next}
+        />
       </div>{" "}
     </form>
   );

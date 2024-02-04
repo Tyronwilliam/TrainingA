@@ -16,6 +16,7 @@ import {
   InputSelectPropsWithOptions,
   LabelProps,
 } from "./type";
+import Helpers from "./Helpers";
 
 export const InputString = ({
   id,
@@ -48,7 +49,7 @@ export const InputString = ({
         onBlur={formik.handleBlur}
         placeholder={placeholder !== undefined ? placeholder : ""}
       />
-      {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
+      {helper && <Helpers classStyle="text-sm italic" helper={helper} />}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -96,7 +97,7 @@ export const InputPassword = ({
           />
         )}
       </div>{" "}
-      {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
+      {helper && <Helpers classStyle="text-sm italic" helper={helper} />}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -131,7 +132,7 @@ export const TextArea = ({
         rows={4}
         placeholder={placeholder}
       ></textarea>{" "}
-      {helper && <p className="text-sm italic">{`(${helper})`}</p>}
+      {helper && <Helpers classStyle="text-sm italic" helper={helper} />}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -169,7 +170,7 @@ export const InputNumber = ({
         onKeyUp={handleKeyPress}
         onWheel={handleWheel}
       />{" "}
-      {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
+      {helper && <Helpers classStyle="text-sm italic" helper={helper} />}
       <ErrorInput errorText={errorText} />
     </div>
   );
@@ -207,7 +208,7 @@ export const InputCheckBox = ({
           onBlur={formik.handleBlur}
         />
       </div>
-      {helper && <p className="text-sm italic">{`(${helper})`}</p>}
+      {helper && <Helpers classStyle="text-sm italic" helper={helper} />}
       <ErrorInput errorText={errorText} />
     </div>
   );

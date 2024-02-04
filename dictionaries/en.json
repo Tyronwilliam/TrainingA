@@ -62,7 +62,9 @@
       "processing": "Processing",
       "connexion": "Log in",
       "validate": "Validé",
-      "submit": "Submit"
+      "submit": "Submit",
+      "next": "Next",
+      "previous": "Previous"
     },
     "accueil": "Home"
   },

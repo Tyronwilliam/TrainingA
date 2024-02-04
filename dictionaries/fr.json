@@ -62,7 +62,9 @@
       "processing": "Envoi en cours",
       "connexion": "Se connecter",
       "validate": "Validé",
-      "submit": "Soumettre"
+      "submit": "Soumettre",
+      "next": "Suivant",
+      "previous": "Précedent"
     },
     "accueil": "Accueil"
   },

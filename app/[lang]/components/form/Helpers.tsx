@@ -7,7 +7,7 @@ const Helpers = ({
   classStyle: string;
   helper: string;
 }) => {
-  return <p className={classStyle}>{helper}</p>;
+  return <p className={classStyle}>{`(${helper})`}</p>;
 };
 
 export default Helpers;
