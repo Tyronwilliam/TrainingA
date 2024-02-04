@@ -1,14 +1,19 @@
+import useToggle from "@/hooks/Basic/useToggle";
 import { useState } from "react";
 import Spinner from "../Spinner";
+import { Dialog } from "./Dialog";
 import { ErrorInput, Label } from "./InputLabel";
 import {
   checkError,
+  handleFileChange,
   handleMultipleFileChange,
   handlePutPortfolioPhoto,
   handleSingleFileChange,
 } from "./function";
 import { InputPhotoProps, PortfolioButtonsProps } from "./type";
-import useToggle from "@/hooks/Basic/useToggle";
+import { PortfolioButtons } from "./PortfolioButtons";
+
+// PASSER LE JWT EN PROPS
 
 const InputPhoto = ({
   id,
@@ -34,9 +39,9 @@ const InputPhoto = ({
   const maxPhotoError = dictionary?.general?.form?.errors?.autresphotos;
   const helperPhoto = dictionary?.general?.form?.helpers?.autresphotos;
 
-  console.log(formik?.values?.autresphotos, "FORMIK");
+  console.log(formik?.values, "FORMIK");
   return (
-    <div className="box__input box__photo" data-testid="input">
+    <div className="box__input box__photo relative" data-testid="input">
       <Label
         requis={requis}
         label={label}
@@ -58,24 +63,15 @@ const InputPhoto = ({
         disabled={isDisabled}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           if (setIsLoadInput) {
-            if (multiple) {
-              handleMultipleFileChange({
-                event,
-                formik,
-                setIsLoadInput,
-                error: maxPhotoError,
-                id,
-                setIsCurrentlyEditing,
-              });
-            } else {
-              handleSingleFileChange({
-                event,
-                formik,
-                setIsLoadInput,
-                id,
-                setIsCurrentlyEditing,
-              });
-            }
+            handleFileChange({
+              event,
+              formik,
+              setIsLoadInput,
+              error: maxPhotoError,
+              id,
+              setIsCurrentlyEditing,
+              multiple,
+            });
           }
         }}
         onBlur={formik.handleBlur}
@@ -92,13 +88,15 @@ const InputPhoto = ({
         buttonText="Gérer Photos"
         handleButtonClick={toggle}
       />
-      {/* Modal <>
-        {Array.isArray(value) &&
-          value?.map((i, index) => {
-            console.log(i);
-            return;
-          })}
-      </> */}
+      <Dialog
+        open={open}
+        value={value}
+        toggle={toggle}
+        formik={formik}
+        id={id}
+        jwt={"jwt"}
+        buttonText="OPEN DIALOG"
+      />
       {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
       {/* BUTTON pour envoyer photo multiple */}
       <PortfolioButtons
@@ -112,42 +110,8 @@ const InputPhoto = ({
         formik={formik}
       />
       <ErrorInput errorText={errorText} />
-      <dialog open={open}>
-        <p>Salutations, à tous et à toutes !</p>
-        <>
-          {Array.isArray(value) &&
-            value?.map((i, index) => {
-              console.log(i);
-              return <p>{i.name}</p>;
-            })}
-        </>
-        <button type="button" onClick={toggle}>
-          OK
-        </button>
-      </dialog>
     </div>
   );
 };
 
 export default InputPhoto;
-
-const PortfolioButtons = ({
-  handleButtonClick,
-  buttonText,
-  pictureLength,
-  multiple,
-  ...props
-}: PortfolioButtonsProps) => {
-  return (
-    multiple &&
-    pictureLength && (
-      <button
-        type="button"
-        className="boutonSlideCommon"
-        onClick={() => handleButtonClick(props)}
-      >
-        {buttonText}
-      </button>
-    )
-  );
-};

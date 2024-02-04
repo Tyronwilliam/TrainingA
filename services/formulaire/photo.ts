@@ -1,6 +1,5 @@
-import { PutDataPortfolioParams } from "@/types/photo";
+import { DeletePhotoParams, PutDataPortfolioParams } from "@/types/photo";
 import axios from "axios";
-import { FormikProps } from "formik";
 
 const axiosMutationFile = async (
   url: string,
@@ -74,9 +73,7 @@ export const uploadFileInCandidat = async (
       //   },
       // }
     )
-    .then((res) => {
-      return res;
-    })
+    .then((res) => res)
     .catch((err: any) => {
       console.error(err);
       return err;
@@ -90,9 +87,7 @@ export const putDataPortfolio = async ({
 }: PutDataPortfolioParams) => {
   const onlyFile = files?.filter((file) => file instanceof File);
   const promises = await promisesUpload(onlyFile);
-  console.log(promises, "PROMISSES UNRELSOVED");
   const promisesResolved = await Promise.all(promises);
-  console.log(promisesResolved, "SHOULD CONTAIN ONLY PROMISE WITH OBJECT");
   const nonFile = files?.filter((file) => !(file instanceof File));
   if (nonFile?.length > 0) promisesResolved.push(...nonFile);
   await formik.setFieldValue("autresphotos", promisesResolved);
@@ -102,6 +97,22 @@ export const putDataPortfolio = async ({
     candidatId,
     jwt
   );
-  console.log(response, "RESPONSE PUT FILE IN CANDIDAT");
   return response;
+};
+
+export const deletePhotos = async ({ file, jwt }: DeletePhotoParams) => {
+  try {
+    const response = await axios.delete(
+      `${process.env.NEXT_PUBLIC_API_URL}/upload/files/${file?.id}`,
+      {
+        headers: {
+          // Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
 };

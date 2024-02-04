@@ -1,4 +1,4 @@
-import { putDataPortfolio } from "@/services/formulaire/photo";
+import { deletePhotos, putDataPortfolio } from "@/services/formulaire/photo";
 import { sendToast } from "@/utils/toast";
 import { FormikProps } from "formik";
 import { KeyboardEvent, WheelEvent } from "react";
@@ -61,8 +61,6 @@ export const handleMultipleFileChange = async ({
         arrayFile.push(object);
       });
     }
-    console.log(filterNonFile, "FILE");
-
     await formik.setFieldValue(id, arrayFile);
     setIsLoadInput && setIsLoadInput(false);
     setIsCurrentlyEditing("");
@@ -80,7 +78,6 @@ export const handleSingleFileChange = async ({
   await formik.setFieldValue(id, selectedFiles);
   setIsLoadInput && setIsLoadInput(false);
   setIsCurrentlyEditing("");
-  console.log(event?.currentTarget?.files?.[0], "SINGLE");
 };
 
 export const handlePutPortfolioPhoto = async ({
@@ -95,8 +92,6 @@ export const handlePutPortfolioPhoto = async ({
     files: value,
     formik,
   });
-
-  console.log(response, "FROM HANDLEPUT");
   if (response?.status === 200) {
     sendToast(false, "Photos ajouté");
   } else {
@@ -105,4 +100,64 @@ export const handlePutPortfolioPhoto = async ({
       : "An error occurred";
     sendToast(true, error);
   }
+};
+export const handleFileChange = ({
+  event,
+  formik,
+  setIsLoadInput,
+  id,
+  setIsCurrentlyEditing,
+  multiple,
+  error,
+}: HandleFileChangeParams & { multiple: boolean | undefined }): void => {
+  if (multiple) {
+    handleMultipleFileChange({
+      event,
+      formik,
+      setIsLoadInput,
+      error: error,
+      id,
+      setIsCurrentlyEditing,
+    });
+  } else {
+    handleSingleFileChange({
+      event,
+      formik,
+      setIsLoadInput,
+      id,
+      setIsCurrentlyEditing,
+    });
+  }
+};
+
+export const deleteFile = async (
+  file: any,
+  value: any[],
+  formik: FormikProps<any>,
+  id: string,
+  jwt: string
+) => {
+  if (file instanceof File) {
+    const removeFile = value?.filter((f) => f.name !== file?.name);
+    formik.setFieldValue(id, removeFile);
+  } else {
+    const response = await deletePhotos({ file, jwt });
+    //@ts-ignore
+    if (response?.status === 200) {
+      const removeFile = value?.filter((f) => f.name !== file?.name);
+      formik.setFieldValue(id, removeFile);
+    } else {
+      //@ts-ignore
+      const error = response?.response?.data?.error?.message
+        ? //@ts-ignore
+          response?.response?.data?.error?.message
+        : "An error occurred";
+      sendToast(true, error);
+      // sendToast()
+    }
+    console.log("DEJA DANS LA BDD");
+  }
+  // Si instance of File = Juste supprime par l'id ou l'index
+  // SI False instance of FIle = Supprime par une requete API
+  // Tu update le tableau
 };
