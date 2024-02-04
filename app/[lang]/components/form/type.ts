@@ -81,4 +81,5 @@ export interface PortfolioButtonsProps {
   isDisabled?: boolean;
   setIsLoadInput?: (value: boolean) => void;
   errorText?: string;
+  noInstanceFile?: boolean;
 }

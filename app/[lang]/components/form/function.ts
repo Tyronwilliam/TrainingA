@@ -46,6 +46,8 @@ export const handleMultipleFileChange = async ({
   setIsLoadInput && setIsLoadInput(true);
   const selectedFiles: FileList | null = event?.currentTarget?.files;
   const arrayFile: File[] = [...formik?.values[id]];
+  const idValue = formik?.values[id];
+
 
   if (selectedFiles) {
     const arrayOfObjects = Object.values(selectedFiles);

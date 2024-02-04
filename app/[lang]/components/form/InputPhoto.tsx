@@ -36,6 +36,14 @@ const InputPhoto = ({
   const isDisabled = isLoadInput && isCurrentlyEditing === id;
   const maxPhotoError = dictionary?.general?.form?.errors?.autresphotos;
   const helperPhoto = dictionary?.general?.form?.helpers?.autresphotos;
+  const tooMuchInstanceFile = Array.isArray(value)
+    ? value.filter((item: any) => item instanceof File).length >= 3
+    : false;
+  const noInstanceFile = Array.isArray(value)
+    ? !value.some((item: any) => item instanceof File)
+    : false;
+
+  console.log(tooMuchInstanceFile);
   return (
     <div className="box__input box__photo relative" data-testid="input">
       <Label
@@ -56,7 +64,7 @@ const InputPhoto = ({
         accept={accept}
         id={id}
         name={id}
-        disabled={isDisabled}
+        disabled={isDisabled || tooMuchInstanceFile}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           if (setIsLoadInput && setIsCurrentlyEditing) {
             handleFileChange({
@@ -105,6 +113,7 @@ const InputPhoto = ({
         isDisabled={isDisabled}
         setIsLoadInput={setIsLoadInput}
         errorText={errorText}
+        noInstanceFile={noInstanceFile}
       />
       <ErrorInput errorText={errorText} />
     </div>
