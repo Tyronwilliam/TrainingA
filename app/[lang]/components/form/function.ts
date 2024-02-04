@@ -1,6 +1,12 @@
+import { putDataPortfolio } from "@/services/formulaire/photo";
+import { sendToast } from "@/utils/toast";
 import { FormikProps } from "formik";
-import { ChangeEvent, KeyboardEvent, WheelEvent } from "react";
-import toast from "react-hot-toast";
+import { KeyboardEvent, WheelEvent } from "react";
+import {
+  HandleFileChangeParams,
+  HandlePutPortfolioPhotoParams,
+  LimitNumberParams,
+} from "./type";
 
 export const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
   if (e.key === "ArrowUp" || e.key === "ArrowDown") {
@@ -15,27 +21,28 @@ export const checkError = (formik: FormikProps<any>, id: string) => {
     ? formik.errors[id]?.toString()
     : "";
 };
-export const limitInputNumber = (
-  event: ChangeEvent<HTMLInputElement>,
-  limitNumber: number,
-  formik: FormikProps<any>,
-  id: string
-) => {
+export const limitInputNumber = ({
+  event,
+  limit,
+  formik,
+  id,
+}: LimitNumberParams) => {
   const { value } = event.target;
 
   // Remove non-numeric characters and limit to 15 digits
-  const cleanedValue = value.replace(/\D/g, "").slice(0, limitNumber);
+  const cleanedValue = value.replace(/\D/g, "").slice(0, limit);
 
   formik.setFieldValue(id, cleanedValue);
 };
 
-export const handleMultipleFileChange = async (
-  event: React.ChangeEvent<HTMLInputElement>,
-  formik: FormikProps<any>,
-  setIsLoadInput: (value: boolean) => void,
-  error: string,
-  id: string
-) => {
+export const handleMultipleFileChange = async ({
+  event,
+  formik,
+  setIsLoadInput,
+  error,
+  id,
+  setIsCurrentlyEditing,
+}: HandleFileChangeParams) => {
   setIsLoadInput && setIsLoadInput(true);
   const selectedFiles: FileList | null = event?.currentTarget?.files;
   const arrayFile: File[] = [...formik?.values[id]];
@@ -43,34 +50,59 @@ export const handleMultipleFileChange = async (
   if (selectedFiles) {
     const arrayOfObjects = Object.values(selectedFiles);
 
-    const filterNonFileObjects = arrayOfObjects?.filter(
+    const filterNonFile = arrayOfObjects?.filter(
       (file: File) => file instanceof File
     );
 
-    if (filterNonFileObjects?.length > 3) {
-      toast.error(error);
+    if (filterNonFile?.length > 3) {
+      error && sendToast(true, error);
     } else {
-      filterNonFileObjects.forEach((object) => {
+      filterNonFile.forEach((object) => {
         arrayFile.push(object);
       });
     }
-    console.log(filterNonFileObjects, "NON FILE");
+    console.log(filterNonFile, "FILE");
 
     await formik.setFieldValue(id, arrayFile);
     setIsLoadInput && setIsLoadInput(false);
+    setIsCurrentlyEditing("");
   }
 };
-export const handleSingleFileChange = async (
-  event: React.ChangeEvent<HTMLInputElement>,
-  formik: FormikProps<any>,
-  setIsLoadInput: (value: boolean) => void,
-  error: string,
-  id: string
-) => {
+export const handleSingleFileChange = async ({
+  event,
+  formik,
+  setIsLoadInput,
+  id,
+  setIsCurrentlyEditing,
+}: HandleFileChangeParams) => {
   setIsLoadInput && setIsLoadInput(true);
   const selectedFiles = event?.currentTarget?.files?.[0];
   await formik.setFieldValue(id, selectedFiles);
   setIsLoadInput && setIsLoadInput(false);
-
+  setIsCurrentlyEditing("");
   console.log(event?.currentTarget?.files?.[0], "SINGLE");
+};
+
+export const handlePutPortfolioPhoto = async ({
+  candidatId,
+  jwt,
+  value,
+  formik,
+}: HandlePutPortfolioPhotoParams) => {
+  const response = await putDataPortfolio({
+    candidatId,
+    jwt,
+    files: value,
+    formik,
+  });
+
+  console.log(response, "FROM HANDLEPUT");
+  if (response?.status === 200) {
+    sendToast(false, "Photos ajouté");
+  } else {
+    const error = response?.response?.data?.error?.message
+      ? response?.response?.data?.error?.message
+      : "An error occurred";
+    sendToast(true, error);
+  }
 };

@@ -162,7 +162,7 @@ export const InputNumber = ({
         type="number"
         id={id}
         name={id}
-        onChange={(e) => limitInputNumber(e, limit, formik, id)}
+        onChange={(event) => limitInputNumber({ event, limit, formik, id })}
         value={value}
         onBlur={formik.handleBlur}
         placeholder={placeholder}

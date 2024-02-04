@@ -4,9 +4,11 @@ import { ErrorInput, Label } from "./InputLabel";
 import {
   checkError,
   handleMultipleFileChange,
+  handlePutPortfolioPhoto,
   handleSingleFileChange,
 } from "./function";
-import { InputPhotoProps } from "./type";
+import { InputPhotoProps, PortfolioButtonsProps } from "./type";
+import useToggle from "@/hooks/Basic/useToggle";
 
 const InputPhoto = ({
   id,
@@ -21,17 +23,18 @@ const InputPhoto = ({
   setIsLoadInput,
   dictionary,
 }: InputPhotoProps) => {
+  const { toggle, open } = useToggle();
   const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
   const errorText = checkError(formik, id);
   const value = formik.values[id];
   const length = Array.isArray(value) ? value.length : value !== "" ? 1 : 0;
-  const handlePicture = Array.isArray(value) && value.length > 0;
+  const pictureLenght = Array.isArray(value) && value.length > 0;
   const isDisabled = isLoadInput;
   const displaySpinner = isLoadInput && isCurrentlyEditing === id;
   const maxPhotoError = dictionary?.general?.form?.errors?.autresphotos;
   const helperPhoto = dictionary?.general?.form?.helpers?.autresphotos;
 
-  console.log(formik?.values?.photodepresentation, "FORMIK");
+  console.log(formik?.values?.autresphotos, "FORMIK");
   return (
     <div className="box__input box__photo" data-testid="input">
       <Label
@@ -56,15 +59,22 @@ const InputPhoto = ({
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           if (setIsLoadInput) {
             if (multiple) {
-              handleMultipleFileChange(
+              handleMultipleFileChange({
                 event,
                 formik,
                 setIsLoadInput,
-                maxPhotoError,
-                id
-              );
+                error: maxPhotoError,
+                id,
+                setIsCurrentlyEditing,
+              });
             } else {
-              handleSingleFileChange(event, formik, setIsLoadInput, "", id);
+              handleSingleFileChange({
+                event,
+                formik,
+                setIsLoadInput,
+                id,
+                setIsCurrentlyEditing,
+              });
             }
           }
         }}
@@ -76,13 +86,13 @@ const InputPhoto = ({
           inputElement.value = "";
         }}
       />
-      {/* Button to view Photo  */}
-      {multiple && handlePicture && (
-        <button type="button" className="boutonSlideCommon">
-          Gerer photos
-        </button>
-      )}
-      {/* <>
+      <PortfolioButtons
+        multiple={multiple}
+        pictureLength={pictureLenght}
+        buttonText="Gérer Photos"
+        handleButtonClick={toggle}
+      />
+      {/* Modal <>
         {Array.isArray(value) &&
           value?.map((i, index) => {
             console.log(i);
@@ -91,14 +101,53 @@ const InputPhoto = ({
       </> */}
       {helper && <p className="text-sm italic ">{`(${helper})`}</p>}
       {/* BUTTON pour envoyer photo multiple */}
-      {multiple && (
-        <button type="button" className="boutonSlideCommon">
-          SEND MULTIPLE
-        </button>
-      )}
+      <PortfolioButtons
+        multiple={multiple}
+        pictureLength={pictureLenght}
+        buttonText=" SEND MULTIPLE"
+        handleButtonClick={handlePutPortfolioPhoto}
+        candidatId={183}
+        jwt={"jwt"}
+        value={formik?.values?.autresphotos}
+        formik={formik}
+      />
       <ErrorInput errorText={errorText} />
+      <dialog open={open}>
+        <p>Salutations, à tous et à toutes !</p>
+        <>
+          {Array.isArray(value) &&
+            value?.map((i, index) => {
+              console.log(i);
+              return <p>{i.name}</p>;
+            })}
+        </>
+        <button type="button" onClick={toggle}>
+          OK
+        </button>
+      </dialog>
     </div>
   );
 };
 
 export default InputPhoto;
+
+const PortfolioButtons = ({
+  handleButtonClick,
+  buttonText,
+  pictureLength,
+  multiple,
+  ...props
+}: PortfolioButtonsProps) => {
+  return (
+    multiple &&
+    pictureLength && (
+      <button
+        type="button"
+        className="boutonSlideCommon"
+        onClick={() => handleButtonClick(props)}
+      >
+        {buttonText}
+      </button>
+    )
+  );
+};

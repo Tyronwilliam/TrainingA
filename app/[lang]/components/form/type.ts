@@ -1,5 +1,6 @@
 import { Dictionary } from "@/types/dictionary";
 import { FormikProps } from "formik";
+import { ChangeEvent } from "react";
 
 export type InputLabelProps = {
   id: string;
@@ -43,3 +44,33 @@ export type LabelProps = {
   length?: number;
   limit?: number;
 };
+export interface HandlePutPortfolioPhotoParams {
+  candidatId: number;
+  jwt: string;
+  value: File[];
+  formik: FormikProps<any>;
+}
+export interface HandleFileChangeParams {
+  event: React.ChangeEvent<HTMLInputElement>;
+  formik: FormikProps<any>;
+  setIsLoadInput: (value: boolean) => void;
+  error?: string;
+  id: string;
+  setIsCurrentlyEditing: (value: string) => void;
+}
+export interface LimitNumberParams {
+  event: ChangeEvent<HTMLInputElement>;
+  limit: number;
+  formik: FormikProps<any>;
+  id: string;
+}
+export interface PortfolioButtonsProps {
+  handleButtonClick: (props: any) => void; // Adjust the type as needed
+  buttonText: string;
+  candidatId?: number;
+  jwt?: string;
+  value?: any; // Adjust the type as needed
+  formik?: any; // Adjust the type as needed
+  multiple: boolean | undefined;
+  pictureLength: boolean | undefined;
+}
