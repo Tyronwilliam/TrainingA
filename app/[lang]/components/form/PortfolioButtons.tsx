@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { PortfolioButtonsProps } from "./type";
 
 export const PortfolioButtons = ({
@@ -12,7 +13,13 @@ export const PortfolioButtons = ({
     pictureLength && (
       <button
         type="button"
-        className="boutonSlideCommon"
+        disabled={props.isDisabled || props.errorText === "15 pictures max"}
+        className={classNames({
+          "shrink-0 text-lg  w-full radius p-1 border-[1px] border-white": true,
+          boutonSlideCommon: !props.isDisabled,
+          "max-w-[180px] opacity-50":
+            props.isDisabled || props.errorText === "15 pictures max",
+        })}
         onClick={() => handleButtonClick(props)}
       >
         {buttonText}

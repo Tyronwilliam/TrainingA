@@ -18,6 +18,10 @@ type InputProps = {
   dictionary: Dictionary;
   isLoadInput?: boolean;
   setIsLoadInput?: (isLoadInput: boolean) => void;
+  open?: boolean;
+  toggle?: () => void;
+  isCurrentlyEditing?: string;
+  setIsCurrentlyEditing?: (id: string) => void;
 };
 const Inputs = ({
   inputs,
@@ -25,6 +29,10 @@ const Inputs = ({
   dictionary,
   isLoadInput,
   setIsLoadInput,
+  open,
+  toggle,
+  setIsCurrentlyEditing,
+  isCurrentlyEditing,
 }: InputProps) => {
   return (
     <>
@@ -119,6 +127,10 @@ const Inputs = ({
                 isLoadInput={isLoadInput}
                 setIsLoadInput={setIsLoadInput}
                 dictionary={dictionary}
+                open={open}
+                toggle={toggle}
+                isCurrentlyEditing={isCurrentlyEditing}
+                setIsCurrentlyEditing={setIsCurrentlyEditing}
               />
             )}
           </React.Fragment>

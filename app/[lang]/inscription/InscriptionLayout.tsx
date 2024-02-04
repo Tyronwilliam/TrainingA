@@ -1,25 +1,27 @@
 "use client";
+import useToggle from "@/hooks/Basic/useToggle";
+import useFormSubmission from "@/hooks/Formulaire/useFormSubmission";
 import { Dictionary } from "@/types/dictionary";
 import {
   StepFiveSchema,
   StepFourSchema,
   StepOneSchema,
-  StepSixSchema,
   StepThreeSchema,
   StepTwoSchema,
   inscriptionInitialValues,
 } from "@/utils/validationInscription";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
-import StepThree from "./StepThree";
-import StepFour from "./StepFour";
 import StepFive from "./StepFive";
-import useFormSubmission from "@/hooks/Formulaire/useFormSubmission";
+import StepFour from "./StepFour";
+import StepOne from "./StepOne";
+import StepThree from "./StepThree";
+import StepTwo from "./StepTwo";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const [currentStep, setCurrentStep] = useState(4);
+  const { toggle, open } = useToggle();
+  const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
   const frSysteme = dictionary?.general?.form?.helpers?.frSysteme;
   const {
     isSubmitting,
@@ -37,7 +39,6 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     StepThreeSchema,
     StepFourSchema,
     StepFiveSchema,
-    StepSixSchema,
   ];
 
   const formik = useFormik({
@@ -67,6 +68,10 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       next={handleNext}
       isLoadInput={isLoadInput}
       setIsLoadInput={setIsLoadInput}
+      open={open}
+      toggle={toggle}
+      isCurrentlyEditing={isCurrentlyEditing}
+      setIsCurrentlyEditing={setIsCurrentlyEditing}
     />,
   ];
   useEffect(() => {

@@ -32,6 +32,10 @@ export type InputPhotoProps = Omit<InputLabelProps, "placeholder"> & {
   multiple: boolean | undefined;
   isLoadInput?: boolean;
   setIsLoadInput?: (isLoadInput: boolean) => void;
+  open?: boolean;
+  toggle?: () => void;
+  isCurrentlyEditing?: string;
+  setIsCurrentlyEditing?: (id: string) => void;
 };
 export type ErrorInputProps = {
   errorText: string | undefined;
@@ -49,6 +53,7 @@ export interface HandlePutPortfolioPhotoParams {
   jwt: string;
   value: File[];
   formik: FormikProps<any>;
+  setIsLoadInput: (value: boolean) => void;
 }
 export interface HandleFileChangeParams {
   event: React.ChangeEvent<HTMLInputElement>;
@@ -73,4 +78,7 @@ export interface PortfolioButtonsProps {
   formik?: any; // Adjust the type as needed
   multiple: boolean | undefined;
   pictureLength: boolean | undefined;
+  isDisabled?: boolean;
+  setIsLoadInput?: (value: boolean) => void;
+  errorText?: string;
 }

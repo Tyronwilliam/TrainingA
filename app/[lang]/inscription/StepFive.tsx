@@ -7,6 +7,10 @@ type StepFiveProps = {
   next: any;
   isLoadInput: boolean;
   setIsLoadInput: (isLoadInput: boolean) => void;
+  open: boolean;
+  toggle: () => void;
+  isCurrentlyEditing: string;
+  setIsCurrentlyEditing: (id: string) => void;
 };
 const StepFive = ({
   dictionary,
@@ -14,6 +18,10 @@ const StepFive = ({
   next,
   isLoadInput,
   setIsLoadInput,
+  open,
+  toggle,
+  setIsCurrentlyEditing,
+  isCurrentlyEditing,
 }: StepFiveProps) => {
   const checkBox: Record<string, StepType> =
     dictionary?.inscription?.stepFive.checkbox;
@@ -31,6 +39,10 @@ const StepFive = ({
         inputs={inputs}
         isLoadInput={isLoadInput}
         setIsLoadInput={setIsLoadInput}
+        open={open}
+        toggle={toggle}
+        isCurrentlyEditing={isCurrentlyEditing}
+        setIsCurrentlyEditing={setIsCurrentlyEditing}
       />
     </>
   );

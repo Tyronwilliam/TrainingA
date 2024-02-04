@@ -126,16 +126,8 @@ export const StepThreeSchema = Yup.object().shape({
   chaussures: Yup.string().required("Required"),
   origine: Yup.string().required("Required"),
 });
+
 export const StepFourSchema = Yup.object().shape({
-  confectionHaut: Yup.string().required("Required"),
-  confectionBas: Yup.string().required("Required"),
-  cheveux: Yup.string().required("Required"),
-  yeux: Yup.string().required("Required"),
-  taille: Yup.string().required("Required"),
-  chaussures: Yup.string().required("Required"),
-  origine: Yup.string().required("Required"),
-});
-export const StepFiveSchema = Yup.object().shape({
   defile: Yup.boolean().required("Required"),
   danseClassique: Yup.boolean().required("Required"),
   danseContemporaine: Yup.boolean().required("Required"),
@@ -153,11 +145,17 @@ export const StepFiveSchema = Yup.object().shape({
     otherwise: (schema) => schema.optional(),
   }),
 });
-export const StepSixSchema = Yup.object().shape({
+export const StepFiveSchema = Yup.object().shape({
   acteur: Yup.boolean().required("Required"),
   modele: Yup.boolean().required("Required"),
   figuration: Yup.boolean().required("Required"),
   silhouette: Yup.boolean().required("Required"),
   photodepresentation: Yup.string().required("Required"),
-  autresphotos: Yup.array().required("Required").nonNullable().max(15, "15 photos max"),
+  autresphotos: Yup.array()
+    .required("Required")
+    .test("max-photos", "15 pictures max", (value) => value.length <= 15)
+    .test("file-instance", "Veuillez enregistrer vos photos", (value) => {
+      // Check if any item in the array is an instance of File
+      return !value.some((item) => item instanceof File);
+    }),
 });

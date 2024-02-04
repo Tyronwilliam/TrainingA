@@ -63,7 +63,7 @@ export const handleMultipleFileChange = async ({
     }
     await formik.setFieldValue(id, arrayFile);
     setIsLoadInput && setIsLoadInput(false);
-    setIsCurrentlyEditing("");
+    // setIsCurrentlyEditing("");
   }
 };
 export const handleSingleFileChange = async ({
@@ -77,7 +77,7 @@ export const handleSingleFileChange = async ({
   const selectedFiles = event?.currentTarget?.files?.[0];
   await formik.setFieldValue(id, selectedFiles);
   setIsLoadInput && setIsLoadInput(false);
-  setIsCurrentlyEditing("");
+  // setIsCurrentlyEditing("");
 };
 
 export const handlePutPortfolioPhoto = async ({
@@ -85,7 +85,9 @@ export const handlePutPortfolioPhoto = async ({
   jwt,
   value,
   formik,
+  setIsLoadInput,
 }: HandlePutPortfolioPhotoParams) => {
+  setIsLoadInput(true);
   const response = await putDataPortfolio({
     candidatId,
     jwt,
@@ -94,11 +96,13 @@ export const handlePutPortfolioPhoto = async ({
   });
   if (response?.status === 200) {
     sendToast(false, "Photos ajouté");
+    setIsLoadInput(false);
   } else {
     const error = response?.response?.data?.error?.message
       ? response?.response?.data?.error?.message
       : "An error occurred";
     sendToast(true, error);
+    setIsLoadInput(false);
   }
 };
 export const handleFileChange = ({
@@ -153,11 +157,6 @@ export const deleteFile = async (
           response?.response?.data?.error?.message
         : "An error occurred";
       sendToast(true, error);
-      // sendToast()
     }
-    console.log("DEJA DANS LA BDD");
   }
-  // Si instance of File = Juste supprime par l'id ou l'index
-  // SI False instance of FIle = Supprime par une requete API
-  // Tu update le tableau
 };
