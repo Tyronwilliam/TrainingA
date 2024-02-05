@@ -41,7 +41,6 @@ export const handleMultipleFileChange = async ({
   setIsLoadInput,
   error,
   id,
-  setIsCurrentlyEditing,
 }: HandleFileChangeParams) => {
   setIsLoadInput && setIsLoadInput(true);
   const selectedFiles: FileList | null = event?.currentTarget?.files;
@@ -63,7 +62,6 @@ export const handleMultipleFileChange = async ({
     }
     await formik.setFieldValue(id, arrayFile);
     setIsLoadInput && setIsLoadInput(false);
-    // setIsCurrentlyEditing("");
   }
 };
 export const handleSingleFileChange = async ({
@@ -71,13 +69,11 @@ export const handleSingleFileChange = async ({
   formik,
   setIsLoadInput,
   id,
-  setIsCurrentlyEditing,
 }: HandleFileChangeParams) => {
   setIsLoadInput && setIsLoadInput(true);
   const selectedFiles = event?.currentTarget?.files?.[0];
   await formik.setFieldValue(id, selectedFiles);
   setIsLoadInput && setIsLoadInput(false);
-  // setIsCurrentlyEditing("");
 };
 
 export const handlePutPortfolioPhoto = async ({
@@ -112,7 +108,6 @@ export const handleFileChange = ({
   formik,
   setIsLoadInput,
   id,
-  setIsCurrentlyEditing,
   multiple,
   error,
 }: HandleFileChangeParams & { multiple: boolean | undefined }): void => {
@@ -123,7 +118,6 @@ export const handleFileChange = ({
       setIsLoadInput,
       error: error,
       id,
-      setIsCurrentlyEditing,
     });
   } else {
     handleSingleFileChange({
@@ -131,7 +125,6 @@ export const handleFileChange = ({
       formik,
       setIsLoadInput,
       id,
-      setIsCurrentlyEditing,
     });
   }
 };

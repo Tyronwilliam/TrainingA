@@ -25,7 +25,7 @@ export const uploadFile = async (file: any, url: string, jwt?: string) => {
 
   const headers = {
     "Content-Type": "multipart/form-data",
-    // Authorization: `Bearer ${jwt}`,
+    Authorization: `Bearer ${jwt}`,
   };
   try {
     const response = await axiosMutationFile(url, formData, headers);
@@ -36,13 +36,13 @@ export const uploadFile = async (file: any, url: string, jwt?: string) => {
   }
 };
 
-export const promisesUpload = async (files: File[]) => {
-  return files.map(async (file) => {
+export const promisesUpload = async (files: File[] | File, jwt: string) => {
+  return (Array.isArray(files) ? files : [files]).map(async (file) => {
     try {
       const res = await uploadFile(
         file,
-        `${process.env.NEXT_PUBLIC_API_URL}/upload`
-        // jwt
+        `${process.env.NEXT_PUBLIC_API_URL}/upload`,
+        jwt
       );
       return res?.data[0];
     } catch (err) {
@@ -53,7 +53,7 @@ export const promisesUpload = async (files: File[]) => {
 };
 
 export const uploadFileInCandidat = async (
-  promisesResolved: {}[],
+  promisesResolved: {}[] | {},
   candidatId: number,
   id: string,
   jwt?: string
@@ -62,12 +62,12 @@ export const uploadFileInCandidat = async (
   return await axios
     .put(
       `${process.env.NEXT_PUBLIC_API_URL}/candidats/${candidatId}?populate=Portfolio.Portfolio&populate=Bande_Demo`,
-      data
-      // {
-      //   headers: {
-      //     Authorization: `Bearer ${jwt}`,
-      //   },
-      // }
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
     )
     .then((res) => res)
     .catch((err: any) => {
@@ -83,7 +83,7 @@ export const putDataPortfolio = async ({
   id,
 }: PutDataPortfolioParams) => {
   const onlyFile = files?.filter((file) => file instanceof File);
-  const promises = await promisesUpload(onlyFile);
+  const promises = await promisesUpload(onlyFile ,jwt);
   const promisesResolved = await Promise.all(promises);
   const nonFile = files?.filter((file) => !(file instanceof File));
   if (nonFile?.length > 0) promisesResolved.push(...nonFile);
@@ -104,7 +104,7 @@ export const deletePhotos = async ({ file, jwt }: DeletePhotoParams) => {
       `${process.env.NEXT_PUBLIC_API_URL}/upload/files/${file?.id}`,
       {
         headers: {
-          // Authorization: `Bearer ${jwt}`,
+          Authorization: `Bearer ${jwt}`,
         },
       }
     );

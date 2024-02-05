@@ -48,7 +48,7 @@ export interface FormikInscriptionProps {
   congeSpectacle: string;
   lastMedicVisite: Date | null;
   abattement: boolean;
-  cmb: string;
+  cmb: File;
   confectionHaut: string;
   confectionBas: string;
   cheveux: string;
@@ -72,7 +72,7 @@ export interface FormikInscriptionProps {
   modele: boolean;
   figuration: boolean;
   silhouette: boolean;
-  photodepresentation: string;
+  photodepresentation: File;
   autresphotos: [];
   videodepresentation: string;
   bandeDemo: [];

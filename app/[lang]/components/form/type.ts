@@ -64,7 +64,6 @@ export interface HandleFileChangeParams {
   setIsLoadInput: (value: boolean) => void;
   error?: string;
   id: string;
-  setIsCurrentlyEditing: (value: string) => void;
 }
 export interface LimitNumberParams {
   event: ChangeEvent<HTMLInputElement>;

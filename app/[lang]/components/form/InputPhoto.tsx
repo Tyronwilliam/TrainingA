@@ -64,14 +64,13 @@ const InputPhoto = ({
         name={id}
         disabled={isDisabled || tooMuchInstanceFile}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          if (setIsLoadInput && setIsCurrentlyEditing) {
+          if (setIsLoadInput) {
             handleFileChange({
               event,
               formik,
               setIsLoadInput,
               error: maxPhotoError,
               id,
-              setIsCurrentlyEditing,
               multiple,
             });
           }
