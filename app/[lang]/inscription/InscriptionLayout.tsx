@@ -6,6 +6,7 @@ import {
   StepFiveSchema,
   StepFourSchema,
   StepOneSchema,
+  StepSixSchema,
   StepThreeSchema,
   StepTwoSchema,
   inscriptionInitialValues,
@@ -18,6 +19,7 @@ import StepOne from "./StepOne";
 import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
 import ButtonForm from "../components/ButtonForm";
+import StepSix from "./StepSix";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const {
@@ -40,6 +42,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     StepThreeSchema,
     StepFourSchema,
     StepFiveSchema,
+    StepSixSchema,
   ];
 
   const formik = useFormik({
@@ -58,11 +61,35 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       setCurrentStep(stepPlusUn);
     }
   };
+  const handlePrev = async () => {
+    const stepPlusUn = currentStep - 1;
+    setCurrentStep(stepPlusUn);
+  };
   const stepComponents = [
-    <StepOne formik={formik} dictionary={dictionary} next={handleNext} />,
-    <StepTwo formik={formik} dictionary={dictionary} next={handleNext} />,
-    <StepThree formik={formik} dictionary={dictionary} next={handleNext} />,
-    <StepFour formik={formik} dictionary={dictionary} next={handleNext} />,
+    <StepOne
+      formik={formik}
+      dictionary={dictionary}
+      next={handleNext}
+      key={"StepOne"}
+    />,
+    <StepTwo
+      formik={formik}
+      dictionary={dictionary}
+      next={handleNext}
+      key={"StepTwo"}
+    />,
+    <StepThree
+      formik={formik}
+      dictionary={dictionary}
+      next={handleNext}
+      key={"StepThree"}
+    />,
+    <StepFour
+      formik={formik}
+      dictionary={dictionary}
+      next={handleNext}
+      key={"StepFour"}
+    />,
     <StepFive
       formik={formik}
       dictionary={dictionary}
@@ -73,6 +100,19 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       toggle={toggle}
       isCurrentlyEditing={isCurrentlyEditing}
       setIsCurrentlyEditing={setIsCurrentlyEditing}
+      key={"StepFive"}
+    />,
+    <StepSix
+      formik={formik}
+      dictionary={dictionary}
+      next={handleNext}
+      isLoadInput={isLoadInput}
+      setIsLoadInput={setIsLoadInput}
+      open={open}
+      toggle={toggle}
+      isCurrentlyEditing={isCurrentlyEditing}
+      setIsCurrentlyEditing={setIsCurrentlyEditing}
+      key={"StepSix"}
     />,
   ];
   useEffect(() => {
@@ -93,19 +133,14 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       )}
       {stepComponents[currentStep]}
       <div className="shrink-0 grow basis-full text-center flex flex-wrap items-center justify-center mt-6 gap-4">
-        {/* <button
-          className="boutonSlideCommon text-lg max-w-[120px] w-full radius p-2.5 border-[1px] border-white"
-          onClick={() => handleNext()}
-          type="button"
-        >
-          Next
-        </button> */}
         {currentStep > 0 && (
           <ButtonForm
             isSubmitting={isSubmitting}
             formik={formik}
             dictionary={dictionary}
             content={dictionary?.cta?.formEvent?.previous}
+            type="button"
+            handleClick={handlePrev}
           />
         )}
         <ButtonForm
@@ -113,6 +148,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
           formik={formik}
           dictionary={dictionary}
           content={dictionary?.cta?.formEvent?.next}
+          type="submit"
         />
       </div>{" "}
     </form>

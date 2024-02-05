@@ -1,4 +1,5 @@
 import { DeletePhotoParams, PutDataPortfolioParams } from "@/types/photo";
+import { apiObject } from "@/utils/apiObject";
 import axios from "axios";
 
 const axiosMutationFile = async (
@@ -54,18 +55,13 @@ export const promisesUpload = async (files: File[]) => {
 export const uploadFileInCandidat = async (
   promisesResolved: {}[],
   candidatId: number,
+  id: string,
   jwt?: string
 ) => {
-  const data = {
-    data: {
-      Portfolio: {
-        Portfolio: promisesResolved,
-      },
-    },
-  };
+  const data = apiObject(id, promisesResolved);
   return await axios
     .put(
-      `${process.env.NEXT_PUBLIC_API_URL}/candidats/${candidatId}?populate=Portfolio.Portfolio`,
+      `${process.env.NEXT_PUBLIC_API_URL}/candidats/${candidatId}?populate=Portfolio.Portfolio&populate=Bande_Demo`,
       data
       // {
       //   headers: {
@@ -84,17 +80,19 @@ export const putDataPortfolio = async ({
   jwt,
   files,
   formik,
+  id,
 }: PutDataPortfolioParams) => {
   const onlyFile = files?.filter((file) => file instanceof File);
   const promises = await promisesUpload(onlyFile);
   const promisesResolved = await Promise.all(promises);
   const nonFile = files?.filter((file) => !(file instanceof File));
   if (nonFile?.length > 0) promisesResolved.push(...nonFile);
-  await formik.setFieldValue("autresphotos", promisesResolved);
+  await formik.setFieldValue(id, promisesResolved);
 
   const response = await uploadFileInCandidat(
     promisesResolved,
     candidatId,
+    id,
     jwt
   );
   return response;
@@ -112,7 +110,7 @@ export const deletePhotos = async ({ file, jwt }: DeletePhotoParams) => {
     );
     return response;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return err;
   }
 };

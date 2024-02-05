@@ -5,6 +5,7 @@ export interface PutDataPortfolioParams {
   jwt: string;
   files: File[];
   formik: FormikProps<any>;
+  id: string;
 }
 
 export interface DeletePhotoParams {

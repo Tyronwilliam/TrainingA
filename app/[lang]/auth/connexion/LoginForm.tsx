@@ -64,6 +64,7 @@ const LoginForm = ({ dictionary }: { dictionary: Dictionary }) => {
         formik={formik}
         isSubmitting={isSubmitting}
         content={dictionary.cta.formEvent.connexion}
+        type="submit"
       />
     </form>
   );

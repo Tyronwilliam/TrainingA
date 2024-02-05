@@ -11,6 +11,8 @@ export type InputLabelProps = {
   type?: string;
   helper?: string;
   dictionary?: Dictionary;
+  pattern?: string;
+  limit?: number;
 };
 export type InputPasswordPropsWithShow = Omit<InputLabelProps, "placeholder">;
 export type InputLabelPropsWithCustomClass = InputLabelProps & {
@@ -54,6 +56,7 @@ export interface HandlePutPortfolioPhotoParams {
   value: File[];
   formik: FormikProps<any>;
   setIsLoadInput: (value: boolean) => void;
+  id: string;
 }
 export interface HandleFileChangeParams {
   event: React.ChangeEvent<HTMLInputElement>;
@@ -82,4 +85,5 @@ export interface PortfolioButtonsProps {
   setIsLoadInput?: (value: boolean) => void;
   errorText?: string;
   noInstanceFile?: boolean;
+  id?: string;
 }

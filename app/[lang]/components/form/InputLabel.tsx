@@ -26,11 +26,14 @@ export const InputString = ({
   requis,
   type,
   helper,
+  pattern,
+  limit,
 }: InputLabelProps) => {
   const errorText = checkError(formik, id);
   const value = formik.values[id] !== null ? formik.values[id] : "";
+  const pattenProps = pattern && pattern;
   return (
-    <div className="box__input" data-testid="input">
+    <div className="box__input" data-cy="input">
       <Label
         requis={requis}
         label={label}
@@ -48,6 +51,8 @@ export const InputString = ({
         value={value}
         onBlur={formik.handleBlur}
         placeholder={placeholder !== undefined ? placeholder : ""}
+        pattern={pattenProps}
+        maxLength={limit}
       />
       {helper && <Helpers classStyle="text-sm italic" helper={helper} />}
       <ErrorInput errorText={errorText} />
@@ -67,7 +72,7 @@ export const InputPassword = ({
   const errorText = checkError(formik, id);
 
   return (
-    <div className="box__input" data-testid="input">
+    <div className="box__input" data-cy="input">
       <Label
         requis={requis}
         label={label}
@@ -116,7 +121,7 @@ export const TextArea = ({
   const value = formik.values[id];
 
   return (
-    <div className={`box__input ${classStyle}`} data-testid="textArea">
+    <div className={`box__input ${classStyle}`} data-cy="input">
       <Label
         requis={requis}
         label={label}
@@ -152,7 +157,7 @@ export const InputNumber = ({
   const value = formik.values[id] || "";
   const limit = limitNumber !== undefined ? limitNumber : 0;
   return (
-    <div className="box__input" data-testid="input_number">
+    <div className="box__input" data-cy="input">
       <Label
         requis={requis}
         label={label}
@@ -191,7 +196,7 @@ export const InputCheckBox = ({
     "md:self-baseline": id === "agence" || id === "retired",
   });
   return (
-    <div className={specificTarget} data-testid="input">
+    <div className={specificTarget} data-cy="input">
       <div className="w-full flex gap-2">
         <Label
           requis={requis}
@@ -227,7 +232,7 @@ export const InputSelect = ({
   const value = formik.values[id];
 
   return (
-    <div className="box__input">
+    <div className="box__input" data-cy="input">
       <Label
         requis={requis}
         label={label}

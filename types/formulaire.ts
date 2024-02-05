@@ -35,7 +35,7 @@ export interface FormikInscriptionProps {
   birthCountry: string;
   address: string;
   city: string;
-  postalCode: number | null;
+  postalCode: string;
   country: string;
   nationality: string;
   residencePermit: number | null;
@@ -74,6 +74,8 @@ export interface FormikInscriptionProps {
   silhouette: boolean;
   photodepresentation: string;
   autresphotos: [];
+  videodepresentation: string;
+  bandeDemo: [];
 }
 export interface StepType {
   label: string;
@@ -86,4 +88,5 @@ export interface StepType {
   options?: Record<string, string>;
   accept?: string;
   multiple?: boolean;
+  pattern?: string;
 }

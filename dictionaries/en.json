@@ -226,7 +226,7 @@
       "postalCode": {
         "label": "postal Code",
         "helper": "",
-        "type": "number",
+        "type": "text",
         "required": true,
         "placeholder": "75000",
         "id": "postalCode",
@@ -809,6 +809,30 @@
           "limit": 15,
           "multiple": true
         }
+      }
+    },
+    "stepSix": {
+      "videodepresentation": {
+        "label": "Presentation Video",
+        "helper": "Highly recommended. Video of 1min max, made with a phone, in which you introduce yourself. If you don't have time to do it right away, please add it to your account later",
+        "type": "photo",
+        "required": true,
+        "placeholder": "",
+        "id": "videodepresentation",
+        "limit": 1,
+        "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
+        "multiple": false
+      },
+      "bandeDemo": {
+        "label": "Demo Reel",
+        "helper": "Maximum 3 videos. Please rename the video(s) with \"N. First name\".",
+        "type": "photo",
+        "required": true,
+        "placeholder": "",
+        "id": "bandeDemo",
+        "limit": 3,
+        "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
+        "multiple": true
       }
     }
   }

@@ -1,6 +1,6 @@
 import { FormikInscriptionProps } from "@/types/formulaire";
 import * as Yup from "yup";
-import { phoneNumberRegex, socSecNumberRegex } from "./regex";
+import { phoneNumberRegex, postalCodeRegex, socSecNumberRegex } from "./regex";
 export const inscriptionInitialValues: FormikInscriptionProps = {
   email: "",
   password: "",
@@ -15,7 +15,7 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   birthCountry: "",
   address: "",
   city: "",
-  postalCode: null,
+  postalCode: "",
   country: "",
   nationality: "",
   residencePermit: null,
@@ -55,6 +55,8 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   silhouette: false,
   photodepresentation: "",
   autresphotos: [],
+  bandeDemo: [],
+  videodepresentation: "",
 };
 export const StepOneSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -66,11 +68,15 @@ export const StepOneSchema = Yup.object().shape({
   age: Yup.number().nullable().required("Required"),
   dateOfBirth: Yup.date().nullable().required("Required"),
   birthCity: Yup.string().required("Required"),
-  birthPostal: Yup.number().nullable().required("Required"),
+  birthPostal: Yup.string()
+    .matches(postalCodeRegex, "Invalid postal code")
+    .required("Le code postal est obligatoire."),
   birthCountry: Yup.string().required("Required"),
   address: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
-  postalCode: Yup.number().nullable().required("Required"),
+  postalCode: Yup.string()
+    .matches(postalCodeRegex, "Invalid postal code")
+    .required("Le code postal est obligatoire."),
   country: Yup.string().required("Required"),
   nationality: Yup.string().required("Required"),
   residencePermit: Yup.number().nullable(),
@@ -135,15 +141,15 @@ export const StepFourSchema = Yup.object().shape({
   sportif: Yup.boolean().required("Required"),
   skate: Yup.boolean().required("Required"),
   ski: Yup.boolean().required("Required"),
-  experiencesTournage: Yup.string().optional(),
-  autres: Yup.string().optional(),
-  agence: Yup.string().required("Required"),
-  instagram: Yup.string().optional(),
+  experiencesTournage: Yup.string().nullable(),
+  autres: Yup.string().nullable(),
+  agence: Yup.boolean().required("Required"),
   agenceInfos: Yup.string().when("agence", {
     is: true,
     then: (schema) => Yup.string().required("Required"),
-    otherwise: (schema) => schema.optional(),
+    otherwise: (schema) => schema.nullable(),
   }),
+  instagram: Yup.string().nullable(),
 });
 export const StepFiveSchema = Yup.object().shape({
   acteur: Yup.boolean().required("Required"),
@@ -154,6 +160,16 @@ export const StepFiveSchema = Yup.object().shape({
   autresphotos: Yup.array()
     .required("Required")
     .test("max-photos", "15 pictures max", (value) => value.length <= 15)
+    .test("file-instance", "Veuillez enregistrer vos photos", (value) => {
+      // Check if any item in the array is an instance of File
+      return !value.some((item) => item instanceof File);
+    }),
+});
+export const StepSixSchema = Yup.object().shape({
+  videodepresentation: Yup.string().required("Required"),
+  bandeDemo: Yup.array()
+    .required("Required")
+    .test("max-photos", "15 pictures max", (value) => value.length <= 3)
     .test("file-instance", "Veuillez enregistrer vos photos", (value) => {
       // Check if any item in the array is an instance of File
       return !value.some((item) => item instanceof File);

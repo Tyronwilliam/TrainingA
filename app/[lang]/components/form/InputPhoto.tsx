@@ -42,8 +42,6 @@ const InputPhoto = ({
   const noInstanceFile = Array.isArray(value)
     ? !value.some((item: any) => item instanceof File)
     : false;
-
-  console.log(tooMuchInstanceFile);
   return (
     <div className="box__input box__photo relative" data-testid="input">
       <Label
@@ -108,12 +106,13 @@ const InputPhoto = ({
         handleButtonClick={handlePutPortfolioPhoto}
         candidatId={183}
         jwt={"jwt"}
-        value={formik?.values?.autresphotos}
+        value={formik?.values[id]}
         formik={formik}
         isDisabled={isDisabled}
         setIsLoadInput={setIsLoadInput}
         errorText={errorText}
         noInstanceFile={noInstanceFile}
+        id={id}
       />
       <ErrorInput errorText={errorText} />
     </div>

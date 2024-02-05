@@ -5,10 +5,10 @@ import { Locale } from "@/i18n-config";
 import { PreferencesProvider } from "@/hooks/Basic/usePreferencesProvider";
 import Provider from "@/hooks/Authentification/client-provider";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import { GoogleProvider } from "./provider/GoogleProvider";
 import { getDictionary } from "@/get-disctionary";
 import Footer from "./[lang]/Footer";
+import { authOptions } from "@/utils/auth";
 
 const Roboto = Roboto_Condensed({
   subsets: ["latin"],

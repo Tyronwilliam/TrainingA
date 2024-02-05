@@ -85,6 +85,7 @@ const ContactForm = ({
         formik={formik}
         isSubmitting={isSubmitting}
         content={dictionary.cta.formEvent.send}
+        type="submit"
       />
       <ErrorInput errorText={submitError} />
     </form>

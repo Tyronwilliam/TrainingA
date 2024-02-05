@@ -41,6 +41,7 @@ const ResetForm = ({
         formik={formik}
         isSubmitting={isSubmitting}
         content={dictionary.cta.formEvent.submit}
+        type="submit"
       />
     </form>
   );

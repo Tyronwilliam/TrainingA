@@ -192,10 +192,11 @@
       "birthPostal": {
         "label": "Code postal de naissance",
         "helper": "",
-        "type": "number",
+        "type": "text",
         "required": true,
         "placeholder": "75000",
         "id": "birthPostal",
+        "pattern": "^\\d{1,5}$",
         "limit": 5
       },
       "birthCountry": {
@@ -225,10 +226,11 @@
       "postalCode": {
         "label": "Code postal",
         "helper": "",
-        "type": "number",
+        "type": "text",
         "required": true,
         "placeholder": "75000",
         "id": "postalCode",
+        "pattern": "^\\d{1,5}$",
         "limit": 5
       },
       "country": {
@@ -809,6 +811,30 @@
           "accept": "image/jpg, image/jpeg, image/png",
           "multiple": true
         }
+      }
+    },
+    "stepSix": {
+      "videodepresentation": {
+        "label": "Vidéo de présentation",
+        "helper": "Fortement recommandée. Vidéo d'1min max, faite avec un téléphone, dans laquelle vous vous présentez. Si vous n'avez pas le temps de la faire immédiatement, pensez à la rajouter plus tard sur votre compte svp.",
+        "type": "photo",
+        "required": true,
+        "placeholder": "",
+        "id": "videodepresentation",
+        "limit": 1,
+        "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
+        "multiple": false
+      },
+      "bandeDemo": {
+        "label": "Bande démo",
+        "helper": "Maximum 3 vidéos. Merci de renommer la ou les vidéos par \"N. Prénom\".",
+        "type": "photo",
+        "required": true,
+        "placeholder": "",
+        "id": "bandeDemo",
+        "limit": 3,
+        "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
+        "multiple": true
       }
     }
   }

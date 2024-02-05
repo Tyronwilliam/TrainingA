@@ -47,7 +47,6 @@ export const handleMultipleFileChange = async ({
   const selectedFiles: FileList | null = event?.currentTarget?.files;
   const arrayFile: File[] = [...formik?.values[id]];
 
-
   if (selectedFiles) {
     const arrayOfObjects = Object.values(selectedFiles);
 
@@ -87,6 +86,7 @@ export const handlePutPortfolioPhoto = async ({
   value,
   formik,
   setIsLoadInput,
+  id,
 }: HandlePutPortfolioPhotoParams) => {
   setIsLoadInput(true);
   const response = await putDataPortfolio({
@@ -94,6 +94,7 @@ export const handlePutPortfolioPhoto = async ({
     jwt,
     files: value,
     formik,
+    id,
   });
   if (response?.status === 200) {
     sendToast(false, "Photos ajouté");
@@ -149,7 +150,7 @@ export const deleteFile = async (
     const response = await deletePhotos({ file, jwt });
     //@ts-ignore
     if (response?.status === 200) {
-      const removeFile = value?.filter((f) => f.name !== file?.name);
+      const removeFile = value?.filter((f) => f.id !== file?.id);
       formik.setFieldValue(id, removeFile);
     } else {
       //@ts-ignore

@@ -38,6 +38,7 @@ const ForgotForm = ({
         dictionary={dictionary}
         content={dictionary?.cta?.formEvent?.submit}
         isSubmitting={isSubmitting}
+        type="submit"
       />
     </form>
   );

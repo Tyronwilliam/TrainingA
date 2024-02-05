@@ -47,6 +47,7 @@ const Inputs = ({
           options,
           accept,
           multiple,
+          pattern,
         } = value;
 
         return (
@@ -60,6 +61,8 @@ const Inputs = ({
                 requis={required}
                 type={type}
                 helper={helper}
+                pattern={pattern}
+                limit={limit}
               />
             )}
             {type === "password" && (

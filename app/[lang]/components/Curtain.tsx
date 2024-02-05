@@ -25,6 +25,7 @@ const Curtain = () => {
       ></div>{" "}
       <div
         onClick={handleSplit}
+        data-cy="curtain"
         className={classNames({
           "absolute max-w-[800px] w-full h-full max-h-[250px] top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] cursor-pointer":
             true,
