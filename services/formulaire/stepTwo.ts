@@ -12,7 +12,7 @@ export const sendStepTwoData = async (
   const data = {
     Infos_Administrative: {
       Securite_sociale: socialNumberToString,
-      Enfant_a_charges: values?.children,
+      Enfant_a_charges: values?.children !== "" ? values?.children : 0,
       Statut: values?.statut,
       Retraite: values?.retired,
       Intermittent: values?.intermittent,

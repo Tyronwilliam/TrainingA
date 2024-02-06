@@ -74,7 +74,7 @@ export interface LimitNumberParams {
 export interface PortfolioButtonsProps {
   handleButtonClick: (props: any) => void; // Adjust the type as needed
   buttonText: string;
-  candidatId?: number;
+  candidatId?: number | string;
   jwt?: string;
   value?: any; // Adjust the type as needed
   formik?: any; // Adjust the type as needed

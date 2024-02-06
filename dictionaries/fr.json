@@ -161,7 +161,7 @@
         "options": {
           "Men": "Homme",
           "Women": "Femme",
-          "Kid": "Enfant"
+          "Kids": "Enfant"
         }
       },
       "age": {
@@ -300,7 +300,8 @@
         "type": "number",
         "required": false,
         "placeholder": "",
-        "id": "children"
+        "id": "children",
+        "limit": 2
       },
       "retired": {
         "label": "Retraité",

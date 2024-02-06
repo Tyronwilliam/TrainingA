@@ -69,7 +69,6 @@ export const handleSingleFileChange = async ({
 }: HandleFileChangeParams) => {
   setIsLoadInput && setIsLoadInput(true);
   const selectedFiles = event?.currentTarget?.files?.[0];
-  console.log(selectedFiles, "+++++++", id);
   await formik.setFieldValue(id, selectedFiles);
   setIsLoadInput && setIsLoadInput(false);
 };

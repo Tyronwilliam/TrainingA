@@ -1,6 +1,14 @@
 import { FormikInscriptionProps } from "@/types/formulaire";
 import * as Yup from "yup";
 import { phoneNumberRegex, postalCodeRegex, socSecNumberRegex } from "./regex";
+
+// Changer toast react quand ine photos est ajouté (text)
+//Ajouter le diclaimer au début
+// Ajouté succes du form a la fin
+// Soit enlever précedent
+// Soit avoir une logique si t'"a appuer sur précedent ne pas relancer la requete API"
+
+
 export const inscriptionInitialValues: FormikInscriptionProps = {
   email: "",
   password: "",
@@ -8,10 +16,10 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   nomDeNaissance: "",
   firstname: "",
   gender: "",
-  age: null,
+  age: 0o0,
   dateOfBirth: null,
   birthCity: "",
-  birthPostal: null,
+  birthPostal: "",
   birthCountry: "",
   address: "",
   city: "",
@@ -22,7 +30,7 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   phone: "",
   socialNumber: "",
   statut: "",
-  children: null,
+  children: 0o0,
   retired: false,
   intermittent: false,
   congeSpectacle: "",
@@ -87,7 +95,7 @@ export const StepOneSchema = Yup.object().shape({
     .matches(socSecNumberRegex, "Invalid Social Number")
     .required("Required"),
   statut: Yup.string().required("Required"),
-  children: Yup.number().nullable(),
+  children: Yup.number().optional(),
   retired: Yup.boolean().required("Required"),
 });
 export const StepTwoSchema = Yup.object().shape({
@@ -150,7 +158,7 @@ export const StepFiveSchema = Yup.object().shape({
   autresphotos: Yup.array()
     .min(1, "At least one photo is required")
     .max(15, "15 pictures max")
-    .test("file-instance", "Veuillez enregistrer vos photos", (value) => {
+    .test("file-instance", "Please save your file", (value) => {
       // Check if any item in the array is not an instance of File
       return (
         Array.isArray(value) && !value.some((item) => item instanceof File)
@@ -160,10 +168,12 @@ export const StepFiveSchema = Yup.object().shape({
 export const StepSixSchema = Yup.object().shape({
   videodepresentation: Yup.mixed().required("Required"),
   bandeDemo: Yup.array()
-    .required("Required")
-    .test("max-photos", "15 pictures max", (value) => value.length <= 3)
-    .test("file-instance", "Veuillez enregistrer vos photos", (value) => {
-      // Check if any item in the array is an instance of File
-      return !value.some((item) => item instanceof File);
+    .min(1, "At least one vidéo is required")
+    .max(15, "3 vidéos max")
+    .test("file-instance", "Please save your file", (value) => {
+      // Check if any item in the array is not an instance of File
+      return (
+        Array.isArray(value) && !value.some((item) => item instanceof File)
+      );
     }),
 });

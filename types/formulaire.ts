@@ -31,7 +31,7 @@ export interface FormikInscriptionProps {
   age: number | null;
   dateOfBirth: Date | null;
   birthCity: string;
-  birthPostal: number | null;
+  birthPostal: string;
   birthCountry: string;
   address: string;
   city: string;
@@ -42,7 +42,7 @@ export interface FormikInscriptionProps {
   phone: string;
   socialNumber: string;
   statut: string;
-  children: number | null;
+  children: number | null | string;
   retired: boolean;
   intermittent: boolean;
   congeSpectacle: string;

@@ -162,7 +162,7 @@
         "options": {
           "Men": "Men",
           "Women": "Women",
-          "Kid": "Kid"
+          "Kids": "Kid"
         }
       },
       "age": {
@@ -301,7 +301,8 @@
         "type": "number",
         "required": false,
         "placeholder": "",
-        "id": "children"
+        "id": "children",
+        "limit": 2
       },
       "retired": {
         "label": "Retired",

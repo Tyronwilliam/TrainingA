@@ -16,7 +16,7 @@ const axiosMutationFile = async (
     });
   return response;
 };
-export const uploadFile = async (file: any, url: string, jwt?: string) => {
+export const uploadFile = async (file: any, url: string, jwt: string) => {
   const formData = new FormData();
 
   if (file instanceof File) {

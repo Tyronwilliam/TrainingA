@@ -1,3 +1,5 @@
+import { sendToast } from "./toast";
+
 export const apiObject = (id: string, data: any) => {
   switch (id) {
     case "autresphotos":
@@ -34,5 +36,13 @@ export const apiObject = (id: string, data: any) => {
 
     default:
       break;
+  }
+};
+
+export const handleResponse = (res: any) => {
+  if (res?.status === 200) {
+    return res;
+  } else {
+    sendToast(true, res?.response?.data?.error?.message);
   }
 };

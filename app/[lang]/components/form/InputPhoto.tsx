@@ -9,6 +9,7 @@ import {
   handlePutPortfolioPhoto,
 } from "./function";
 import { InputPhotoProps } from "./type";
+import cookieCutter from "@boiseitguru/cookie-cutter";
 
 // PASSER LE JWT EN PROPS
 
@@ -42,6 +43,10 @@ const InputPhoto = ({
   const noInstanceFile = Array.isArray(value)
     ? !value.some((item: any) => item instanceof File)
     : false;
+  const candidatIdCookie = cookieCutter.get("candidatId");
+  const jwt = cookieCutter.get("jwt");
+  const candidatId = candidatIdCookie && parseInt(candidatIdCookie);
+
   return (
     <div className="box__input box__photo relative" data-testid="input">
       <Label
@@ -95,7 +100,7 @@ const InputPhoto = ({
         toggle={toggle!}
         formik={formik}
         id={id}
-        jwt={"jwt"}
+        jwt={jwt!}
       />
       {helper && <Helpers classStyle="text-sm italic" helper={helper} />}
       <PortfolioButtons
@@ -103,8 +108,8 @@ const InputPhoto = ({
         pictureLength={pictureLenght}
         buttonText=" SEND MULTIPLE"
         handleButtonClick={handlePutPortfolioPhoto}
-        candidatId={183}
-        jwt={"jwt"}
+        candidatId={candidatId}
+        jwt={jwt}
         value={formik?.values[id]}
         formik={formik}
         isDisabled={isDisabled}

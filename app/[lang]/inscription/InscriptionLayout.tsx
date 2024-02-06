@@ -53,24 +53,31 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     onSubmit: async (values) => {},
     //   handleSubmit(values, startSubmission, finishSubmission, executeRecaptcha),
   });
-  console.log(formik?.errors, "ERRORS");
-  console.log(formik?.values, "VALUES");
+  // console.log(formik?.errors, "ERRORS");
+  // console.log(formik?.values, "VALUES");
 
   const handleNext = async () => {
     await formik.validateForm();
 
     console.log(formik?.errors, "ERRORS");
     console.log(formik?.values, "VALUES");
+
     if (Object.keys(formik?.errors)?.length === 0) {
-      const response = await handleApi(currentStep, formik?.values);
-      console.log(response, "SHOW ME BRUV");
-      const stepPlusUn = currentStep + 1;
-      setCurrentStep(stepPlusUn);
+      if (currentStep === 3) {
+        const stepPlusUn = currentStep + 1;
+        setCurrentStep(stepPlusUn);
+      } else {
+        const response = await handleApi(currentStep, formik?.values);
+        if (response?.status === 200) {
+          const stepPlusUn = currentStep + 1;
+          setCurrentStep(stepPlusUn);
+        }
+      }
     }
   };
   const handlePrev = async () => {
-    const stepPlusUn = currentStep - 1;
-    setCurrentStep(stepPlusUn);
+    const stepMoinsUn = currentStep - 1;
+    setCurrentStep(stepMoinsUn);
   };
   const stepComponents = [
     <StepOne
