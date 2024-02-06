@@ -110,6 +110,20 @@
     "passwordConfirmation": "Confirmation du mot de passe"
   },
   "inscription": {
+    "disclaimer": {
+      "h1": "Ce site est privé.",
+      "p1": " Votre profil sera sur un site privé, où seule moi et les professionnels de cinéma avec qui je travaille auront accès.",
+      "p2": "Le reste de vos informations privées est strictement protégé et ne sera utilisé que pour l'établissement de contrats en cas de sélection pour un tournage.",
+      "p3": "Ce n'est PAS une agence de mannequin ou comédien.",
+      "p4": "Apparaitra uniquement : votre prénom, vos images et vos mensurations."
+    },
+    "success": {
+      "p1": "Merci de vous être inscrit.",
+      "p2": "Vous êtes actuellement dans notre base de données de talents accessible aux professionnels du cinéma (réalisateurs et producteurs).",
+      "p3": "Vous recevrez un e-mail lorsque votre compte sera validé. Vous pourrez régulièrement mettre à jour votre compte avec vos nouvelles photos, vidéos ou infos.",
+      "p4": "Bonne chance à vous !"
+    },
+
     "stepOne": {
       "email": {
         "label": "Email",

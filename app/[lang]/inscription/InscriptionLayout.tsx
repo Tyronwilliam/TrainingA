@@ -21,6 +21,9 @@ import StepTwo from "./StepTwo";
 import ButtonForm from "../components/ButtonForm";
 import StepSix from "./StepSix";
 import { handleApi } from "./function";
+import Disclaimer from "./Disclaimer";
+import classNames from "classnames";
+import Success from "./Success";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const {
@@ -39,6 +42,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
   const frSysteme = dictionary?.general?.form?.helpers?.frSysteme;
   const validationSchema = [
+    "",
     StepOneSchema,
     StepTwoSchema,
     StepThreeSchema,
@@ -55,7 +59,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   });
   // console.log(formik?.errors, "ERRORS");
   // console.log(formik?.values, "VALUES");
-
+  // console.log(currentStep);
   const handleNext = async () => {
     await formik.validateForm();
 
@@ -63,7 +67,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     console.log(formik?.values, "VALUES");
 
     if (Object.keys(formik?.errors)?.length === 0) {
-      if (currentStep === 3) {
+      if (currentStep === 4 || currentStep === 0) {
         const stepPlusUn = currentStep + 1;
         setCurrentStep(stepPlusUn);
       } else {
@@ -80,6 +84,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     setCurrentStep(stepMoinsUn);
   };
   const stepComponents = [
+    <Disclaimer dictionary={dictionary} />,
     <StepOne
       formik={formik}
       dictionary={dictionary}
@@ -134,6 +139,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       setIsCurrentlyEditing={setIsCurrentlyEditing}
       key={"StepSix"}
     />,
+    <Success dictionary={dictionary} />,
   ];
   useEffect(() => {
     window.scrollTo({
@@ -146,32 +152,43 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col flex-wrap items-center justify-center w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-6"
+      className={classNames({
+        "flex flex-col flex-wrap justify-center h-full  w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-6":
+          true,
+        "items-center justify-center  shrink-0 ": currentStep === 0,
+        "items-center justify-center mb-0 mt-0 shrink-0 grow":
+          currentStep === 7,
+      })}
     >
-      {currentStep === 2 && (
+      {currentStep === 3 && (
         <p className="text-lg underline text-center">{frSysteme}</p>
       )}
       {stepComponents[currentStep]}
-      <div className="shrink-0 grow basis-full text-center flex flex-wrap items-center justify-center mt-6 gap-4">
-        {currentStep > 0 && (
-          <ButtonForm
-            isSubmitting={isSubmitting}
-            formik={formik}
-            dictionary={dictionary}
-            content={dictionary?.cta?.formEvent?.previous}
-            type="button"
-            handleClick={handlePrev}
-          />
-        )}
-        <ButtonForm
-          isSubmitting={isSubmitting}
-          formik={formik}
-          dictionary={dictionary}
-          content={dictionary?.cta?.formEvent?.next}
-          type="submit"
-          handleClick={handleNext}
-        />
-      </div>{" "}
+      {currentStep < 7 && (
+        <div className="shrink-0 grow basis-full text-center flex flex-wrap items-center justify-center mt-6 gap-4">
+          <>
+            {currentStep > 1 && (
+              <ButtonForm
+                isSubmitting={isSubmitting}
+                formik={formik}
+                dictionary={dictionary}
+                content={dictionary?.cta?.formEvent?.previous}
+                type="button"
+                handleClick={handlePrev}
+              />
+            )}
+
+            <ButtonForm
+              isSubmitting={isSubmitting}
+              formik={formik}
+              dictionary={dictionary}
+              content={dictionary?.cta?.formEvent?.next}
+              type="submit"
+              handleClick={handleNext}
+            />
+          </>
+        </div>
+      )}
     </form>
   );
 };

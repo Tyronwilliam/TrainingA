@@ -111,6 +111,19 @@
     "passwordConfirmation": "Confirm password"
   },
   "inscription": {
+    "disclaimer": {
+      "h1": "This site is private.",
+      "p1": "Your profile will be on a private site, where only me and the film professionals I work with will have access.",
+      "p2": "The rest of your private information is strictly protected and will only be used to establish contracts in the event of selection for a shoot.",
+      "p3": "This is NOT a modeling or acting agency.",
+      "p4": "Only your first name, images and measurements will appear."
+    },
+    "success": {
+      "p1": "Thank you for registering.",
+      "p2": "You are currently in our talent database, accessible to film professionals (directors and producers).",
+      "p3": "You will receive an e-mail when your account is validated. You'll be able to update your account regularly with new photos, videos and news.",
+      "p4": "Good luck to you!"
+    },
     "stepOne": {
       "email": {
         "label": "Email",

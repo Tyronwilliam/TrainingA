@@ -25,7 +25,7 @@ export const handleApi = async (
     const candidatId = candidatIdCookie && parseInt(candidatIdCookie);
 
     switch (step) {
-      case 0:
+      case 1:
         const responseCreateUser = await createUser(values);
         await handleResponse(responseCreateUser);
         const userId = await responseCreateUser?.data?.user?.id;
@@ -36,7 +36,7 @@ export const handleApi = async (
         cookieCutter.set("candidatId", candidatIdRes);
         return await handleResponse(responseCreateCandidat);
         break;
-      case 1:
+      case 2:
         if (jwt && candidatId) {
           const responseStepTwo = await sendStepTwoData(
             values,
@@ -47,7 +47,7 @@ export const handleApi = async (
         }
 
         break;
-      case 2:
+      case 3:
         if (jwt && candidatId) {
           const responseStepThree = await sendStepThreeData(
             values,
@@ -57,7 +57,7 @@ export const handleApi = async (
           return await handleResponse(responseStepThree);
         }
         break;
-      case 4:
+      case 5:
         if (jwt && candidatId) {
           const responseStepFourAndFive = await sendStepFourAndFive(
             values,
@@ -79,7 +79,7 @@ export const handleApi = async (
           return await handleResponse(responseStepFive);
         }
         break;
-      case 5:
+      case 6:
         if (jwt && candidatId) {
           const promisesSix = await promisesUpload(
             values?.videodepresentation,
