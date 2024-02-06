@@ -3,12 +3,10 @@ import React from "react";
 
 const Tab = ({
   currentTab,
-  open,
   handleClick,
   index,
 }: {
   currentTab: number | null;
-  open: boolean;
   handleClick: (arg: number) => void;
   index: number;
 }) => {
@@ -25,9 +23,9 @@ const Tab = ({
       <div
         className={classNames({
           "h-[50px] w-full border-2 border-red-500 transition-height duration-500 ease":
-            open,
+            currentTab === index,
           "h-0 overflow-hidden w-full transition-height duration-500 ease border-2 border-red-500":
-            !open,
+            currentTab !== index,
         })}
       >
         FORM 1{" "}
