@@ -36,7 +36,10 @@ export const uploadFile = async (file: any, url: string, jwt?: string) => {
   }
 };
 
-export const promisesUpload = async (files: File[] | File, jwt: string) => {
+export const promisesUpload = async (
+  files: File[] | File | null,
+  jwt: string
+) => {
   return (Array.isArray(files) ? files : [files]).map(async (file) => {
     try {
       const res = await uploadFile(
@@ -83,7 +86,7 @@ export const putDataPortfolio = async ({
   id,
 }: PutDataPortfolioParams) => {
   const onlyFile = files?.filter((file) => file instanceof File);
-  const promises = await promisesUpload(onlyFile ,jwt);
+  const promises = await promisesUpload(onlyFile, jwt);
   const promisesResolved = await Promise.all(promises);
   const nonFile = files?.filter((file) => !(file instanceof File));
   if (nonFile?.length > 0) promisesResolved.push(...nonFile);

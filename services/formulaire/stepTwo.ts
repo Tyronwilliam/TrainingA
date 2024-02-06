@@ -6,11 +6,12 @@ export const sendStepTwoData = async (
   candidatId: number,
   jwt: string
 ) => {
+  const socialNumberToString = parseInt(values?.socialNumber);
   const formData = new FormData();
 
   const data = {
     Infos_Administrative: {
-      Securite_sociale: values?.socialNumber,
+      Securite_sociale: socialNumberToString,
       Enfant_a_charges: values?.children,
       Statut: values?.statut,
       Retraite: values?.retired,

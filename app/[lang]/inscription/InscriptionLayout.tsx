@@ -20,6 +20,7 @@ import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
 import ButtonForm from "../components/ButtonForm";
 import StepSix from "./StepSix";
+import { handleApi } from "./function";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const {
@@ -32,6 +33,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     isLoadInput,
     setIsLoadInput,
   } = useFormSubmission();
+
   const { toggle, open } = useToggle();
   const [currentStep, setCurrentStep] = useState(0);
   const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
@@ -51,12 +53,17 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     onSubmit: async (values) => {},
     //   handleSubmit(values, startSubmission, finishSubmission, executeRecaptcha),
   });
+  console.log(formik?.errors, "ERRORS");
+  console.log(formik?.values, "VALUES");
+
   const handleNext = async () => {
     await formik.validateForm();
 
     console.log(formik?.errors, "ERRORS");
     console.log(formik?.values, "VALUES");
     if (Object.keys(formik?.errors)?.length === 0) {
+      const response = await handleApi(currentStep, formik?.values);
+      console.log(response, "SHOW ME BRUV");
       const stepPlusUn = currentStep + 1;
       setCurrentStep(stepPlusUn);
     }
@@ -77,6 +84,12 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       dictionary={dictionary}
       next={handleNext}
       key={"StepTwo"}
+      isLoadInput={isLoadInput}
+      setIsLoadInput={setIsLoadInput}
+      open={open}
+      toggle={toggle}
+      isCurrentlyEditing={isCurrentlyEditing}
+      setIsCurrentlyEditing={setIsCurrentlyEditing}
     />,
     <StepThree
       formik={formik}
@@ -149,6 +162,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
           dictionary={dictionary}
           content={dictionary?.cta?.formEvent?.next}
           type="submit"
+          handleClick={handleNext}
         />
       </div>{" "}
     </form>

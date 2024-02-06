@@ -28,10 +28,7 @@ export const limitInputNumber = ({
   id,
 }: LimitNumberParams) => {
   const { value } = event.target;
-
-  // Remove non-numeric characters and limit to 15 digits
   const cleanedValue = value.replace(/\D/g, "").slice(0, limit);
-
   formik.setFieldValue(id, cleanedValue);
 };
 
@@ -72,6 +69,7 @@ export const handleSingleFileChange = async ({
 }: HandleFileChangeParams) => {
   setIsLoadInput && setIsLoadInput(true);
   const selectedFiles = event?.currentTarget?.files?.[0];
+  console.log(selectedFiles, "+++++++", id);
   await formik.setFieldValue(id, selectedFiles);
   setIsLoadInput && setIsLoadInput(false);
 };

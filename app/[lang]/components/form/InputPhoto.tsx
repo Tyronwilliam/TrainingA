@@ -31,7 +31,7 @@ const InputPhoto = ({
 }: InputPhotoProps) => {
   const errorText = checkError(formik, id);
   const value = formik.values[id];
-  const length = Array.isArray(value) ? value.length : value !== "" ? 1 : 0;
+  const length = Array.isArray(value) ? value.length : value !== null ? 1 : 0;
   const pictureLenght = Array.isArray(value) && value.length > 0;
   const isDisabled = isLoadInput && isCurrentlyEditing === id;
   const maxPhotoError = dictionary?.general?.form?.errors?.autresphotos;

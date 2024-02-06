@@ -12,6 +12,7 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
+    "@boiseitguru/cookie-cutter": "^0.2.3",
     "@formatjs/intl-localematcher": "^0.5.4",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",

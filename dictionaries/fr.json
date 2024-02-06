@@ -261,20 +261,22 @@
       "phone": {
         "label": "Téléphone",
         "helper": "",
-        "type": "number",
+        "type": "text",
         "required": true,
         "placeholder": "0786085046",
         "id": "phone",
-        "limit": 10
+        "limit": 10,
+        "pattern": "^\\d{1,10}$"
       },
       "socialNumber": {
         "label": "Numéro de sécurité sociale",
         "helper": "",
-        "type": "number",
+        "type": "text",
         "required": true,
         "placeholder": "562354895415658",
         "id": "socialNumber",
-        "limit": 15
+        "limit": 15,
+        "pattern": "^\\d{1,15}$"
       },
       "statut": {
         "label": "Statut",
@@ -351,7 +353,10 @@
           "type": "photo",
           "required": true,
           "placeholder": "",
-          "id": "cmb"
+          "id": "cmb",
+          "limit": 1,
+          "accept": "image/jpg, image/jpeg, image/png,application/pdf",
+          "multiple": false
         }
       }
     },

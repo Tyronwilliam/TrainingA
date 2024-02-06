@@ -39,8 +39,8 @@ export interface FormikInscriptionProps {
   country: string;
   nationality: string;
   residencePermit: number | null;
-  phone: number | null;
-  socialNumber: number | null;
+  phone: string;
+  socialNumber: string;
   statut: string;
   children: number | null;
   retired: boolean;
@@ -48,7 +48,7 @@ export interface FormikInscriptionProps {
   congeSpectacle: string;
   lastMedicVisite: Date | null;
   abattement: boolean;
-  cmb: File;
+  cmb: File | null;
   confectionHaut: string;
   confectionBas: string;
   cheveux: string;
@@ -72,9 +72,9 @@ export interface FormikInscriptionProps {
   modele: boolean;
   figuration: boolean;
   silhouette: boolean;
-  photodepresentation: File;
+  photodepresentation: File | null;
   autresphotos: [];
-  videodepresentation: string;
+  videodepresentation: File | null;
   bandeDemo: [];
 }
 export interface StepType {

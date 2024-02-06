@@ -17,6 +17,7 @@ import {
   LabelProps,
 } from "./type";
 import Helpers from "./Helpers";
+import { ChangeEvent } from "react";
 
 export const InputString = ({
   id,
@@ -32,6 +33,12 @@ export const InputString = ({
   const errorText = checkError(formik, id);
   const value = formik.values[id] !== null ? formik.values[id] : "";
   const pattenProps = pattern && pattern;
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (pattern && limit) {
+      return limitInputNumber({ event, limit, formik, id });
+    }
+    formik?.handleChange(event);
+  };
   return (
     <div className="box__input" data-cy="input">
       <Label
@@ -47,7 +54,7 @@ export const InputString = ({
         }`}
         id={id}
         name={id}
-        onChange={formik.handleChange}
+        onChange={handleChange}
         value={value}
         onBlur={formik.handleBlur}
         placeholder={placeholder !== undefined ? placeholder : ""}

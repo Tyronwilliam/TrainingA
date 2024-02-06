@@ -1,7 +1,7 @@
 import { Dictionary } from "@/types/dictionary";
 import { StepType } from "@/types/formulaire";
 import Inputs from "../components/form/Inputs";
-type StepFiveProps = {
+export type StepFiveProps = {
   dictionary: Dictionary;
   formik: any;
   next: any;

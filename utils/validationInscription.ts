@@ -19,8 +19,8 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   country: "",
   nationality: "",
   residencePermit: null,
-  phone: null,
-  socialNumber: null,
+  phone: "",
+  socialNumber: "",
   statut: "",
   children: null,
   retired: false,
@@ -28,7 +28,7 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   congeSpectacle: "",
   lastMedicVisite: null,
   abattement: false,
-  cmb: "",
+  cmb: null,
   confectionHaut: "",
   confectionBas: "",
   cheveux: "",
@@ -53,10 +53,10 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   modele: false,
   figuration: false,
   silhouette: false,
-  photodepresentation: "",
+  photodepresentation: null,
   autresphotos: [],
   bandeDemo: [],
-  videodepresentation: "",
+  videodepresentation: null,
 };
 export const StepOneSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -70,31 +70,21 @@ export const StepOneSchema = Yup.object().shape({
   birthCity: Yup.string().required("Required"),
   birthPostal: Yup.string()
     .matches(postalCodeRegex, "Invalid postal code")
-    .required("Le code postal est obligatoire."),
+    .required("Required"),
   birthCountry: Yup.string().required("Required"),
   address: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
   postalCode: Yup.string()
     .matches(postalCodeRegex, "Invalid postal code")
-    .required("Le code postal est obligatoire."),
+    .required("Required"),
   country: Yup.string().required("Required"),
   nationality: Yup.string().required("Required"),
   residencePermit: Yup.number().nullable(),
-  phone: Yup.number()
-    .nullable()
-    .test(
-      "phone",
-      "Invalid phone number",
-      (value) => !value || phoneNumberRegex.test(value.toString())
-    )
+  phone: Yup.string()
+    .matches(phoneNumberRegex, "Invalid Phone Number")
     .required("Required"),
-  socialNumber: Yup.number()
-    .nullable()
-    .test(
-      "socialNumber",
-      "Invalid Social Number",
-      (value) => !value || socSecNumberRegex.test(value.toString())
-    )
+  socialNumber: Yup.string()
+    .matches(socSecNumberRegex, "Invalid Social Number")
     .required("Required"),
   statut: Yup.string().required("Required"),
   children: Yup.number().nullable(),
@@ -117,10 +107,10 @@ export const StepTwoSchema = Yup.object().shape({
     then: (schema) => Yup.string().required("Required"),
     otherwise: (schema) => schema.nullable(),
   }),
-  cmb: Yup.string().when("intermittent", {
+  cmb: Yup.mixed().when("intermittent", {
     is: true,
-    then: (schema) => Yup.string().required("Required"),
-    otherwise: (schema) => schema.nullable(),
+    then: (schema) => Yup.mixed().required("File is required"),
+    otherwise: (schema) => Yup.mixed().nullable(),
   }),
 });
 export const StepThreeSchema = Yup.object().shape({
@@ -156,17 +146,19 @@ export const StepFiveSchema = Yup.object().shape({
   modele: Yup.boolean().required("Required"),
   figuration: Yup.boolean().required("Required"),
   silhouette: Yup.boolean().required("Required"),
-  photodepresentation: Yup.string().required("Required"),
+  photodepresentation: Yup.mixed().required("File is required"),
   autresphotos: Yup.array()
-    .required("Required")
-    .test("max-photos", "15 pictures max", (value) => value.length <= 15)
+    .min(1, "At least one photo is required")
+    .max(15, "15 pictures max")
     .test("file-instance", "Veuillez enregistrer vos photos", (value) => {
-      // Check if any item in the array is an instance of File
-      return !value.some((item) => item instanceof File);
+      // Check if any item in the array is not an instance of File
+      return (
+        Array.isArray(value) && !value.some((item) => item instanceof File)
+      );
     }),
 });
 export const StepSixSchema = Yup.object().shape({
-  videodepresentation: Yup.string().required("Required"),
+  videodepresentation: Yup.mixed().required("Required"),
   bandeDemo: Yup.array()
     .required("Required")
     .test("max-photos", "15 pictures max", (value) => value.length <= 3)
