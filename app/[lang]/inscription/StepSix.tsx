@@ -28,7 +28,7 @@ const StepSix = ({
       <Inputs
         formik={formik}
         dictionary={dictionary}
-        inputs={dictionary?.inscription?.stepSix}
+        inputs={dictionary?.inscription?.stepSix?.default}
         isLoadInput={isLoadInput}
         setIsLoadInput={setIsLoadInput}
         open={open}

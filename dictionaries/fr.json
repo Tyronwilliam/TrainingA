@@ -834,27 +834,42 @@
       }
     },
     "stepSix": {
-      "videodepresentation": {
-        "label": "Vidéo de présentation",
-        "helper": "Fortement recommandée. Vidéo d'1min max, faite avec un téléphone, dans laquelle vous vous présentez. Si vous n'avez pas le temps de la faire immédiatement, pensez à la rajouter plus tard sur votre compte svp.",
-        "type": "photo",
-        "required": true,
-        "placeholder": "",
-        "id": "videodepresentation",
-        "limit": 1,
-        "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
-        "multiple": false
+      "default": {
+        "videodepresentation": {
+          "label": "Vidéo de présentation",
+          "helper": "Fortement recommandée. Vidéo d'1min max, faite avec un téléphone, dans laquelle vous vous présentez. Si vous n'avez pas le temps de la faire immédiatement, pensez à la rajouter plus tard sur votre compte svp.",
+          "type": "photo",
+          "required": true,
+          "placeholder": "",
+          "id": "videodepresentation",
+          "limit": 1,
+          "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
+          "multiple": false
+        },
+        "bandeDemo": {
+          "label": "Bande démo",
+          "helper": "Maximum 3 vidéos. Merci de renommer la ou les vidéos par \"N. Prénom\".",
+          "type": "photo",
+          "required": true,
+          "placeholder": "",
+          "id": "bandeDemo",
+          "limit": 3,
+          "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
+          "multiple": true
+        }
       },
-      "bandeDemo": {
-        "label": "Bande démo",
-        "helper": "Maximum 3 vidéos. Merci de renommer la ou les vidéos par \"N. Prénom\".",
-        "type": "photo",
-        "required": true,
-        "placeholder": "",
-        "id": "bandeDemo",
-        "limit": 3,
-        "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
-        "multiple": true
+      "content": {
+        "newPhotos": {
+          "label": "Ajoutez vos nouvelles photos",
+          "helper": "NE PAS ajouter les photos que vous avez soumises lors de votre inscription! 15 photos max ",
+          "type": "photo",
+          "required": false,
+          "placeholder": "",
+          "id": "newPhotos",
+          "accept": "image/jpg, image/jpeg, image/png",
+          "limit": 15,
+          "multiple": true
+        }
       }
     }
   }
