@@ -8,6 +8,7 @@ import StepFour from "../../inscription/StepFour";
 import StepFiveCheckbox from "./StepFiveCheckbox";
 import StepSix from "../../inscription/StepSix";
 import { StepType } from "@/types/formulaire";
+import ButtonForm from "../../components/ButtonForm";
 
 const TabsLayout = ({
   currentTab,
@@ -22,9 +23,10 @@ const TabsLayout = ({
   setIsCurrentlyEditing,
   isCurrentlyEditing,
   mergedStepSix,
+  isSubmitting,
 }: {
-  currentTab: string | null;
-  handleClick: (arg: string) => void;
+  currentTab: number | null;
+  handleClick: (arg: number) => void;
   dictionary: Dictionary;
   formik: any;
   excludeField: string[];
@@ -37,13 +39,20 @@ const TabsLayout = ({
   candidatId?: number | "" | undefined;
   jwt?: string;
   mergedStepSix: Record<string, StepType>;
+  isSubmitting: boolean;
 }) => {
   return (
-    <>
+    <form
+      onSubmit={formik.handleSubmit}
+      className={
+        "px-2 sm:px-0 flex  flex-col justify-center  max-w-[700px] m-auto"
+      }
+    >
+      {" "}
       <Tab
         currentTab={currentTab}
         handleClick={handleClick}
-        index={"Général"}
+        index={0}
         title={dictionary?.profil[0]}
       >
         <StepOne
@@ -57,7 +66,7 @@ const TabsLayout = ({
         title={dictionary?.profil[1]}
         currentTab={currentTab}
         handleClick={handleClick}
-        index={"Administratif"}
+        index={1}
       >
         <StepTwo
           formik={formik}
@@ -75,7 +84,7 @@ const TabsLayout = ({
         title={dictionary?.profil[2]}
         currentTab={currentTab}
         handleClick={handleClick}
-        index={"Physionomie"}
+        index={2}
       >
         <StepThree
           formik={formik}
@@ -88,14 +97,14 @@ const TabsLayout = ({
         title={dictionary?.profil[3]}
         currentTab={currentTab}
         handleClick={handleClick}
-        index={"Compétences"}
+        index={3}
       >
         <StepFour formik={formik} dictionary={dictionary} key={"StepFour"} />
       </Tab>
       <Tab
         currentTab={currentTab}
         handleClick={handleClick}
-        index={"Rôle"}
+        index={4}
         title={dictionary?.profil[4]}
       >
         <StepFiveCheckbox
@@ -108,7 +117,7 @@ const TabsLayout = ({
         title={dictionary?.profil[5]}
         currentTab={currentTab}
         handleClick={handleClick}
-        index={"Photos & Vidéos"}
+        index={5}
       >
         <StepSix
           formik={formik}
@@ -123,7 +132,15 @@ const TabsLayout = ({
           key={"StepSix"}
         />
       </Tab>
-    </>
+      <ButtonForm
+        isSubmitting={isSubmitting}
+        formik={formik}
+        dictionary={dictionary}
+        content={"SUBMIT"}
+        type="submit"
+        handleClick={() => {}}
+      />{" "}
+    </form>
   );
 };
 

@@ -217,6 +217,7 @@ export const InputCheckBox = ({
           name={id}
           onChange={formik.handleChange}
           value={value}
+          checked={value}
           onBlur={formik.handleBlur}
         />
       </div>

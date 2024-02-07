@@ -8,9 +8,9 @@ const Tab = ({
   children,
   title,
 }: {
-  currentTab: string | null;
-  handleClick: (arg: string) => void;
-  index: string;
+  currentTab: number | null;
+  handleClick: (arg: number) => void;
+  index: number;
   children: ReactNode;
   title: string;
 }) => {
@@ -24,7 +24,7 @@ const Tab = ({
       >
         <h1>{title}</h1>
       </div>
-      <form
+      <div
         className={classNames({
           "px-2 sm:px-0 flex background__grey  flex-wrap justify-center  max-w-[700px] m-auto  md:flex-row md:flex-wrap gap-6 transition-maxHeight duration-1000 ease":
             true,
@@ -33,7 +33,7 @@ const Tab = ({
         })}
       >
         {children}
-      </form>
+      </div>
     </section>
   );
 };
