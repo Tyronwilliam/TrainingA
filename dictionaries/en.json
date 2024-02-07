@@ -110,6 +110,14 @@
     "h1": "Reset password",
     "passwordConfirmation": "Confirm password"
   },
+  "profil": [
+    "General",
+    "Administrative",
+    "Physionomy",
+    "Skills",
+    "Role",
+    "Photos & Videos"
+  ],
   "inscription": {
     "disclaimer": {
       "h1": "This site is private.",

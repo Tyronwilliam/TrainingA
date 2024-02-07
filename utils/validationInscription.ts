@@ -8,7 +8,6 @@ import { phoneNumberRegex, postalCodeRegex, socSecNumberRegex } from "./regex";
 // Soit enlever précedent
 // Soit avoir une logique si t'"a appuer sur précedent ne pas relancer la requete API"
 
-
 export const inscriptionInitialValues: FormikInscriptionProps = {
   email: "",
   password: "",
@@ -66,27 +65,17 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   bandeDemo: [],
   videodepresentation: null,
 };
-export const StepOneSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().min(8, "Too Short!").required("Required"),
-  marital: Yup.string(),
-  nomDeNaissance: Yup.string().required("Required"),
-  firstname: Yup.string().required("Required"),
-  gender: Yup.string().required("Required"),
+
+export const baseStepOneSchema = Yup.object().shape({
+  marital: Yup.string().nullable(),
   age: Yup.number().nullable().required("Required"),
-  dateOfBirth: Yup.date().nullable().required("Required"),
-  birthCity: Yup.string().required("Required"),
-  birthPostal: Yup.string()
-    .matches(postalCodeRegex, "Invalid postal code")
-    .required("Required"),
-  birthCountry: Yup.string().required("Required"),
+
   address: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
   postalCode: Yup.string()
     .matches(postalCodeRegex, "Invalid postal code")
     .required("Required"),
   country: Yup.string().required("Required"),
-  nationality: Yup.string().required("Required"),
   residencePermit: Yup.number().nullable(),
   phone: Yup.string()
     .matches(phoneNumberRegex, "Invalid Phone Number")
@@ -98,6 +87,22 @@ export const StepOneSchema = Yup.object().shape({
   children: Yup.number().optional(),
   retired: Yup.boolean().required("Required"),
 });
+const SchemaInscription = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().min(8, "Too Short!").required("Required"),
+  nomDeNaissance: Yup.string().required("Required"),
+  firstname: Yup.string().required("Required"),
+  gender: Yup.string().required("Required"),
+  dateOfBirth: Yup.date().nullable().required("Required"),
+  birthPostal: Yup.string()
+    .matches(postalCodeRegex, "Invalid postal code")
+    .required("Required"),
+  birthCity: Yup.string().required("Required"),
+  birthCountry: Yup.string().required("Required"),
+  nationality: Yup.string().required("Required"),
+});
+export const StepOneSchema = baseStepOneSchema.concat(SchemaInscription);
+
 export const StepTwoSchema = Yup.object().shape({
   intermittent: Yup.boolean().required("Required"),
   congeSpectacle: Yup.string().when("intermittent", {
@@ -121,6 +126,7 @@ export const StepTwoSchema = Yup.object().shape({
     otherwise: (schema) => Yup.mixed().nullable(),
   }),
 });
+
 export const StepThreeSchema = Yup.object().shape({
   confectionHaut: Yup.string().required("Required"),
   confectionBas: Yup.string().required("Required"),
@@ -149,11 +155,7 @@ export const StepFourSchema = Yup.object().shape({
   }),
   instagram: Yup.string().nullable(),
 });
-export const StepFiveSchema = Yup.object().shape({
-  acteur: Yup.boolean().required("Required"),
-  modele: Yup.boolean().required("Required"),
-  figuration: Yup.boolean().required("Required"),
-  silhouette: Yup.boolean().required("Required"),
+const SchemaPhotoInscription = Yup.object().shape({
   photodepresentation: Yup.mixed().required("File is required"),
   autresphotos: Yup.array()
     .min(1, "At least one photo is required")
@@ -165,7 +167,15 @@ export const StepFiveSchema = Yup.object().shape({
       );
     }),
 });
-export const StepSixSchema = Yup.object().shape({
+export const SchemaRole = Yup.object().shape({
+  acteur: Yup.boolean().required("Required"),
+  modele: Yup.boolean().required("Required"),
+  figuration: Yup.boolean().required("Required"),
+  silhouette: Yup.boolean().required("Required"),
+});
+export const StepFiveSchema = SchemaRole.concat(SchemaPhotoInscription);
+
+export const SchemaVideoInscription = Yup.object().shape({
   videodepresentation: Yup.mixed().required("Required"),
   bandeDemo: Yup.array()
     .min(1, "At least one vidéo is required")
@@ -177,3 +187,5 @@ export const StepSixSchema = Yup.object().shape({
       );
     }),
 });
+
+export const StepSixSchema = SchemaVideoInscription;

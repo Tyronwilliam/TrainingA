@@ -90,3 +90,6 @@ export interface StepType {
   multiple?: boolean;
   pattern?: string;
 }
+export type FormikProfilProps = FormikInscriptionProps & {
+  newPhotos: [];
+};

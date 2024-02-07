@@ -109,6 +109,14 @@
     "h1": "Réinitialiser le mot de passe",
     "passwordConfirmation": "Confirmation du mot de passe"
   },
+  "profil": [
+    "Général",
+    "Administratif",
+    "Physionomie",
+    "Compétences",
+    "Rôle",
+    "Photos & Vidéos"
+  ],
   "inscription": {
     "disclaimer": {
       "h1": "Ce site est privé.",

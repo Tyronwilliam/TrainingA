@@ -6,11 +6,13 @@ const Tab = ({
   handleClick,
   index,
   children,
+  title,
 }: {
   currentTab: string | null;
   handleClick: (arg: string) => void;
   index: string;
   children: ReactNode;
+  title: string;
 }) => {
   return (
     <section className="w-full max-w-[700px]  px-4 md:px-0  radius custom__border">
@@ -20,7 +22,7 @@ const Tab = ({
         }}
         className="uppercase mt-4 radius text-lg text-center background__grey h-16 p-5 cursor-pointer  hover:opacity-80"
       >
-        <h1>{index}</h1>
+        <h1>{title}</h1>
       </div>
       <form
         className={classNames({
