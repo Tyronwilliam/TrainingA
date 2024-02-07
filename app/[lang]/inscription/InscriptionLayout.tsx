@@ -24,6 +24,7 @@ import { handleApi } from "./function";
 import Disclaimer from "./Disclaimer";
 import classNames from "classnames";
 import Success from "./Success";
+import cookieCutter from "@boiseitguru/cookie-cutter";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const {
@@ -36,6 +37,11 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     isLoadInput,
     setIsLoadInput,
   } = useFormSubmission();
+
+  const jwt = cookieCutter.get("jwt");
+  const candidatIdCookie = cookieCutter.get("candidatId");
+  const candidatId: number | "" | undefined =
+    candidatIdCookie && parseInt(candidatIdCookie);
 
   const { toggle, open } = useToggle();
   const [currentStep, setCurrentStep] = useState(0);
@@ -85,16 +91,10 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   };
   const stepComponents = [
     <Disclaimer dictionary={dictionary} />,
-    <StepOne
-      formik={formik}
-      dictionary={dictionary}
-      next={handleNext}
-      key={"StepOne"}
-    />,
+    <StepOne formik={formik} dictionary={dictionary} key={"StepOne"} />,
     <StepTwo
       formik={formik}
       dictionary={dictionary}
-      next={handleNext}
       key={"StepTwo"}
       isLoadInput={isLoadInput}
       setIsLoadInput={setIsLoadInput}
@@ -103,22 +103,11 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       isCurrentlyEditing={isCurrentlyEditing}
       setIsCurrentlyEditing={setIsCurrentlyEditing}
     />,
-    <StepThree
-      formik={formik}
-      dictionary={dictionary}
-      next={handleNext}
-      key={"StepThree"}
-    />,
-    <StepFour
-      formik={formik}
-      dictionary={dictionary}
-      next={handleNext}
-      key={"StepFour"}
-    />,
+    <StepThree formik={formik} dictionary={dictionary} key={"StepThree"} />,
+    <StepFour formik={formik} dictionary={dictionary} key={"StepFour"} />,
     <StepFive
       formik={formik}
       dictionary={dictionary}
-      next={handleNext}
       isLoadInput={isLoadInput}
       setIsLoadInput={setIsLoadInput}
       open={open}
@@ -126,18 +115,22 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       isCurrentlyEditing={isCurrentlyEditing}
       setIsCurrentlyEditing={setIsCurrentlyEditing}
       key={"StepFive"}
+      candidatId={candidatId}
+      jwt={jwt}
     />,
     <StepSix
       formik={formik}
       dictionary={dictionary}
-      next={handleNext}
       isLoadInput={isLoadInput}
       setIsLoadInput={setIsLoadInput}
       open={open}
       toggle={toggle}
+      inputs={dictionary?.inscription?.stepSix?.default}
       isCurrentlyEditing={isCurrentlyEditing}
       setIsCurrentlyEditing={setIsCurrentlyEditing}
       key={"StepSix"}
+      candidatId={candidatId}
+      jwt={jwt}
     />,
     <Success dictionary={dictionary} />,
   ];

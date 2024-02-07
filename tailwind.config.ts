@@ -22,6 +22,7 @@ const config: Config = {
       transitionProperty: {
         height: "height",
         width: "width",
+        maxHeight: "max-height",
       },
       colors: {
         hoverLightGrey: "#ffffff81",

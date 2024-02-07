@@ -5,11 +5,9 @@ import Inputs from "../components/form/Inputs";
 const StepFour = ({
   dictionary,
   formik,
-  next,
 }: {
   dictionary: Dictionary;
   formik: any;
-  next: any;
 }) => {
   const enAgenceFalse: Record<string, StepType> =
     dictionary?.inscription?.stepFour.default.default;

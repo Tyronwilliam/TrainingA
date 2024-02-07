@@ -1,27 +1,30 @@
 import { Dictionary } from "@/types/dictionary";
 import { StepType } from "@/types/formulaire";
 import Inputs from "../components/form/Inputs";
+
 export type StepFiveProps = {
   dictionary: Dictionary;
   formik: any;
-  next: any;
   isLoadInput: boolean;
   setIsLoadInput: (isLoadInput: boolean) => void;
   open: boolean;
   toggle: () => void;
   isCurrentlyEditing: string;
   setIsCurrentlyEditing: (id: string) => void;
+  candidatId?: number | "" | undefined;
+  jwt?: string;
 };
 const StepFive = ({
   dictionary,
   formik,
-  next,
   isLoadInput,
   setIsLoadInput,
   open,
   toggle,
   setIsCurrentlyEditing,
   isCurrentlyEditing,
+  candidatId,
+  jwt,
 }: StepFiveProps) => {
   const checkBox: Record<string, StepType> =
     dictionary?.inscription?.stepFive.checkbox;
@@ -43,6 +46,8 @@ const StepFive = ({
         toggle={toggle}
         isCurrentlyEditing={isCurrentlyEditing}
         setIsCurrentlyEditing={setIsCurrentlyEditing}
+        candidatId={candidatId}
+        jwt={jwt}
       />
     </>
   );

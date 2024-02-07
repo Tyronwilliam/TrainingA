@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import Spinner from "../Spinner";
 import { Dialog } from "./Dialog";
 import Helpers from "./Helpers";
@@ -9,7 +10,6 @@ import {
   handlePutPortfolioPhoto,
 } from "./function";
 import { InputPhotoProps } from "./type";
-import cookieCutter from "@boiseitguru/cookie-cutter";
 
 // PASSER LE JWT EN PROPS
 
@@ -29,6 +29,8 @@ const InputPhoto = ({
   setIsCurrentlyEditing,
   open,
   toggle,
+  candidatId,
+  jwt,
 }: InputPhotoProps) => {
   const errorText = checkError(formik, id);
   const value = formik.values[id];
@@ -43,9 +45,6 @@ const InputPhoto = ({
   const noInstanceFile = Array.isArray(value)
     ? !value.some((item: any) => item instanceof File)
     : false;
-  const candidatIdCookie = cookieCutter.get("candidatId");
-  const jwt = cookieCutter.get("jwt");
-  const candidatId = candidatIdCookie && parseInt(candidatIdCookie);
 
   return (
     <div className="box__input box__photo relative" data-testid="input">

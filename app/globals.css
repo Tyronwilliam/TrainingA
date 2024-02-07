@@ -126,6 +126,14 @@ html {
   }
 }
 @layer utilities {
+  .background__grey {
+    background: rgb(38, 38, 38);
+    background: linear-gradient(
+      149deg,
+      rgb(38, 38, 38) 0%,
+      rgb(15, 15, 15) 100%
+    );
+  }
   .dialog__portfolio {
     width: 100%;
     left: 0;
@@ -144,6 +152,7 @@ html {
   }
   .box__input {
     width: 100%;
+    /* max-width: calc(280px - 20px); */
     max-width: 280px;
     height: 120px;
     display: flex;
@@ -210,6 +219,7 @@ html {
   .radius {
     border-radius: 5px;
   }
+
   .lds-ring {
     display: inline-block;
     position: relative;

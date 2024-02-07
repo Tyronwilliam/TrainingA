@@ -1,35 +1,37 @@
 import classNames from "classnames";
-import React from "react";
+import React, { ReactNode } from "react";
 
 const Tab = ({
   currentTab,
   handleClick,
   index,
+  children,
 }: {
-  currentTab: number | null;
-  handleClick: (arg: number) => void;
-  index: number;
+  currentTab: string | null;
+  handleClick: (arg: string) => void;
+  index: string;
+  children: ReactNode;
 }) => {
   return (
-    <section className="w-full max-w-[600px]   text-center radius">
-      <section
+    <section className="w-full max-w-[700px]  px-4 md:px-0  radius custom__border">
+      <div
         onClick={() => {
           handleClick(index);
         }}
-        className="border-2 border-white"
+        className="uppercase mt-4 radius text-lg text-center background__grey h-16 p-5 cursor-pointer  hover:opacity-80"
       >
         <h1>{index}</h1>
-      </section>{" "}
-      <div
+      </div>
+      <form
         className={classNames({
-          "h-[50px] w-full border-2 border-red-500 transition-height duration-500 ease":
-            currentTab === index,
-          "h-0 overflow-hidden w-full transition-height duration-500 ease border-2 border-red-500":
-            currentTab !== index,
+          "px-2 sm:px-0 flex background__grey  flex-wrap justify-center  max-w-[700px] m-auto  md:flex-row md:flex-wrap gap-6 transition-maxHeight duration-1000 ease":
+            true,
+          "max-h-[3000px]  w-full py-5": currentTab === index,
+          "max-h-0 overflow-hidden w-full": currentTab !== index,
         })}
       >
-        FORM 1{" "}
-      </div>
+        {children}
+      </form>
     </section>
   );
 };

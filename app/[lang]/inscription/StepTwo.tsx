@@ -2,10 +2,10 @@ import { StepType } from "@/types/formulaire";
 import Inputs from "../components/form/Inputs";
 import { StepFiveProps } from "./StepFive";
 
+
 const StepTwo = ({
   dictionary,
   formik,
-  next,
   isLoadInput,
   setIsLoadInput,
   open,
@@ -19,6 +19,7 @@ const StepTwo = ({
   const inputs: Record<string, StepType> = !formik?.values?.intermittent
     ? intermittentFalse
     : intermittentTrue;
+
   return (
     <Inputs
       formik={formik}
