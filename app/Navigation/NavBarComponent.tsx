@@ -10,11 +10,7 @@ type Props = {
   classStyles: string;
   lang: Locale;
 };
-export default function NavBarComponent({
-  dictionary,
-  classStyles,
-  lang,
-}: Props) {
+export function NavBarComponent({ dictionary, classStyles, lang }: Props) {
   const { data: session } = useSession();
 
   const isFrench = lang;
@@ -49,11 +45,13 @@ export default function NavBarComponent({
         items={filteredItems}
         resourceName="linkItem"
         itemComponent={LinkItemComponent}
+        liStyle="text-lg text-center md:text-xl uppercase"
+        gap="gap-2"
       />
     </nav>
   );
 }
-function LinkItemComponent({ linkItem }: LinkItemProps) {
+export function LinkItemComponent({ linkItem }: LinkItemProps) {
   const { label, link } = linkItem;
   return <Link href={`/${link}`}>{label}</Link>;
 }

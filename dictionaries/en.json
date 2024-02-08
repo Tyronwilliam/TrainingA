@@ -56,6 +56,22 @@
     },
     "formEvent": "Thank you for contacting us, we'll get back to you as soon as possible."
   },
+  "genre": {
+    "choices": [
+      {
+        "label": "WOMEN",
+        "link": "en/choix/genre/Women"
+      },
+      {
+        "label": "MEN",
+        "link": "en/choix/genre/Men"
+      },
+      {
+        "label": "KIDS",
+        "link": "en/choix/genre/Kids"
+      }
+    ]
+  },
   "cta": {
     "formEvent": {
       "send": "Send",

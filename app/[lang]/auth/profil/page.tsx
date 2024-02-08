@@ -5,6 +5,7 @@ import React from "react";
 import ProfilLayout from "./ProfilLayout";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/auth";
+import PreviousNavHistory from "../../components/PreviousNavHistory";
 
 export const metadata: Metadata = {
   title: "Mon profil - Agence Graziani",
@@ -43,12 +44,15 @@ const ProfilPage = async ({
   const candidat = await getSingleTalent(session?.user?.jwt);
   const dictionary = await getDictionary(lang);
   return (
-    <main className="w-full min-h-full h-fit m-auto pt-5 mb-10 flex flex-col items-center justify-center">
-      <h1 className="text-3xl mb-6 uppercase">
-        {dictionary?.general?.greeting} {candidat?.candidat?.Prenom}
-      </h1>
-      <ProfilLayout dictionary={dictionary} candidat={candidat?.candidat} />
-    </main>
+    <>
+      <PreviousNavHistory />
+      <main className="w-full min-h-full h-fit m-auto pt-5 mb-10 flex flex-col items-center justify-center">
+        <h1 className="text-3xl mb-6 uppercase">
+          {dictionary?.general?.greeting} {candidat?.candidat?.Prenom}
+        </h1>
+        <ProfilLayout dictionary={dictionary} candidat={candidat?.candidat} />
+      </main>
+    </>
   );
 };
 

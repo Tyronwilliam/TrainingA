@@ -5,10 +5,15 @@ export default function List({
   items,
   resourceName,
   itemComponent: ItemComponent,
+  liStyle,
+  gap,
+
   ...props
 }: ListProps) {
   return (
-    <ul className="flex items-center justify-center flex-col gap-2 mb-4 md:flex-row  md:gap-9 md:justify-normal md:mb-0">
+    <ul
+      className={`flex items-center justify-center flex-col  mb-4 md:flex-row  md:gap-9 md:justify-normal md:mb-0 ${gap}`}
+    >
       {items.map((item, i: number) => {
         const itemProps = {
           linkItem: item,
@@ -16,7 +21,7 @@ export default function List({
           ...props,
         };
         return (
-          <li key={i} className="text-lg text-center md:text-xl uppercase">
+          <li key={i} className={liStyle}>
             {/* Spread the itemProps object */}
             <ItemComponent {...itemProps} />{" "}
           </li>

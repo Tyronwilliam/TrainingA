@@ -1,7 +1,7 @@
 "use client";
 import useToggle from "@/hooks/Basic/useToggle";
 import React from "react";
-import NavBarComponent from "./NavBarComponent";
+import { NavBarComponent } from "./NavBarComponent";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { Dictionary } from "@/types/dictionary";
 import { Locale } from "@/i18n-config";

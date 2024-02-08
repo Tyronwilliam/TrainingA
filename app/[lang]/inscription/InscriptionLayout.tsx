@@ -61,17 +61,10 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     initialValues: inscriptionInitialValues,
     validationSchema: validationSchema[currentStep],
     onSubmit: async (values) => {},
-    //   handleSubmit(values, startSubmission, finishSubmission, executeRecaptcha),
   });
-  // console.log(formik?.errors, "ERRORS");
-  // console.log(formik?.values, "VALUES");
-  // console.log(currentStep);
+
   const handleNext = async () => {
     await formik.validateForm();
-
-    console.log(formik?.errors, "ERRORS");
-    console.log(formik?.values, "VALUES");
-
     if (Object.keys(formik?.errors)?.length === 0) {
       if (currentStep === 4 || currentStep === 0) {
         const stepPlusUn = currentStep + 1;
@@ -170,15 +163,26 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
                 handleClick={handlePrev}
               />
             )}
+            {currentStep === 0 && (
+              <button
+                type="button"
+                onClick={handleNext}
+                className="boutonSlideCommon shrink-0 text-lg max-w-[120px] w-full radius p-2.5 border-[1px] border-white"
+              >
+                {dictionary?.cta?.formEvent?.next}
+              </button>
+            )}
 
-            <ButtonForm
-              isSubmitting={isSubmitting}
-              formik={formik}
-              dictionary={dictionary}
-              content={dictionary?.cta?.formEvent?.next}
-              type="submit"
-              handleClick={handleNext}
-            />
+            {currentStep > 0 && (
+              <ButtonForm
+                isSubmitting={isSubmitting}
+                formik={formik}
+                dictionary={dictionary}
+                content={dictionary?.cta?.formEvent?.next}
+                type="submit"
+                handleClick={handleNext}
+              />
+            )}
           </>
         </div>
       )}

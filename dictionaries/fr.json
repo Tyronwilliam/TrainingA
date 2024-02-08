@@ -56,6 +56,22 @@
     },
     "formEvent": "Merci d'avoir pris contact avec nous, nous vous répondrons dans les meilleurs délais."
   },
+  "genre": {
+    "choices": [
+      {
+        "label": "FEMME",
+        "link": "choix/genre/Women"
+      },
+      {
+        "label": "HOMME",
+        "link": "choix/genre/Men"
+      },
+      {
+        "label": "ENFANT",
+        "link": "choix/genre/Kids"
+      }
+    ]
+  },
   "cta": {
     "formEvent": {
       "send": "Envoyer",

@@ -10,6 +10,7 @@ interface ButtonFormProps {
   content: string;
   handleClick?: () => void;
   type: "button" | "submit" | "reset" | undefined;
+  
 }
 
 const ButtonForm = ({

@@ -4,6 +4,7 @@ import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import React from "react";
 import InscriptionLayout from "./InscriptionLayout";
+import PreviousNavHistory from "../components/PreviousNavHistory";
 
 export const metadata: Metadata = {
   title: "Inscription Talent.",
@@ -35,14 +36,17 @@ const InscriptionPage = async ({
 
   const dictionary = await getDictionary(lang);
   return (
-    <main
-      className="w-full  h-fit m-auto pt-5  flex flex-col "
-      style={{ minHeight: "calc(100vh - 48px)" }}
-    >
-      {" "}
-      {CurrentView}
-      <InscriptionLayout dictionary={dictionary} />
-    </main>
+    <>
+      <PreviousNavHistory />
+      <main
+        className="w-full  h-fit m-auto pt-5  flex flex-col "
+        style={{ minHeight: "calc(100vh - 48px)" }}
+      >
+        {" "}
+        {CurrentView}
+        <InscriptionLayout dictionary={dictionary} />
+      </main>
+    </>
   );
 };
 

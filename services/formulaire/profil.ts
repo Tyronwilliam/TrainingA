@@ -3,8 +3,6 @@ import axios from "axios";
 
 const dataProfil = (values: FormikInscriptionWithoutExcluded) => {
   const json = {
-    // Nom_de_naissance: values.nomDeNaissance,
-    // Date_de_naissance: values.dateOfBirth,
     Telephone: values?.phone,
     Age: values.age,
     Physionomie: {
@@ -24,10 +22,8 @@ const dataProfil = (values: FormikInscriptionWithoutExcluded) => {
       Retraite: values.retired,
       Intermittent: values.intermittent,
       Nationalite: values.nationality,
-      // RIB: values?.previewRib ? values?.previewRib : undefined,
     },
     Role_Candidat: {
-      //   Unique: values?.unique,
       Acteur: values?.acteur,
       Figurant: values?.figuration,
       Modele: values?.modele,
@@ -57,11 +53,6 @@ const dataProfil = (values: FormikInscriptionWithoutExcluded) => {
       Abattement: values?.abattement,
       CMB: values?.cmb ? values?.cmb : undefined,
     },
-    // Lieu_de_Naissance: {
-    //   Ville: values.birthCity,
-    //   Pays: values.birthCountry,
-    //   Code_postal: values?.birthPostal,
-    // },
     Agence: {
       En_Agence: values?.agence,
       Agence_Infos: values?.agenceInfos,
