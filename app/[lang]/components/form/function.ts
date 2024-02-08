@@ -7,6 +7,7 @@ import {
   HandlePutPortfolioPhotoParams,
   LimitNumberParams,
 } from "./type";
+import { checkFileSize } from "@/utils/form";
 
 export const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
   if (e.key === "ArrowUp" || e.key === "ArrowDown") {
@@ -38,14 +39,20 @@ export const handleMultipleFileChange = async ({
   setIsLoadInput,
   error,
   id,
+  limit,
 }: HandleFileChangeParams) => {
   setIsLoadInput && setIsLoadInput(true);
   const selectedFiles: FileList | null = event?.currentTarget?.files;
   const arrayFile: File[] = [...formik?.values[id]];
+  const formikAndSelectedValue =
+    formik?.values[id].length + selectedFiles?.length;
+  if (!selectedFiles) {
+    setIsLoadInput && setIsLoadInput(false);
+    return;
+  }
 
-  if (selectedFiles) {
+  if (formikAndSelectedValue < limit + 1) {
     const arrayOfObjects = Object.values(selectedFiles);
-
     const filterNonFile = arrayOfObjects?.filter(
       (file: File) => file instanceof File
     );
@@ -53,11 +60,21 @@ export const handleMultipleFileChange = async ({
     if (filterNonFile?.length > 3) {
       error && sendToast(true, error);
     } else {
-      filterNonFile.forEach((object) => {
-        arrayFile.push(object);
+      filterNonFile.forEach((file: File) => {
+        if (id === "bandeDemo") {
+          const fileChecked = checkFileSize(file);
+          if (fileChecked !== undefined) {
+            arrayFile.push(fileChecked);
+          }
+        } else {
+          arrayFile.push(file);
+        }
       });
     }
     await formik.setFieldValue(id, arrayFile);
+    setIsLoadInput && setIsLoadInput(false);
+  } else {
+    sendToast(true, `Too much Files`);
     setIsLoadInput && setIsLoadInput(false);
   }
 };
@@ -68,8 +85,24 @@ export const handleSingleFileChange = async ({
   id,
 }: HandleFileChangeParams) => {
   setIsLoadInput && setIsLoadInput(true);
+
   const selectedFiles = event?.currentTarget?.files?.[0];
-  await formik.setFieldValue(id, selectedFiles);
+
+  if (!selectedFiles) {
+    setIsLoadInput && setIsLoadInput(false);
+    return;
+  }
+
+  if (id === "videodepresentation") {
+    const fileChecked = checkFileSize(selectedFiles);
+    if (fileChecked !== undefined) {
+      await formik.setFieldValue(id, selectedFiles);
+    }
+  }
+  if (id !== "videodepresentation") {
+    await formik.setFieldValue(id, selectedFiles);
+  }
+
   setIsLoadInput && setIsLoadInput(false);
 };
 
@@ -107,6 +140,7 @@ export const handleFileChange = ({
   id,
   multiple,
   error,
+  limit,
 }: HandleFileChangeParams & { multiple: boolean | undefined }): void => {
   if (multiple) {
     handleMultipleFileChange({
@@ -115,6 +149,7 @@ export const handleFileChange = ({
       setIsLoadInput,
       error: error,
       id,
+      limit,
     });
   } else {
     handleSingleFileChange({
@@ -122,6 +157,7 @@ export const handleFileChange = ({
       formik,
       setIsLoadInput,
       id,
+      limit,
     });
   }
 };

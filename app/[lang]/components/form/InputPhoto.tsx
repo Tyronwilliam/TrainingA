@@ -80,6 +80,7 @@ const InputPhoto = ({
               error: maxPhotoError,
               id,
               multiple,
+              limit: limit!,
             });
           }
         }}
