@@ -1,23 +1,17 @@
 "use client";
 import useToggle from "@/hooks/Basic/useToggle";
 import useFormSubmission from "@/hooks/Formulaire/useFormSubmission";
-import { Dictionary } from "@/types/dictionary";
-import {
-  SchemaRole,
-  StepFourSchema,
-  StepThreeSchema,
-  StepTwoSchema,
-  baseStepOneSchema,
-} from "@/utils/validationInscription";
-import { SchemaPhotoVideoProfil } from "@/utils/validationProfil";
-import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import TabsLayout from "./TabsLayout";
 import useServeInitialValueProfil from "@/hooks/Formulaire/useServeInitialValueProfil";
 import { updateProfil } from "@/services/formulaire/profil";
+import { Dictionary } from "@/types/dictionary";
+import { SchemaValidationProfil } from "@/utils/validationProfil";
+import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import TabsLayout from "./TabsLayout";
+import { sendToast } from "@/utils/toast";
 
-const excludeField = [
+export const excludeField = [
   "email",
   "password",
   "nomDeNaissance",
@@ -32,10 +26,10 @@ const excludeField = [
   "origine",
   "photodepresentation",
   "autresphotos",
+  "marital",
 ];
 // 1- I'm feeling emotional... (a chill mix) et 2- No Sleep | A Chill Mix sur la chaine MrSuicideSheep , je l'ai grave poncé y a qlq années c pas jazzy mais plutot chill
-// MEC OUBLIE PAS DE FAIRE LA FONCTION DANS ISNCRIPTION SI LUSER EXISTE DEJA
-// et de le logguer
+
 const ProfilLayout = ({
   dictionary,
   candidat,
@@ -48,33 +42,20 @@ const ProfilLayout = ({
   const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
   const { toggle, open } = useToggle();
   const { data: session } = useSession();
-
   const {
     isSubmitting,
-    submitError,
-    startSubmission,
-    finishSubmission,
-    submitSuccess,
-    setSubmitSuccess,
     isLoadInput,
     setIsLoadInput,
   } = useFormSubmission();
+
   const mergedStepSix = {
     ...dictionary?.inscription?.stepSix?.default,
     ...dictionary?.inscription?.stepSix?.content,
   };
 
-  const validationSchema: any = [
-    baseStepOneSchema,
-    StepTwoSchema,
-    StepThreeSchema,
-    StepFourSchema,
-    SchemaRole,
-    SchemaPhotoVideoProfil,
-  ];
   const formik = useFormik({
     initialValues: profilInitialValues,
-    validationSchema: currentTab !== null ? validationSchema[currentTab] : "",
+    validationSchema: SchemaValidationProfil,
     onSubmit: async (values) => {
       const response = await updateProfil(
         values,
@@ -82,9 +63,16 @@ const ProfilLayout = ({
         session?.user?.jwt,
         candidat?.id
       );
-      console.log(response, "MA REPONSE FROM SUBMIT");
+      if (response?.status === 200) {
+        sendToast(false, dictionary?.general?.success);
+      } else {
+        if (response?.response?.data?.error?.message) {
+          sendToast(true, response?.response?.data?.error?.message);
+        } else {
+          sendToast(true, "An error occurred");
+        }
+      }
     },
-    //   handleSubmit(values, startSubmission, finishSubmission, executeRecaptcha),
   });
 
   const handleTab = (tab: number | null) => {

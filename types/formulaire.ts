@@ -1,3 +1,5 @@
+import { excludeField } from "@/app/[lang]/auth/profil/ProfilLayout";
+
 export interface FormikContactProps {
   lastname: string;
   firstname: string;
@@ -90,6 +92,23 @@ export interface StepType {
   multiple?: boolean;
   pattern?: string;
 }
-export type FormikProfilProps = FormikInscriptionProps & {
+
+
+export type FormikInscriptionWithoutExcluded = Omit<
+  FormikInscriptionProps,
+  | "email"
+  | "password"
+  | "nomDeNaissance"
+  | "firstname"
+  | "gender"
+  | "dateOfBirth"
+  | "birthCity"
+  | "birthPostal"
+  | "birthCountry"
+  | "photodepresentation"
+  | "autresphotos"
+  | "marital"
+> & {
   newPhotos: [];
+  unique: boolean;
 };

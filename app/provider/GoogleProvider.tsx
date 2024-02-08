@@ -6,15 +6,16 @@ import { Toaster } from "react-hot-toast";
 
 export function GoogleProvider({ children }: { children: React.ReactNode }) {
   return (
-    <GoogleReCaptchaProvider reCaptchaKey="6LdOB3IoAAAAAHy_OhqQXCkbiT58MrqG_cyTu1SM">
+    <>
+      {/* <GoogleReCaptchaProvider reCaptchaKey="6LdOB3IoAAAAAHy_OhqQXCkbiT58MrqG_cyTu1SM"> */}
       {children}
       {/* <Script
         id="cookieyes"
         type="text/javascript"
         src="https://cdn-cookieyes.com/client_data/25f157bf1a80fb0cb0b9e79c/script.js"
       /> */}{" "}
-    
-        <Toaster />
-    </GoogleReCaptchaProvider>
+      <Toaster />
+      {/* </GoogleReCaptchaProvider> */}
+    </>
   );
 }

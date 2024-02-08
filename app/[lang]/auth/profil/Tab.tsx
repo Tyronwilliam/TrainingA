@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { ReactNode } from "react";
+import { TabProps } from "./type";
 
 const Tab = ({
   currentTab,
@@ -7,22 +8,22 @@ const Tab = ({
   index,
   children,
   title,
-}: {
-  currentTab: number | null;
-  handleClick: (arg: number) => void;
-  index: number;
-  children: ReactNode;
-  title: string;
-}) => {
+  formik,
+}: TabProps) => {
+  const currentStepErrors =
+    //@ts-ignore
+    currentTab !== null && formik.errors && formik.errors[currentTab];
+
   return (
     <section className="w-full max-w-[700px]  px-4 md:px-0  radius custom__border">
       <div
         onClick={() => {
           handleClick(index);
         }}
-        className="uppercase mt-4 radius text-lg text-center background__grey h-16 p-5 cursor-pointer  hover:opacity-80"
+        className="uppercase mt-4 radius text-lg text-center background__grey h-16 p-5 cursor-pointer  hover:opacity-80 flex items-center justify-center"
       >
         <h1>{title}</h1>
+    
       </div>
       <div
         className={classNames({

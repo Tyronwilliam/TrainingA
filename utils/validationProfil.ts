@@ -1,19 +1,16 @@
-import { FormikProfilProps } from "@/types/formulaire";
+import { FormikInscriptionWithoutExcluded } from "@/types/formulaire";
 import * as Yup from "yup";
-import { SchemaVideoInscription } from "./validationInscription";
+import {
+  SchemaRole,
+  SchemaVideoInscription,
+  StepFourSchema,
+  StepThreeSchema,
+  StepTwoSchema,
+  baseStepOneSchema,
+} from "./validationInscription";
 
-export const profilInitialValues: FormikProfilProps = {
-  email: "",
-  password: "",
-  marital: "",
-  nomDeNaissance: "",
-  firstname: "",
-  gender: "",
+export const profilInitialValues: FormikInscriptionWithoutExcluded = {
   age: 0o0,
-  dateOfBirth: null,
-  birthCity: "",
-  birthPostal: "",
-  birthCountry: "",
   address: "",
   city: "",
   postalCode: "",
@@ -54,23 +51,26 @@ export const profilInitialValues: FormikProfilProps = {
   modele: false,
   figuration: false,
   silhouette: false,
-  photodepresentation: null,
-  autresphotos: [],
   bandeDemo: [],
   videodepresentation: null,
   newPhotos: [],
+  unique: false,
 };
 export const SchemaNewPhoto = Yup.object().shape({
-    newPhotos: Yup.array()
-    .min(1, "At least one vidéo is required")
-    .max(15, "3 vidéos max")
-    .test("file-instance", "Please save your file", (value) => {
+  newPhotos: Yup.array()
+    .max(15, "15 photos max")
+    .test("file-instance", "Please save your new file", (value) => {
       // Check if any item in the array is not an instance of File
       return (
         Array.isArray(value) && !value.some((item) => item instanceof File)
       );
     }),
 });
-export const SchemaPhotoVideoProfil = SchemaNewPhoto.concat(
-  SchemaVideoInscription
-);
+
+const SchemaPhotoVideoProfil = SchemaNewPhoto.concat(SchemaVideoInscription);
+export const SchemaValidationProfil = baseStepOneSchema
+  .concat(StepTwoSchema)
+  .concat(StepThreeSchema)
+  .concat(StepFourSchema)
+  .concat(SchemaRole)
+  .concat(SchemaPhotoVideoProfil);

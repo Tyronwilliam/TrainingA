@@ -64,11 +64,15 @@
       "validate": "Validé",
       "submit": "Soumettre",
       "next": "Suivant",
-      "previous": "Précedent"
+      "previous": "Précedent",
+      "myFile": "Mes fichiers",
+      "savedFile": "Sauvegarder"
     },
     "accueil": "Accueil"
   },
   "general": {
+    "greeting": "Bonjour",
+    "success": "Sauvegarde réussi",
     "form": {
       "password": "Mot de passe",
       "passwordConfirmation": "Confirmation du mot de passe",

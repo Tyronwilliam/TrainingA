@@ -44,7 +44,9 @@ const ProfilPage = async ({
   const dictionary = await getDictionary(lang);
   return (
     <main className="w-full min-h-full h-fit m-auto pt-5 mb-10 flex flex-col items-center justify-center">
-      <h1 className="text-3xl mb-6">BONJOUR {candidat?.candidat?.Prenom}</h1>
+      <h1 className="text-3xl mb-6 uppercase">
+        {dictionary?.general?.greeting} {candidat?.candidat?.Prenom}
+      </h1>
       <ProfilLayout dictionary={dictionary} candidat={candidat?.candidat} />
     </main>
   );

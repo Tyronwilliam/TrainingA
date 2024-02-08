@@ -9,6 +9,7 @@ type DialogProps = {
   formik: FormikProps<any>;
   id: string;
   jwt: string;
+  isCurrentlyEditing: string | undefined;
 };
 export const Dialog = ({
   open,
@@ -17,10 +18,12 @@ export const Dialog = ({
   formik,
   id,
   jwt,
+  isCurrentlyEditing,
 }: DialogProps) => {
+  const isOpen = open && isCurrentlyEditing === id;
   return (
     Array.isArray(value) && (
-      <dialog open={open} className="dialog__portfolio">
+      <dialog open={isOpen} className="dialog__portfolio">
         <button
           aria-label="delete"
           type="button"

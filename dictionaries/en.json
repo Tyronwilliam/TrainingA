@@ -64,11 +64,15 @@
       "validate": "Validé",
       "submit": "Submit",
       "next": "Next",
-      "previous": "Previous"
+      "previous": "Previous",
+      "myFile": "My file",
+      "savedFile": "Save"
     },
     "accueil": "Home"
   },
   "general": {
+    "greeting": "Hello",
+    "success": "Successful",
     "form": {
       "password": "Password",
       "passwordConfirmation": "Confirm password",

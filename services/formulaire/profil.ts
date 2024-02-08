@@ -1,10 +1,10 @@
-import { FormikProfilProps } from "@/types/formulaire";
+import { FormikInscriptionWithoutExcluded } from "@/types/formulaire";
 import axios from "axios";
 
-const dataProfil = (values: FormikProfilProps) => {
+const dataProfil = (values: FormikInscriptionWithoutExcluded) => {
   const json = {
-    Nom_de_naissance: values.nomDeNaissance,
-    Date_de_naissance: values.dateOfBirth,
+    // Nom_de_naissance: values.nomDeNaissance,
+    // Date_de_naissance: values.dateOfBirth,
     Telephone: values?.phone,
     Age: values.age,
     Physionomie: {
@@ -32,6 +32,7 @@ const dataProfil = (values: FormikProfilProps) => {
       Figurant: values?.figuration,
       Modele: values?.modele,
       Silhouette: values?.silhouette,
+      Unique: values?.unique,
       Competence: {
         Defile_de_mode: values?.defile,
         Danse_Classique: values?.danseClassique,
@@ -56,11 +57,11 @@ const dataProfil = (values: FormikProfilProps) => {
       Abattement: values?.abattement,
       CMB: values?.cmb ? values?.cmb : undefined,
     },
-    Lieu_de_Naissance: {
-      Ville: values.birthCity,
-      Pays: values.birthCountry,
-      Code_postal: values?.birthPostal,
-    },
+    // Lieu_de_Naissance: {
+    //   Ville: values.birthCity,
+    //   Pays: values.birthCountry,
+    //   Code_postal: values?.birthPostal,
+    // },
     Agence: {
       En_Agence: values?.agence,
       Agence_Infos: values?.agenceInfos,
@@ -72,8 +73,16 @@ const dataProfil = (values: FormikProfilProps) => {
 
 export const updateProfil = async (values: any, jwt: string, id: number) => {
   const formData = new FormData();
+
+  if (values?.videodepresentation instanceof File) {
+    formData.append(
+      `files.Video_Presentation`,
+      values?.videodepresentation,
+      values?.videodepresentation?.name
+    );
+  }
+
   const json = dataProfil(values);
-  console.log(json, "JSON DATA");
   formData.append("data", JSON.stringify(json));
 
   try {

@@ -55,14 +55,14 @@ export const promisesUpload = async (
   });
 };
 
-export const uploadFileInCandidat = async (
+export const uploadFileInCandidat = (
   promisesResolved: {}[] | {},
   candidatId: number,
   id: string,
   jwt?: string
 ) => {
   const data = apiObject(id, promisesResolved);
-  return await axios
+  return axios
     .put(
       `${process.env.NEXT_PUBLIC_API_URL}/candidats/${candidatId}?populate=Portfolio.Portfolio&populate=Bande_Demo`,
       data,

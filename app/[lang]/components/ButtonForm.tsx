@@ -35,7 +35,7 @@ const ButtonForm = ({
         "opacity-50": !formik.isValid && !isPreviousButton,
         "max-w-[180px] opacity-50": isSubmitting && formik.isValid,
       })}
-      disabled={isDisabled}
+      disabled={isDisabled || !formik.dirty}
       onClick={() => handleClick && handleClick()}
     >
       {isSubmitting ? (

@@ -135,13 +135,13 @@ export const deleteFile = async (
 ) => {
   if (file instanceof File) {
     const removeFile = value?.filter((f) => f.name !== file?.name);
-    formik.setFieldValue(id, removeFile);
+    await formik.setFieldValue(id, removeFile);
   } else {
     const response = await deletePhotos({ file, jwt });
     //@ts-ignore
     if (response?.status === 200) {
       const removeFile = value?.filter((f) => f.id !== file?.id);
-      formik.setFieldValue(id, removeFile);
+      await formik.setFieldValue(id, removeFile);
     } else {
       //@ts-ignore
       const error = response?.response?.data?.error?.message

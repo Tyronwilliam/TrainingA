@@ -67,39 +67,38 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
 };
 
 export const baseStepOneSchema = Yup.object().shape({
-  marital: Yup.string().nullable(),
-  age: Yup.number().nullable().required("Required"),
-
-  address: Yup.string().required("Required"),
-  city: Yup.string().required("Required"),
+  age: Yup.number().nullable().required("Age Required"),
+  address: Yup.string().required(" Address Required"),
+  city: Yup.string().required("City Required"),
   postalCode: Yup.string()
     .matches(postalCodeRegex, "Invalid postal code")
-    .required("Required"),
-  country: Yup.string().required("Required"),
+    .required("Postal code Required"),
+  country: Yup.string().required("Country Required"),
   residencePermit: Yup.number().nullable(),
   phone: Yup.string()
     .matches(phoneNumberRegex, "Invalid Phone Number")
-    .required("Required"),
+    .required("Phone Required"),
   socialNumber: Yup.string()
     .matches(socSecNumberRegex, "Invalid Social Number")
-    .required("Required"),
-  statut: Yup.string().required("Required"),
+    .required("Social Number Required"),
+  statut: Yup.string().required("Statut Required"),
   children: Yup.number().optional(),
-  retired: Yup.boolean().required("Required"),
+  retired: Yup.boolean().required("Retired Required"),
 });
 const SchemaInscription = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().min(8, "Too Short!").required("Required"),
-  nomDeNaissance: Yup.string().required("Required"),
-  firstname: Yup.string().required("Required"),
-  gender: Yup.string().required("Required"),
-  dateOfBirth: Yup.date().nullable().required("Required"),
+  marital: Yup.string().nullable(),
+  email: Yup.string().email("Invalid email").required("Email Required"),
+  password: Yup.string().min(8, "Too Short!").required("Password Required"),
+  nomDeNaissance: Yup.string().required("Lastname Required"),
+  firstname: Yup.string().required("Firstname Required"),
+  gender: Yup.string().required("Gender Required"),
+  dateOfBirth: Yup.date().nullable().required("Date Of Birth Required"),
   birthPostal: Yup.string()
     .matches(postalCodeRegex, "Invalid postal code")
-    .required("Required"),
-  birthCity: Yup.string().required("Required"),
-  birthCountry: Yup.string().required("Required"),
-  nationality: Yup.string().required("Required"),
+    .required("Birth Postal Required"),
+  birthCity: Yup.string().required("Birth City Required"),
+  birthCountry: Yup.string().required("Birth Country Required"),
+  nationality: Yup.string().required("Nationality Required"),
 });
 export const StepOneSchema = baseStepOneSchema.concat(SchemaInscription);
 
@@ -107,34 +106,35 @@ export const StepTwoSchema = Yup.object().shape({
   intermittent: Yup.boolean().required("Required"),
   congeSpectacle: Yup.string().when("intermittent", {
     is: true,
-    then: (schema) => Yup.string().required("Required"),
+    then: (schema) => Yup.string().required("Leave Number Required"),
     otherwise: (schema) => schema.nullable(),
   }),
   lastMedicVisite: Yup.date().when("intermittent", {
     is: true,
-    then: (schema) => Yup.date().required("Required"),
+    then: (schema) => Yup.date().required("Last Medical Visite Required"),
     otherwise: (schema) => schema.nullable(),
   }),
   abattement: Yup.string().when("intermittent", {
     is: true,
-    then: (schema) => Yup.string().required("Required"),
+    then: (schema) => Yup.string().required("Allowance Required"),
     otherwise: (schema) => schema.nullable(),
   }),
   cmb: Yup.mixed().when("intermittent", {
     is: true,
-    then: (schema) => Yup.mixed().required("File is required"),
+    then: (schema) => Yup.mixed().required("CMB File is required"),
     otherwise: (schema) => Yup.mixed().nullable(),
   }),
 });
 
 export const StepThreeSchema = Yup.object().shape({
-  confectionHaut: Yup.string().required("Required"),
-  confectionBas: Yup.string().required("Required"),
-  cheveux: Yup.string().required("Required"),
-  yeux: Yup.string().required("Required"),
-  taille: Yup.string().required("Required"),
-  chaussures: Yup.string().required("Required"),
-  origine: Yup.string().required("Required"),
+  confectionHaut: Yup.string().required("Upper Clothing Required"),
+  confectionBas: Yup.string().required("Lower Clothing Required"),
+  cheveux: Yup.string().required("Hair Color Required"),
+  yeux: Yup.string().required("Eyes Color Required"),
+  taille: Yup.string().required("Height Required"),
+  chaussures: Yup.string().required("Shoes size Required"),
+  origine: Yup.string().required("Origin Required"),
+  // unique: Yup.boolean().required("Required"),
 });
 
 export const StepFourSchema = Yup.object().shape({
@@ -150,13 +150,13 @@ export const StepFourSchema = Yup.object().shape({
   agence: Yup.boolean().required("Required"),
   agenceInfos: Yup.string().when("agence", {
     is: true,
-    then: (schema) => Yup.string().required("Required"),
+    then: (schema) => Yup.string().required("Agency Informations Required"),
     otherwise: (schema) => schema.nullable(),
   }),
   instagram: Yup.string().nullable(),
 });
 const SchemaPhotoInscription = Yup.object().shape({
-  photodepresentation: Yup.mixed().required("File is required"),
+  photodepresentation: Yup.mixed().required("Presentation File is required"),
   autresphotos: Yup.array()
     .min(1, "At least one photo is required")
     .max(15, "15 pictures max")
@@ -176,7 +176,7 @@ export const SchemaRole = Yup.object().shape({
 export const StepFiveSchema = SchemaRole.concat(SchemaPhotoInscription);
 
 export const SchemaVideoInscription = Yup.object().shape({
-  videodepresentation: Yup.mixed().required("Required"),
+  videodepresentation: Yup.mixed().required("Presentation Video Required"),
   bandeDemo: Yup.array()
     .min(1, "At least one vidéo is required")
     .max(15, "3 vidéos max")

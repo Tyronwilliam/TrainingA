@@ -140,7 +140,8 @@ html {
     top: 0;
     min-width: 250px;
     max-width: 450px;
-    max-height: 150px;
+    max-height: 180px;
+    z-index: 100;
     overflow-y: scroll;
     margin: 10% auto;
     padding: 20px;
@@ -207,13 +208,29 @@ html {
     background-size: 200% 200%;
     border: 1px solid white;
     cursor: pointer;
-    &:hover {
+    /* &:hover {
       transition: all 0.5s ease-in-out;
       background: linear-gradient(to bottom right, black 50%, white 50%);
       background-position: bottom right;
       background-size: 200% 200%;
       border: 1px solid black;
       color: black;
+    } */
+    &:not([disabled]):hover {
+      transition: all 0.5s ease-in-out;
+      background: linear-gradient(to bottom right, black 50%, white 50%);
+      background-position: bottom right;
+      background-size: 200% 200%;
+      border: 1px solid black;
+      color: black;
+    }
+
+    /* Styles for disabled state */
+    &:disabled {
+      background: black; /* You can adjust the color for disabled state */
+      border: 1px solid #ccc;
+      cursor: not-allowed;
+      color: #666; /* You can adjust the color for disabled text */
     }
   }
   .radius {

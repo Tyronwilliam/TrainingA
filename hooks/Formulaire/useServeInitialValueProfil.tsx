@@ -1,19 +1,12 @@
-import { FormikProfilProps } from "@/types/formulaire";
-import React from "react";
+import { FormikInscriptionWithoutExcluded } from "@/types/formulaire";
 
 const useServeInitialValueProfil = (candidat: any) => {
   const {
-    Email,
     Infos_Administrative,
     Physionomie,
     Data_intermittent,
     Photo_Candidature,
-    Portfolio,
     Location,
-    Lieu_de_Naissance,
-    Photo_de_presentation,
-    Nom_de_naissance,
-    Date_de_naissance,
     Role_Candidat,
     Telephone,
     Instagram,
@@ -22,23 +15,11 @@ const useServeInitialValueProfil = (candidat: any) => {
     Video_Presentation,
     Bande_Demo,
     Agence,
-    Nom,
-    Prenom,
   } = candidat || {};
 
-  // IL faut typer correctement les initial values
-  const profilInitialValues: any = {
-    nomDeNaissance: Nom_de_naissance ? Nom_de_naissance : "",
-    firstname: Prenom,
-    email: Email,
+  const profilInitialValues: FormikInscriptionWithoutExcluded = {
     phone: Telephone ? `0${Telephone}` : "",
-    dateOfBirth: Date_de_naissance ? Date_de_naissance : "",
     age: Age ? Age : "",
-    birthCity: Lieu_de_Naissance?.Ville ? Lieu_de_Naissance?.Ville : "",
-    birthCountry: Lieu_de_Naissance?.Pays ? Lieu_de_Naissance?.Pays : "",
-    birthPostal: Lieu_de_Naissance?.Code_postal
-      ? Lieu_de_Naissance?.Code_postal.trim()
-      : "",
     address: Location?.adresse ? Location?.adresse : "",
     city: Location?.Ville ? Location?.Ville : "",
     postalCode: Location?.Code_postal ? Location?.Code_postal.trim() : "",
@@ -101,19 +82,16 @@ const useServeInitialValueProfil = (candidat: any) => {
     chaussures: Physionomie?.Chaussures ? Physionomie?.Chaussures : "",
     origine: Physionomie?.Origin ? Physionomie?.Origin : "",
     taille: Physionomie?.Taille ? Physionomie?.Taille : "",
-    //   unique: Role_Candidat?.Unique ? Role_Candidat?.Unique : false,
+    unique: Role_Candidat?.Unique ? Role_Candidat?.Unique : false,
     acteur: Role_Candidat?.Acteur ? Role_Candidat?.Acteur : false,
     modele: Role_Candidat?.Modele ? Role_Candidat?.Modele : false,
     figuration: Role_Candidat?.Figurant ? Role_Candidat?.Figurant : false,
     silhouette: Role_Candidat?.Silhouette ? Role_Candidat?.Silhouette : false,
     bandeDemo: Bande_Demo ? Bande_Demo : [],
     videodepresentation: Video_Presentation ? Video_Presentation : null,
-    autresphotos: Portfolio?.Portfolio ? Portfolio?.Portfolio : [],
-    photodepresentation: Photo_de_presentation ? Photo_de_presentation : null,
     newPhotos: Photo_Candidature?.Nouvelle_photos
       ? Photo_Candidature?.Nouvelle_photos
       : [],
-
     congeSpectacle: Data_intermittent?.Numero_conges_spectacle
       ? Data_intermittent?.Numero_conges_spectacle
       : "",
