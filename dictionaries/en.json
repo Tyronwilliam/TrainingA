@@ -70,832 +70,877 @@
         "label": "KIDS",
         "link": "en/choix/genre/Kids"
       }
-    ]
-  },
-  "cta": {
-    "formEvent": {
-      "send": "Send",
-      "processing": "Processing",
-      "connexion": "Log in",
-      "validate": "Validé",
-      "submit": "Submit",
-      "next": "Next",
-      "previous": "Previous",
-      "myFile": "My file",
-      "savedFile": "Save"
-    },
-    "accueil": "Home"
-  },
-  "general": {
-    "greeting": "Hello",
-    "success": "Successful",
-    "form": {
-      "password": "Password",
-      "passwordConfirmation": "Confirm password",
-      "select": "Select",
-      "helpers": {
-        "autresphotos": "Add your photos in groups of 3!",
-        "frSysteme": "Please note that clothing sizes are indicated in the French system."
+    ],
+    "page": {
+      "role": {
+        "Tous": "Tous",
+        "Acteur": "Acteur",
+        "Modèle": "Modèle",
+        "Figurant": "Extra"
       },
-      "errors": {
-        "autresphotos": "3 photos max per add-on"
-      }
-    }
-  },
-  "footer": {
-    "termcondition": "Terms & Conditions",
-    "google": {
-      "span1": "This site is protected by reCAPTCHA and Google.",
-      "link1": "Privacy Policy",
-      "link2": "Terms of Use",
-      "span2": "applied.",
-      "and": "and"
-    }
-  },
+      "filter": {
+        "age": {
+          "title": { "Age": "Age" },
+          "value": [">16", "18/24", "25/30", "30/40", "40/50", "50/60", "60+"]
+        },
+        "taille": {
+          "title": { "Taille": "Height" },
+          "value": [">160", "160/170", "170/180", "+180"]
+        },
+        "skills": {
+          "title": { "Compétence": "Skills" },
+          "value": {
+            "Defile_de_mode": "Catwalk",
+            "Danse_Classique": "Classical Dance",
+            "Danse_Contemporaine": "Contemporary Dance",
+            "HipHop": "HipHop",
+            "Sportif": "Sporty",
+            "Skate": "Skateboarding",
+            "Ski": "Skiing"
+          }
+        },
+        "origine": {
+          "title": { "Type": "Type" },
+          "value": {
+            "ASIATIQUE": "ASIATIC",
+            "BLANC": "WHITE",
+            "NOIR": "BLACK",
+            "LATINO": "LATINO",
+            "MAGHREBIN": "NORTH AFRICAN",
+            "METISSE": "MIXED RACE"
+          }
+        },
 
-  "connexion": {
-    "nav": [
-      {
-        "label": "Forgot your password?",
-        "link": "forgot-password"
-      }
-    ]
-  },
-  "forgot": {
-    "h1": "Forgot your password?",
-    "p": "Please enter your email address to receive a reset email.",
-    "emailSend": "An e-mail has been sent to you. You should receive it in a few minutes."
-  },
-  "reset": {
-    "h1": "Reset password",
-    "passwordConfirmation": "Confirm password"
-  },
-  "profil": [
-    "General",
-    "Administrative",
-    "Physionomy",
-    "Skills",
-    "Role",
-    "Photos & Videos"
-  ],
-  "inscription": {
-    "disclaimer": {
-      "h1": "This site is private.",
-      "p1": "Your profile will be on a private site, where only me and the film professionals I work with will have access.",
-      "p2": "The rest of your private information is strictly protected and will only be used to establish contracts in the event of selection for a shoot.",
-      "p3": "This is NOT a modeling or acting agency.",
-      "p4": "Only your first name, images and measurements will appear."
-    },
-    "success": {
-      "p1": "Thank you for registering.",
-      "p2": "You are currently in our talent database, accessible to film professionals (directors and producers).",
-      "p3": "You will receive an e-mail when your account is validated. You'll be able to update your account regularly with new photos, videos and news.",
-      "p4": "Good luck to you!"
-    },
-    "stepOne": {
-      "email": {
-        "label": "Email",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "john@exemple.com",
-        "id": "email"
-      },
-      "password": {
-        "label": "Create your password",
-        "helper": "",
-        "type": "password",
-        "required": true,
-        "placeholder": "",
-        "id": "password"
-      },
-      "marital": {
-        "label": "marital name",
-        "helper": "if married",
-        "type": "text",
-        "required": false,
-        "placeholder": "Doe",
-        "id": "marital"
-      },
-      "nomDeNaissance": {
-        "label": "birthname",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "Doe",
-        "id": "nomDeNaissance"
-      },
-      "firstname": {
-        "label": "firstname",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "John",
-        "id": "firstname"
-      },
-      "gender": {
-        "label": "Gender",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "gender",
-        "options": {
-          "Men": "Men",
-          "Women": "Women",
-          "Kids": "Kid"
+        "unique": {
+          "title": { "Unique": "Unique" }
         }
-      },
-      "age": {
-        "label": "Age",
-        "helper": "",
-        "type": "number",
-        "required": true,
-        "placeholder": "30",
-        "id": "age",
-        "limit": 3
-      },
-      "dateOfBirth": {
-        "label": "Date of birth",
-        "helper": "",
-        "type": "date",
-        "required": true,
-        "placeholder": "",
-        "id": "dateOfBirth"
-      },
-      "birthCity": {
-        "label": "birth City",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "Paris",
-        "id": "birthCity"
-      },
-      "birthPostal": {
-        "label": "birth Postal Code",
-        "helper": "",
-        "type": "number",
-        "required": true,
-        "placeholder": "75000",
-        "id": "birthPostal",
-        "limit": 5,
-        "pattern": "^\\d{1,5}$"
-      },
-      "birthCountry": {
-        "label": "Country of birth",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "France",
-        "id": "birthCountry"
-      },
-      "address": {
-        "label": "Current address",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "130 street of example",
-        "id": "address"
-      },
-      "city": {
-        "label": "City",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "Paris",
-        "id": "city"
-      },
-      "postalCode": {
-        "label": "postal Code",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "75000",
-        "id": "postalCode",
-        "limit": 5,
-        "pattern": "^\\d{1,5}$"
-      },
-      "country": {
-        "label": "Country",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "France",
-        "id": "country"
-      },
-      "nationality": {
-        "label": "Nationality",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "français",
-        "id": "nationality"
-      },
-      "residencePermit": {
-        "label": "Residence permit number",
-        "helper": "To be completed if you are a foreign national",
-        "type": "number",
-        "required": false,
-        "placeholder": "",
-        "id": "residencePermit",
-        "limit": 20
-      },
-      "phone": {
-        "label": "Phone ",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "0786085046",
-        "id": "phone",
-        "limit": 10,
-        "pattern": "^\\d{1,10}$"
-      },
-      "socialNumber": {
-        "label": "Social security number",
-        "helper": "",
-        "type": "text",
-        "required": true,
-        "placeholder": "562354895415658",
-        "id": "socialNumber",
-        "limit": 15,
-        "pattern": "^\\d{1,15}$"
-      },
-      "statut": {
-        "label": "Status",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "statut",
-        "options": {
-          "Célibataire": "Single",
-          "Marié": "Married",
-          "Pacsé": "Civilunion",
-          "Concubinage": "Cohabiting",
-          "Divorcé": "Divorced",
-          "Veuf": "Widowed"
-        }
-      },
-      "children": {
-        "label": "Number of dependent children",
-        "helper": "Leave blank if you have no children",
-        "type": "number",
-        "required": false,
-        "placeholder": "",
-        "id": "children",
-        "limit": 2
-      },
-      "retired": {
-        "label": "Retired",
-        "helper": "Tick the box if you are retired",
-        "type": "checkbox",
-        "required": false,
-        "placeholder": "",
-        "id": "retired"
       }
     },
-    "stepTwo": {
-      "default": {
-        "intermittent": {
-          "label": "Intermittent",
-          "helper": "tick this box if you are intermittent",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "intermittent"
-        }
+    "cta": {
+      "formEvent": {
+        "send": "Send",
+        "processing": "Processing",
+        "connexion": "Log in",
+        "validate": "Validé",
+        "submit": "Submit",
+        "next": "Next",
+        "previous": "Previous",
+        "myFile": "My file",
+        "savedFile": "Save"
       },
-      "content": {
-        "congeSpectacle": {
-          "label": "Entertainment Leave Number",
+      "accueil": "Home"
+    },
+    "general": {
+      "greeting": "Hello",
+      "success": "Successful",
+      "form": {
+        "password": "Password",
+        "passwordConfirmation": "Confirm password",
+        "select": "Select",
+        "helpers": {
+          "autresphotos": "Add your photos in groups of 3!",
+          "frSysteme": "Please note that clothing sizes are indicated in the French system."
+        },
+        "errors": {
+          "autresphotos": "3 photos max per add-on"
+        }
+      }
+    },
+    "footer": {
+      "termcondition": "Terms & Conditions",
+      "google": {
+        "span1": "This site is protected by reCAPTCHA and Google.",
+        "link1": "Privacy Policy",
+        "link2": "Terms of Use",
+        "span2": "applied.",
+        "and": "and"
+      }
+    },
+
+    "connexion": {
+      "nav": [
+        {
+          "label": "Forgot your password?",
+          "link": "forgot-password"
+        }
+      ]
+    },
+    "forgot": {
+      "h1": "Forgot your password?",
+      "p": "Please enter your email address to receive a reset email.",
+      "emailSend": "An e-mail has been sent to you. You should receive it in a few minutes."
+    },
+    "reset": {
+      "h1": "Reset password",
+      "passwordConfirmation": "Confirm password"
+    },
+    "profil": [
+      "General",
+      "Administrative",
+      "Physionomy",
+      "Skills",
+      "Role",
+      "Photos & Videos"
+    ],
+    "inscription": {
+      "disclaimer": {
+        "h1": "This site is private.",
+        "p1": "Your profile will be on a private site, where only me and the film professionals I work with will have access.",
+        "p2": "The rest of your private information is strictly protected and will only be used to establish contracts in the event of selection for a shoot.",
+        "p3": "This is NOT a modeling or acting agency.",
+        "p4": "Only your first name, images and measurements will appear."
+      },
+      "success": {
+        "p1": "Thank you for registering.",
+        "p2": "You are currently in our talent database, accessible to film professionals (directors and producers).",
+        "p3": "You will receive an e-mail when your account is validated. You'll be able to update your account regularly with new photos, videos and news.",
+        "p4": "Good luck to you!"
+      },
+      "stepOne": {
+        "email": {
+          "label": "Email",
           "helper": "",
           "type": "text",
           "required": true,
-          "placeholder": "",
-          "id": "congeSpectacle"
+          "placeholder": "john@exemple.com",
+          "id": "email"
         },
-        "lastMedicVisite": {
-          "label": "Last Medical Visit",
+        "password": {
+          "label": "Create your password",
+          "helper": "",
+          "type": "password",
+          "required": true,
+          "placeholder": "",
+          "id": "password"
+        },
+        "marital": {
+          "label": "marital name",
+          "helper": "if married",
+          "type": "text",
+          "required": false,
+          "placeholder": "Doe",
+          "id": "marital"
+        },
+        "nomDeNaissance": {
+          "label": "birthname",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "Doe",
+          "id": "nomDeNaissance"
+        },
+        "firstname": {
+          "label": "firstname",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "John",
+          "id": "firstname"
+        },
+        "gender": {
+          "label": "Gender",
+          "helper": "",
+          "type": "select",
+          "required": true,
+          "placeholder": "",
+          "id": "gender",
+          "options": {
+            "Men": "Men",
+            "Women": "Women",
+            "Kids": "Kid"
+          }
+        },
+        "age": {
+          "label": "Age",
+          "helper": "",
+          "type": "number",
+          "required": true,
+          "placeholder": "30",
+          "id": "age",
+          "limit": 3
+        },
+        "dateOfBirth": {
+          "label": "Date of birth",
           "helper": "",
           "type": "date",
           "required": true,
           "placeholder": "",
-          "id": "lastMedicVisite"
+          "id": "dateOfBirth"
         },
-        "abattement": {
-          "label": "Accepts Allowance",
-          "helper": "If you accept the allowance, check this box",
+        "birthCity": {
+          "label": "birth City",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "Paris",
+          "id": "birthCity"
+        },
+        "birthPostal": {
+          "label": "birth Postal Code",
+          "helper": "",
+          "type": "number",
+          "required": true,
+          "placeholder": "75000",
+          "id": "birthPostal",
+          "limit": 5,
+          "pattern": "^\\d{1,5}$"
+        },
+        "birthCountry": {
+          "label": "Country of birth",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "France",
+          "id": "birthCountry"
+        },
+        "address": {
+          "label": "Current address",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "130 street of example",
+          "id": "address"
+        },
+        "city": {
+          "label": "City",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "Paris",
+          "id": "city"
+        },
+        "postalCode": {
+          "label": "postal Code",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "75000",
+          "id": "postalCode",
+          "limit": 5,
+          "pattern": "^\\d{1,5}$"
+        },
+        "country": {
+          "label": "Country",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "France",
+          "id": "country"
+        },
+        "nationality": {
+          "label": "Nationality",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "français",
+          "id": "nationality"
+        },
+        "residencePermit": {
+          "label": "Residence permit number",
+          "helper": "To be completed if you are a foreign national",
+          "type": "number",
+          "required": false,
+          "placeholder": "",
+          "id": "residencePermit",
+          "limit": 20
+        },
+        "phone": {
+          "label": "Phone ",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "0786085046",
+          "id": "phone",
+          "limit": 10,
+          "pattern": "^\\d{1,10}$"
+        },
+        "socialNumber": {
+          "label": "Social security number",
+          "helper": "",
+          "type": "text",
+          "required": true,
+          "placeholder": "562354895415658",
+          "id": "socialNumber",
+          "limit": 15,
+          "pattern": "^\\d{1,15}$"
+        },
+        "statut": {
+          "label": "Status",
+          "helper": "",
+          "type": "select",
+          "required": true,
+          "placeholder": "",
+          "id": "statut",
+          "options": {
+            "Célibataire": "Single",
+            "Marié": "Married",
+            "Pacsé": "Civilunion",
+            "Concubinage": "Cohabiting",
+            "Divorcé": "Divorced",
+            "Veuf": "Widowed"
+          }
+        },
+        "children": {
+          "label": "Number of dependent children",
+          "helper": "Leave blank if you have no children",
+          "type": "number",
+          "required": false,
+          "placeholder": "",
+          "id": "children",
+          "limit": 2
+        },
+        "retired": {
+          "label": "Retired",
+          "helper": "Tick the box if you are retired",
           "type": "checkbox",
           "required": false,
           "placeholder": "",
-          "id": "abattement"
+          "id": "retired"
+        }
+      },
+      "stepTwo": {
+        "default": {
+          "intermittent": {
+            "label": "Intermittent",
+            "helper": "tick this box if you are intermittent",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "intermittent"
+          }
         },
-        "cmb": {
-          "label": "Cmb",
+        "content": {
+          "congeSpectacle": {
+            "label": "Entertainment Leave Number",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "",
+            "id": "congeSpectacle"
+          },
+          "lastMedicVisite": {
+            "label": "Last Medical Visit",
+            "helper": "",
+            "type": "date",
+            "required": true,
+            "placeholder": "",
+            "id": "lastMedicVisite"
+          },
+          "abattement": {
+            "label": "Accepts Allowance",
+            "helper": "If you accept the allowance, check this box",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "abattement"
+          },
+          "cmb": {
+            "label": "Cmb",
+            "helper": "",
+            "type": "photo",
+            "required": true,
+            "placeholder": "",
+            "id": "cmb",
+            "limit": 1,
+            "accept": "image/jpg, image/jpeg, image/png,application/pdf",
+            "multiple": false
+          }
+        }
+      },
+      "stepThree": {
+        "confectionHaut": {
+          "label": "Upper Clothing Size",
           "helper": "",
-          "type": "photo",
+          "type": "select",
           "required": true,
           "placeholder": "",
-          "id": "cmb",
-          "limit": 1,
-          "accept": "image/jpg, image/jpeg, image/png,application/pdf",
-          "multiple": false
-        }
-      }
-    },
-    "stepThree": {
-      "confectionHaut": {
-        "label": "Upper Clothing Size",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "confectionHaut",
-        "options": {
-          "2ans": "2ans",
-          "3ans": "3ans",
-          "4ans": "4ans",
-          "5ans": "5ans",
-          "6ans": "6ans",
-          "7ans": "7ans",
-          "8ans": "8ans",
-          "9ans": "9ans",
-          "10ans": "10ans",
-          "12ans": "12ans",
-          "13ans": "13ans",
-          "14ans": "14ans",
-          "15ans": "15ans",
-          "16ans": "16ans",
-          "30": 30,
-          "32": 32,
-          "34": 34,
-          "36": 36,
-          "38": 38,
-          "40": 40,
-          "42": 42,
-          "44": 44,
-          "46": 46,
-          "48": 48,
-          "50": 50,
-          "52": 52,
-          "54": 54,
-          "56": 56,
-          "58": 58,
-          "60": 60,
-          "62": 62
+          "id": "confectionHaut",
+          "options": {
+            "2ans": "2ans",
+            "3ans": "3ans",
+            "4ans": "4ans",
+            "5ans": "5ans",
+            "6ans": "6ans",
+            "7ans": "7ans",
+            "8ans": "8ans",
+            "9ans": "9ans",
+            "10ans": "10ans",
+            "12ans": "12ans",
+            "13ans": "13ans",
+            "14ans": "14ans",
+            "15ans": "15ans",
+            "16ans": "16ans",
+            "30": 30,
+            "32": 32,
+            "34": 34,
+            "36": 36,
+            "38": 38,
+            "40": 40,
+            "42": 42,
+            "44": 44,
+            "46": 46,
+            "48": 48,
+            "50": 50,
+            "52": 52,
+            "54": 54,
+            "56": 56,
+            "58": 58,
+            "60": 60,
+            "62": 62
+          }
+        },
+        "confectionBas": {
+          "label": "Lower Clothing Size",
+          "helper": "",
+          "type": "select",
+          "required": true,
+          "placeholder": "",
+          "id": "confectionBas",
+          "options": {
+            "2ans": "2years",
+            "3ans": "3years",
+            "4ans": "4years",
+            "5ans": "5years",
+            "6ans": "6years",
+            "7ans": "7years",
+            "8ans": "8years",
+            "9ans": "9years",
+            "10ans": "10years",
+            "12ans": "12years",
+            "13ans": "13years",
+            "14ans": "14years",
+            "15ans": "15years",
+            "16ans": "16years",
+            "30": 30,
+            "32": 32,
+            "34": 34,
+            "36": 36,
+            "38": 38,
+            "40": 40,
+            "42": 42,
+            "44": 44,
+            "46": 46,
+            "48": 48,
+            "50": 50,
+            "52": 52,
+            "54": 54,
+            "56": 56,
+            "58": 58,
+            "60": 60,
+            "62": 62
+          }
+        },
+        "cheveux": {
+          "label": "Hair Color",
+          "helper": "",
+          "type": "select",
+          "required": true,
+          "placeholder": "",
+          "id": "cheveux",
+          "options": {
+            "Roux": "Red-haired",
+            "Blond": "Blond",
+            "Blond foncé": "Dark blond",
+            "Blond clair": "Light blond",
+            "Blond platine": "Platinum blonde",
+            "Blond vénitien": "Venetian blond",
+            "Marron": "Brown",
+            "Marron clair": "Light brown",
+            "Marron foncé": "Dark brown",
+            "Noir": "Black",
+            "Rouge": "Red",
+            "Blanc": "White",
+            "Chauve": "Bald",
+            "Gris": "Grey"
+          }
+        },
+        "yeux": {
+          "label": "Eyes Color",
+          "helper": "",
+          "type": "select",
+          "required": true,
+          "placeholder": "",
+          "id": "yeux",
+          "options": {
+            "Bleu": "Blue",
+            "Bleu Vert": "Blue Green",
+            "Bleu Gris": "Grey Blue",
+            "Gris": "Grey",
+            "Marron": "Brown",
+            "Noir": "Black",
+            "Noisette": "Hazelnut",
+            "Vert": "Green",
+            "Vert Gris": "Grey Green",
+            "Vert Marron": "Brown Green",
+            "Vairons": "Vairons"
+          }
+        },
+        "taille": {
+          "label": "Height",
+          "helper": "",
+          "type": "select",
+          "required": true,
+          "placeholder": "",
+          "id": "taille",
+          "options": {
+            "100 cm - 3'3.4": "100 cm - 3'3.4",
+            "101 cm - 3'3.8": "101 cm - 3'3.8",
+            "102 cm - 3'4.2": "102 cm - 3'4.2",
+            "103 cm - 3'4.6": "103 cm - 3'4.6",
+            "104 cm - 3'5": "104 cm - 3'5",
+            "105 cm - 3'5.4": "105 cm - 3'5.4",
+            "106 cm - 3'5.8": "106 cm - 3'5.8",
+            "107 cm - 3'6.2": "107 cm - 3'6.2",
+            "108 cm - 3'6.6": "108 cm - 3'6.6",
+            "109 cm - 3'7": "109 cm - 3'7",
+            "110 cm - 3'7.4": "110 cm - 3'7.4",
+            "111 cm - 3'7.8": "111 cm - 3'7.8",
+            "112 cm - 3'8.2": "112 cm - 3'8.2",
+            "113 cm - 3'8.6": "113 cm - 3'8.6",
+            "114 cm - 3'9": "114 cm - 3'9",
+            "115 cm - 3'9.4": "115 cm - 3'9.4",
+            "116 cm - 3'9.8": "116 cm - 3'9.8",
+            "117 cm - 3'10.2": "117 cm - 3'10.2",
+            "118 cm - 3'10.6": "118 cm - 3'10.6",
+            "119 cm - 3'11": "119 cm - 3'11",
+            "120 cm - 3'11.4": "120 cm - 3'11.4",
+            "121 cm - 4'0": "121 cm - 4'0",
+            "122 cm - 4'0.4": "122 cm - 4'0.4",
+            "123 cm - 4'0.8": "123 cm - 4'0.8",
+            "124 cm - 4'1.2": "124 cm - 4'1.2",
+            "125 cm - 4'1": "125 cm - 4'1",
+            "126 cm - 4'1.4": "126 cm - 4'1.4",
+            "127 cm - 4'1.8": "127 cm - 4'1.8",
+            "128 cm - 4'2.2": "128 cm - 4'2.2",
+            "129 cm - 4'2.6": "129 cm - 4'2.6",
+            "130 cm - 4'3": "130 cm - 4'3",
+            "131 cm - 4'3.4": "131 cm - 4'3.4",
+            "132 cm - 4'3.8": "132 cm - 4'3.8",
+            "133 cm - 4'4.2": "133 cm - 4'4.2",
+            "134 cm - 4'4.6": "134 cm - 4'4.6",
+            "135 cm - 4'5": "135 cm - 4'5",
+            "136 cm - 4'5.4": "136 cm - 4'5.4",
+            "137 cm - 4'5.8": "137 cm - 4'5.8",
+            "138 cm - 4'6.2": "138 cm - 4'6.2",
+            "139 cm - 4'6.6": "139 cm - 4'6.6",
+            "140 cm - 4'7": "140 cm - 4'7",
+            "141 cm - 4'7.4": "141 cm - 4'7.4",
+            "142 cm - 4'7.8": "142 cm - 4'7.8",
+            "143 cm - 4'8.2": "143 cm - 4'8.2",
+            "144 cm - 4'8.6": "144 cm - 4'8.6",
+            "145 cm - 4'9": "145 cm - 4'9",
+            "146 cm - 4'9.4": "146 cm - 4'9.4",
+            "147 cm - 4'9.8": "147 cm - 4'9.8",
+            "148 cm - 4'10.2": "148 cm - 4'10.2",
+            "149 cm - 4'10.6": "149 cm - 4'10.6",
+            "150 cm - 4'11": "150 cm - 4'11",
+            "151 cm - 4'11.4": "151 cm - 4'11.4",
+            "152 cm - 4'11.8": "152 cm - 4'11.8",
+            "153 cm - 5'0.2": "153 cm - 5'0.2",
+            "154 cm - 5'0.6": "154 cm - 5'0.6",
+            "155 cm - 5'1": "155 cm - 5'1",
+            "156 cm - 5'1.4": "156 cm - 5'1.4",
+            "157 cm - 5'1.8": "157 cm - 5'1.8",
+            "158 cm - 5'2.2": "158 cm - 5'2.2",
+            "159 cm - 5'2.6": "159 cm - 5'2.6",
+            "160 cm - 5'3": "160 cm - 5'3",
+            "161 cm - 5'3.4": "161 cm - 5'3.4",
+            "162 cm - 5'3.8": "162 cm - 5'3.8",
+            "163 cm - 5'4.2": "163 cm - 5'4.2",
+            "164 cm - 5'4.6": "164 cm - 5'4.6",
+            "165 cm - 5'5": "165 cm - 5'5",
+            "166 cm - 5'5.4": "166 cm - 5'5.4",
+            "167 cm - 5'5.8": "167 cm - 5'5.8",
+            "168 cm - 5'6.2": "168 cm - 5'6.2",
+            "169 cm - 5'6.6": "169 cm - 5'6.6",
+            "170 cm - 5'7": "170 cm - 5'7",
+            "171 cm - 5'7.4": "171 cm - 5'7.4",
+            "172 cm - 5'7.8": "172 cm - 5'7.8",
+            "173 cm - 5'8.2": "173 cm - 5'8.2",
+            "174 cm - 5'8.6": "174 cm - 5'8.6",
+            "175 cm - 5'9": "175 cm - 5'9",
+            "176 cm - 5'9.4": "176 cm - 5'9.4",
+            "177 cm - 5'9.8": "177 cm - 5'9.8",
+            "178 cm - 5'10.2": "178 cm - 5'10.2",
+            "179 cm - 5'10.6": "179 cm - 5'10.6",
+            "180 cm - 5'11": "180 cm - 5'11",
+            "181 cm - 5'11.4": "181 cm - 5'11.4",
+            "182 cm - 5'11.8": "182 cm - 5'11.8",
+            "183 cm - 6'0.2": "183 cm - 6'0.2",
+            "184 cm - 6'0.6": "184 cm - 6'0.6",
+            "185 cm - 6'1": "185 cm - 6'1",
+            "186 cm - 6'1.4": "186 cm - 6'1.4",
+            "187 cm - 6'1.8": "187 cm - 6'1.8",
+            "188 cm - 6'2.2": "188 cm - 6'2.2",
+            "189 cm - 6'2.6": "189 cm - 6'2.6",
+            "190 cm - 6'3": "190 cm - 6'3",
+            "191 cm - 6'3.4": "191 cm - 6'3.4",
+            "192 cm - 6'3.8": "192 cm - 6'3.8",
+            "193 cm - 6'4.2": "193 cm - 6'4.2",
+            "194 cm - 6'4.6": "194 cm - 6'4.6",
+            "195 cm - 6'5": "195 cm - 6'5",
+            "196 cm - 6'5.4": "196 cm - 6'5.4",
+            "197 cm - 6'5.8": "197 cm - 6'5.8",
+            "198 cm - 6'6.2": "198 cm - 6'6.2",
+            "199 cm - 6'6.6": "199 cm - 6'6.6",
+            "200 cm - 6'7": "200 cm - 6'7"
+          }
+        },
+        "chaussures": {
+          "label": "Shoe Size",
+          "helper": "",
+          "type": "select",
+          "required": true,
+          "placeholder": "",
+          "id": "chaussures",
+          "options": {
+            "25": 25,
+            "26": 26,
+            "27": 27,
+            "28": 28,
+            "29": 29,
+            "30": 30,
+            "31": 31,
+            "32": 32,
+            "33": 33,
+            "34": 34,
+            "35": 35,
+            "36": 36,
+            "37": 37,
+            "38": 38,
+            "39": 39,
+            "40": 40,
+            "41": 41,
+            "42": 42,
+            "43": 43,
+            "44": 44,
+            "45": 45,
+            "46": 46,
+            "47": 47,
+            "48": 48,
+            "49": 49
+          }
+        },
+        "origine": {
+          "label": "Type",
+          "helper": "",
+          "type": "select",
+          "required": true,
+          "placeholder": "",
+          "id": "origine",
+          "options": {
+            "ASIATIQUE": "ASIATIC",
+            "BLANC": "WHITE",
+            "NOIR": "BLACK",
+            "LATINO": "LATINO",
+            "METISSE": "MIXED RACE",
+            "MAGHREBIN": "NORTH AFRICAN"
+          }
         }
       },
-      "confectionBas": {
-        "label": "Lower Clothing Size",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "confectionBas",
-        "options": {
-          "2ans": "2years",
-          "3ans": "3years",
-          "4ans": "4years",
-          "5ans": "5years",
-          "6ans": "6years",
-          "7ans": "7years",
-          "8ans": "8years",
-          "9ans": "9years",
-          "10ans": "10years",
-          "12ans": "12years",
-          "13ans": "13years",
-          "14ans": "14years",
-          "15ans": "15years",
-          "16ans": "16years",
-          "30": 30,
-          "32": 32,
-          "34": 34,
-          "36": 36,
-          "38": 38,
-          "40": 40,
-          "42": 42,
-          "44": 44,
-          "46": 46,
-          "48": 48,
-          "50": 50,
-          "52": 52,
-          "54": 54,
-          "56": 56,
-          "58": 58,
-          "60": 60,
-          "62": 62
+      "stepFour": {
+        "default": {
+          "checkbox": {
+            "defile": {
+              "label": "Catwalk",
+              "helper": "",
+              "type": "checkbox",
+              "required": false,
+              "placeholder": "",
+              "id": "defile"
+            },
+            "danseClassique": {
+              "label": "Classical Dance",
+              "helper": "",
+              "type": "checkbox",
+              "required": false,
+              "placeholder": "",
+              "id": "danseClassique"
+            },
+            "danseContemporaine": {
+              "label": "Contemporary Dance",
+              "helper": "",
+              "type": "checkbox",
+              "required": false,
+              "placeholder": "",
+              "id": "danseContemporaine"
+            },
+            "skate": {
+              "label": "Skateboarding",
+              "helper": "",
+              "type": "checkbox",
+              "required": false,
+              "placeholder": "",
+              "id": "skate"
+            },
+            "sportif": {
+              "label": "Sporty",
+              "helper": "",
+              "type": "checkbox",
+              "required": false,
+              "placeholder": "",
+              "id": "sportif"
+            },
+            "hipHop": {
+              "label": "Hiphop",
+              "helper": "",
+              "type": "checkbox",
+              "required": false,
+              "placeholder": "",
+              "id": "hipHop"
+            },
+            "ski": {
+              "label": "Skiing",
+              "helper": "",
+              "type": "checkbox",
+              "required": false,
+              "placeholder": "",
+              "id": "ski"
+            }
+          },
+          "default": {
+            "experiencesTournage": {
+              "label": "specific experience on shoots or filming",
+              "helper": "ex: role or silhouette / film title / director, no need to specify figuration",
+              "type": "textarea",
+              "required": false,
+              "placeholder": "",
+              "id": "experiencesTournage"
+            },
+            "autres": {
+              "label": "Others",
+              "helper": "",
+              "type": "textarea",
+              "required": false,
+              "placeholder": "",
+              "id": "autres"
+            },
+            "instagram": {
+              "label": "INSTAGRAM ACCOUNT LINK",
+              "helper": "",
+              "type": "text",
+              "required": false,
+              "placeholder": "",
+              "id": "instagram"
+            },
+            "agence": {
+              "label": "In Agency",
+              "helper": "If you are part of an agency, check this box",
+              "type": "checkbox",
+              "required": false,
+              "placeholder": "",
+              "id": "agence"
+            }
+          }
+        },
+        "content": {
+          "agenceInfos": {
+            "label": "Agency Informations",
+            "helper": "please specify agency name + agent name + contact",
+            "type": "textarea",
+            "required": false,
+            "placeholder": "Agency Graziani / JohnDoe / example@gmail.com",
+            "id": "agenceInfos"
+          }
         }
       },
-      "cheveux": {
-        "label": "Hair Color",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "cheveux",
-        "options": {
-          "Roux": "Red-haired",
-          "Blond": "Blond",
-          "Blond foncé": "Dark blond",
-          "Blond clair": "Light blond",
-          "Blond platine": "Platinum blonde",
-          "Blond vénitien": "Venetian blond",
-          "Marron": "Brown",
-          "Marron clair": "Light brown",
-          "Marron foncé": "Dark brown",
-          "Noir": "Black",
-          "Rouge": "Red",
-          "Blanc": "White",
-          "Chauve": "Bald",
-          "Gris": "Grey"
-        }
-      },
-      "yeux": {
-        "label": "Eyes Color",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "yeux",
-        "options": {
-          "Bleu": "Blue",
-          "Bleu Vert": "Blue Green",
-          "Bleu Gris": "Grey Blue",
-          "Gris": "Grey",
-          "Marron": "Brown",
-          "Noir": "Black",
-          "Noisette": "Hazelnut",
-          "Vert": "Green",
-          "Vert Gris": "Grey Green",
-          "Vert Marron": "Brown Green",
-          "Vairons": "Vairons"
-        }
-      },
-      "taille": {
-        "label": "Height",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "taille",
-        "options": {
-          "100 cm - 3'3.4": "100 cm - 3'3.4",
-          "101 cm - 3'3.8": "101 cm - 3'3.8",
-          "102 cm - 3'4.2": "102 cm - 3'4.2",
-          "103 cm - 3'4.6": "103 cm - 3'4.6",
-          "104 cm - 3'5": "104 cm - 3'5",
-          "105 cm - 3'5.4": "105 cm - 3'5.4",
-          "106 cm - 3'5.8": "106 cm - 3'5.8",
-          "107 cm - 3'6.2": "107 cm - 3'6.2",
-          "108 cm - 3'6.6": "108 cm - 3'6.6",
-          "109 cm - 3'7": "109 cm - 3'7",
-          "110 cm - 3'7.4": "110 cm - 3'7.4",
-          "111 cm - 3'7.8": "111 cm - 3'7.8",
-          "112 cm - 3'8.2": "112 cm - 3'8.2",
-          "113 cm - 3'8.6": "113 cm - 3'8.6",
-          "114 cm - 3'9": "114 cm - 3'9",
-          "115 cm - 3'9.4": "115 cm - 3'9.4",
-          "116 cm - 3'9.8": "116 cm - 3'9.8",
-          "117 cm - 3'10.2": "117 cm - 3'10.2",
-          "118 cm - 3'10.6": "118 cm - 3'10.6",
-          "119 cm - 3'11": "119 cm - 3'11",
-          "120 cm - 3'11.4": "120 cm - 3'11.4",
-          "121 cm - 4'0": "121 cm - 4'0",
-          "122 cm - 4'0.4": "122 cm - 4'0.4",
-          "123 cm - 4'0.8": "123 cm - 4'0.8",
-          "124 cm - 4'1.2": "124 cm - 4'1.2",
-          "125 cm - 4'1": "125 cm - 4'1",
-          "126 cm - 4'1.4": "126 cm - 4'1.4",
-          "127 cm - 4'1.8": "127 cm - 4'1.8",
-          "128 cm - 4'2.2": "128 cm - 4'2.2",
-          "129 cm - 4'2.6": "129 cm - 4'2.6",
-          "130 cm - 4'3": "130 cm - 4'3",
-          "131 cm - 4'3.4": "131 cm - 4'3.4",
-          "132 cm - 4'3.8": "132 cm - 4'3.8",
-          "133 cm - 4'4.2": "133 cm - 4'4.2",
-          "134 cm - 4'4.6": "134 cm - 4'4.6",
-          "135 cm - 4'5": "135 cm - 4'5",
-          "136 cm - 4'5.4": "136 cm - 4'5.4",
-          "137 cm - 4'5.8": "137 cm - 4'5.8",
-          "138 cm - 4'6.2": "138 cm - 4'6.2",
-          "139 cm - 4'6.6": "139 cm - 4'6.6",
-          "140 cm - 4'7": "140 cm - 4'7",
-          "141 cm - 4'7.4": "141 cm - 4'7.4",
-          "142 cm - 4'7.8": "142 cm - 4'7.8",
-          "143 cm - 4'8.2": "143 cm - 4'8.2",
-          "144 cm - 4'8.6": "144 cm - 4'8.6",
-          "145 cm - 4'9": "145 cm - 4'9",
-          "146 cm - 4'9.4": "146 cm - 4'9.4",
-          "147 cm - 4'9.8": "147 cm - 4'9.8",
-          "148 cm - 4'10.2": "148 cm - 4'10.2",
-          "149 cm - 4'10.6": "149 cm - 4'10.6",
-          "150 cm - 4'11": "150 cm - 4'11",
-          "151 cm - 4'11.4": "151 cm - 4'11.4",
-          "152 cm - 4'11.8": "152 cm - 4'11.8",
-          "153 cm - 5'0.2": "153 cm - 5'0.2",
-          "154 cm - 5'0.6": "154 cm - 5'0.6",
-          "155 cm - 5'1": "155 cm - 5'1",
-          "156 cm - 5'1.4": "156 cm - 5'1.4",
-          "157 cm - 5'1.8": "157 cm - 5'1.8",
-          "158 cm - 5'2.2": "158 cm - 5'2.2",
-          "159 cm - 5'2.6": "159 cm - 5'2.6",
-          "160 cm - 5'3": "160 cm - 5'3",
-          "161 cm - 5'3.4": "161 cm - 5'3.4",
-          "162 cm - 5'3.8": "162 cm - 5'3.8",
-          "163 cm - 5'4.2": "163 cm - 5'4.2",
-          "164 cm - 5'4.6": "164 cm - 5'4.6",
-          "165 cm - 5'5": "165 cm - 5'5",
-          "166 cm - 5'5.4": "166 cm - 5'5.4",
-          "167 cm - 5'5.8": "167 cm - 5'5.8",
-          "168 cm - 5'6.2": "168 cm - 5'6.2",
-          "169 cm - 5'6.6": "169 cm - 5'6.6",
-          "170 cm - 5'7": "170 cm - 5'7",
-          "171 cm - 5'7.4": "171 cm - 5'7.4",
-          "172 cm - 5'7.8": "172 cm - 5'7.8",
-          "173 cm - 5'8.2": "173 cm - 5'8.2",
-          "174 cm - 5'8.6": "174 cm - 5'8.6",
-          "175 cm - 5'9": "175 cm - 5'9",
-          "176 cm - 5'9.4": "176 cm - 5'9.4",
-          "177 cm - 5'9.8": "177 cm - 5'9.8",
-          "178 cm - 5'10.2": "178 cm - 5'10.2",
-          "179 cm - 5'10.6": "179 cm - 5'10.6",
-          "180 cm - 5'11": "180 cm - 5'11",
-          "181 cm - 5'11.4": "181 cm - 5'11.4",
-          "182 cm - 5'11.8": "182 cm - 5'11.8",
-          "183 cm - 6'0.2": "183 cm - 6'0.2",
-          "184 cm - 6'0.6": "184 cm - 6'0.6",
-          "185 cm - 6'1": "185 cm - 6'1",
-          "186 cm - 6'1.4": "186 cm - 6'1.4",
-          "187 cm - 6'1.8": "187 cm - 6'1.8",
-          "188 cm - 6'2.2": "188 cm - 6'2.2",
-          "189 cm - 6'2.6": "189 cm - 6'2.6",
-          "190 cm - 6'3": "190 cm - 6'3",
-          "191 cm - 6'3.4": "191 cm - 6'3.4",
-          "192 cm - 6'3.8": "192 cm - 6'3.8",
-          "193 cm - 6'4.2": "193 cm - 6'4.2",
-          "194 cm - 6'4.6": "194 cm - 6'4.6",
-          "195 cm - 6'5": "195 cm - 6'5",
-          "196 cm - 6'5.4": "196 cm - 6'5.4",
-          "197 cm - 6'5.8": "197 cm - 6'5.8",
-          "198 cm - 6'6.2": "198 cm - 6'6.2",
-          "199 cm - 6'6.6": "199 cm - 6'6.6",
-          "200 cm - 6'7": "200 cm - 6'7"
-        }
-      },
-      "chaussures": {
-        "label": "Shoe Size",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "chaussures",
-        "options": {
-          "25": 25,
-          "26": 26,
-          "27": 27,
-          "28": 28,
-          "29": 29,
-          "30": 30,
-          "31": 31,
-          "32": 32,
-          "33": 33,
-          "34": 34,
-          "35": 35,
-          "36": 36,
-          "37": 37,
-          "38": 38,
-          "39": 39,
-          "40": 40,
-          "41": 41,
-          "42": 42,
-          "43": 43,
-          "44": 44,
-          "45": 45,
-          "46": 46,
-          "47": 47,
-          "48": 48,
-          "49": 49
-        }
-      },
-      "origine": {
-        "label": "Type",
-        "helper": "",
-        "type": "select",
-        "required": true,
-        "placeholder": "",
-        "id": "origine",
-        "options": {
-          "ASIATIQUE": "ASIATIC",
-          "BLANC": "WHITE",
-          "NOIR": "BLACK",
-          "LATINO": "LATINO",
-          "METISSE": "MIXED RACE",
-          "MAGHREBIN": "NORTH AFRICAN"
-        }
-      }
-    },
-    "stepFour": {
-      "default": {
+      "stepFive": {
         "checkbox": {
-          "defile": {
-            "label": "Catwalk",
+          "acteur": {
+            "label": "Actor",
             "helper": "",
             "type": "checkbox",
             "required": false,
             "placeholder": "",
-            "id": "defile"
+            "id": "acteur"
           },
-          "danseClassique": {
-            "label": "Classical Dance",
+          "modele": {
+            "label": "MANNEQUIN",
             "helper": "",
             "type": "checkbox",
             "required": false,
             "placeholder": "",
-            "id": "danseClassique"
+            "id": "modele"
           },
-          "danseContemporaine": {
-            "label": "Contemporary Dance",
+          "figuration": {
+            "label": "FIGURATION ACCEPTED",
             "helper": "",
             "type": "checkbox",
-            "required": false,
+            "required": true,
             "placeholder": "",
-            "id": "danseContemporaine"
+            "id": "figuration"
           },
-          "skate": {
-            "label": "Skateboarding",
+          "silhouette": {
+            "label": "SILHOUETTE ACCEPTED",
             "helper": "",
             "type": "checkbox",
             "required": false,
             "placeholder": "",
-            "id": "skate"
-          },
-          "sportif": {
-            "label": "Sporty",
-            "helper": "",
-            "type": "checkbox",
-            "required": false,
-            "placeholder": "",
-            "id": "sportif"
-          },
-          "hipHop": {
-            "label": "Hiphop",
-            "helper": "",
-            "type": "checkbox",
-            "required": false,
-            "placeholder": "",
-            "id": "hipHop"
-          },
-          "ski": {
-            "label": "Skiing",
-            "helper": "",
-            "type": "checkbox",
-            "required": false,
-            "placeholder": "",
-            "id": "ski"
+            "id": "silhouette"
           }
         },
         "default": {
-          "experiencesTournage": {
-            "label": "specific experience on shoots or filming",
-            "helper": "ex: role or silhouette / film title / director, no need to specify figuration",
-            "type": "textarea",
-            "required": false,
+          "photodepresentation": {
+            "label": "Presentation Photo",
+            "helper": "This photo is the one that will be displayed on our website. Rename your image with \"N. Firstname\"",
+            "type": "photo",
+            "required": true,
             "placeholder": "",
-            "id": "experiencesTournage"
+            "id": "photodepresentation",
+            "accept": "image/jpg, image/jpeg, image/png",
+            "limit": 1,
+            "multiple": false
           },
-          "autres": {
-            "label": "Others",
-            "helper": "",
-            "type": "textarea",
-            "required": false,
+          "autresphotos": {
+            "label": "YOUR BEST PHOTOS",
+            "helper": "respect a vertical format ONLY. 15 photos max of GOOD QUALITY, including one portrait and one full-length photo. Make sure they are all in the right direction. All NAMED: first letter of surname and first name.",
+            "type": "photo",
+            "required": true,
             "placeholder": "",
-            "id": "autres"
-          },
-          "instagram": {
-            "label": "INSTAGRAM ACCOUNT LINK",
-            "helper": "",
-            "type": "text",
-            "required": false,
-            "placeholder": "",
-            "id": "instagram"
-          },
-          "agence": {
-            "label": "In Agency",
-            "helper": "If you are part of an agency, check this box",
-            "type": "checkbox",
-            "required": false,
-            "placeholder": "",
-            "id": "agence"
+            "id": "autresphotos",
+            "accept": "image/jpg, image/jpeg, image/png",
+            "limit": 15,
+            "multiple": true
           }
         }
       },
-      "content": {
-        "agenceInfos": {
-          "label": "Agency Informations",
-          "helper": "please specify agency name + agent name + contact",
-          "type": "textarea",
-          "required": false,
-          "placeholder": "Agency Graziani / JohnDoe / example@gmail.com",
-          "id": "agenceInfos"
-        }
-      }
-    },
-    "stepFive": {
-      "checkbox": {
-        "acteur": {
-          "label": "Actor",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "acteur"
+      "stepSix": {
+        "default": {
+          "videodepresentation": {
+            "label": "Presentation Video",
+            "helper": "Highly recommended. Video of 1min max, made with a phone, in which you introduce yourself. If you don't have time to do it right away, please add it to your account later",
+            "type": "photo",
+            "required": true,
+            "placeholder": "",
+            "id": "videodepresentation",
+            "limit": 1,
+            "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
+            "multiple": false
+          },
+          "bandeDemo": {
+            "label": "Demo Reel",
+            "helper": "Maximum 3 videos. Please rename the video(s) with \"N. First name\".",
+            "type": "photo",
+            "required": true,
+            "placeholder": "",
+            "id": "bandeDemo",
+            "limit": 3,
+            "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
+            "multiple": true
+          }
         },
-        "modele": {
-          "label": "MANNEQUIN",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "modele"
-        },
-        "figuration": {
-          "label": "FIGURATION ACCEPTED",
-          "helper": "",
-          "type": "checkbox",
-          "required": true,
-          "placeholder": "",
-          "id": "figuration"
-        },
-        "silhouette": {
-          "label": "SILHOUETTE ACCEPTED",
-          "helper": "",
-          "type": "checkbox",
-          "required": false,
-          "placeholder": "",
-          "id": "silhouette"
-        }
-      },
-      "default": {
-        "photodepresentation": {
-          "label": "Presentation Photo",
-          "helper": "This photo is the one that will be displayed on our website. Rename your image with \"N. Firstname\"",
-          "type": "photo",
-          "required": true,
-          "placeholder": "",
-          "id": "photodepresentation",
-          "accept": "image/jpg, image/jpeg, image/png",
-          "limit": 1,
-          "multiple": false
-        },
-        "autresphotos": {
-          "label": "YOUR BEST PHOTOS",
-          "helper": "respect a vertical format ONLY. 15 photos max of GOOD QUALITY, including one portrait and one full-length photo. Make sure they are all in the right direction. All NAMED: first letter of surname and first name.",
-          "type": "photo",
-          "required": true,
-          "placeholder": "",
-          "id": "autresphotos",
-          "accept": "image/jpg, image/jpeg, image/png",
-          "limit": 15,
-          "multiple": true
-        }
-      }
-    },
-    "stepSix": {
-      "default": {
-        "videodepresentation": {
-          "label": "Presentation Video",
-          "helper": "Highly recommended. Video of 1min max, made with a phone, in which you introduce yourself. If you don't have time to do it right away, please add it to your account later",
-          "type": "photo",
-          "required": true,
-          "placeholder": "",
-          "id": "videodepresentation",
-          "limit": 1,
-          "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
-          "multiple": false
-        },
-        "bandeDemo": {
-          "label": "Demo Reel",
-          "helper": "Maximum 3 videos. Please rename the video(s) with \"N. First name\".",
-          "type": "photo",
-          "required": true,
-          "placeholder": "",
-          "id": "bandeDemo",
-          "limit": 3,
-          "accept": "video/mpeg,video/mp4,video/quicktime,video/x-ms-wmv,video/x-msvideo,video/flv",
-          "multiple": true
-        }
-      },
-      "content": {
-        "newPhotos": {
-          "label": "Add your new photos",
-          "helper": "DO NOT add the same photos as those you added when you registered!. 15 photos max ",
-          "type": "photo",
-          "required": false,
-          "placeholder": "",
-          "id": "newPhotos",
-          "accept": "image/jpg, image/jpeg, image/png",
-          "limit": 15,
-          "multiple": true
+        "content": {
+          "newPhotos": {
+            "label": "Add your new photos",
+            "helper": "DO NOT add the same photos as those you added when you registered!. 15 photos max ",
+            "type": "photo",
+            "required": false,
+            "placeholder": "",
+            "id": "newPhotos",
+            "accept": "image/jpg, image/jpeg, image/png",
+            "limit": 15,
+            "multiple": true
+          }
         }
       }
     }

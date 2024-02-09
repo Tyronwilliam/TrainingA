@@ -70,7 +70,52 @@
         "label": "ENFANT",
         "link": "choix/genre/Kids"
       }
-    ]
+    ],
+    "page": {
+      "role": {
+        "Tous": "Tous",
+        "Acteur": "Acteur",
+        "Modèle": "Modèle",
+        "Figurant": "Extra"
+      },
+      "filter": {
+        "age": {
+          "title": { "Age": "Age" },
+          "value": [">16", "18/24", "25/30", "30/40", "40/50", "50/60", "60+"]
+        },
+        "taille": {
+          "title": { "Taille": "Taille" },
+          "value": [">160", "160/170", "170/180", "+180"]
+        },
+        "skills": {
+          "title": { "Compétence": "Compétence" },
+          "value": {
+            "Defile_de_mode": "Défilé",
+            "Danse_Classique": "Danse Classique",
+            "Danse_Contemporaine": "Danse Contemporaine",
+            "HipHop": "HipHop",
+            "Sportif": "Sportif",
+            "Skate": "Skate",
+            "Ski": "Ski"
+          }
+        },
+        "origine": {
+          "title": { "Type": "Type" },
+          "value": {
+            "ASIATIQUE": "ASIATIQUE",
+            "BLANC": "BLANC",
+            "NOIR": "NOIR",
+            "LATINO": "LATINO",
+            "MAGHREBIN": "MAGHREBIN",
+            "METISSE": "METISSE"
+          }
+        },
+
+        "unique": {
+          "title": { "Unique": "Unique" }
+        }
+      }
+    }
   },
   "cta": {
     "formEvent": {

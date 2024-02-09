@@ -27,7 +27,7 @@ const ChoixPage = async ({
             resourceName="linkItem"
             itemComponent={LinkItemComponent}
             liStyle="text-2xl text-center md:text-3xl uppercase"
-            gap="gap-10 md:gap-24"
+            gap="gap-10 md:gap-28"
           />
         </section>
       </main>

@@ -1,10 +1,60 @@
 "use server";
-export async function getCandidat(gender: string, pageNumber: number) {
+
+import {
+  generateAgeFilter,
+  generateFilterQuery,
+  generateTailleFilter,
+  generateTypeFilter,
+} from "./function";
+
+export async function getCandidat(
+  gender: string,
+  length: number,
+  competence?: string,
+  age?: string,
+  taille?: string,
+  type?: string,
+  unique?: string,
+  role?: string
+) {
   try {
-    const pagin = pageNumber
-      ? `&pagination[page]=${pageNumber}`
-      : `&pagination[page]=1`;
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/candidats?filters[Sexe][$eq]=${gender}&filters[valide][$eq]=true[populate][Physionomie]=*&[populate][Role_Candidat][populate][Competence]=*&[populate][Photo_de_presentation]=*&[populate][Portfolio][populate][Portfolio]=*&sort[0]=Prenom:asc${pagin}&pagination[pageSize]=2`;
+    const start = `&pagination[start]=${length}`;
+    let filters = ``;
+    //OK
+    if (competence !== undefined) {
+      let encoded;
+      if (competence.includes(" ")) {
+        encoded = encodeURIComponent(competence.replace(/ /g, "_"));
+      } else {
+        encoded = competence;
+      }
+      filters += generateFilterQuery(encoded);
+    }
+    //OK
+    if (age !== undefined) {
+      const ageValues = age.split(",");
+      filters += generateAgeFilter(ageValues);
+    }
+    //PAS OK
+    if (taille !== undefined) {
+      const tailleValues = taille.split(",");
+      filters += generateTailleFilter(tailleValues);
+    }
+    // OK
+    if (type !== undefined) {
+      const typeValue = type.split(",");
+      filters += generateTypeFilter(typeValue);
+    }
+    // OK
+    if (role !== undefined) {
+      filters += `&filters[Role_Candidat][${role}][$eq]=true`;
+    }
+    // OK
+    if (unique !== undefined) {
+      filters += `&filters[Role_Candidat][Unique][$eq]=true`;
+    }
+
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/candidats?filters[Sexe][$eq]=${gender}&filters[valide][$eq]=true[populate][Physionomie]=*&[populate][Role_Candidat][populate][Competence]=*&[populate][Photo_de_presentation]=*&[populate][Portfolio][populate][Portfolio]=*&sort[0]=Prenom:asc${start}&pagination[limit]=2`;
     const response = await fetch(url, { next: { revalidate: 0 } });
     if (!response.ok) {
       // This will activate the closest `error.js` Error Boundary

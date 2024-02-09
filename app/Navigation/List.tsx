@@ -12,7 +12,7 @@ export default function List({
 }: ListProps) {
   return (
     <ul
-      className={`flex items-center justify-center flex-col  mb-4 md:flex-row  md:gap-9 md:justify-normal md:mb-0 ${gap}`}
+      className={`flex items-center justify-center flex-col  mb-4 md:flex-row   md:justify-normal md:mb-0 ${gap}`}
     >
       {items.map((item, i: number) => {
         const itemProps = {

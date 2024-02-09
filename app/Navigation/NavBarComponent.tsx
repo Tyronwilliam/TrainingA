@@ -46,7 +46,7 @@ export function NavBarComponent({ dictionary, classStyles, lang }: Props) {
         resourceName="linkItem"
         itemComponent={LinkItemComponent}
         liStyle="text-lg text-center md:text-xl uppercase"
-        gap="gap-2"
+        gap="gap-2 md:gap-9"
       />
     </nav>
   );
