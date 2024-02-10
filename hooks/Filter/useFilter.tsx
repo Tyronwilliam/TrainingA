@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
-import useCustomRouter from "../Basic/useCustomRouter";
+import { getCandidat } from "@/app/[lang]/choix/genre/[gender]/action";
 import {
   filterParams,
   handleQuery,
   handleQueryTaille,
 } from "@/app/[lang]/choix/genre/[gender]/function";
-import { getCandidat } from "@/app/[lang]/choix/genre/[gender]/action";
+import { useEffect, useState } from "react";
+import useCustomRouter from "../Basic/useCustomRouter";
 interface PhysioState {
   Age: string[]; // Change 'any' to the actual type of your Age array elements
-  Taille: string[]; // Change 'any' to the actual type of your Taille array elements
+  Taille: string; // Change 'any' to the actual type of your Taille array elements
   Type: string[]; // Change 'any' to the actual type of your Type array elements
-  Compétence: string[]; // Change 'any' to the actual type of your Compétence array elements
+  Compétence: string[];
+  Unique: boolean; // Change 'any' to the actual type of your Compétence array elements
 }
 const useFilter = (talents: any, metaInitial: any) => {
   const { router, pathname, searchParams } = useCustomRouter();
@@ -22,9 +23,10 @@ const useFilter = (talents: any, metaInitial: any) => {
   const [meta, setMeta] = useState(metaInitial);
   const [valuePhysio, setValuePhysio] = useState<PhysioState>({
     Age: [],
-    Taille: [],
+    Taille: "",
     Type: [],
     Compétence: [],
+    Unique: true,
   });
   const compétence = searchParams.get("Compétence");
   const age = searchParams.get("Age");
@@ -43,7 +45,9 @@ const useFilter = (talents: any, metaInitial: any) => {
   useEffect(() => {
     handleRole(role);
   }, [role]);
-
+  useEffect(() => {
+    console.log(valuePhysio);
+  }, [valuePhysio]);
   ////////////////////
   const handleRole = (role: string | null) => {
     if (role === null) {
@@ -100,10 +104,6 @@ const useFilter = (talents: any, metaInitial: any) => {
       //@ts-ignore
       valuePhysio[currentList]?.includes(value)
     ) {
-      // Vérifie si la valeur est déjà présente dans subSelected
-      //@ts-ignore
-      //  Construit le lienHref sans l'item dans l'URL
-
       const updatedQueryString = newQueryString
         .toString()
         .replace(`${key}=${value}`, "");
@@ -114,6 +114,39 @@ const useFilter = (talents: any, metaInitial: any) => {
       const linkHref = `${pathname}?${newQueryString}`;
       router.push(linkHref);
     }
+    setValuePhysio((prevValue: PhysioState) => {
+      //@ts-ignore
+      const existingValues = prevValue[key] ;
+
+      let updatedValues;
+
+      if (typeof existingValues === "string") {
+        updatedValues = value;
+      } else if (typeof existingValues === "boolean") {
+        updatedValues = !existingValues;
+      } else if (Array.isArray(existingValues)) {
+        if (existingValues.includes(value)) {
+          updatedValues = [];
+        } else {
+          if (existingValues.length < 2) {
+            updatedValues = [...existingValues, value];
+          } else {
+            updatedValues = [existingValues[0], value];
+          }
+        }
+      } else {
+        // handle other types if needed
+        updatedValues = existingValues;
+      }
+
+      return {
+        ...prevValue,
+        [key]: updatedValues,
+      };
+    });
+
+    // Parcourez les clés du nouvel objet et ajoutez les valeurs correspondantes aux tableaux
+
     ////////////////
     // const isSelected = currentPhysio.includes(arg);
     // if (isSelected) {
@@ -211,6 +244,8 @@ const useFilter = (talents: any, metaInitial: any) => {
     setCurrentRole,
     candidat,
     setCandidat,
+    router,
+    pathname,
   };
 };
 

@@ -46,6 +46,7 @@ const GenrePage = async ({
           talents={talents?.data}
           metaInitial={talents?.meta?.pagination?.total}
           dictionary={dictionary}
+          gender={params?.gender}
         />
       </main>
     </>

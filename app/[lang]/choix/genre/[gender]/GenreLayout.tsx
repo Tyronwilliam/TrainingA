@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getCandidat } from "./action";
 import InfiniteScroll from "react-infinite-scroll-component";
 import RoleFilter from "./RoleFilter";
@@ -8,16 +8,20 @@ import { Dictionary } from "@/types/dictionary";
 import { Physionomie } from "./Physionomie";
 import useCustomRouter from "@/hooks/Basic/useCustomRouter";
 import useFilter from "@/hooks/Filter/useFilter";
+import { usePathname } from "next/navigation";
 
 const GenreLayout = ({
   talents,
   metaInitial,
   dictionary,
+  gender,
 }: {
   talents: any;
   metaInitial: any;
   dictionary: Dictionary;
+  gender: string;
 }) => {
+  const pathname = usePathname();
   const {
     loadMoreUsers,
     handleFilter,
@@ -29,6 +33,7 @@ const GenreLayout = ({
     currentPhysio,
     currentRole,
     candidat,
+    router,
   } = useFilter(talents, metaInitial);
 
   return (
@@ -47,6 +52,9 @@ const GenreLayout = ({
           handlePhysioQuery={handlePhysioQuery}
           handleCurrentList={handleCurrentList}
           currentList={currentList}
+          router={router}
+          pathname={pathname}
+          gender={gender}
         />
       </section>
       {/* TALENT LAYOUT */}

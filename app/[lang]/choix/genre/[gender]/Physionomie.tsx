@@ -1,5 +1,6 @@
 import { Dictionary } from "@/types/dictionary";
 import classNames from "classnames";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import React from "react";
 import { BsCircle, BsFillCircleFill } from "react-icons/bs";
 import ListSubFilter from "./ListSubFilter";
@@ -10,12 +11,18 @@ export const Physionomie = ({
   currentList,
   handleCurrentList,
   handlePhysioQuery,
+  router,
+  gender,
+  pathname,
 }: {
   dictionary: Dictionary;
   currentPhysio: string[];
   handlePhysioQuery: (value: string | boolean, key: string) => void;
   currentList: string;
   handleCurrentList: (list: string) => void;
+  router: AppRouterInstance;
+  gender: string;
+  pathname: string;
 }) => {
   return (
     <div className="max-w-[450px] w-full flex justify-between items-center uppercase  text-xl ">
@@ -42,15 +49,17 @@ export const Physionomie = ({
               <BsFillCircleFill
                 className="w-6 h-6"
                 onClick={(e) => {
-                  e.stopPropagation();
-                  handlePhysioQuery(true, "Unique");
+                  console.log("NOT UNIQUE");
+                  router.push(`/fr/choix/genre/${gender}`);
                 }}
               />
             ) : (
               <BsCircle
                 className="w-6 h-6"
                 onClick={(e) => {
-                  handlePhysioQuery(true, "Unique");
+                  console.log(" UNIQUE", pathname);
+
+                  router.push(`${pathname}?Unique=true`);
                 }}
               />
             )}
