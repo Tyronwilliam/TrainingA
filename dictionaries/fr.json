@@ -26,6 +26,16 @@
     "lang": ["fr", "en"]
   },
   "home": {
+    "footer": {
+      "termcondition": "Termes & Conditions",
+      "google": {
+        "span1": "Ce site est protégé par reCAPTCHA et Google.",
+        "link1": "Politique de confidentialité",
+        "link2": "Conditions d'utilisation",
+        "span2": "appliquées.",
+        "and": "et"
+      }
+    },
     "bouton": [
       {
         "label": "INSCRIS-TOI",
@@ -75,7 +85,7 @@
       "role": {
         "Tous": "Tous",
         "Acteur": "Acteur",
-        "Modèle": "Modèle",
+        "Modele": "Modèle",
         "Figurant": "Extra"
       },
       "filter": {
@@ -147,16 +157,7 @@
       }
     }
   },
-  "footer": {
-    "termcondition": "Termes & Conditions",
-    "google": {
-      "span1": "Ce site est protégé par reCAPTCHA et Google.",
-      "link1": "Politique de confidentialité",
-      "link2": "Conditions d'utilisation",
-      "span2": "appliquées.",
-      "and": "et"
-    }
-  },
+
   "connexion": {
     "nav": [
       {

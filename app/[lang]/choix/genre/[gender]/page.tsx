@@ -8,12 +8,31 @@ import { getCandidat } from "./action";
 
 const GenrePage = async ({
   params,
+  searchParams,
 }: {
   params: { gender: string; lang: Locale };
+  searchParams: {
+    pagination: string;
+    Compétence: string;
+    Age: string;
+    Taille: string;
+    Type: string;
+    Unique: string;
+    Role: string;
+  };
 }) => {
   const dictionary = await getDictionary(params.lang);
-  const talents = await getCandidat(params?.gender, 0);
-  console.log(talents?.data, "hey");
+  const talents = await getCandidat({
+    gender: params?.gender,
+    properStart: 0,
+    competence: searchParams?.Compétence,
+    age: searchParams?.Age,
+    taille: searchParams?.Taille,
+    type: searchParams?.Type,
+    unique: searchParams?.Unique,
+    role: searchParams?.Role,
+  });
+
   return (
     <>
       <PreviousNavHistory />
@@ -25,7 +44,7 @@ const GenrePage = async ({
         />
         <GenreLayout
           talents={talents?.data}
-          meta={talents?.meta}
+          metaInitial={talents?.meta?.pagination?.total}
           dictionary={dictionary}
         />
       </main>

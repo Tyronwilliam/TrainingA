@@ -6,8 +6,6 @@ const useCustomRouter = () => {
   const searchParams = useSearchParams();
 
   const routerPushTo = (arg: string) => {
-    console.log("CLICK", arg);
-    console.log(pathname);
     if (arg === "") {
       return router.push(`${pathname}`);
     }

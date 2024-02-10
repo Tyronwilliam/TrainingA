@@ -1,58 +1,36 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getCandidat } from "./action";
 import InfiniteScroll from "react-infinite-scroll-component";
 import RoleFilter from "./RoleFilter";
 import { Dictionary } from "@/types/dictionary";
-import Physionomie from "./Physionomie";
+import { Physionomie } from "./Physionomie";
+import useCustomRouter from "@/hooks/Basic/useCustomRouter";
+import useFilter from "@/hooks/Filter/useFilter";
 
 const GenreLayout = ({
   talents,
-  meta,
+  metaInitial,
   dictionary,
 }: {
   talents: any;
-  meta: any;
+  metaInitial: any;
   dictionary: Dictionary;
 }) => {
-  const [candidat, setCandidat] = useState(talents);
-  const [age, setAge] = useState<number | null>(null);
-  const [currentRole, setCurrentRole] = useState<string>("Tous");
-  const [currentPhysio, setCurrentPhysio] = useState<string[]>([]);
-  const [currentList, setCurrentList] = useState("");
-  const loadMoreUsers = async () => {
-    const response = await getCandidat("Men", candidat?.length);
-    const data = response?.data;
-    setCandidat((prev: []) => [...prev, ...data]);
-  };
-  const handleRole = (role: string) => {
-    setCurrentRole(role);
-  };
-  const handleCurrentList = (arg: string) => {
-    if (currentList === arg) {
-      setCurrentList("");
-    } else {
-      setCurrentList(arg);
-    }
-  };
-  const handlePhysio = (arg: string) => {
-    const isSelected = currentPhysio.includes(arg);
-    console.log(arg, "CLICL SUIBITEM");
-    if (isSelected) {
-      const newArray = currentPhysio.filter(
-        (selectedItem) => selectedItem !== arg
-      );
-      console.log(newArray, "WHY ");
-      setCurrentPhysio(newArray);
-    } else {
-      if (currentPhysio.length < 2) {
-        const newArray = [...currentPhysio, arg];
-        setCurrentPhysio(newArray);
-      }
-    }
-  };
-  console.log(currentPhysio, "CURRENT PHYSIO");
+  const {
+    loadMoreUsers,
+    handleFilter,
+    handlePhysioQuery,
+    handleCurrentList,
+    handleRole,
+    meta,
+    currentList,
+    currentPhysio,
+    currentRole,
+    candidat,
+  } = useFilter(talents, metaInitial);
+
   return (
     <section>
       {/* Filtre */}
@@ -61,11 +39,12 @@ const GenreLayout = ({
           dictionary={dictionary}
           currentRole={currentRole}
           handleClick={handleRole}
+          handleFilter={handleFilter}
         />
         <Physionomie
           dictionary={dictionary}
           currentPhysio={currentPhysio}
-          handleClick={handlePhysio}
+          handlePhysioQuery={handlePhysioQuery}
           handleCurrentList={handleCurrentList}
           currentList={currentList}
         />
@@ -76,7 +55,7 @@ const GenreLayout = ({
           <InfiniteScroll
             dataLength={candidat.length}
             next={loadMoreUsers}
-            hasMore={meta?.pagination?.total > candidat.length}
+            hasMore={meta > candidat.length}
             loader={<h4>Loading...</h4>}
             endMessage={
               <p style={{ textAlign: "center" }}>

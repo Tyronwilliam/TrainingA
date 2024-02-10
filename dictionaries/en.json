@@ -26,6 +26,16 @@
     "lang": ["fr", "en"]
   },
   "home": {
+    "footer": {
+      "termcondition": "Terms & Conditions",
+      "google": {
+        "span1": "This site is protected by reCAPTCHA and Google.",
+        "link1": "Privacy Policy",
+        "link2": "Terms of Use",
+        "span2": "applied.",
+        "and": "and"
+      }
+    },
     "bouton": [
       {
         "label": "Sign Up",
@@ -75,7 +85,7 @@
       "role": {
         "Tous": "Tous",
         "Acteur": "Acteur",
-        "Modèle": "Modèle",
+        "Modele": "Modèle",
         "Figurant": "Extra"
       },
       "filter": {
@@ -144,16 +154,6 @@
         "errors": {
           "autresphotos": "3 photos max per add-on"
         }
-      }
-    },
-    "footer": {
-      "termcondition": "Terms & Conditions",
-      "google": {
-        "span1": "This site is protected by reCAPTCHA and Google.",
-        "link1": "Privacy Policy",
-        "link2": "Terms of Use",
-        "span2": "applied.",
-        "and": "and"
       }
     },
 

@@ -30,11 +30,10 @@ export default async function RootLayout({
     <html lang={params.lang} className={Roboto.className}>
       <body>
         {" "}
-        <GoogleProvider>
+        <GoogleProvider dictionary={dictionary} params={params}>
           <Provider session={session}>
             <PreferencesProvider>{children}</PreferencesProvider>
           </Provider>{" "}
-          <Footer dictionary={dictionary} />
         </GoogleProvider>
       </body>
     </html>

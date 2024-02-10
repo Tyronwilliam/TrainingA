@@ -7,18 +7,27 @@ import {
   generateTypeFilter,
 } from "./function";
 
-export async function getCandidat(
-  gender: string,
-  length: number,
-  competence?: string,
-  age?: string,
-  taille?: string,
-  type?: string,
-  unique?: string,
-  role?: string
-) {
+export async function getCandidat({
+  gender,
+  properStart,
+  competence,
+  age,
+  taille,
+  type,
+  unique,
+  role,
+}: {
+  gender: string;
+  properStart: number;
+  competence?: string;
+  age?: string;
+  taille?: string;
+  type?: string;
+  unique?: string;
+  role?: string;
+}) {
   try {
-    const start = `&pagination[start]=${length}`;
+    const start = `&pagination[start]=${properStart}`;
     let filters = ``;
     //OK
     if (competence !== undefined) {
@@ -54,7 +63,7 @@ export async function getCandidat(
       filters += `&filters[Role_Candidat][Unique][$eq]=true`;
     }
 
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/candidats?filters[Sexe][$eq]=${gender}&filters[valide][$eq]=true[populate][Physionomie]=*&[populate][Role_Candidat][populate][Competence]=*&[populate][Photo_de_presentation]=*&[populate][Portfolio][populate][Portfolio]=*&sort[0]=Prenom:asc${start}&pagination[limit]=2`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/candidats?filters[Sexe][$eq]=${gender}&filters[valide][$eq]=true[populate][Physionomie]=*&[populate][Role_Candidat][populate][Competence]=*&[populate][Photo_de_presentation]=*&[populate][Portfolio][populate][Portfolio]=*${filters}&sort[0]=Prenom:asc${start}&pagination[limit]=2`;
     const response = await fetch(url, { next: { revalidate: 0 } });
     if (!response.ok) {
       // This will activate the closest `error.js` Error Boundary

@@ -89,3 +89,103 @@ export function generateTypeFilter(types: string[]) {
   }
   return typeFilter;
 }
+
+export function filterParams(
+  queryParams: Record<string, string | null | undefined>
+): Record<string, string> {
+  const filteredParams: Record<string, string> = {};
+
+  for (const [key, value] of Object.entries(queryParams)) {
+    if (value !== null && value !== undefined) {
+      filteredParams[key] = String(value);
+    }
+  }
+
+  return filteredParams;
+}
+
+export const handleQueryNumber = (
+  mutateQueryNumber: any,
+  stateNumber: number[] | null,
+  value: number
+) => {
+  let numberQuery: any;
+
+  if (mutateQueryNumber) {
+    if (Array.isArray(stateNumber)) {
+      if (stateNumber.includes(value)) {
+        // Si l'index est déjà présent, le retirer
+        numberQuery = stateNumber.filter(
+          (selectedIndex) => selectedIndex !== value
+        );
+      } else {
+        // Sinon, ajouter l'index à la fin du tableau
+        numberQuery = [...stateNumber, value];
+
+        // Si le tableau a maintenant plus de deux éléments, retirer le deuxième élément
+        if (numberQuery.length > 2) {
+          numberQuery[1] = value;
+          numberQuery.pop();
+        }
+      }
+      mutateQueryNumber(numberQuery?.length > 2 ? null : numberQuery);
+    } else {
+      // Si stateNumber n'est pas un tableau, initialiser numberQuery avec [value]
+      const numberQuery = [value];
+      mutateQueryNumber(numberQuery);
+    }
+  }
+};
+export const handleQueryTaille = (
+  queryValueToArray: string[],
+  value: string,
+  key: string,
+  queryInUrl: URLSearchParams
+) => {
+  if (!queryValueToArray.includes(value) && key === "Taille") {
+    // Supprime tous les paramètres existants avec la même clé que le titre
+    queryInUrl.delete(key);
+
+    // Ajoute la nouvelle valeur
+    queryInUrl.append(key, value);
+  } else {
+    queryInUrl.delete(key);
+  }
+  return queryInUrl;
+};
+export const handleQuery = (
+  queryValueToArray: string[],
+  value: string,
+  key: string,
+  queryInUrl: URLSearchParams
+) => {
+  if (queryValueToArray.includes(value)) {
+    const updatedParamValues = queryValueToArray.filter(
+      (value) => value !== value
+    );
+
+    // Supprime tous les paramètres existants avec la même clé que le titre
+    queryInUrl.delete(key);
+
+    // Ajoute toutes les valeurs mises à jour pour le paramètre spécifié par "key"
+    if (updatedParamValues.length > 0) {
+      queryInUrl.append(key, updatedParamValues.join(","));
+    }
+  } else {
+    // Si la valeur n'est pas déjà présente, ajoutez-la comme avant
+    if (queryValueToArray.length === 2) {
+      queryValueToArray[1] = value;
+    } else {
+      queryValueToArray.push(value);
+    }
+
+    // Supprime tous les paramètres existants avec la même clé que le titre
+    queryInUrl.delete(key);
+
+    // Ajoute toutes les valeurs mises à jour pour le paramètre spécifié par "key"
+    if (queryValueToArray.length > 0) {
+      queryInUrl.append(key, queryValueToArray.join(","));
+    }
+  }
+  return queryInUrl;
+};
