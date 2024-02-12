@@ -1,21 +1,22 @@
 import { Dictionary } from "@/types/dictionary";
 import React from "react";
 import { CtaList } from "./Physionomie";
+import { PhysioState } from "@/hooks/Filter/useFilter";
 
 const ListSubFilter = ({
   dictionary,
-  currentPhysio,
+  valuePhysio,
   handleClick,
   currentList,
   handleCurrentList,
   handlePhysioQuery,
 }: {
   dictionary: Dictionary;
-  currentPhysio: string[];
+  valuePhysio: PhysioState;
   handleClick: (role: string) => void;
   currentList: string;
   handleCurrentList: (list: string) => void;
-  handlePhysioQuery: (value: string | boolean, key: string) => void;
+  handlePhysioQuery: (value: string, key: string) => void;
 }) => {
   return Object.entries(dictionary?.genre?.page?.filter as Object)?.map(
     ([key, value]) => {
@@ -39,16 +40,16 @@ const ListSubFilter = ({
                     innerKey !== "Unique" &&
                     value?.value?.map((subItemKey: string) => {
                       return (
-                        <React.Fragment key={subItemKey}>
-                          <CtaList
-                            value={subItemKey as React.ReactNode}
-                            handleClick={handleClick}
-                            current={currentPhysio}
-                            cle={currentList}
-                            customStyle="font-medium text-base md:text-xl"
-                            handlePhysioQuery={handlePhysioQuery}
-                          />
-                        </React.Fragment>
+                        <CtaList
+                          key={subItemKey}
+                          value={subItemKey as React.ReactNode}
+                          handleClick={handleClick} //@ts-ignore
+                          current={valuePhysio[currentList]}
+                          cle={subItemKey as string}
+                          customStyle="font-medium text-base md:text-xl"
+                          handlePhysioQuery={handlePhysioQuery}
+                          onlyMapKey={currentList}
+                        />
                       );
                     })}
                   {typeof value?.value === "object" &&
@@ -62,7 +63,8 @@ const ListSubFilter = ({
                             cle={currentList}
                             value={subItemValue as React.ReactNode}
                             handleClick={handleClick}
-                            current={currentPhysio}
+                            //@ts-ignore
+                            current={valuePhysio[currentList]}
                             customStyle="font-medium text-base md:text-xl"
                             handlePhysioQuery={handlePhysioQuery}
                           />

@@ -1,17 +1,19 @@
 import { getCandidat } from "@/app/[lang]/choix/genre/[gender]/action";
 import {
+  createNewUrl,
   filterParams,
   handleQuery,
   handleQueryTaille,
 } from "@/app/[lang]/choix/genre/[gender]/function";
 import { useEffect, useState } from "react";
 import useCustomRouter from "../Basic/useCustomRouter";
-interface PhysioState {
+export interface PhysioState {
   Age: string[]; // Change 'any' to the actual type of your Age array elements
   Taille: string; // Change 'any' to the actual type of your Taille array elements
   Type: string[]; // Change 'any' to the actual type of your Type array elements
   Compétence: string[];
   Unique: boolean; // Change 'any' to the actual type of your Compétence array elements
+  [key: string]: string[] | string | boolean;
 }
 const useFilter = (talents: any, metaInitial: any) => {
   const { router, pathname, searchParams } = useCustomRouter();
@@ -26,7 +28,7 @@ const useFilter = (talents: any, metaInitial: any) => {
     Taille: "",
     Type: [],
     Compétence: [],
-    Unique: true,
+    Unique: false,
   });
   const compétence = searchParams.get("Compétence");
   const age = searchParams.get("Age");
@@ -34,7 +36,6 @@ const useFilter = (talents: any, metaInitial: any) => {
   const type = searchParams.get("Type");
   const uniqueParams = searchParams.get("Unique");
   const role = searchParams.get("Role");
-
   const queryParams = {
     Compétence: compétence,
     Age: age,
@@ -45,9 +46,7 @@ const useFilter = (talents: any, metaInitial: any) => {
   useEffect(() => {
     handleRole(role);
   }, [role]);
-  useEffect(() => {
-    console.log(valuePhysio);
-  }, [valuePhysio]);
+
   ////////////////////
   const handleRole = (role: string | null) => {
     if (role === null) {
@@ -68,18 +67,12 @@ const useFilter = (talents: any, metaInitial: any) => {
   const paramsFiltered = filterParams(queryParams);
   const queryToString = new URLSearchParams(paramsFiltered).toString();
   //
-  const handlePhysioQuery = (value: string | boolean, key: string) => {
-    console.log(value, "++++++", key, "+++++++++++", key);
-    //@ts-ignore
-    console.log(valuePhysio[currentList]);
+  console.log(valuePhysio);
+  const handlePhysioQuery = async (value: string | boolean, key: string) => {
     const queryInUrl = new URLSearchParams(queryToString);
-    const queryValue = queryInUrl.get(key);
-    //@ts-ignore
+    const queryValue = queryInUrl.get(key as string);
     const queryValueToArray = queryValue ? queryValue.split(",") : [];
-    console.log(value, "ALORQ ALORS");
 
-    //COndition quand c'est number et quand c'est taille ou non
-    // Convertit les paramètres en chaîne de requête
     let newQueryInUrl: any;
 
     if (key === "Taille") {
@@ -98,6 +91,7 @@ const useFilter = (talents: any, metaInitial: any) => {
       );
     }
     const newQueryString = newQueryInUrl.toString();
+    let link: string;
     if (
       //@ts-ignore
       Array.isArray(valuePhysio[currentList]) &&
@@ -108,24 +102,29 @@ const useFilter = (talents: any, metaInitial: any) => {
         .toString()
         .replace(`${key}=${value}`, "");
 
-      const linkHref = `${pathname}?${updatedQueryString}`;
-      router.push(linkHref);
+      link = `${pathname}?${updatedQueryString}`;
     } else {
-      const linkHref = `${pathname}?${newQueryString}`;
-      router.push(linkHref);
+      link = `${pathname}?${newQueryString}`;
     }
+    router.push(link);
+
+    //@ts-ignore
     setValuePhysio((prevValue: PhysioState) => {
-      //@ts-ignore
-      const existingValues = prevValue[key] ;
-
+      const existingValues = prevValue[key];
+      console.log(existingValues, "EXIST");
       let updatedValues;
-
       if (typeof existingValues === "string") {
-        updatedValues = value;
+        if (value === existingValues) {
+          updatedValues = "";
+        } else {
+          updatedValues = value;
+        }
       } else if (typeof existingValues === "boolean") {
-        updatedValues = !existingValues;
+        // handle other types if needed
+        updatedValues = existingValues ? false : true;
+        console.log("BOOLEAN", existingValues);
       } else if (Array.isArray(existingValues)) {
-        if (existingValues.includes(value)) {
+        if (existingValues.includes(value as string)) {
           updatedValues = [];
         } else {
           if (existingValues.length < 2) {
@@ -135,31 +134,15 @@ const useFilter = (talents: any, metaInitial: any) => {
           }
         }
       } else {
-        // handle other types if needed
         updatedValues = existingValues;
       }
+      console.log(key, updatedValues, "FROM FUNCTION CHECK");
 
       return {
         ...prevValue,
         [key]: updatedValues,
       };
     });
-
-    // Parcourez les clés du nouvel objet et ajoutez les valeurs correspondantes aux tableaux
-
-    ////////////////
-    // const isSelected = currentPhysio.includes(arg);
-    // if (isSelected) {
-    //   const newArray = currentPhysio.filter(
-    //     (selectedItem) => selectedItem !== arg
-    //   );
-    //   setCurrentPhysio(newArray);
-    // } else {
-    //   if (currentPhysio.length < 2) {
-    //     const newArray = [...currentPhysio, arg];
-    //     setCurrentPhysio(newArray);
-    //   }
-    // }
   };
 
   const fetchData = async (role: string | undefined = undefined) => {
@@ -213,8 +196,6 @@ const useFilter = (talents: any, metaInitial: any) => {
         properStart: startParams,
         role: role,
       });
-      console.log("LOADUSERS", talents);
-
       const data = response?.data;
       const metaRes = response?.meta?.pagination?.total;
       setMeta(metaRes);
@@ -246,6 +227,7 @@ const useFilter = (talents: any, metaInitial: any) => {
     setCandidat,
     router,
     pathname,
+    valuePhysio,
   };
 };
 

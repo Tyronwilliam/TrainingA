@@ -4,10 +4,12 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import React from "react";
 import { BsCircle, BsFillCircleFill } from "react-icons/bs";
 import ListSubFilter from "./ListSubFilter";
+import { PhysioState } from "@/hooks/Filter/useFilter";
+import { boolean } from "yup";
 
 export const Physionomie = ({
   dictionary,
-  currentPhysio,
+  valuePhysio,
   currentList,
   handleCurrentList,
   handlePhysioQuery,
@@ -16,7 +18,7 @@ export const Physionomie = ({
   pathname,
 }: {
   dictionary: Dictionary;
-  currentPhysio: string[];
+  valuePhysio: PhysioState;
   handlePhysioQuery: (value: string | boolean, key: string) => void;
   currentList: string;
   handleCurrentList: (list: string) => void;
@@ -28,7 +30,7 @@ export const Physionomie = ({
     <div className="max-w-[450px] w-full flex justify-between items-center uppercase  text-xl ">
       <ListSubFilter
         dictionary={dictionary}
-        currentPhysio={currentPhysio}
+        valuePhysio={valuePhysio}
         handlePhysioQuery={handlePhysioQuery}
         handleClick={() => {}}
         currentList={currentList}
@@ -45,11 +47,11 @@ export const Physionomie = ({
         />
         {currentList === "Unique" && (
           <ul className="absolute flex flex-col gap-2 z-50 top-[110%] background__grey min-w-min h-fit p-2">
-            {currentPhysio.includes("Unique") ? (
+            {valuePhysio["Unique"] ? (
               <BsFillCircleFill
                 className="w-6 h-6"
                 onClick={(e) => {
-                  console.log("NOT UNIQUE");
+                  handlePhysioQuery(false, "Unique");
                   router.push(`/fr/choix/genre/${gender}`);
                 }}
               />
@@ -57,7 +59,7 @@ export const Physionomie = ({
               <BsCircle
                 className="w-6 h-6"
                 onClick={(e) => {
-                  console.log(" UNIQUE", pathname);
+                  handlePhysioQuery(true, "Unique");
 
                   router.push(`${pathname}?Unique=true`);
                 }}
@@ -78,6 +80,7 @@ export const CtaList = ({
   customStyle,
   handleFilter,
   handlePhysioQuery,
+  onlyMapKey,
 }: {
   cle: string;
   value: React.ReactNode;
@@ -85,10 +88,11 @@ export const CtaList = ({
   current: string | string[];
   customStyle: string;
   handleFilter?: (role: string) => void;
-  handlePhysioQuery?: (value: string | boolean, key: string) => void;
+  handlePhysioQuery?: (value: string, key: string) => void;
+  onlyMapKey?: string;
 }) => {
-  const validation = Array.isArray(current)
-    ? !current.includes(cle)
+  const validationSubList = Array.isArray(current)
+    ? !current.includes(value as string)
     : current !== cle;
   return (
     <button
@@ -97,13 +101,17 @@ export const CtaList = ({
       onClick={() => {
         handleClick(cle);
         handleFilter && handleFilter(cle);
-        handlePhysioQuery && handlePhysioQuery(value as string | boolean, cle);
+        if (onlyMapKey) {
+          handlePhysioQuery && handlePhysioQuery(value as string, onlyMapKey);
+        } else {
+          handlePhysioQuery && handlePhysioQuery(value as string, cle);
+        }
       }}
     >
       <li
         className={classNames({
           [`${`font-medium ${customStyle}`}`]: true,
-          "opacity-50": validation,
+          "opacity-50 ": validationSubList,
         })}
       >
         {value as React.ReactNode}

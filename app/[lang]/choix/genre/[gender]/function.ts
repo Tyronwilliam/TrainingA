@@ -1,3 +1,5 @@
+import { PhysioState } from "@/hooks/Filter/useFilter";
+
 export function generateTailleFilter(tailleRanges: string[]) {
   let tailleFilter = "";
   for (let i = 0; i < tailleRanges.length; i++) {
@@ -153,6 +155,7 @@ export const handleQueryTaille = (
   }
   return queryInUrl;
 };
+
 export const handleQuery = (
   queryValueToArray: string[],
   value: string,
@@ -188,4 +191,32 @@ export const handleQuery = (
     }
   }
   return queryInUrl;
+};
+
+export const createNewUrl = (
+  newQueryInUrl: string,
+  key: string,
+  value: string | boolean,
+  pathname: string,
+  valuePhysio: PhysioState,
+  currentList: string
+) => {
+  const newQueryString = newQueryInUrl.toString();
+  let link: string;
+  if (
+    //@ts-ignore
+    Array.isArray(valuePhysio[currentList]) &&
+    //@ts-ignore
+    valuePhysio[currentList]?.includes(value)
+  ) {
+    const updatedQueryString = newQueryString
+      .toString()
+      .replace(`${key}=${value}`, "");
+
+    link = `${pathname}?${updatedQueryString}`;
+  } else {
+    link = `${pathname}?${newQueryString}`;
+  }
+
+  return link;
 };

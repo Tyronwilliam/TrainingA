@@ -34,6 +34,7 @@ const GenreLayout = ({
     currentRole,
     candidat,
     router,
+    valuePhysio,
   } = useFilter(talents, metaInitial);
 
   return (
@@ -48,7 +49,7 @@ const GenreLayout = ({
         />
         <Physionomie
           dictionary={dictionary}
-          currentPhysio={currentPhysio}
+          valuePhysio={valuePhysio}
           handlePhysioQuery={handlePhysioQuery}
           handleCurrentList={handleCurrentList}
           currentList={currentList}
