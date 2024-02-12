@@ -30,12 +30,17 @@ const useFilter = (talents: any, metaInitial: any) => {
     Compétence: [],
     Unique: false,
   });
-  const compétence = searchParams.get("Compétence");
-  const age = searchParams.get("Age");
-  const taille = searchParams.get("Taille");
-  const type = searchParams.get("Type");
-  const uniqueParams = searchParams.get("Unique");
+  // const compétence = searchParams.get("Compétence");
+  // const age = searchParams.get("Age");
+  // const taille = searchParams.get("Taille");
+  // const type = searchParams.get("Type");
+  // const uniqueParams = searchParams.get("Unique");
   const role = searchParams.get("Role");
+  const compétence = searchParams.getAll("Compétence");
+  const age = searchParams.getAll("Age");
+  const taille = searchParams.get("Taille") || ""; // Utiliser une chaîne vide si la valeur est null
+  const type = searchParams.getAll("Type");
+  const uniqueParams = searchParams.get("Unique");
   const queryParams = {
     Compétence: compétence,
     Age: age,
@@ -44,9 +49,10 @@ const useFilter = (talents: any, metaInitial: any) => {
     Unique: uniqueParams,
   };
   useEffect(() => {
-    handleRole(role);
-  }, [role]);
+    // Mise à jour de la state locale
 
+    handleRole(role);
+  }, [compétence, age, taille, type, uniqueParams, role]);
   ////////////////////
   const handleRole = (role: string | null) => {
     if (role === null) {
@@ -64,6 +70,7 @@ const useFilter = (talents: any, metaInitial: any) => {
     }
   };
   //////////////////////
+  //@ts-ignore
   const paramsFiltered = filterParams(queryParams);
   const queryToString = new URLSearchParams(paramsFiltered).toString();
   //
@@ -91,58 +98,89 @@ const useFilter = (talents: any, metaInitial: any) => {
       );
     }
     const newQueryString = newQueryInUrl.toString();
-    let link: string;
-    if (
-      //@ts-ignore
+    // let link: string;
+    // if (
+    //   Array.isArray(valuePhysio[currentList]) &&
+    //   //@ts-ignore
+    //   valuePhysio[currentList]?.includes(value)
+    // ) {
+    //   const updatedQueryString = newQueryString
+    //     .toString()
+    //     .replace(`${key}=${value}`, "");
+
+    //   link = `${pathname}?${updatedQueryString}`;
+    // } else {
+    //   link = `${pathname}?${newQueryString}`;
+    // }
+    let link = `${pathname}?${
       Array.isArray(valuePhysio[currentList]) &&
       //@ts-ignore
       valuePhysio[currentList]?.includes(value)
-    ) {
-      const updatedQueryString = newQueryString
-        .toString()
-        .replace(`${key}=${value}`, "");
-
-      link = `${pathname}?${updatedQueryString}`;
-    } else {
-      link = `${pathname}?${newQueryString}`;
-    }
+        ? newQueryString.replace(`${key}=${value}`, "")
+        : newQueryString
+    }`;
     router.push(link);
-
-    //@ts-ignore
     setValuePhysio((prevValue: PhysioState) => {
       const existingValues = prevValue[key];
-      console.log(existingValues, "EXIST");
-      let updatedValues;
+      let updatedValues:
+        | string
+        | boolean
+        | string[]
+        | (string | boolean)[]
+        | { [key: string]: any };
+
       if (typeof existingValues === "string") {
-        if (value === existingValues) {
-          updatedValues = "";
-        } else {
-          updatedValues = value;
-        }
+        updatedValues = value === existingValues ? "" : value;
       } else if (typeof existingValues === "boolean") {
-        // handle other types if needed
-        updatedValues = existingValues ? false : true;
-        console.log("BOOLEAN", existingValues);
+        updatedValues = !existingValues;
       } else if (Array.isArray(existingValues)) {
-        if (existingValues.includes(value as string)) {
-          updatedValues = [];
-        } else {
-          if (existingValues.length < 2) {
-            updatedValues = [...existingValues, value];
-          } else {
-            updatedValues = [existingValues[0], value];
-          }
-        }
+        updatedValues = existingValues.includes(value as string)
+          ? []
+          : existingValues.length < 2
+          ? [...existingValues, value]
+          : [existingValues[0], value];
       } else {
         updatedValues = existingValues;
       }
+
       console.log(key, updatedValues, "FROM FUNCTION CHECK");
 
-      return {
-        ...prevValue,
-        [key]: updatedValues,
-      };
+      return { ...prevValue, [key]: updatedValues } as PhysioState;
     });
+
+    //@ts-ignore
+    // setValuePhysio((prevValue: PhysioState) => {
+    //   const existingValues = prevValue[key];
+    //   let updatedValues;
+    //   if (typeof existingValues === "string") {
+    //     if (value === existingValues) {
+    //       updatedValues = "";
+    //     } else {
+    //       updatedValues = value;
+    //     }
+    //   } else if (typeof existingValues === "boolean") {
+    //     // handle other types if needed
+    //     updatedValues = existingValues ? false : true;
+    //   } else if (Array.isArray(existingValues)) {
+    //     if (existingValues.includes(value as string)) {
+    //       updatedValues = [];
+    //     } else {
+    //       if (existingValues.length < 2) {
+    //         updatedValues = [...existingValues, value];
+    //       } else {
+    //         updatedValues = [existingValues[0], value];
+    //       }
+    //     }
+    //   } else {
+    //     updatedValues = existingValues;
+    //   }
+    //   console.log(key, updatedValues, "FROM FUNCTION CHECK");
+
+    //   return {
+    //     ...prevValue,
+    //     [key]: updatedValues,
+    //   };
+    // });
   };
 
   const fetchData = async (role: string | undefined = undefined) => {
