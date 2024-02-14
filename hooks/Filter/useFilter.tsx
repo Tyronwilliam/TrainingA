@@ -42,6 +42,7 @@ const useFilter = (talents: any, metaInitial: any) => {
   };
   useEffect(() => {
     // Mise à jour de la state locale
+
     fetchData({
       gender: "Men",
       properStart: 0,
@@ -52,9 +53,19 @@ const useFilter = (talents: any, metaInitial: any) => {
       type,
       unique: uniqueParams,
     });
-    console.log(uniqueParams, "UNIQUE");
     handleRole(role);
   }, [role, compétence, age, taille, type, uniqueParams]);
+
+  useEffect(() => {
+    const newObject = {
+      Age: age ? age.split(",") : [],
+      Taille: taille || "",
+      Type: type ? type.split(",") : [],
+      Compétence: compétence ? compétence.split(",") : [],
+      Unique: uniqueParams !== null && JSON.parse(uniqueParams),
+    };
+    setValuePhysio(newObject);
+  }, []);
   ////////////////////
   const handleRole = (role: string | null) => {
     if (role === null) {
@@ -130,8 +141,6 @@ const useFilter = (talents: any, metaInitial: any) => {
       } else {
         updatedValues = existingValues;
       }
-
-      console.log(key, updatedValues, "FROM FUNCTION CHECK");
 
       return { ...prevValue, [key]: updatedValues } as PhysioState;
     });
@@ -209,7 +218,7 @@ const useFilter = (talents: any, metaInitial: any) => {
         router.push(`${pathname}`);
         await fetchData({
           gender: "Men",
-          properStart:0,
+          properStart: 0,
           role,
           competence: compétence,
           age,

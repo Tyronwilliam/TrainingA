@@ -1,7 +1,6 @@
-import { Dictionary } from "@/types/dictionary";
 import classNames from "classnames";
 import React from "react";
-import { CtaList } from "./Physionomie";
+import { CtaList } from "./CtaList";
 import { RoleFilterProps } from "./type";
 
 const RoleFilter = ({

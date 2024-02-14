@@ -3,6 +3,7 @@ import React from "react";
 import { BsCircle, BsFillCircleFill } from "react-icons/bs";
 import ListSubFilter from "./ListSubFilter";
 import { CTAListProps, PhysionomieProps } from "./type";
+import { CtaList } from "./CtaList";
 
 export const Physionomie = ({
   dictionary,
@@ -57,47 +58,5 @@ export const Physionomie = ({
         )}
       </ul>
     </div>
-  );
-};
-
-export const CtaList = ({
-  cle,
-  value,
-  handleClick,
-  current,
-  customStyle,
-  handleFilter,
-  handlePhysioQuery,
-  onlyMapKey,
-  onlyObjectKey,
-}: CTAListProps) => {
-  const validationSubList = Array.isArray(current)
-    ? !current.includes(value as string)
-    : current !== cle;
-  return (
-    <button
-      key={cle}
-      className="uppercase whitespace-nowrap w-fit"
-      onClick={() => {
-        handleClick(cle);
-        handleFilter && handleFilter(cle);
-        if (onlyMapKey) {
-          handlePhysioQuery && handlePhysioQuery(value as string, onlyMapKey);
-        } else if (onlyObjectKey) {
-          handlePhysioQuery && handlePhysioQuery(onlyObjectKey, cle);
-        } else {
-          handlePhysioQuery && handlePhysioQuery(value as string, cle);
-        }
-      }}
-    >
-      <li
-        className={classNames({
-          [`${`font-medium ${customStyle}`}`]: true,
-          "opacity-50 ": validationSubList,
-        })}
-      >
-        {value as React.ReactNode}
-      </li>
-    </button>
   );
 };
