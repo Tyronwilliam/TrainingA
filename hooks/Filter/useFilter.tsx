@@ -1,20 +1,16 @@
-import { getCandidat } from "@/app/[lang]/choix/genre/[gender]/action";
 import {
-  createNewUrl,
+  getCandidat,
+  getCandidatParams,
+} from "@/app/[lang]/choix/genre/[gender]/action";
+import {
   filterParams,
   handleQuery,
   handleQueryTaille,
 } from "@/app/[lang]/choix/genre/[gender]/function";
 import { useEffect, useState } from "react";
 import useCustomRouter from "../Basic/useCustomRouter";
-export interface PhysioState {
-  Age: string[]; // Change 'any' to the actual type of your Age array elements
-  Taille: string; // Change 'any' to the actual type of your Taille array elements
-  Type: string[]; // Change 'any' to the actual type of your Type array elements
-  Compétence: string[];
-  Unique: boolean; // Change 'any' to the actual type of your Compétence array elements
-  [key: string]: string[] | string | boolean;
-}
+import { PhysioState } from "@/app/[lang]/choix/genre/[gender]/type";
+
 const useFilter = (talents: any, metaInitial: any) => {
   const { router, pathname, searchParams } = useCustomRouter();
 
@@ -30,17 +26,13 @@ const useFilter = (talents: any, metaInitial: any) => {
     Compétence: [],
     Unique: false,
   });
-  // const compétence = searchParams.get("Compétence");
-  // const age = searchParams.get("Age");
-  // const taille = searchParams.get("Taille");
-  // const type = searchParams.get("Type");
-  // const uniqueParams = searchParams.get("Unique");
-  const role = searchParams.get("Role");
-  const compétence = searchParams.getAll("Compétence");
-  const age = searchParams.getAll("Age");
-  const taille = searchParams.get("Taille") || ""; // Utiliser une chaîne vide si la valeur est null
-  const type = searchParams.getAll("Type");
+  const compétence = searchParams.get("Compétence");
+  const age = searchParams.get("Age");
+  const taille = searchParams.get("Taille");
+  const type = searchParams.get("Type");
   const uniqueParams = searchParams.get("Unique");
+  const role = searchParams.get("Role");
+
   const queryParams = {
     Compétence: compétence,
     Age: age,
@@ -50,9 +42,19 @@ const useFilter = (talents: any, metaInitial: any) => {
   };
   useEffect(() => {
     // Mise à jour de la state locale
-
+    fetchData({
+      gender: "Men",
+      properStart: 0,
+      role,
+      competence: compétence,
+      age,
+      taille,
+      type,
+      unique: uniqueParams,
+    });
+    console.log(uniqueParams, "UNIQUE");
     handleRole(role);
-  }, [compétence, age, taille, type, uniqueParams, role]);
+  }, [role, compétence, age, taille, type, uniqueParams]);
   ////////////////////
   const handleRole = (role: string | null) => {
     if (role === null) {
@@ -70,11 +72,8 @@ const useFilter = (talents: any, metaInitial: any) => {
     }
   };
   //////////////////////
-  //@ts-ignore
   const paramsFiltered = filterParams(queryParams);
   const queryToString = new URLSearchParams(paramsFiltered).toString();
-  //
-  console.log(valuePhysio);
   const handlePhysioQuery = async (value: string | boolean, key: string) => {
     const queryInUrl = new URLSearchParams(queryToString);
     const queryValue = queryInUrl.get(key as string);
@@ -85,40 +84,29 @@ const useFilter = (talents: any, metaInitial: any) => {
     if (key === "Taille") {
       newQueryInUrl = handleQueryTaille(
         queryValueToArray,
-        value as string,
+        value,
         key,
         queryInUrl
       );
     } else {
-      newQueryInUrl = handleQuery(
-        queryValueToArray,
-        value as string,
-        key,
-        queryInUrl
-      );
+      newQueryInUrl = handleQuery(queryValueToArray, value, key, queryInUrl);
     }
     const newQueryString = newQueryInUrl.toString();
-    // let link: string;
-    // if (
-    //   Array.isArray(valuePhysio[currentList]) &&
-    //   //@ts-ignore
-    //   valuePhysio[currentList]?.includes(value)
-    // ) {
-    //   const updatedQueryString = newQueryString
-    //     .toString()
-    //     .replace(`${key}=${value}`, "");
-
-    //   link = `${pathname}?${updatedQueryString}`;
-    // } else {
-    //   link = `${pathname}?${newQueryString}`;
-    // }
-    let link = `${pathname}?${
+    let link;
+    if (
       Array.isArray(valuePhysio[currentList]) &&
       //@ts-ignore
-      valuePhysio[currentList]?.includes(value)
-        ? newQueryString.replace(`${key}=${value}`, "")
-        : newQueryString
-    }`;
+      valuePhysio[currentList]?.includes(value) &&
+      value
+    ) {
+      const updatedQueryString = newQueryString
+        .toString()
+        .replace(`${key}=${value}`, "");
+
+      link = `${pathname}?${updatedQueryString}`;
+    } else {
+      link = `${pathname}?${newQueryString}`;
+    }
     router.push(link);
     setValuePhysio((prevValue: PhysioState) => {
       const existingValues = prevValue[key];
@@ -147,46 +135,26 @@ const useFilter = (talents: any, metaInitial: any) => {
 
       return { ...prevValue, [key]: updatedValues } as PhysioState;
     });
-
-    //@ts-ignore
-    // setValuePhysio((prevValue: PhysioState) => {
-    //   const existingValues = prevValue[key];
-    //   let updatedValues;
-    //   if (typeof existingValues === "string") {
-    //     if (value === existingValues) {
-    //       updatedValues = "";
-    //     } else {
-    //       updatedValues = value;
-    //     }
-    //   } else if (typeof existingValues === "boolean") {
-    //     // handle other types if needed
-    //     updatedValues = existingValues ? false : true;
-    //   } else if (Array.isArray(existingValues)) {
-    //     if (existingValues.includes(value as string)) {
-    //       updatedValues = [];
-    //     } else {
-    //       if (existingValues.length < 2) {
-    //         updatedValues = [...existingValues, value];
-    //       } else {
-    //         updatedValues = [existingValues[0], value];
-    //       }
-    //     }
-    //   } else {
-    //     updatedValues = existingValues;
-    //   }
-    //   console.log(key, updatedValues, "FROM FUNCTION CHECK");
-
-    //   return {
-    //     ...prevValue,
-    //     [key]: updatedValues,
-    //   };
-    // });
   };
 
-  const fetchData = async (role: string | undefined = undefined) => {
-    const queryParams = role
-      ? { gender: "Men", properStart: 0, role }
-      : { gender: "Men", properStart: 0 };
+  const fetchData = async ({
+    role,
+    competence: compétence,
+    age,
+    taille,
+    type,
+    unique: uniqueParams,
+  }: getCandidatParams) => {
+    const queryParams = {
+      gender: "Men",
+      properStart: 0,
+      role,
+      competence: compétence,
+      age,
+      taille,
+      type,
+      unique: uniqueParams,
+    };
 
     const response = await getCandidat(queryParams);
     const data = response?.data;
@@ -202,23 +170,53 @@ const useFilter = (talents: any, metaInitial: any) => {
         router.push(
           `${pathname}?Role=Acteur${queryToString ? `&${queryToString}` : ""}`
         );
-        await fetchData("Acteur");
+        await fetchData({
+          role: "Acteur",
+          competence: compétence,
+          age,
+          taille,
+          type,
+          unique: uniqueParams,
+        });
         break;
       case "Modele":
         router.push(
           `${pathname}?Role=Modele${queryToString ? `&${queryToString}` : ""}`
         );
-        await fetchData("Modele");
+        await fetchData({
+          role: "Modele",
+          competence: compétence,
+          age,
+          taille,
+          type,
+          unique: uniqueParams,
+        });
         break;
       case "Figurant":
         router.push(
           `${pathname}?Role=Figurant${queryToString ? `&${queryToString}` : ""}`
         );
-        await fetchData("Figurant");
+        await fetchData({
+          role: "Figurant",
+          competence: compétence,
+          age,
+          taille,
+          type,
+          unique: uniqueParams,
+        });
         break;
       case "Tous":
         router.push(`${pathname}`);
-        await fetchData();
+        await fetchData({
+          gender: "Men",
+          properStart:0,
+          role,
+          competence: compétence,
+          age,
+          taille,
+          type,
+          unique: uniqueParams,
+        });
         break;
       default:
         break;
@@ -228,18 +226,32 @@ const useFilter = (talents: any, metaInitial: any) => {
   const loadMoreUsers = async () => {
     const properStart = candidat?.length;
     const startParams = meta >= candidat.length ? candidat.length : 0;
-    if (role !== null) {
+    if (role || compétence || age || taille || type || uniqueParams) {
       const response = await getCandidat({
         gender: "Men",
         properStart: startParams,
-        role: role,
+        role,
+        competence: compétence,
+        age,
+        taille,
+        type,
+        unique: uniqueParams,
       });
       const data = response?.data;
       const metaRes = response?.meta?.pagination?.total;
       setMeta(metaRes);
       setCandidat((prev: []) => [...prev, ...data]);
     } else {
-      const response = await getCandidat({ gender: "Men", properStart });
+      const response = await getCandidat({
+        gender: "Men",
+        properStart,
+        role,
+        competence: compétence,
+        age,
+        taille,
+        type,
+        unique: uniqueParams,
+      });
       const data = response?.data;
       const metaRes = response?.meta?.pagination?.total;
       setMeta(metaRes);

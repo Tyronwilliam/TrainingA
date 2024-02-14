@@ -1,7 +1,7 @@
 import { Dictionary } from "@/types/dictionary";
 import React from "react";
 import { CtaList } from "./Physionomie";
-import { PhysioState } from "@/hooks/Filter/useFilter";
+import { PhysioState } from "./type";
 
 const ListSubFilter = ({
   dictionary,
@@ -63,6 +63,7 @@ const ListSubFilter = ({
                             cle={currentList}
                             value={subItemValue as React.ReactNode}
                             handleClick={handleClick}
+                            onlyObjectKey={keySub}
                             //@ts-ignore
                             current={valuePhysio[currentList]}
                             customStyle="font-medium text-base md:text-xl"

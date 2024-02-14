@@ -2,18 +2,14 @@ import { Dictionary } from "@/types/dictionary";
 import classNames from "classnames";
 import React from "react";
 import { CtaList } from "./Physionomie";
+import { RoleFilterProps } from "./type";
 
 const RoleFilter = ({
   dictionary,
   currentRole,
   handleClick,
   handleFilter,
-}: {
-  dictionary: Dictionary;
-  currentRole: string;
-  handleClick: (role: string) => void;
-  handleFilter: (role: string) => void;
-}) => {
+}: RoleFilterProps) => {
   return (
     <ul
       className={classNames({
@@ -38,4 +34,3 @@ const RoleFilter = ({
 };
 
 export default RoleFilter;
-// "max-w-[360px] w-full  flex justify-between items-center uppercase  text-2xl mx-auto"

@@ -1,5 +1,3 @@
-import { PhysioState } from "@/hooks/Filter/useFilter";
-
 export function generateTailleFilter(tailleRanges: string[]) {
   let tailleFilter = "";
   for (let i = 0; i < tailleRanges.length; i++) {
@@ -140,16 +138,16 @@ export const handleQueryNumber = (
 };
 export const handleQueryTaille = (
   queryValueToArray: string[],
-  value: string,
+  value: string | boolean,
   key: string,
   queryInUrl: URLSearchParams
 ) => {
-  if (!queryValueToArray.includes(value) && key === "Taille") {
+  if (!queryValueToArray.includes(value.toString()) && key === "Taille") {
     // Supprime tous les paramètres existants avec la même clé que le titre
     queryInUrl.delete(key);
 
     // Ajoute la nouvelle valeur
-    queryInUrl.append(key, value);
+    queryInUrl.append(key, value.toString());
   } else {
     queryInUrl.delete(key);
   }
@@ -158,11 +156,11 @@ export const handleQueryTaille = (
 
 export const handleQuery = (
   queryValueToArray: string[],
-  value: string,
+  value: string | boolean,
   key: string,
   queryInUrl: URLSearchParams
 ) => {
-  if (queryValueToArray.includes(value)) {
+  if (queryValueToArray.includes(value.toString())) {
     const updatedParamValues = queryValueToArray.filter(
       (value) => value !== value
     );
@@ -177,9 +175,9 @@ export const handleQuery = (
   } else {
     // Si la valeur n'est pas déjà présente, ajoutez-la comme avant
     if (queryValueToArray.length === 2) {
-      queryValueToArray[1] = value;
+      queryValueToArray[1] = value.toString();
     } else {
-      queryValueToArray.push(value);
+      queryValueToArray.push(value.toString());
     }
 
     // Supprime tous les paramètres existants avec la même clé que le titre
@@ -191,32 +189,4 @@ export const handleQuery = (
     }
   }
   return queryInUrl;
-};
-
-export const createNewUrl = (
-  newQueryInUrl: string,
-  key: string,
-  value: string | boolean,
-  pathname: string,
-  valuePhysio: PhysioState,
-  currentList: string
-) => {
-  const newQueryString = newQueryInUrl.toString();
-  let link: string;
-  if (
-    //@ts-ignore
-    Array.isArray(valuePhysio[currentList]) &&
-    //@ts-ignore
-    valuePhysio[currentList]?.includes(value)
-  ) {
-    const updatedQueryString = newQueryString
-      .toString()
-      .replace(`${key}=${value}`, "");
-
-    link = `${pathname}?${updatedQueryString}`;
-  } else {
-    link = `${pathname}?${newQueryString}`;
-  }
-
-  return link;
 };

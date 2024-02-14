@@ -1,14 +1,11 @@
 "use client";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { getCandidat } from "./action";
-import InfiniteScroll from "react-infinite-scroll-component";
-import RoleFilter from "./RoleFilter";
-import { Dictionary } from "@/types/dictionary";
-import { Physionomie } from "./Physionomie";
-import useCustomRouter from "@/hooks/Basic/useCustomRouter";
 import useFilter from "@/hooks/Filter/useFilter";
+import { Dictionary } from "@/types/dictionary";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Physionomie } from "./Physionomie";
+import RoleFilter from "./RoleFilter";
 
 const GenreLayout = ({
   talents,
@@ -62,9 +59,9 @@ const GenreLayout = ({
       <section className="flex flex-col">
         <section className="flex flex-wrap">
           <InfiniteScroll
-            dataLength={candidat.length}
+            dataLength={candidat?.length ? candidat?.length : 0}
             next={loadMoreUsers}
-            hasMore={meta > candidat.length}
+            hasMore={meta > candidat?.length}
             loader={<h4>Loading...</h4>}
             endMessage={
               <p style={{ textAlign: "center" }}>

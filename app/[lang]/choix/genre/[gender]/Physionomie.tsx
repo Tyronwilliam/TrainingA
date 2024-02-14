@@ -1,11 +1,8 @@
-import { Dictionary } from "@/types/dictionary";
 import classNames from "classnames";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import React from "react";
 import { BsCircle, BsFillCircleFill } from "react-icons/bs";
 import ListSubFilter from "./ListSubFilter";
-import { PhysioState } from "@/hooks/Filter/useFilter";
-import { boolean } from "yup";
+import { CTAListProps, PhysionomieProps } from "./type";
 
 export const Physionomie = ({
   dictionary,
@@ -16,16 +13,7 @@ export const Physionomie = ({
   router,
   gender,
   pathname,
-}: {
-  dictionary: Dictionary;
-  valuePhysio: PhysioState;
-  handlePhysioQuery: (value: string | boolean, key: string) => void;
-  currentList: string;
-  handleCurrentList: (list: string) => void;
-  router: AppRouterInstance;
-  gender: string;
-  pathname: string;
-}) => {
+}: PhysionomieProps) => {
   return (
     <div className="max-w-[450px] w-full flex justify-between items-center uppercase  text-xl ">
       <ListSubFilter
@@ -81,16 +69,8 @@ export const CtaList = ({
   handleFilter,
   handlePhysioQuery,
   onlyMapKey,
-}: {
-  cle: string;
-  value: React.ReactNode;
-  handleClick: (arg: string) => void;
-  current: string | string[];
-  customStyle: string;
-  handleFilter?: (role: string) => void;
-  handlePhysioQuery?: (value: string, key: string) => void;
-  onlyMapKey?: string;
-}) => {
+  onlyObjectKey,
+}: CTAListProps) => {
   const validationSubList = Array.isArray(current)
     ? !current.includes(value as string)
     : current !== cle;
@@ -103,6 +83,8 @@ export const CtaList = ({
         handleFilter && handleFilter(cle);
         if (onlyMapKey) {
           handlePhysioQuery && handlePhysioQuery(value as string, onlyMapKey);
+        } else if (onlyObjectKey) {
+          handlePhysioQuery && handlePhysioQuery(onlyObjectKey, cle);
         } else {
           handlePhysioQuery && handlePhysioQuery(value as string, cle);
         }
