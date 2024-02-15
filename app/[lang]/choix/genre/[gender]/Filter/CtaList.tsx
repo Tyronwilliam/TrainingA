@@ -13,7 +13,7 @@ export const CtaList = ({
   onlyObjectKey,
 }: CTAListProps) => {
   const validation = Array.isArray(current)
-    ? !current.includes(onlyObjectKey ? onlyObjectKey : (value as string))
+    ? !current?.includes(onlyObjectKey ? onlyObjectKey : (value as string))
     : onlyObjectKey
     ? onlyObjectKey !== current
     : current !== cle;

@@ -7,14 +7,14 @@ import {
   generateTypeFilter,
 } from "./function";
 export interface getCandidatParams {
-  gender?: string;
-  properStart?: number;
-  competence: string | null;
-  age: string | null;
-  taille: string | null;
-  type: string | null;
-  unique: string | null;
-  role: string | null;
+  gender: string;
+  properStart: number;
+  competence?: string;
+  age?: string;
+  taille?: string;
+  type?: string;
+  unique?: string;
+  role?: string;
 }
 export async function getCandidat({
   gender,
@@ -30,10 +30,9 @@ export async function getCandidat({
     const start = `&pagination[start]=${properStart}`;
     let filters = ``;
     //OK
-    console.log(role, competence, age, taille, type, unique);
-    if (competence !== null) {
+    if (competence !== undefined) {
       let encoded;
-      if (competence.includes(" ")) {
+      if (competence?.includes(" ")) {
         encoded = encodeURIComponent(competence.replace(/ /g, "_"));
       } else {
         encoded = competence;
@@ -41,26 +40,26 @@ export async function getCandidat({
       filters += generateFilterQuery(encoded);
     }
     //OK
-    if (age !== null) {
+    if (age !== undefined) {
       const ageValues = age.split(",");
       filters += generateAgeFilter(ageValues);
     }
     //PAS OK
-    if (taille !== null) {
+    if (taille !== undefined) {
       const tailleValues = taille.split(",");
       filters += generateTailleFilter(tailleValues);
     }
     // OK
-    if (type !== null) {
+    if (type !== undefined) {
       const typeValue = type.split(",");
       filters += generateTypeFilter(typeValue);
     }
     // OK
-    if (role !== null) {
+    if (role !== undefined) {
       filters += `&filters[Role_Candidat][${role}][$eq]=true`;
     }
     // OK
-    if (unique !== null) {
+    if (unique !== undefined) {
       filters += `&filters[Role_Candidat][Unique][$eq]=true`;
     }
 

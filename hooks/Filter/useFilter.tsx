@@ -41,18 +41,17 @@ const useFilter = (talents: any, metaInitial: any) => {
     Unique: uniqueParams,
   };
   useEffect(() => {
-    // Mise à jour de la state locale
-
     fetchData({
       gender: "Men",
       properStart: 0,
-      role,
-      competence: compétence,
-      age,
-      taille,
-      type,
-      unique: uniqueParams,
+      role: role !== null ? role : undefined,
+      competence: compétence !== null ? compétence : undefined,
+      age: age !== null ? age : undefined,
+      taille: taille !== null ? taille : undefined,
+      type: type !== null ? type : undefined,
+      unique: uniqueParams !== null ? uniqueParams : undefined,
     });
+
     handleRole(role);
   }, [role, compétence, age, taille, type, uniqueParams]);
 
@@ -168,7 +167,7 @@ const useFilter = (talents: any, metaInitial: any) => {
     const response = await getCandidat(queryParams);
     const data = response?.data;
     const metaRes = response?.meta?.pagination?.total;
-
+    console.log("RUNNING");
     setMeta(metaRes);
     setCandidat(data);
   };
@@ -181,11 +180,13 @@ const useFilter = (talents: any, metaInitial: any) => {
         );
         await fetchData({
           role: "Acteur",
-          competence: compétence,
-          age,
-          taille,
-          type,
-          unique: uniqueParams,
+          properStart: 0,
+          gender: "Men",
+          competence: compétence !== null ? compétence : undefined,
+          age: age !== null ? age : undefined,
+          taille: taille !== null ? taille : undefined,
+          type: type !== null ? type : undefined,
+          unique: uniqueParams !== null ? uniqueParams : undefined,
         });
         break;
       case "Modele":
@@ -194,11 +195,13 @@ const useFilter = (talents: any, metaInitial: any) => {
         );
         await fetchData({
           role: "Modele",
-          competence: compétence,
-          age,
-          taille,
-          type,
-          unique: uniqueParams,
+          properStart: 0,
+          gender: "Men",
+          competence: compétence !== null ? compétence : undefined,
+          age: age !== null ? age : undefined,
+          taille: taille !== null ? taille : undefined,
+          type: type !== null ? type : undefined,
+          unique: uniqueParams !== null ? uniqueParams : undefined,
         });
         break;
       case "Figurant":
@@ -206,12 +209,14 @@ const useFilter = (talents: any, metaInitial: any) => {
           `${pathname}?Role=Figurant${queryToString ? `&${queryToString}` : ""}`
         );
         await fetchData({
+          gender: "Men",
           role: "Figurant",
-          competence: compétence,
-          age,
-          taille,
-          type,
-          unique: uniqueParams,
+          properStart: 0,
+          competence: compétence !== null ? compétence : undefined,
+          age: age !== null ? age : undefined,
+          taille: taille !== null ? taille : undefined,
+          type: type !== null ? type : undefined,
+          unique: uniqueParams !== null ? uniqueParams : undefined,
         });
         break;
       case "Tous":
@@ -219,12 +224,11 @@ const useFilter = (talents: any, metaInitial: any) => {
         await fetchData({
           gender: "Men",
           properStart: 0,
-          role,
-          competence: compétence,
-          age,
-          taille,
-          type,
-          unique: uniqueParams,
+          competence: compétence !== null ? compétence : undefined,
+          age: age !== null ? age : undefined,
+          taille: taille !== null ? taille : undefined,
+          type: type !== null ? type : undefined,
+          unique: uniqueParams !== null ? uniqueParams : undefined,
         });
         break;
       default:
@@ -239,12 +243,11 @@ const useFilter = (talents: any, metaInitial: any) => {
       const response = await getCandidat({
         gender: "Men",
         properStart: startParams,
-        role,
-        competence: compétence,
-        age,
-        taille,
-        type,
-        unique: uniqueParams,
+        competence: compétence !== null ? compétence : undefined,
+        age: age !== null ? age : undefined,
+        taille: taille !== null ? taille : undefined,
+        type: type !== null ? type : undefined,
+        unique: uniqueParams !== null ? uniqueParams : undefined,
       });
       const data = response?.data;
       const metaRes = response?.meta?.pagination?.total;
@@ -254,12 +257,11 @@ const useFilter = (talents: any, metaInitial: any) => {
       const response = await getCandidat({
         gender: "Men",
         properStart,
-        role,
-        competence: compétence,
-        age,
-        taille,
-        type,
-        unique: uniqueParams,
+        competence: compétence !== null ? compétence : undefined,
+        age: age !== null ? age : undefined,
+        taille: taille !== null ? taille : undefined,
+        type: type !== null ? type : undefined,
+        unique: uniqueParams !== null ? uniqueParams : undefined,
       });
       const data = response?.data;
       const metaRes = response?.meta?.pagination?.total;

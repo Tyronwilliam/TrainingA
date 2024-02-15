@@ -16,7 +16,6 @@ const InfniteScrollDisplay = ({
 }) => {
   return (
     <section className="flex flex-col">
-      {/* <section className="flex flex-wrap"> */}
       <InfiniteScroll
         dataLength={candidat?.length ? candidat?.length : 0}
         next={loadMoreUsers}
@@ -49,7 +48,6 @@ const InfniteScrollDisplay = ({
           })}{" "}
         </section>
       </InfiniteScroll>
-      {/* </section> */}
     </section>
   );
 };

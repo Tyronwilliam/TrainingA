@@ -11,7 +11,7 @@ export function generateTailleFilter(tailleRanges: string[]) {
       end = value;
     } else {
       // Assume it's a single value
-      const [value] = tailleRange.split("/").map(Number);
+      const [value] = tailleRange?.split("/").map(Number);
 
       // Adjust start and end based on specific conditions
       if (value === 180) {
@@ -37,7 +37,7 @@ export function generateAgeFilter(ageRanges: string[]) {
 
   for (let i = 0; i < ageRanges.length; i++) {
     const ageRange = ageRanges[i];
-    const [start, end] = ageRange.split("/").map(Number);
+    const [start, end] = ageRange?.split("/").map(Number);
 
     if (i === 0) {
       if (ageRange.startsWith(">")) {
@@ -61,10 +61,10 @@ export function generateAgeFilter(ageRanges: string[]) {
 }
 export function generateFilterQuery(values: string) {
   const encodedValues = values
-    .split(",")
-    .map((value: string) => encodeURIComponent(value));
+    ?.split(",")
+    ?.map((value: string) => encodeURIComponent(value));
 
-  const competenceFilters = encodedValues.map(
+  const competenceFilters = encodedValues?.map(
     (encodedValue: string, index: number) => {
       if (index === 0) {
         return `&filters[$or][${index}][Role_Candidat][Competence][${encodedValue}][$eq]=true`;
@@ -142,7 +142,7 @@ export const handleQueryTaille = (
   key: string,
   queryInUrl: URLSearchParams
 ) => {
-  if (!queryValueToArray.includes(value.toString()) && key === "Taille") {
+  if (!queryValueToArray?.includes(value.toString()) && key === "Taille") {
     // Supprime tous les paramètres existants avec la même clé que le titre
     queryInUrl.delete(key);
 

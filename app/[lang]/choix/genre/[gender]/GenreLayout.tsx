@@ -26,7 +26,6 @@ const GenreLayout = ({
     handleRole,
     meta,
     currentList,
-    currentPhysio,
     currentRole,
     candidat,
     router,
