@@ -1,9 +1,19 @@
 import React from "react";
 
-const Name = ({ prenom, nom }: { prenom: string; nom: string | undefined }) => {
+const Name = ({
+  prenom,
+  nom,
+  classStyle,
+}: {
+  prenom: string;
+  nom: string | undefined;
+  classStyle: string;
+}) => {
   return (
-    <div className="flex gap-2">
-      <span className="select-none text-3xl uppercase font-bold inline-block max-w-[163px] truncate whitespace-nowrap text-ellipsis">
+    <div className={`flex gap-2 items-center justify-center  `}>
+      <span
+        className={`${classStyle} select-none text-3xl uppercase font-bold inline-block  truncate whitespace-nowrap text-ellipsis`}
+      >
         {/* */}
         {prenom}
       </span>

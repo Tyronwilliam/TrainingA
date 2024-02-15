@@ -4,15 +4,18 @@ import { capitalizeFirstLetter } from "../function";
 import CardCandidat from "./CardCandidat";
 import Link from "next/link";
 import ImageCandidat from "./ImageCandidat";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 const InfniteScrollDisplay = ({
   candidat,
   loadMoreUsers,
   meta,
+  pathname,
 }: {
   candidat: any;
   loadMoreUsers: () => void;
   meta: number;
+  pathname: string;
 }) => {
   return (
     <section className="flex flex-col">
@@ -27,7 +30,7 @@ const InfniteScrollDisplay = ({
           </p>
         }
       >
-        <section className="flex flex-wrap justify-center items-center flex-col md:flex-row w-full h-fit gap-10 md:gap-5 p-5 md:gap-y-[50px]">
+        <section className="flex flex-wrap justify-center items-center flex-col md:flex-row w-full h-fit gap-10 md:gap-5 p-5 md:gap-y-[50px] max-w-[1100px] mx-auto">
           {candidat?.map((talent: any) => {
             const image =
               talent?.attributes?.Photo_de_presentation?.data?.attributes?.url;
@@ -39,8 +42,9 @@ const InfniteScrollDisplay = ({
                 talent={talent}
                 nom={letterLastName}
                 key={talent?.id}
+                showName={true}
               >
-                <Link href={"/"}>
+                <Link href={`${pathname}/${talent?.id}`}>
                   <ImageCandidat image={image} />
                 </Link>
               </CardCandidat>

@@ -35,7 +35,7 @@ const GenreLayout = ({
   return (
     <section>
       {/* Filtre */}
-      <section className="w-full px-3 flex flex-col gap-8">
+      <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
         <RoleFilter
           dictionary={dictionary}
           currentRole={currentRole}
@@ -58,6 +58,7 @@ const GenreLayout = ({
         candidat={candidat}
         loadMoreUsers={loadMoreUsers}
         meta={meta}
+        pathname={pathname}
       />
     </section>
   );

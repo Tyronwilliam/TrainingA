@@ -127,6 +127,18 @@
       }
     }
   },
+  "singleTalent": {
+    "page": {
+      "physionomie": {
+        "Taille": "Taille",
+        "Confection_Haut": "Confection haut",
+        "Confection_Bas": "Confection bas",
+        "Chaussures": "Pointure",
+        "Cheveux": "Cheveux",
+        "Yeux": "Yeux"
+      }
+    }
+  },
   "cta": {
     "formEvent": {
       "send": "Envoyer",

@@ -5,10 +5,12 @@ const CardCandidat = ({
   talent,
   children,
   nom,
+  showName,
 }: {
   talent: any;
   children: ReactNode;
   nom: string | undefined;
+  showName: boolean;
 }) => {
   return (
     <div
@@ -21,7 +23,13 @@ const CardCandidat = ({
       >
         {children}
       </div>
-      <Name prenom={talent?.attributes?.Prenom} nom={nom} />
+      {showName && (
+        <Name
+          prenom={talent?.attributes?.Prenom}
+          nom={nom}
+          classStyle="max-w-[163px]"
+        />
+      )}
     </div>
   );
 };
