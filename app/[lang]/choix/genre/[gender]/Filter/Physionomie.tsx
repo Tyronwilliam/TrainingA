@@ -1,9 +1,7 @@
-import classNames from "classnames";
-import React from "react";
 import { BsCircle, BsFillCircleFill } from "react-icons/bs";
-import ListSubFilter from "./ListSubFilter";
-import { CTAListProps, PhysionomieProps } from "./type";
+import { PhysionomieProps } from "../type";
 import { CtaList } from "./CtaList";
+import ListSubFilter from "./ListSubFilter";
 
 export const Physionomie = ({
   dictionary,

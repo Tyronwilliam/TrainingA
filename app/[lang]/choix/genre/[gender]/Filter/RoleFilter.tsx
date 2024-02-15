@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React from "react";
 import { CtaList } from "./CtaList";
-import { RoleFilterProps } from "./type";
+import { RoleFilterProps } from "../type";
 
 const RoleFilter = ({
   dictionary,

@@ -1,6 +1,6 @@
 import { Dictionary } from "@/types/dictionary";
 import React from "react";
-import { PhysioState } from "./type";
+import { PhysioState } from "../type";
 import { CtaList } from "./CtaList";
 
 const ListSubFilter = ({

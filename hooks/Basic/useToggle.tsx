@@ -6,14 +6,8 @@ function useToggle() {
   const toggle = () => {
     setIsOpen(!open);
   };
-  // a remove d'ici
-  const capitalizeFirstLetter = (
-    nom: string | undefined
-  ): string | undefined => {
-    return nom ? nom.substring(0, 1).toUpperCase() : undefined;
-  };
 
-  return { toggle, open, capitalizeFirstLetter };
+  return { toggle, open };
 }
 
 export default useToggle;

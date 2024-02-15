@@ -190,3 +190,9 @@ export const handleQuery = (
   }
   return queryInUrl;
 };
+
+export const capitalizeFirstLetter = (
+  nom: string | undefined
+): string | undefined => {
+  return nom ? nom.substring(0, 1).toUpperCase() : undefined;
+};

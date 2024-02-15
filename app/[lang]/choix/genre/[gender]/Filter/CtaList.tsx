@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { CTAListProps } from "./type";
+import { CTAListProps } from "../type";
 
 export const CtaList = ({
   cle,
