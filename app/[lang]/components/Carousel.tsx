@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -15,6 +15,24 @@ const Carousel = ({
   const navigationPrevRef = useRef<HTMLDivElement | null>(null);
   const navigationNextRef = useRef<HTMLDivElement | null>(null);
   const [swiper, setSwiper] = useState<any | null>(null);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  useEffect(() => {
+    if (swiper) {
+      swiper.on("slideChange", () => {
+        const previousSlideIndex = swiper.previousIndex;
+        pauseVideo(previousSlideIndex);
+        setCurrentSlideIndex(swiper.realIndex);
+      });
+    }
+  }, [swiper]);
+
+  const pauseVideo = (slideIndex: number) => {
+    const videoElement = document.querySelector(`#video-${slideIndex}`);
+    if (videoElement instanceof HTMLVideoElement && !videoElement.paused) {
+      videoElement.pause();
+    }
+  };
   return (
     <Swiper
       //@ts-ignore
@@ -29,7 +47,11 @@ const Carousel = ({
         nextEl: navigationNextRef?.current,
       }}
     >
-      {children}
+      {React.Children.map(children, (child, index) =>
+        React.cloneElement(child as React.ReactElement, {
+          key: index,
+        })
+      )}
       {React.Children.count(children) > 1 && (
         <div className="flex justify-between items-center  z-50 absolute top-2/4 w-full h-fit">
           <div
