@@ -8,9 +8,11 @@ import { Swiper } from "swiper/react";
 const Carousel = ({
   children,
   myStyle,
+  isVideo,
 }: {
   children: React.ReactNode;
   myStyle: string;
+  isVideo?: boolean;
 }) => {
   const navigationPrevRef = useRef<HTMLDivElement | null>(null);
   const navigationNextRef = useRef<HTMLDivElement | null>(null);
@@ -47,21 +49,23 @@ const Carousel = ({
         nextEl: navigationNextRef?.current,
       }}
     >
-      {React.Children.map(children, (child, index) =>
-        React.cloneElement(child as React.ReactElement, {
-          key: index,
-        })
-      )}
+      {isVideo
+        ? React.Children.map(children, (child, index) =>
+            React.cloneElement(child as React.ReactElement, {
+              key: index,
+            })
+          )
+        : children}
       {React.Children.count(children) > 1 && (
         <div className="flex justify-between items-center  z-50 absolute top-2/4 w-full h-fit">
           <div
-            className="fill-white w-10 h-20 z-50 bg-black cursor-pointer"
+            className="fill-white w-10 h-20 z-50  cursor-pointer"
             ref={navigationPrevRef}
           >
             <SlArrowLeft className="fill-white w-full h-full " />
           </div>
           <div
-            className="fill-white w-10 h-20 z-50 bg-black cursor-pointer"
+            className="fill-white w-10 h-20 z-50 cursor-pointer"
             ref={navigationNextRef}
           >
             <SlArrowRight className="fill-white w-full h-full " />

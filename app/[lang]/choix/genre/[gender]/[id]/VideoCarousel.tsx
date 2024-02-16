@@ -3,14 +3,14 @@ import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { SwiperSlide } from "swiper/react";
 
-const VideosCarousel = ({
-  videos,
+const VideoCarousel = ({
   toggle,
   open,
+  videos,
 }: {
-  videos: any[];
   toggle: () => void;
   open: boolean;
+  videos: any[];
 }) => {
   return (
     open && (
@@ -18,12 +18,11 @@ const VideosCarousel = ({
         open={open}
         className="w-full h-full  z-50 flex items-center justify-center fixed top-0 left-0 bg-black"
       >
-        {" "}
         <AiFillCloseCircle
           className="z-50 absolute right-6 top-6 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
           onClick={toggle}
         />
-        <Carousel myStyle="relative container__swiper">
+        <Carousel myStyle="relative container__swiper" isVideo={true}>
           {videos?.length > 0 &&
             videos?.map((demo: any, index: number) => {
               return (
@@ -47,4 +46,4 @@ const VideosCarousel = ({
   );
 };
 
-export default VideosCarousel;
+export default VideoCarousel;

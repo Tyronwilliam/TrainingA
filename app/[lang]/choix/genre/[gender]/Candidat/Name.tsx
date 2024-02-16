@@ -14,11 +14,11 @@ const Name = ({
   return (
     <div className={`flex gap-2 ${containerStyle}`}>
       <span
-        className={`${classStyle} select-none text-3xl uppercase font-bold inline-block  truncate whitespace-nowrap text-ellipsis`}
+        className={`${classStyle}text-white select-none text-3xl uppercase font-bold inline-block  truncate whitespace-nowrap text-ellipsis`}
       >
         {prenom}
       </span>
-      <span className="select-none text-3xl uppercase font-bold opacity-50">
+      <span className="select-none text-3xl uppercase font-bold opacity-50 text-white">
         {nom && nom}.
       </span>
     </div>

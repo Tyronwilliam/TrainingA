@@ -7,11 +7,9 @@ import Name from "../Candidat/Name";
 import { capitalizeFirstLetter } from "../function";
 import PhysonomieInfos from "./PhysonomieInfos";
 import Skills from "./Skills";
-import Carousel from "@/app/[lang]/components/Carousel";
-import { SwiperSlide } from "swiper/react";
 import { combineArrays } from "./function";
-import { AiFillCloseCircle } from "react-icons/ai";
-import VideosCarousel from "./VideosCarousel";
+import VideoCarousel from "./VideoCarousel";
+import PortfolioCarousel from "./PortfolioCarousel";
 
 const SingleCandidatLayout = ({
   candidat,
@@ -20,7 +18,8 @@ const SingleCandidatLayout = ({
   candidat: any;
   dictionary: Dictionary;
 }) => {
-  const { open, toggle } = useToggle();
+  const { open: isOpenModal1, toggle: toggleModal1 } = useToggle();
+  const { open: isOpenModal2, toggle: toggleModal2 } = useToggle();
   const letterLastName = capitalizeFirstLetter(candidat?.attributes?.Nom);
   const image =
     candidat?.attributes?.Photo_de_presentation?.data?.attributes?.url;
@@ -28,10 +27,22 @@ const SingleCandidatLayout = ({
   const bandeDemo = candidat?.attributes?.Bande_Demo?.data;
   const videoPresentation = candidat?.attributes?.Video_Presentation?.data;
   const videos = combineArrays(bandeDemo, videoPresentation);
+  const photoPresention =
+    candidat?.attributes?.Photo_de_presentation?.data?.attributes?.url;
+  const portfolio = candidat?.attributes?.Portfolio?.Portfolio?.data;
+
   return (
     <section className="flex flex-wrap w-full max-w-6xl min-h-[590px] justify-center items-center shrink-0 gap-6 m-auto pt-14 pb-5 px-5 md:items-start lg:gap-24">
-      <div className="relative max-h-[540px] w-full max-w-[333.3px] shrink-0 grow">
-        <CardCandidat talent={candidat} nom={letterLastName} showName={false}>
+      <div
+        onClick={toggleModal2}
+        className="relative max-h-[540px] w-full max-w-[333.3px] shrink-0 grow"
+      >
+        <CardCandidat
+          talent={candidat}
+          nom={letterLastName}
+          showName={false}
+          showFolio={true}
+        >
           <ImageCandidat image={image} />
         </CardCandidat>
       </div>
@@ -44,15 +55,29 @@ const SingleCandidatLayout = ({
         />
         <PhysonomieInfos dictionary={dictionary} candidat={candidat} />
         <Skills dictionary={dictionary} competence={competence} />
-        <button
-          type="button"
-          onClick={toggle}
-          className="w-fit  font-bold text-xl extraWide uppercase hover:opacity-50 transition-all duration-200 ease-out"
-        >
-          {dictionary?.singleTalent?.page?.videos}
-        </button>
+        {videos?.length > 0 && (
+          <button
+            type="button"
+            onClick={toggleModal1}
+            className="w-fit  font-bold text-xl extraWide uppercase hover:opacity-50 transition-all duration-200 ease-out"
+          >
+            {dictionary?.singleTalent?.page?.videos}
+          </button>
+        )}
       </div>{" "}
-      <VideosCarousel toggle={toggle} open={open} videos={videos} />
+      <VideoCarousel
+        toggle={toggleModal1}
+        open={isOpenModal1}
+        videos={videos}
+      />
+      <PortfolioCarousel
+        toggle={toggleModal2}
+        open={isOpenModal2}
+        presentation={photoPresention}
+        portfolio={portfolio}
+        nom={letterLastName}
+        candidat={candidat}
+      />
     </section>
   );
 };
