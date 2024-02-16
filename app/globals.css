@@ -208,14 +208,6 @@ html {
     background-size: 200% 200%;
     border: 1px solid white;
     cursor: pointer;
-    /* &:hover {
-      transition: all 0.5s ease-in-out;
-      background: linear-gradient(to bottom right, black 50%, white 50%);
-      background-position: bottom right;
-      background-size: 200% 200%;
-      border: 1px solid black;
-      color: black;
-    } */
     &:not([disabled]):hover {
       transition: all 0.5s ease-in-out;
       background: linear-gradient(to bottom right, black 50%, white 50%);
@@ -235,6 +227,30 @@ html {
   }
   .radius {
     border-radius: 5px;
+  }
+  .container__swiper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - 30px);
+    .swiper-wrapper {
+      /* z-index: 90; */
+      align-items: center;
+    }
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-pagination {
+      .swiper-pagination-bullet {
+        background-color: white;
+      }
+    }
   }
 
   .lds-ring {

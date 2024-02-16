@@ -136,7 +136,9 @@
         "Chaussures": "Pointure",
         "Cheveux": "Cheveux",
         "Yeux": "Yeux"
-      }
+      },
+      "skills": "Compétence(s)",
+      "videos": "Vidéos"
     }
   },
   "cta": {
