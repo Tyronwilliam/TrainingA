@@ -1,9 +1,5 @@
-import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import {
-  handleAddToPack,
-  isCandidatInPack,
-} from "../../choix/genre/[gender]/functionPackage";
+import PacksDisplay from "./PacksDisplay";
 
 const DialogPackage = ({
   open,
@@ -31,29 +27,7 @@ const DialogPackage = ({
             <span>Enregistrer dans ...</span>
           </div>
           {/* PACK CONTENT */}
-          <div className="box__middle-package">
-            {allPack?.map((pack: any) => {
-              console.log(candidatId);
-              const checked =
-                candidatId !== null && isCandidatInPack(pack, candidatId);
-              return (
-                <div key={pack.id}>
-                  <input
-                    type="checkbox"
-                    id={pack.id}
-                    checked={checked}
-                    onChange={() => {
-                      candidatId !== null &&
-                        handleAddToPack(checked, candidatId, pack.id);
-                    }}
-                  />
-                  <label htmlFor={pack.id}>
-                    <p>{pack.attributes.Nom}</p>
-                  </label>
-                </div>
-              );
-            })}
-          </div>
+          <PacksDisplay candidatId={candidatId} allPack={allPack} />
         </dialog>
       </section>
     )
