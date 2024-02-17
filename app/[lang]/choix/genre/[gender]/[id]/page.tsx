@@ -58,7 +58,7 @@ const SingleCandidatPage = async ({
     <>
       <PreviousNavHistory />
       <main
-        className="w-full  h-fit pt-5 flex items-center justify-center"
+        className="w-full  h-fit pt-5 flex items-center justify-center relative"
         style={{ minHeight: "calc(100vh - 48px)" }}
       >
         <SingleCandidatLayout candidat={candidat} dictionary={dictionary} />
