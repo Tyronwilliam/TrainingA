@@ -7,6 +7,7 @@ const Name = ({
   containerStyle,
   isPackage,
   toggle,
+  candidatId,
 }: {
   prenom: string;
   nom: string | undefined;
@@ -14,6 +15,7 @@ const Name = ({
   containerStyle: string;
   isPackage?: boolean;
   toggle?: () => void;
+  candidatId?: number;
 }) => {
   return (
     <div className={`flex gap-2 ${containerStyle}`}>
@@ -27,7 +29,7 @@ const Name = ({
       >
         {nom && nom}.
       </span>
-      {isPackage && <ButtonAdd toggle={toggle!} />}
+      {isPackage && <ButtonAdd toggle={toggle!} candidatId={candidatId!} />}
     </div>
   );
 };

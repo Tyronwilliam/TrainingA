@@ -2,8 +2,14 @@ import { usePackage } from "@/hooks/Package/usePackage";
 import React from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-const ButtonAdd = ({ toggle }: { toggle: () => void }) => {
-  const { fetchPackageById } = usePackage();
+const ButtonAdd = ({
+  toggle,
+  candidatId,
+}: {
+  toggle: () => void;
+  candidatId: number;
+}) => {
+  const { fetchPackageById, setCandidatId } = usePackage();
 
   return (
     <button
@@ -12,6 +18,7 @@ const ButtonAdd = ({ toggle }: { toggle: () => void }) => {
       onClick={() => {
         toggle();
         fetchPackageById();
+        setCandidatId(candidatId);
       }}
     >
       <AiOutlinePlusCircle className="w-6 h-6 hover:opacity-55" />

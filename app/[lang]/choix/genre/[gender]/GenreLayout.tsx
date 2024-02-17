@@ -35,7 +35,7 @@ const GenreLayout = ({
     valuePhysio,
   } = useFilter(talents, metaInitial);
   const { open, toggle } = useToggle();
-  const {  allPack } = usePackage();
+  const { allPack, candidatId } = usePackage();
   return (
     <section>
       <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
@@ -63,7 +63,12 @@ const GenreLayout = ({
         pathname={pathname}
         toggle={toggle}
       />
-      <DialogPackage open={open} toggle={toggle} allPack={allPack} />
+      <DialogPackage
+        open={open}
+        toggle={toggle}
+        allPack={allPack}
+        candidatId={candidatId}
+      />
     </section>
   );
 };

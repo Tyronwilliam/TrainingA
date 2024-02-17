@@ -13,6 +13,7 @@ export const usePackage = () => useContext(PackageContext);
 const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
   const [allPack, setAllPack] = useState([]);
+  const [candidatId, setCandidatId] = useState<number | null>(null);
   // @ts-ignore
   const userId = session?.user?.id; // @ts-ignore
   const jwt = session?.user?.jwt;
@@ -33,6 +34,8 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   const exposed = {
     fetchPackageById,
     allPack,
+    candidatId,
+    setCandidatId,
   };
   return (
     <PackageContext.Provider value={exposed}>

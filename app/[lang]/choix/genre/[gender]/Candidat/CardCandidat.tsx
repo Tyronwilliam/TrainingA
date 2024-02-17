@@ -48,6 +48,7 @@ const CardCandidat = ({
           containerStyle="justify-center items-center"
           isPackage={true}
           toggle={toggle}
+          candidatId={talent?.id}
         />
       )}
     </div>

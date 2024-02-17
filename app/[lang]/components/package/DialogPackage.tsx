@@ -1,14 +1,20 @@
 import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import {
+  handleAddToPack,
+  isCandidatInPack,
+} from "../../choix/genre/[gender]/functionPackage";
 
 const DialogPackage = ({
   open,
   toggle,
   allPack,
+  candidatId,
 }: {
   open: boolean;
   toggle: () => void;
   allPack: any[];
+  candidatId: number | null;
 }) => {
   return (
     open && (
@@ -27,23 +33,23 @@ const DialogPackage = ({
           {/* PACK CONTENT */}
           <div className="box__middle-package">
             {allPack?.map((pack: any) => {
-              // const checked = checkIsTalentAdded(item, idTalent);
+              console.log(candidatId);
+              const checked =
+                candidatId !== null && isCandidatInPack(pack, candidatId);
               return (
                 <div key={pack.id}>
                   <input
                     type="checkbox"
                     id={pack.id}
-                    // checked={checked}
+                    checked={checked}
                     onChange={() => {
-                      // if (checked) {
-                      //   sendMessageToClient(false, "Talent déjà ajouté");
-                      //   return;
-                      // } else {
-                      //   addRelationToPackage(item.id, idTalent);
-                      // }
+                      candidatId !== null &&
+                        handleAddToPack(checked, candidatId, pack.id);
                     }}
-                  />{" "}
-                  <p>{pack.attributes.Nom}</p>
+                  />
+                  <label htmlFor={pack.id}>
+                    <p>{pack.attributes.Nom}</p>
+                  </label>
                 </div>
               );
             })}
