@@ -4,6 +4,7 @@ import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { SwiperSlide } from "swiper/react";
 import Name from "../../Candidat/Name";
+import classNames from "classnames";
 
 const PortfolioCarousel = ({
   toggle,
@@ -60,13 +61,20 @@ const PortfolioCarousel = ({
           </SwiperSlide>
           {elementsParDeux?.length > 0 &&
             elementsParDeux?.map((photoPair: any[], index: number) => {
+              const isSingleImage = photoPair.length === 1;
+
               return (
                 <SwiperSlide key={index}>
                   <div className="max-w-[895px]  max-h-full mx-auto flex">
                     {photoPair.map((pair: any) => (
                       <div
                         key={pair?.id}
-                        className="relative shrink-0 grow-0 basis-2/4  max-h-[600px] mx-auto z-50 lg:h-[600px]"
+                        className={classNames({
+                          "relative shrink-0 grow-0 basis-2/4  max-h-[600px] mx-auto z-50 lg:h-[600px]":
+                            !isSingleImage,
+                          "relative basis-2/4 max-h-[600px] grow z-50":
+                            isSingleImage,
+                        })}
                       >
                         <Image
                           src={`${pair?.attributes?.url}`}
@@ -75,7 +83,12 @@ const PortfolioCarousel = ({
                           height={600}
                           priority={true}
                           alt="picture model"
-                          className="w-full h-full z-50 max-h-[600px] object-cover object-top"
+                          className={classNames({
+                            "w-full h-full z-50 max-h-[600px] object-cover object-top":
+                              !isSingleImage,
+                            "w-full h-auto object-contain max-h-[600px]":
+                              isSingleImage,
+                          })}
                           sizes="(max-width: 768px) 50%, (max-width: 1382px) 50%, 50%"
                         />
                       </div>
