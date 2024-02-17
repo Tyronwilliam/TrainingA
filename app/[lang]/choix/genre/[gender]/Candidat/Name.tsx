@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const Name = ({
   prenom,
@@ -23,6 +24,10 @@ const Name = ({
       >
         {nom && nom}.
       </span>
+      <button>
+        {" "}
+        <AiOutlinePlusCircle className="add_package" />
+      </button>
     </div>
   );
 };

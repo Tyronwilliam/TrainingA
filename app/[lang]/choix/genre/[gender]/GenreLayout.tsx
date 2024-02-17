@@ -3,7 +3,7 @@ import useFilter from "@/hooks/Filter/useFilter";
 import { Dictionary } from "@/types/dictionary";
 import { usePathname } from "next/navigation";
 import InfniteScrollDisplay from "./Candidat/InfniteScrollDisplay";
-import { Physionomie } from "./Filter/Physionomie";
+import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
 
 const GenreLayout = ({
@@ -34,7 +34,6 @@ const GenreLayout = ({
 
   return (
     <section>
-      {/* Filtre */}
       <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
         <RoleFilter
           dictionary={dictionary}
@@ -42,7 +41,7 @@ const GenreLayout = ({
           handleClick={handleRole}
           handleFilter={handleFilter}
         />
-        <Physionomie
+        <PhysionomieFilter
           dictionary={dictionary}
           valuePhysio={valuePhysio}
           handlePhysioQuery={handlePhysioQuery}
@@ -53,7 +52,6 @@ const GenreLayout = ({
           gender={gender}
         />
       </section>
-      {/* TALENT LAYOUT */}
       <InfniteScrollDisplay
         candidat={candidat}
         loadMoreUsers={loadMoreUsers}
