@@ -7,9 +7,11 @@ import CardCandidat from "./CardCandidat";
 const TalentsLayout = ({
   candidat,
   pathname,
+  toggle,
 }: {
   candidat: any;
   pathname: string;
+  toggle: () => void;
 }) => {
   return (
     <section className="flex flex-wrap justify-center items-center flex-col md:flex-row w-full h-fit gap-10 md:gap-5 p-5 md:gap-y-[50px] max-w-[1100px] mx-auto">
@@ -23,6 +25,7 @@ const TalentsLayout = ({
             nom={letterLastName}
             key={talent?.id}
             showName={true}
+            toggle={toggle}
           >
             <Link href={`${pathname}/${talent?.id}`}>
               <ImageCandidat image={image} />

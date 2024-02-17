@@ -9,6 +9,7 @@ import { GoogleProvider } from "./provider/GoogleProvider";
 import { getDictionary } from "@/get-disctionary";
 import Footer from "./[lang]/Footer";
 import { authOptions } from "@/utils/auth";
+import PackageProvider from "@/hooks/Package/usePackage";
 
 const Roboto = Roboto_Condensed({
   subsets: ["latin"],
@@ -32,7 +33,9 @@ export default async function RootLayout({
         {" "}
         <GoogleProvider dictionary={dictionary} params={params}>
           <Provider session={session}>
-            <PreferencesProvider>{children}</PreferencesProvider>
+            <PackageProvider>
+              <PreferencesProvider>{children}</PreferencesProvider>
+            </PackageProvider>
           </Provider>{" "}
         </GoogleProvider>
       </body>

@@ -1,16 +1,19 @@
-import React from "react";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import ButtonAdd from "@/app/[lang]/components/package/ButtonAdd";
 
 const Name = ({
   prenom,
   nom,
   classStyle,
   containerStyle,
+  isPackage,
+  toggle,
 }: {
   prenom: string;
   nom: string | undefined;
   classStyle: string;
   containerStyle: string;
+  isPackage?: boolean;
+  toggle?: () => void;
 }) => {
   return (
     <div className={`flex gap-2 ${containerStyle}`}>
@@ -24,10 +27,7 @@ const Name = ({
       >
         {nom && nom}.
       </span>
-      <button>
-        {" "}
-        <AiOutlinePlusCircle className="add_package" />
-      </button>
+      {isPackage && <ButtonAdd toggle={toggle!} />}
     </div>
   );
 };

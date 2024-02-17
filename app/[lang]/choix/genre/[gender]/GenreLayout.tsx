@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 import InfniteScrollDisplay from "./Candidat/InfniteScrollDisplay";
 import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
+import DialogPackage from "@/app/[lang]/components/package/DialogPackage";
+import useToggle from "@/hooks/Basic/useToggle";
+import { usePackage } from "@/hooks/Package/usePackage";
 
 const GenreLayout = ({
   talents,
@@ -31,7 +34,8 @@ const GenreLayout = ({
     router,
     valuePhysio,
   } = useFilter(talents, metaInitial);
-
+  const { open, toggle } = useToggle();
+  const {  allPack } = usePackage();
   return (
     <section>
       <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
@@ -57,7 +61,9 @@ const GenreLayout = ({
         loadMoreUsers={loadMoreUsers}
         meta={meta}
         pathname={pathname}
+        toggle={toggle}
       />
+      <DialogPackage open={open} toggle={toggle} allPack={allPack} />
     </section>
   );
 };

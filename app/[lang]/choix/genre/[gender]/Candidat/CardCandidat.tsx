@@ -8,12 +8,14 @@ const CardCandidat = ({
   nom,
   showName,
   showFolio,
+  toggle,
 }: {
   talent: any;
   children: ReactNode;
   nom: string | undefined;
   showName: boolean;
   showFolio?: boolean;
+  toggle?: () => void;
 }) => {
   return (
     <div
@@ -44,6 +46,8 @@ const CardCandidat = ({
           nom={nom}
           classStyle="max-w-[163px] text-3xl"
           containerStyle="justify-center items-center"
+          isPackage={true}
+          toggle={toggle}
         />
       )}
     </div>
