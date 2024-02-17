@@ -57,7 +57,7 @@ const Carousel = ({
           )
         : children}
       {React.Children.count(children) > 1 && (
-        <div className="flex justify-between items-center  z-50 absolute top-2/4 w-full h-fit">
+        <div className="flex justify-between items-center  z-50 absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] w-full h-fit">
           <div
             className="fill-white w-10 h-20 z-50  cursor-pointer"
             ref={navigationPrevRef}

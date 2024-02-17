@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { SwiperSlide } from "swiper/react";
-import Name from "../Candidat/Name";
+import Name from "../../Candidat/Name";
 
 const PortfolioCarousel = ({
   toggle,
@@ -38,7 +38,7 @@ const PortfolioCarousel = ({
         <Name
           prenom={candidat?.attributes?.Prenom}
           nom={nom}
-          classStyle="max-w-[263px] "
+          classStyle="max-w-[263px] text-5xl"
           containerStyle="justify-center items-center z-50 "
         />
         <Carousel myStyle="relative container__swiper  ">

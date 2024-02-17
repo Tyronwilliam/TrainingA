@@ -42,7 +42,7 @@ const CardCandidat = ({
         <Name
           prenom={talent?.attributes?.Prenom}
           nom={nom}
-          classStyle="max-w-[163px]"
+          classStyle="max-w-[163px] text-3xl"
           containerStyle="justify-center items-center"
         />
       )}
