@@ -1,19 +1,20 @@
 "use client";
+import CandidateTable from "@/app/[lang]/components/package/CandidateTable";
+import DialogPackage from "@/app/[lang]/components/package/DialogPackage";
+import NewItemForm from "@/app/[lang]/components/package/NewItemForm";
+import useToggle from "@/hooks/Basic/useToggle";
 import useFilter from "@/hooks/Filter/useFilter";
+import { usePackage } from "@/hooks/Package/usePackage";
 import { Dictionary } from "@/types/dictionary";
 import { usePathname } from "next/navigation";
+import { FormEvent, useState } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { FaChevronRight } from "react-icons/fa6";
 import InfniteScrollDisplay from "./Candidat/InfniteScrollDisplay";
 import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
-import DialogPackage from "@/app/[lang]/components/package/DialogPackage";
-import useToggle from "@/hooks/Basic/useToggle";
-import { usePackage } from "@/hooks/Package/usePackage";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { MdEdit } from "react-icons/md";
-import { MdEditOff } from "react-icons/md";
-import { FaChevronRight } from "react-icons/fa6";
-import { FaChevronDown } from "react-icons/fa6";
-import NewItemForm from "@/app/[lang]/components/package/NewPackage";
+import PackageItem from "@/app/[lang]/components/package/PackageItem";
+import PackageListLayout from "@/app/[lang]/components/package/PackageListLayout";
 
 const GenreLayout = ({
   talents,
@@ -52,11 +53,16 @@ const GenreLayout = ({
     setPackName,
     useCreatePackage,
     fetchPackageById,
+    useUpdatePackageName,
+    openPackId,
+    setOpenPackId,
+    handleTogglePack,
   } = usePackage();
 
-  const handleToggle = (value?: string) => {
-    setPackName(value);
+  const handleToggle = (packId: number, packNom?: string) => {
+    packNom && setPackName(packNom);
     toggleInput();
+    setOpenPackId(openPackId === packId ? null : packId);
   };
   return (
     <section>
@@ -115,42 +121,20 @@ const GenreLayout = ({
             className="text-white bg-black border-[1px] border-gray-800 radius w-[90%] max-w-[666px] min-w-64 flex flex-col gap-4 p-5"
           >
             <AiFillCloseCircle
-              className="z-50 absolute right-10 top-2 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
+              className="z-50 absolute right-1 top-2 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
               onClick={() => {
                 toggleModalOne();
               }}
             />
-            {allPack?.length === 0 ? (
-              <p className="text-center">Vous n'avez créé aucun package.</p>
-            ) : (
-              allPack?.length > 0 && (
-                <div className="flex flex-col gap-3 max-h-80 overflow-y-scroll">
-                  {allPack?.map((pack: any) => {
-                    return (
-                      <div
-                        key={pack.id}
-                        className="flex justify-between w-[95%] border-[1px] border-white border-opacity-55 radius cursor-pointer font-bold  p-4 gap-4 items-center background__grey custom__hover"
-                      >
-                        <NewItemForm
-                          isOpen={openInput}
-                          toggle={handleToggle}
-                          handleInputChange={handleInputChange}
-                          itemValue={packName}
-                          onSubmit={useCreatePackage}
-                          placeholder={packName}
-                          label=""
-                          isUpdate={true}
-                          buttonText={pack?.attributes?.Nom}
-                        />
-                        <div>
-                          <FaChevronRight className="w-4 h-4" />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )
-            )}
+            <PackageListLayout
+              allPack={allPack}
+              openPackId={openPackId}
+              handleToggle={handleToggle}
+              handleInputChange={handleInputChange}
+              useUpdatePackageName={useUpdatePackageName}
+              handleTogglePack={handleTogglePack}
+              packName={packName}
+            />
           </dialog>
         </section>
       )}

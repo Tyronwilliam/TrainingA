@@ -1,5 +1,5 @@
 import { AiFillCloseCircle } from "react-icons/ai";
-import NewItemForm from "./NewPackage";
+import NewItemForm from "./NewItemForm";
 import PacksDisplay from "./PacksDisplay";
 
 const DialogPackage = ({

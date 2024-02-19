@@ -23,7 +23,20 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   const [allPack, setAllPack] = useState([]);
   const [candidatId, setCandidatId] = useState<number | null>(null);
   const [packName, setPackName] = useState<string>("");
+  const [openPackId, setOpenPackId] = useState<number | null>(null);
+  const [currentTable, setCurrentTable] = useState<number | null>(null);
 
+  const handleCurrentTable = (tableId: number) => {
+    if (currentTable === tableId) {
+      setCurrentTable(null);
+    } else {
+      setCurrentTable(tableId);
+    }
+  };
+
+  const handleTogglePack = (packId: number) => {
+    setOpenPackId(openPackId === packId ? null : packId);
+  };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.currentTarget.value;
     setPackName(value);
@@ -36,6 +49,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
         const packages = response?.data?.data;
         setAllPack(packages);
       } else {
+        console.log(response);
         sendToast(true, response?.response?.data?.error?.message);
       }
     } catch (err) {
@@ -125,6 +139,12 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     packName,
     setPackName,
     useUpdatePackageName,
+    openPackId,
+    setOpenPackId,
+    handleTogglePack,
+    currentTable,
+    setCurrentTable,
+    handleCurrentTable,
   };
   return (
     <PackageContext.Provider value={exposed}>

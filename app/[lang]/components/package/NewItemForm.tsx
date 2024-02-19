@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { CgFolderAdd } from "react-icons/cg";
-import { MdEdit } from "react-icons/md";
+import { MdEdit, MdEditOff } from "react-icons/md";
 
 // const NewPackage = ({
 //   openInput,
@@ -51,8 +51,8 @@ import { MdEdit } from "react-icons/md";
 // export default NewPackage;
 interface NewItemFormProps<T> {
   isOpen: boolean;
-  toggle: (packName?: string) => void;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  toggle: () => void;
+  handleInputChange: () => void;
   itemValue: T;
   onSubmit: () => void;
   buttonText: string;
@@ -79,6 +79,7 @@ const NewItemForm = <T,>({
         onSubmit();
         toggle();
       }}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="flex flex-col mb-2">
         {label && <label htmlFor="name">{label}:</label>}
@@ -86,21 +87,29 @@ const NewItemForm = <T,>({
           type="text"
           id="name"
           placeholder={placeholder}
-          className="max-w-52"
-          onChange={(e) => handleInputChange(e)}
+          className="max-w-52 placeholder:text-gray-500"
+          onChange={handleInputChange}
           value={itemValue as any}
         />
       </div>
-      <button type="submit" className="boutonSlideCommon p-2 radius">
-        {isUpdate ? "Mettre à jour" : "Créer"}
-      </button>
+      <div className="flex items-center gap-2">
+        <button type="submit" className="boutonSlideCommon p-2 radius">
+          {isUpdate ? "Mettre à jour" : "Créer"}
+        </button>
+        <button onClick={toggle} type="button">
+          <MdEditOff className="w-5 h-5 hover:opacity-55" />
+        </button>
+      </div>
     </form>
   ) : (
     <>
       {isUpdate ? (
-        <div className="flex gap-1 items-center">
+        <div
+          className="flex gap-1 items-center"
+          onClick={(e) => e.stopPropagation()}
+        >
           <p>{buttonText}</p>
-          <button onClick={() => toggle(buttonText)}>
+          <button onClick={toggle}>
             <MdEdit />
           </button>
         </div>
