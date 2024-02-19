@@ -11,13 +11,16 @@ export const isCandidatInPack = (pack: any, id: number) => {
 export const handleAddToPack = (
   checked: boolean,
   candidatId: number,
-  packId: number
+  packId: number,
+  useAssociateCandidatsWithPackage: (
+    packageId: number,
+    candidatId: number
+  ) => void
 ) => {
   if (checked) {
     sendToast(true, "Talent already in package");
     return;
   } else {
-    console.log("FUNCTION ADD TO PACKAGE");
-    // addRelationToPackage(packId, candidatId);
+    useAssociateCandidatsWithPackage(packId, candidatId);
   }
 };

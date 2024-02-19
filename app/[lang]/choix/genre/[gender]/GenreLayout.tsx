@@ -34,8 +34,10 @@ const GenreLayout = ({
     router,
     valuePhysio,
   } = useFilter(talents, metaInitial);
-  const { open, toggle } = useToggle();
-  const { allPack, candidatId } = usePackage();
+  const { open: openModal, toggle: toggleModal } = useToggle();
+  const { open: openInput, toggle: toggleInput } = useToggle();
+  const { allPack, candidatId, useAssociateCandidatsWithPackage } =
+    usePackage();
   return (
     <section>
       <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
@@ -61,13 +63,16 @@ const GenreLayout = ({
         loadMoreUsers={loadMoreUsers}
         meta={meta}
         pathname={pathname}
-        toggle={toggle}
+        toggleModal={toggleModal}
       />
       <DialogPackage
-        open={open}
-        toggle={toggle}
+        openModal={openModal}
+        openInput={openInput}
+        toggleModal={toggleModal}
+        toggleInput={toggleInput}
         allPack={allPack}
         candidatId={candidatId}
+        useAssociateCandidatsWithPackage={useAssociateCandidatsWithPackage}
       />
     </section>
   );

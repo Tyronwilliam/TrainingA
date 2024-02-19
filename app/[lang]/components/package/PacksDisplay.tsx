@@ -7,24 +7,34 @@ import {
 const PacksDisplay = ({
   allPack,
   candidatId,
+  useAssociateCandidatsWithPackage,
 }: {
   allPack: any[];
   candidatId: number | null;
+  useAssociateCandidatsWithPackage: (
+    packageId: number,
+    candidatId: number
+  ) => void;
 }) => {
   return (
-    <div className="">
+    <div className="flex flex-col gap-4 max-h-40 overflow-y-scroll">
       {allPack?.map((pack: any) => {
         const checked =
           candidatId !== null && isCandidatInPack(pack, candidatId);
         return (
-          <div key={pack.id}>
+          <div key={pack.id} className="flex gap-2 items-center">
             <input
               type="checkbox"
               id={pack.id}
               checked={checked}
               onChange={() => {
                 candidatId !== null &&
-                  handleAddToPack(checked, candidatId, pack.id);
+                  handleAddToPack(
+                    checked,
+                    candidatId,
+                    pack.id,
+                    useAssociateCandidatsWithPackage
+                  );
               }}
             />
             <label htmlFor={pack.id}>

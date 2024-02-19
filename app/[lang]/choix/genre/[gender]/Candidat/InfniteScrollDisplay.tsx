@@ -6,13 +6,13 @@ const InfniteScrollDisplay = ({
   loadMoreUsers,
   meta,
   pathname,
-  toggle
+  toggleModal,
 }: {
   candidat: any;
   loadMoreUsers: () => void;
   meta: number;
   pathname: string;
-  toggle: () => void;
+  toggleModal: () => void;
 }) => {
   return (
     <section className="flex flex-col">
@@ -30,7 +30,7 @@ const InfniteScrollDisplay = ({
         <TalentsLayout
           candidat={candidat}
           pathname={pathname}
-          toggle={toggle}
+          toggle={toggleModal}
         />
       </InfiniteScroll>
     </section>
