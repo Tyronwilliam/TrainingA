@@ -24,3 +24,13 @@ export const handleAddToPack = (
     useAssociateCandidatsWithPackage(packId, candidatId);
   }
 };
+export const generateUrlFromCandidats = (
+  candidats: [candidats: { id: number }],
+  packName: string
+) => {
+  const talentIDs = candidats?.map((candidat) => candidat?.id);
+  const talentIDsString = talentIDs.join(",");
+  const baseURL = `${process.env.NEXT_PUBLIC_FRONT_URL}/fr/package?`;
+  const url = baseURL + "talentIds=" + talentIDsString + "&name=" + packName;
+  return url;
+};

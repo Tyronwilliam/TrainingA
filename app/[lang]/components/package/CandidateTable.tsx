@@ -9,8 +9,8 @@ const CandidateTable = ({
   onDeleteCandidate?: () => void;
 }) => {
   return (
-    <div className="max-h-36 overflow-y-scroll overflow-x-scroll md:overflow-x-hidden">
-      <table className="table-auto w-full mt-2">
+    <div className="max-h-36 overflow-y-scroll my-4 overflow-x-scroll md:overflow-x-hidden">
+      <table className="table-auto w-full ">
         <thead className="text-left font-bold uppercase">
           <tr>
             <th>Nom</th>

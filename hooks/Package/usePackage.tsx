@@ -1,4 +1,5 @@
 "use client";
+import { generateUrlFromCandidats } from "@/app/[lang]/choix/genre/[gender]/functionPackage";
 import {
   associateCandidatsWithPackage,
   createPackage,
@@ -42,6 +43,20 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     setPackName(value);
   };
 
+  const handleCopyUrlClipBoard = async (
+    candidats: [candidats: { id: number }],
+    packName: string
+  ) => {
+    const url = generateUrlFromCandidats(candidats, packName);
+    await navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        sendToast(false, "URL COPIED");
+      })
+      .catch((error) => {
+        sendToast(true, "FAIL TO COPY URL");
+      });
+  };
   const fetchPackageById = async () => {
     try {
       const response = await getPackagesById(userId, jwt);
@@ -128,6 +143,8 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       sendToast(true, "An error occured");
     }
   };
+
+  const useDeletePackage = async () => {};
   const exposed = {
     fetchPackageById,
     allPack,
@@ -145,6 +162,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     currentTable,
     setCurrentTable,
     handleCurrentTable,
+    handleCopyUrlClipBoard,
   };
   return (
     <PackageContext.Provider value={exposed}>

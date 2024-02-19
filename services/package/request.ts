@@ -103,3 +103,22 @@ export const updatePackageName = async (
     return error;
   }
 };
+export const deletePackage = async (id: number, jwt: string) => {
+  try {
+    const response = await axios.delete(
+      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate=*`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    return response;
+  } catch (error: any) {
+    console.error(
+      "Une erreur s'est produite lors de la requête :",
+      error.message
+    );
+    return error;
+  }
+};

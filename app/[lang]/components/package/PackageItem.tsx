@@ -23,7 +23,8 @@ const PackageItem = ({
   handleTogglePack,
   packName,
 }: PackageItemProps) => {
-  const { currentTable, handleCurrentTable } = usePackage();
+  const { currentTable, handleCurrentTable, handleCopyUrlClipBoard } =
+    usePackage();
   return (
     <div
       key={pack.id}
@@ -56,13 +57,30 @@ const PackageItem = ({
         </div>
       </div>
       {currentTable === pack?.id && (
-        <CandidateTable candidates={pack.attributes.candidats?.data} />
+        <>
+          <CandidateTable candidates={pack.attributes.candidats?.data} />
+          <div className="flex flex-col gap-4 w-fit">
+            <button
+              className="boutonSlideCommon p-2 radius w-fit uppercase"
+              onClick={() =>
+                handleCopyUrlClipBoard(
+                  pack.attributes.candidats?.data,
+                  pack.attributes.Nom
+                )
+              }
+            >
+              GéNéRER LE LIEN
+            </button>
+            {/* SEULEMENT POUR ADMIN */}
+            <button className="boutonSlideCommon p-2 radius w-fit uppercase">
+              GéNéRER LES CONTRATS
+            </button>
+            <button className="boutonSlideCommon p-2 radius w-fit uppercase">
+              SUPPRIMER LE PACKAGE
+            </button>
+          </div>
+        </>
       )}
-      <div>
-        <button></button>
-        <button></button>
-        <button></button>
-      </div>
     </div>
   );
 };
