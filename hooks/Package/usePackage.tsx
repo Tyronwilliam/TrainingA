@@ -1,7 +1,9 @@
 "use client";
 import {
   associateCandidatsWithPackage,
+  createPackage,
   getPackagesById,
+  updatePackageName,
 } from "@/services/package/request";
 import { sendToast } from "@/utils/toast";
 import { useSession } from "next-auth/react";
@@ -15,11 +17,17 @@ export const PackageContext = createContext<GenericContextType>({});
 export const usePackage = () => useContext(PackageContext);
 const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
-  const [allPack, setAllPack] = useState([]);
-  const [candidatId, setCandidatId] = useState<number | null>(null);
   // @ts-ignore
   const userId = session?.user?.id; // @ts-ignore
   const jwt = session?.user?.jwt;
+  const [allPack, setAllPack] = useState([]);
+  const [candidatId, setCandidatId] = useState<number | null>(null);
+  const [packName, setPackName] = useState<string>("");
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const value = e.currentTarget.value;
+    setPackName(value);
+  };
 
   const fetchPackageById = async () => {
     try {
@@ -36,7 +44,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   };
   const useAssociateCandidatsWithPackage = async (
     packageId: number,
-    candidatId: number,
+    candidatId: number
   ) => {
     const data = {
       candidats: [candidatId],
@@ -60,12 +68,63 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       );
     }
   };
+  const useCreatePackage = async () => {
+    const data = {
+      Nom: packName,
+      users_permissions_user: userId,
+    };
+    try {
+      const response = await createPackage(data, jwt);
+      if (response?.status === 200) {
+        const id = await response?.data?.data?.id;
+        if (candidatId !== null) {
+          await useAssociateCandidatsWithPackage(id, candidatId);
+          await fetchPackageById();
+          sendToast(false, "Package crée");
+          setPackName("");
+        }
+      } else {
+        sendToast(true, response?.response?.data?.error?.message);
+      }
+    } catch (error: any) {
+      console.error(
+        "Une erreur s'est produite lors de la requête :",
+        error.message
+      );
+      sendToast(true, "An error occured");
+    }
+  };
+
+  const useUpdatePackageName = async (packId: number) => {
+    try {
+      const response = await updatePackageName(packId, packName, jwt);
+
+      if (response?.status === 200) {
+        await fetchPackageById();
+        sendToast(false, "Modification réussi");
+        setPackName("");
+      } else {
+        sendToast(true, response?.response?.data?.error?.message);
+      }
+    } catch (error: any) {
+      console.error(
+        "Une erreur s'est produite lors de la requête :",
+        error.message
+      );
+      sendToast(true, "An error occured");
+    }
+  };
   const exposed = {
     fetchPackageById,
     allPack,
     candidatId,
     setCandidatId,
     useAssociateCandidatsWithPackage,
+    handleInputChange,
+    useCreatePackage,
+    packName,
+    setPackName,
+    useUpdatePackageName,
   };
   return (
     <PackageContext.Provider value={exposed}>

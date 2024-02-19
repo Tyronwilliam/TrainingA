@@ -1,6 +1,6 @@
 import { AiFillCloseCircle } from "react-icons/ai";
+import NewItemForm from "./NewPackage";
 import PacksDisplay from "./PacksDisplay";
-import { CgFolderAdd } from "react-icons/cg";
 
 const DialogPackage = ({
   openModal,
@@ -10,6 +10,9 @@ const DialogPackage = ({
   allPack,
   candidatId,
   useAssociateCandidatsWithPackage,
+  handleInputChange,
+  packName,
+  useCreatePackage,
 }: {
   openModal: boolean;
   openInput: boolean;
@@ -19,8 +22,11 @@ const DialogPackage = ({
   candidatId: number | null;
   useAssociateCandidatsWithPackage: (
     packageId: number,
-    candidatId: number,
+    candidatId: number
   ) => void;
+  packName: string;
+  useCreatePackage: () => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     openModal && (
@@ -31,7 +37,10 @@ const DialogPackage = ({
         >
           <AiFillCloseCircle
             className="z-50 absolute right-4 top-3 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
-            onClick={toggleModal}
+            onClick={() => {
+              toggleModal();
+              openInput && toggleInput();
+            }}
           />
           <div className="">
             <span>Enregistrer dans ...</span>
@@ -41,33 +50,17 @@ const DialogPackage = ({
             allPack={allPack}
             useAssociateCandidatsWithPackage={useAssociateCandidatsWithPackage}
           />
-          {openInput ? (
-            <form>
-              <div className="flex flex-col mb-2">
-                <label htmlFor="name">Nom:*</label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Ex: Acteur Casting Plage"
-                  className="max-w-52"
-                />
-              </div>
-              <button type="submit" className="boutonSlideCommon p-2 radius">
-                Créer
-              </button>
-            </form>
-          ) : (
-            <div className="flex items-center gap-2 text-lg h-fit">
-              <CgFolderAdd className="w-6 h-6" />
-              <button
-                type="button"
-                className="hover:underline"
-                onClick={toggleInput}
-              >
-                Créer un package
-              </button>
-            </div>
-          )}
+          <NewItemForm
+            isOpen={openInput}
+            toggle={toggleInput}
+            handleInputChange={handleInputChange}
+            itemValue={packName}
+            onSubmit={useCreatePackage}
+            placeholder="Ex: Acteur Casting Plage"
+            label="Nom:*"
+            isUpdate={false}
+            buttonText="Créer"
+          />
         </dialog>
       </section>
     )
