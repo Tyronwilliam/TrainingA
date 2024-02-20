@@ -8,10 +8,12 @@ const TalentsLayout = ({
   candidat,
   pathname,
   toggle,
+  isPackagePage,
 }: {
   candidat: any;
   pathname: string;
-  toggle: () => void;
+  toggle?: () => void;
+  isPackagePage: boolean;
 }) => {
   return (
     <section className="flex flex-wrap justify-center items-center flex-col md:flex-row w-full h-fit gap-10 md:gap-5 md:justify-start p-5 md:gap-y-[50px] max-w-[1100px] mx-auto">
@@ -26,13 +28,14 @@ const TalentsLayout = ({
             key={talent?.id}
             showName={true}
             toggle={toggle}
+            isPackagePage={isPackagePage}
           >
             <Link href={`${pathname}/${talent?.id}`}>
               <ImageCandidat image={image} />
             </Link>
           </CardCandidat>
         );
-      })}{" "}
+      })}
     </section>
   );
 };

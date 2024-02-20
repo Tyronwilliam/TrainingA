@@ -34,6 +34,7 @@ const InfniteScrollDisplay = ({
           candidat={candidat}
           pathname={pathname}
           toggle={toggleModal}
+          isPackagePage={false}
         />
       </InfiniteScroll>
     </section>

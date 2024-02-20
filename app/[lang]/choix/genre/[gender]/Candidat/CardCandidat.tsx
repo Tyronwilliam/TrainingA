@@ -10,11 +10,13 @@ const CardCandidat = ({
   showName,
   showFolio,
   toggle,
+  isPackagePage,
 }: {
   talent: any;
   children: ReactNode;
   nom: string | undefined;
   showName: boolean;
+  isPackagePage: boolean;
   showFolio?: boolean;
   toggle?: () => void;
 }) => {
@@ -48,8 +50,12 @@ const CardCandidat = ({
           nom={nom}
           classStyle="max-w-[163px] text-3xl"
           containerStyle="justify-center items-center"
-          //@ts-ignore
-          isPackage={session?.user?.role === "Admin" || session?.user.filtre}
+          isPackage={
+            //@ts-ignore
+            (session?.user?.role === "Admin" && !isPackagePage) ||
+            //@ts-ignore
+            (session?.user.filtre && !isPackagePage)
+          }
           toggle={toggle}
           candidatId={talent?.id}
         />
