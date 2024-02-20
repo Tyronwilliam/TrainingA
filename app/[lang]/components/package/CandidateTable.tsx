@@ -5,11 +5,13 @@ import { BsFillTrashFill } from "react-icons/bs";
 const CandidateTable = ({
   candidates,
   dictionary,
-  onDeleteCandidate,
+  useDeleteCandidat,
+  packId,
 }: {
   candidates: any;
   dictionary: Dictionary;
-  onDeleteCandidate?: () => void;
+  useDeleteCandidat: (packId: number, candidatId: number) => void;
+  packId: number;
 }) => {
   return (
     <div className="max-h-36 overflow-y-scroll my-4 overflow-x-scroll md:overflow-x-hidden">
@@ -43,7 +45,7 @@ const CandidateTable = ({
                 <td>
                   <BsFillTrashFill
                     className="mx-auto cursor-pointer hover:opacity-55"
-                    // onClick={() => onDeleteCandidate(candidat.id)}
+                    onClick={() => useDeleteCandidat(packId, candidat.id)}
                   />
                 </td>
               </tr>

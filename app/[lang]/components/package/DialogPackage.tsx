@@ -3,19 +3,7 @@ import Modal from "./Modal";
 import NewItemForm from "./NewItemForm";
 import PacksDisplay from "./PacksDisplay";
 
-const DialogPackage = ({
-  openModal,
-  openInput,
-  toggleModal,
-  toggleInput,
-  allPack,
-  candidatId,
-  useAssociateCandidatsWithPackage,
-  handleInputChange,
-  packName,
-  useCreatePackage,
-  dictionary,
-}: {
+interface DialogPackageProps {
   openModal: boolean;
   openInput: boolean;
   toggleModal: () => void;
@@ -30,7 +18,20 @@ const DialogPackage = ({
   useCreatePackage: () => void;
   handleInputChange: () => void;
   dictionary: Dictionary;
-}) => {
+}
+const DialogPackage = ({
+  openModal,
+  openInput,
+  toggleModal,
+  toggleInput,
+  allPack,
+  candidatId,
+  useAssociateCandidatsWithPackage,
+  handleInputChange,
+  packName,
+  useCreatePackage,
+  dictionary,
+}: DialogPackageProps) => {
   const handleToggle = () => {
     toggleModal();
     openInput && toggleInput();

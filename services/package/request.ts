@@ -122,3 +122,33 @@ export const deletePackage = async (id: number, jwt: string) => {
     return error;
   }
 };
+export const deleteCandidat = async (
+  id: number,
+  data: Record<string, any>,
+  jwt: string
+) => {
+  try {
+    const response = await axios.put(
+      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate=*`,
+      {
+        data: {
+          candidats: {
+            disconnect: data.candidats,
+          },
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    return response;
+  } catch (error: any) {
+    console.error(
+      "Une erreur s'est produite lors de la requête :",
+      error.message
+    );
+    return error;
+  }
+};

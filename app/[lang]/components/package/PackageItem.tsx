@@ -32,6 +32,7 @@ const PackageItem = ({
     handleCurrentTable,
     handleCopyUrlClipBoard,
     useDeletePackage,
+    useDeleteCandidat,
   } = usePackage();
   return (
     <div
@@ -70,6 +71,8 @@ const PackageItem = ({
           <CandidateTable
             candidates={pack.attributes.candidats?.data}
             dictionary={dictionary}
+            useDeleteCandidat={useDeleteCandidat}
+            packId={pack?.id}
           />
           <TableCTA
             dictionary={dictionary}

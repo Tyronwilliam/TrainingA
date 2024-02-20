@@ -3,6 +3,7 @@ import { generateUrlFromCandidats } from "@/app/[lang]/choix/genre/[gender]/func
 import {
   associateCandidatsWithPackage,
   createPackage,
+  deleteCandidat,
   deletePackage,
   getPackagesById,
   updatePackageName,
@@ -159,6 +160,27 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
         "Une erreur s'est produite lors de la requête :",
         error.message
       );
+      sendToast(true, "An error occured");
+    }
+  };
+  const useDeleteCandidat = async (id: number, candidatId: number) => {
+    const data = {
+      candidats: [candidatId],
+    };
+    try {
+      const response = await deleteCandidat(id, data, jwt);
+      if (response?.status === 200) {
+        await fetchPackageById();
+        sendToast(false, "Talent deleted");
+      } else {
+        sendToast(true, response?.response?.data?.error?.message);
+      }
+    } catch (error: any) {
+      console.error(
+        "Une erreur s'est produite lors de la requête :",
+        error.message
+      );
+      sendToast(true, "An error occured");
     }
   };
   const exposed = {
@@ -180,6 +202,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     handleCurrentTable,
     handleCopyUrlClipBoard,
     useDeletePackage,
+    useDeleteCandidat,
   };
   return (
     <PackageContext.Provider value={exposed}>
