@@ -12,6 +12,7 @@ import InfniteScrollDisplay from "./Candidat/InfniteScrollDisplay";
 import PackageButton from "./Filter/PackageButton";
 import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
+import { useSession } from "next-auth/react";
 
 const GenreLayout = ({
   talents,
@@ -24,7 +25,7 @@ const GenreLayout = ({
   dictionary: Dictionary;
   gender: string;
 }) => {
-  const pathname = usePathname();
+  const { data: session } = useSession();
   const {
     loadMoreUsers,
     handleFilter,
@@ -38,10 +39,6 @@ const GenreLayout = ({
     router,
     valuePhysio,
   } = useFilter(talents, metaInitial);
-  const { open: openModal, toggle: toggleModal } = useToggle();
-  const { open: openInput, toggle: toggleInput } = useToggle();
-  const { open: openModalOne, toggle: toggleModalOne } = useToggle();
-  const { open: openModalForm, toggle: toggleModalForm } = useToggle();
   const {
     allPack,
     candidatId,
@@ -57,6 +54,11 @@ const GenreLayout = ({
     handleTogglePack,
     currentPack,
   } = usePackage();
+  const { open: openModal, toggle: toggleModal } = useToggle();
+  const { open: openInput, toggle: toggleInput } = useToggle();
+  const { open: openModalOne, toggle: toggleModalOne } = useToggle();
+  const { open: openModalForm, toggle: toggleModalForm } = useToggle();
+  const pathname = usePathname();
 
   const handleToggle = (packId: number, packNom?: string) => {
     packNom && setPackName(packNom);
@@ -76,19 +78,22 @@ const GenreLayout = ({
           handleClick={handleRole}
           handleFilter={handleFilter}
         />
-        <div className="flex  justify-between flex-wrap gap-2">
-          <PhysionomieFilter
-            dictionary={dictionary}
-            valuePhysio={valuePhysio}
-            handlePhysioQuery={handlePhysioQuery}
-            handleCurrentList={handleCurrentList}
-            currentList={currentList}
-            router={router}
-            pathname={pathname}
-            gender={gender}
-          />
-          <PackageButton onClick={handlePackageButton} />
-        </div>
+        {/* @ts-ignore */}
+        {session?.user?.role === "Admin" || session?.user.filtre ? (
+          <div className="flex justify-between flex-wrap gap-2">
+            <PhysionomieFilter
+              dictionary={dictionary}
+              valuePhysio={valuePhysio}
+              handlePhysioQuery={handlePhysioQuery}
+              handleCurrentList={handleCurrentList}
+              currentList={currentList}
+              router={router}
+              pathname={pathname}
+              gender={gender}
+            />
+            <PackageButton onClick={handlePackageButton} />
+          </div>
+        ) : null}
       </section>
       <InfniteScrollDisplay
         candidat={candidat}
