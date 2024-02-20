@@ -1,5 +1,5 @@
 import { PDFDocument } from "pdf-lib";
-const JSZip = require("jszip");
+import JSZip from "jszip";
 const contratPath = "/CONTRATFIGURANT.pdf";
 type CandidateAttributes = {
   attributes: {
@@ -15,7 +15,6 @@ export const generateContract = async (
   const zip = new JSZip();
   const allCandidat = candidates?.attributes?.candidats?.data;
   for (const candidate of allCandidat) {
-    //@ts-ignore
     const response = await getCandidatById(candidate?.id, session?.user?.jwt);
     if (response?.status === 200) {
       const {
