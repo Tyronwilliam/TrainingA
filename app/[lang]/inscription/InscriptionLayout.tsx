@@ -29,11 +29,6 @@ import cookieCutter from "@boiseitguru/cookie-cutter";
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const {
     isSubmitting,
-    submitError,
-    startSubmission,
-    finishSubmission,
-    submitSuccess,
-    setSubmitSuccess,
     isLoadInput,
     setIsLoadInput,
   } = useFormSubmission();

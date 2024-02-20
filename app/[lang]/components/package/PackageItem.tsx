@@ -12,6 +12,7 @@ interface PackageItemProps {
   openPackId: number | null;
   handleToggle: (packId: number, packNom?: string) => void;
   handleInputChange: () => void;
+  toggleModalForm: () => void;
   useUpdatePackageName: (packId: number) => void; // Adjust the type as per your function signature
   handleTogglePack: (packId: number) => void;
   packName: string;
@@ -26,6 +27,7 @@ const PackageItem = ({
   handleTogglePack,
   packName,
   dictionary,
+  toggleModalForm,
 }: PackageItemProps) => {
   const {
     currentTable,
@@ -79,6 +81,7 @@ const PackageItem = ({
             pack={pack}
             handleCopyUrlClipBoard={handleCopyUrlClipBoard}
             useDeletePackage={useDeletePackage}
+            toggleModalForm={toggleModalForm}
           />
         </>
       )}

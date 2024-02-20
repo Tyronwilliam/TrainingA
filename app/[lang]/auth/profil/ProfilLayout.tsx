@@ -28,7 +28,6 @@ export const excludeField = [
   "autresphotos",
   "marital",
 ];
-// 1- I'm feeling emotional... (a chill mix) et 2- No Sleep | A Chill Mix sur la chaine MrSuicideSheep , je l'ai grave poncé y a qlq années c pas jazzy mais plutot chill
 
 const ProfilLayout = ({
   dictionary,

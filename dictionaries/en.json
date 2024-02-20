@@ -140,6 +140,125 @@
           "firstname": "firstname",
           "gender": "gender",
           "delete": "delete"
+        },
+        "contract": {
+          "nameOfFilm": {
+            "label": "Movie name",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Validé",
+            "id": "nameOfFilm"
+          },
+          "prodNameField": {
+            "label": "Production box",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Ava Studio",
+            "id": "prodNameField"
+          },
+          "adresse": {
+            "label": "Address",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "130 rue de l'exemple",
+            "id": "adresse"
+          },
+          "siret": {
+            "label": "siret",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "siret"
+          },
+          "assedic": {
+            "label": "N°Assedic",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "assedic"
+          },
+          "apec": {
+            "label": "N°Apec",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "apec"
+          },
+          "realisateur": {
+            "label": "director",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nais Graziani",
+            "id": "realisateur"
+          },
+          "role": {
+            "label": "Talent roles",
+            "helper": "",
+            "type": "select",
+            "required": true,
+            "placeholder": "",
+            "id": "role",
+            "options": {
+              "Acteur": "Acteur",
+              "Modèle": "Modèle",
+              "Figurant": "Figurant"
+            }
+          },
+          "remuneration": {
+            "label": "compensation",
+            "helper": "",
+            "type": "number",
+            "required": true,
+            "placeholder": "1200",
+            "id": "remuneration"
+          },
+          "heureTravail": {
+            "label": "hour of Work",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "500",
+            "id": "heureTravail"
+          },
+          "duree": {
+            "label": "Effective date",
+            "helper": "",
+            "type": "date",
+            "required": true,
+            "placeholder": "",
+            "id": "duree"
+          },
+          "jours": {
+            "label": "Number of days",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "40",
+            "id": "jours"
+          },
+          "lieuDeTravail": {
+            "label": "Work location",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "Marseille",
+            "id": "lieuDeTravail"
+          },
+          "faitLe": {
+            "label": "Done on",
+            "helper": "",
+            "type": "date",
+            "required": true,
+            "placeholder": "",
+            "id": "faitLe"
+          }
         }
       }
     }

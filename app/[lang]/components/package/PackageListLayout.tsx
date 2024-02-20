@@ -7,6 +7,7 @@ interface PackageListProps {
   openPackId: number | null;
   handleToggle: (packId: number, packNom?: string) => void;
   handleInputChange: () => void;
+  toggleModalForm: () => void;
   useUpdatePackageName: () => void; // Adjust the type as per your function signature
   handleTogglePack: (packId: number) => void;
   packName: string;
@@ -21,6 +22,7 @@ const PackageListLayout = ({
   handleTogglePack,
   packName,
   dictionary,
+  toggleModalForm,
 }: PackageListProps) => {
   return (
     <>
@@ -40,6 +42,7 @@ const PackageListLayout = ({
                 handleTogglePack={handleTogglePack}
                 packName={packName}
                 dictionary={dictionary}
+                toggleModalForm={toggleModalForm}
               />
             ))}
           </div>

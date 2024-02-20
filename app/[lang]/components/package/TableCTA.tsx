@@ -7,12 +7,14 @@ interface TableCTAProps {
   dictionary: Dictionary;
   handleCopyUrlClipBoard: (pack: any, packName: string) => void;
   useDeletePackage: (packId: number) => void;
+  toggleModalForm: () => void;
 }
 const TableCTA = ({
   pack,
   dictionary,
   handleCopyUrlClipBoard,
   useDeletePackage,
+  toggleModalForm,
 }: TableCTAProps) => {
   return (
     <div className="flex flex-col gap-4 w-fit">
@@ -28,7 +30,10 @@ const TableCTA = ({
         {dictionary?.genre?.page?.package?.cta[0]}
       </button>
       {/* SEULEMENT POUR ADMIN */}
-      <button className="boutonSlideCommon p-2 radius w-fit uppercase">
+      <button
+        className="boutonSlideCommon p-2 radius w-fit uppercase"
+        onClick={toggleModalForm}
+      >
         {dictionary?.genre?.page?.package?.cta[1]}
       </button>
       <button

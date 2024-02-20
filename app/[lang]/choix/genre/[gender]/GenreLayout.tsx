@@ -1,17 +1,17 @@
 "use client";
 import DialogPackage from "@/app/[lang]/components/package/DialogPackage";
+import Modal from "@/app/[lang]/components/package/Modal";
 import PackageListLayout from "@/app/[lang]/components/package/PackageListLayout";
+import Formulaire from "@/app/[lang]/components/package/form/Formulaire";
 import useToggle from "@/hooks/Basic/useToggle";
 import useFilter from "@/hooks/Filter/useFilter";
 import { usePackage } from "@/hooks/Package/usePackage";
 import { Dictionary } from "@/types/dictionary";
 import { usePathname } from "next/navigation";
-import { AiFillCloseCircle } from "react-icons/ai";
 import InfniteScrollDisplay from "./Candidat/InfniteScrollDisplay";
 import PackageButton from "./Filter/PackageButton";
 import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
-import Modal from "@/app/[lang]/components/package/Modal";
 
 const GenreLayout = ({
   talents,
@@ -41,6 +41,7 @@ const GenreLayout = ({
   const { open: openModal, toggle: toggleModal } = useToggle();
   const { open: openInput, toggle: toggleInput } = useToggle();
   const { open: openModalOne, toggle: toggleModalOne } = useToggle();
+  const { open: openModalForm, toggle: toggleModalForm } = useToggle();
   const {
     allPack,
     candidatId,
@@ -124,7 +125,17 @@ const GenreLayout = ({
           handleTogglePack={handleTogglePack}
           packName={packName}
           dictionary={dictionary}
+          toggleModalForm={toggleModalForm}
         />
+      </Modal>
+      <Modal
+        open={openModalForm}
+        toggle={toggleModalForm}
+        classSection="fixed w-full h-full top-0 left-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+        classDialog="max-h-[500px] overflow-y-scroll text-white bg-black border-[1px] border-gray-800 radius w-[90%] max-w-[666px] min-w-64 flex flex-col gap-4 p-5"
+        classIcone="z-50 absolute right-1 top-2 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
+      >
+        <Formulaire dictionary={dictionary} />
       </Modal>
     </section>
   );
