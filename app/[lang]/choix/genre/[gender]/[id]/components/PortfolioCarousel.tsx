@@ -25,7 +25,6 @@ const PortfolioCarousel = ({
     idx % 2 === 0 ? acc.push([val]) : acc[acc.length - 1].push(val);
     return acc;
   }, []);
-  console.log(portfolio, "ELEMENT");
   return (
     open && (
       <dialog

@@ -64,9 +64,8 @@ export async function getCandidat({
     }
 
     const url = `${process.env.NEXT_PUBLIC_API_URL}/candidats?filters[Sexe][$eq]=${gender}&filters[valide][$eq]=true[populate][Physionomie]=*&[populate][Role_Candidat][populate][Competence]=*&[populate][Photo_de_presentation]=*&[populate][Portfolio][populate][Portfolio]=*${filters}&sort[0]=Prenom:asc${start}&pagination[limit]=21`;
-    const response = await fetch(url);
+    const response = await fetch(url, { next: { revalidate: 60 * 1 } });
     if (!response.ok) {
-      // This will activate the closest `error.js` Error Boundary
       throw new Error("Failed to fetch data");
     }
     const data = await response.json();
@@ -76,4 +75,3 @@ export async function getCandidat({
     console.error(err);
   }
 }
-// { next: { revalidate: 0 } }
