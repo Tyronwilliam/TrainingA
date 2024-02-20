@@ -164,11 +164,10 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
       type,
       unique: uniqueParams,
     };
-
+    ("use server");
     const response = await getCandidat(queryParams);
     const data = response?.data;
     const metaRes = response?.meta?.pagination?.total;
-    console.log("RUNNING");
     setMeta(metaRes);
     setCandidat(data);
   };
