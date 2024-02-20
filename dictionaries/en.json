@@ -310,6 +310,10 @@
       "errors": {
         "autresphotos": "3 photos max per add-on"
       }
+    },
+    "restricted": {
+      "p": "To see our full catalogue of talent, please contact us",
+      "link": "Here"
     }
   },
 

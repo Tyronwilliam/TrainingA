@@ -314,6 +314,10 @@
       "errors": {
         "autresphotos": "3 photos max par ajout"
       }
+    },
+    "restricted": {
+      "p": "Pour voir tout notre catalogue de talents, merci de prendre contact avec nous",
+      "link": "Ici"
     }
   },
 
