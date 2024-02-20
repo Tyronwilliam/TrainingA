@@ -125,6 +125,7 @@
           "title": { "Unique": "Unique" }
         }
       },
+      "infiniteScroll": "Vous avez parcouru tous les candidats disponibles",
       "package": {
         "save": "Enregistrer dans ...",
         "empty": "Vous n'avez créé aucun package.",

@@ -101,6 +101,7 @@ const GenreLayout = ({
         meta={meta}
         pathname={pathname}
         toggleModal={toggleModal}
+        dictionary={dictionary}
       />
       <DialogPackage
         openModal={openModal}
