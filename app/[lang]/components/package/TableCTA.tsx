@@ -1,5 +1,6 @@
 import { Dictionary } from "@/types/dictionary";
 import { PackSchema } from "@/types/package";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 interface TableCTAProps {
@@ -8,6 +9,7 @@ interface TableCTAProps {
   handleCopyUrlClipBoard: (pack: any, packName: string) => void;
   useDeletePackage: (packId: number) => void;
   toggleModalForm: () => void;
+  setCurrentPack: (pack: PackSchema) => void;
 }
 const TableCTA = ({
   pack,
@@ -15,27 +17,39 @@ const TableCTA = ({
   handleCopyUrlClipBoard,
   useDeletePackage,
   toggleModalForm,
+  setCurrentPack,
 }: TableCTAProps) => {
+  const { data: session } = useSession();
   return (
     <div className="flex flex-col gap-4 w-fit">
-      <button
-        className="boutonSlideCommon p-2 radius w-fit uppercase"
-        onClick={() =>
-          handleCopyUrlClipBoard(
-            pack.attributes.candidats?.data,
-            pack.attributes.Nom
-          )
-        }
-      >
-        {dictionary?.genre?.page?.package?.cta[0]}
-      </button>
-      {/* SEULEMENT POUR ADMIN */}
-      <button
-        className="boutonSlideCommon p-2 radius w-fit uppercase"
-        onClick={toggleModalForm}
-      >
-        {dictionary?.genre?.page?.package?.cta[1]}
-      </button>
+      {pack?.attributes?.candidats?.data?.length > 0 && (
+        <>
+          <button
+            className="boutonSlideCommon p-2 radius w-fit uppercase"
+            onClick={() =>
+              handleCopyUrlClipBoard(
+                pack.attributes.candidats?.data,
+                pack.attributes.Nom
+              )
+            }
+          >
+            {dictionary?.genre?.page?.package?.cta[0]}
+          </button>
+          {/* @ts-ignore */}
+          {session?.user.role === "Admin" && (
+            <button
+              className="boutonSlideCommon p-2 radius w-fit uppercase"
+              onClick={() => {
+                toggleModalForm();
+                setCurrentPack(pack);
+              }}
+            >
+              {dictionary?.genre?.page?.package?.cta[1]}
+            </button>
+          )}
+        </>
+      )}
+
       <button
         onClick={() => useDeletePackage(pack?.id)}
         className="boutonSlideCommon p-2 radius w-fit uppercase"

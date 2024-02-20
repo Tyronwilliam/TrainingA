@@ -4,7 +4,7 @@ export interface PackSchema {
     Nom: string;
     candidats: {
       data: Array<{
-        id: string;
+        id: number;
         attributes: {
           Nom: string;
           Prenom: string;

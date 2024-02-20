@@ -172,7 +172,8 @@
             "type": "number",
             "required": false,
             "placeholder": "14 numéro",
-            "id": "siret"
+            "id": "siret",
+            "limit": 14
           },
           "assedic": {
             "label": "N°Assedic",
@@ -206,9 +207,9 @@
             "placeholder": "",
             "id": "role",
             "options": {
-              "Acteur": "Acteur",
-              "Modèle": "Modèle",
-              "Figurant": "Figurant"
+              "Acteur": "Actor",
+              "Modèle": "Model",
+              "Figurant": "Extra"
             }
           },
           "remuneration": {
@@ -217,7 +218,8 @@
             "type": "number",
             "required": true,
             "placeholder": "1200",
-            "id": "remuneration"
+            "id": "remuneration",
+            "limit": 10
           },
           "heureTravail": {
             "label": "hour of Work",
@@ -225,7 +227,8 @@
             "type": "number",
             "required": false,
             "placeholder": "500",
-            "id": "heureTravail"
+            "id": "heureTravail",
+            "limit": 10
           },
           "duree": {
             "label": "Effective date",
@@ -241,7 +244,8 @@
             "type": "number",
             "required": false,
             "placeholder": "40",
-            "id": "jours"
+            "id": "jours",
+            "limit": 10
           },
           "lieuDeTravail": {
             "label": "Work location",

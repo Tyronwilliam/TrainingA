@@ -1,21 +1,18 @@
 import { PDFDocument } from "pdf-lib";
 import JSZip from "jszip";
+import { getCandidatById } from "@/services/candidat/request";
+import { PackSchema } from "@/types/package";
 const contratPath = "/CONTRATFIGURANT.pdf";
-type CandidateAttributes = {
-  attributes: {
-    candidats: {
-      data: any; // Define the correct type for 'data'
-    };
-  };
-};
+
 export const generateContract = async (
-  candidates: CandidateAttributes,
-  data: Record<string, any>
+  candidats: PackSchema,
+  data: Record<string, any>,
+  jwt: string
 ) => {
   const zip = new JSZip();
-  const allCandidat = candidates?.attributes?.candidats?.data;
+  const allCandidat = candidats?.attributes?.candidats?.data;
   for (const candidate of allCandidat) {
-    const response = await getCandidatById(candidate?.id, session?.user?.jwt);
+    const response = await getCandidatById(candidate?.id, jwt);
     if (response?.status === 200) {
       const {
         Infos_Administrative,

@@ -8,6 +8,7 @@ import {
   getPackagesById,
   updatePackageName,
 } from "@/services/package/request";
+import { PackSchema } from "@/types/package";
 import { sendToast } from "@/utils/toast";
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useState } from "react";
@@ -28,7 +29,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   const [packName, setPackName] = useState<string>("");
   const [openPackId, setOpenPackId] = useState<number | null>(null);
   const [currentTable, setCurrentTable] = useState<number | null>(null);
-
+  const [currentPack, setCurrentPack] = useState<PackSchema[]>([]);
   const handleCurrentTable = (tableId: number) => {
     if (currentTable === tableId) {
       setCurrentTable(null);
@@ -203,6 +204,8 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     handleCopyUrlClipBoard,
     useDeletePackage,
     useDeleteCandidat,
+    currentPack,
+    setCurrentPack,
   };
   return (
     <PackageContext.Provider value={exposed}>

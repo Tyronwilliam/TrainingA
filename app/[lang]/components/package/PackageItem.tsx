@@ -35,6 +35,7 @@ const PackageItem = ({
     handleCopyUrlClipBoard,
     useDeletePackage,
     useDeleteCandidat,
+    setCurrentPack,
   } = usePackage();
   return (
     <div
@@ -82,6 +83,7 @@ const PackageItem = ({
             handleCopyUrlClipBoard={handleCopyUrlClipBoard}
             useDeletePackage={useDeletePackage}
             toggleModalForm={toggleModalForm}
+            setCurrentPack={setCurrentPack}
           />
         </>
       )}

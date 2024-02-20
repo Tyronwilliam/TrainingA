@@ -55,6 +55,7 @@ const GenreLayout = ({
     openPackId,
     setOpenPackId,
     handleTogglePack,
+    currentPack,
   } = usePackage();
 
   const handleToggle = (packId: number, packNom?: string) => {
@@ -135,7 +136,7 @@ const GenreLayout = ({
         classDialog="max-h-[500px] overflow-y-scroll text-white bg-black border-[1px] border-gray-800 radius w-[90%] max-w-[666px] min-w-64 flex flex-col gap-4 p-5"
         classIcone="z-50 absolute right-1 top-2 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
       >
-        <Formulaire dictionary={dictionary} />
+        <Formulaire dictionary={dictionary} currentPack={currentPack} />
       </Modal>
     </section>
   );
