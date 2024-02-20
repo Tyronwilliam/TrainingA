@@ -124,6 +124,15 @@
         "unique": {
           "title": { "Unique": "Unique" }
         }
+      },
+      "package": {
+        "empty": "Vous n'avez créé aucun package.",
+        "create": "Créer un package",
+        "cta": [
+          "GéNéRER LE LIEN",
+          "GéNéRER LES CONTRATS",
+          "SUPPRIMER LE PACKAGE"
+        ]
       }
     }
   },

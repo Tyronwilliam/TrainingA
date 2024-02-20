@@ -23,8 +23,12 @@ const PackageItem = ({
   handleTogglePack,
   packName,
 }: PackageItemProps) => {
-  const { currentTable, handleCurrentTable, handleCopyUrlClipBoard } =
-    usePackage();
+  const {
+    currentTable,
+    handleCurrentTable,
+    handleCopyUrlClipBoard,
+    useDeletePackage,
+  } = usePackage();
   return (
     <div
       key={pack.id}
@@ -75,7 +79,10 @@ const PackageItem = ({
             <button className="boutonSlideCommon p-2 radius w-fit uppercase">
               GéNéRER LES CONTRATS
             </button>
-            <button className="boutonSlideCommon p-2 radius w-fit uppercase">
+            <button
+              onClick={() => useDeletePackage(pack?.id)}
+              className="boutonSlideCommon p-2 radius w-fit uppercase"
+            >
               SUPPRIMER LE PACKAGE
             </button>
           </div>

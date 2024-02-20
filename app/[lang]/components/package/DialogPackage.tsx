@@ -26,7 +26,7 @@ const DialogPackage = ({
   ) => void;
   packName: string;
   useCreatePackage: () => void;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: () => void;
 }) => {
   return (
     openModal && (

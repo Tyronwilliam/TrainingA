@@ -3,6 +3,7 @@ import { generateUrlFromCandidats } from "@/app/[lang]/choix/genre/[gender]/func
 import {
   associateCandidatsWithPackage,
   createPackage,
+  deletePackage,
   getPackagesById,
   updatePackageName,
 } from "@/services/package/request";
@@ -144,7 +145,22 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const useDeletePackage = async () => {};
+  const useDeletePackage = async (packId: number) => {
+    try {
+      const response = await deletePackage(packId, jwt);
+      if (response?.status === 200) {
+        await fetchPackageById();
+        sendToast(false, "Successful delete");
+      } else {
+        sendToast(true, response?.response?.data?.error?.message);
+      }
+    } catch (error: any) {
+      console.error(
+        "Une erreur s'est produite lors de la requête :",
+        error.message
+      );
+    }
+  };
   const exposed = {
     fetchPackageById,
     allPack,
@@ -163,6 +179,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     setCurrentTable,
     handleCurrentTable,
     handleCopyUrlClipBoard,
+    useDeletePackage,
   };
   return (
     <PackageContext.Provider value={exposed}>

@@ -1,20 +1,17 @@
 "use client";
-import CandidateTable from "@/app/[lang]/components/package/CandidateTable";
 import DialogPackage from "@/app/[lang]/components/package/DialogPackage";
-import NewItemForm from "@/app/[lang]/components/package/NewItemForm";
+import PackageListLayout from "@/app/[lang]/components/package/PackageListLayout";
 import useToggle from "@/hooks/Basic/useToggle";
 import useFilter from "@/hooks/Filter/useFilter";
 import { usePackage } from "@/hooks/Package/usePackage";
 import { Dictionary } from "@/types/dictionary";
 import { usePathname } from "next/navigation";
-import { FormEvent, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { FaChevronRight } from "react-icons/fa6";
 import InfniteScrollDisplay from "./Candidat/InfniteScrollDisplay";
+import PackageButton from "./Filter/PackageButton";
 import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
-import PackageItem from "@/app/[lang]/components/package/PackageItem";
-import PackageListLayout from "@/app/[lang]/components/package/PackageListLayout";
+import Modal from "@/app/[lang]/components/package/Modal";
 
 const GenreLayout = ({
   talents,
@@ -64,6 +61,10 @@ const GenreLayout = ({
     toggleInput();
     setOpenPackId(openPackId === packId ? null : packId);
   };
+  const handlePackageButton = () => {
+    fetchPackageById();
+    toggleModalOne();
+  };
   return (
     <section>
       <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
@@ -84,15 +85,7 @@ const GenreLayout = ({
             pathname={pathname}
             gender={gender}
           />
-          <button
-            onClick={() => {
-              fetchPackageById();
-              toggleModalOne();
-            }}
-            className="font-medium text-base md:text-xl uppercase "
-          >
-            <li>Package</li>
-          </button>
+          <PackageButton onClick={handlePackageButton} />
         </div>
       </section>
       <InfniteScrollDisplay
@@ -114,30 +107,23 @@ const GenreLayout = ({
         packName={packName}
         useCreatePackage={useCreatePackage}
       />
-      {openModalOne && (
-        <section className="fixed w-full h-full top-0 left-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <dialog
-            open={openModalOne}
-            className="text-white bg-black border-[1px] border-gray-800 radius w-[90%] max-w-[666px] min-w-64 flex flex-col gap-4 p-5"
-          >
-            <AiFillCloseCircle
-              className="z-50 absolute right-1 top-2 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
-              onClick={() => {
-                toggleModalOne();
-              }}
-            />
-            <PackageListLayout
-              allPack={allPack}
-              openPackId={openPackId}
-              handleToggle={handleToggle}
-              handleInputChange={handleInputChange}
-              useUpdatePackageName={useUpdatePackageName}
-              handleTogglePack={handleTogglePack}
-              packName={packName}
-            />
-          </dialog>
-        </section>
-      )}
+      <Modal
+        open={openModalOne}
+        toggle={toggleModalOne}
+        classSection="fixed w-full h-full top-0 left-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+        classDialog="text-white bg-black border-[1px] border-gray-800 radius w-[90%] max-w-[666px] min-w-64 flex flex-col gap-4 p-5"
+        classIcone="z-50 absolute right-1 top-2 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
+      >
+        <PackageListLayout
+          allPack={allPack}
+          openPackId={openPackId}
+          handleToggle={handleToggle}
+          handleInputChange={handleInputChange}
+          useUpdatePackageName={useUpdatePackageName}
+          handleTogglePack={handleTogglePack}
+          packName={packName}
+        />
+      </Modal>
     </section>
   );
 };
