@@ -83,9 +83,9 @@
     ],
     "page": {
       "role": {
-        "Tous": "Tous",
-        "Acteur": "Acteur",
-        "Modele": "Modèle",
+        "Tous": "ALL",
+        "Acteur": "Actor",
+        "Modele": "Model",
         "Figurant": "Extra"
       },
       "filter": {
@@ -129,7 +129,7 @@
         "save": "Save in ...",
         "empty": "You have not created any packages.",
         "create": "Create a package",
-        "cta": ["MANAGE LINK", "MANAGE CONTRACTS", "DELETE THE PACKAGE"],
+        "cta": ["MANAGE LINK", "MANAGE CONTRACTS", "DELETE PACKAGE"],
         "form": {
           "label": "Name:*",
           "buttonUpdate": "Update",
