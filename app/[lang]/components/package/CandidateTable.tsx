@@ -20,7 +20,6 @@ const CandidateTable = ({
             <th> {dictionary?.genre?.page?.package?.table?.firstname}</th>
             <th> {dictionary?.genre?.page?.package?.table?.gender}</th>
             <th className="text-center">
-              {" "}
               {dictionary?.genre?.page?.package?.table?.delete}
             </th>
           </tr>
