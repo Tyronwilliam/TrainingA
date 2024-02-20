@@ -314,7 +314,8 @@
     "restricted": {
       "p": "To see our full catalogue of talent, please contact us",
       "link": "Here"
-    }
+    },
+    "candidatEmmpty": "Your file could not be created, please contact us."
   },
 
   "connexion": {

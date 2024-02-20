@@ -25,15 +25,11 @@ function getLocale(request: NextRequest): string | undefined {
 
   return locale;
 }
-const protectedRoutes = ["/choix"];
-const protectedProfil = ["/profil"];
+
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  //@ts-ignore
-  if (protectedRoutes.includes(pathname)) {
-    return NextResponse.redirect("/restreint");
-  }
+
   if (pathname.endsWith(".pdf")) {
     // Si c'est un fichier PDF, renvoyer directement la réponse
     return NextResponse.next();

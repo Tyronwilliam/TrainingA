@@ -4,6 +4,9 @@ import { Metadata } from "next";
 import React from "react";
 import SingleCandidatLayout from "./SingleCandidatLayout";
 import PreviousNavHistory from "@/app/[lang]/components/PreviousNavHistory";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/auth";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: { id: string };
@@ -52,6 +55,19 @@ const SingleCandidatPage = async ({
 }: {
   params: { id: string; lang: Locale };
 }) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/restreint");
+  }
+  if (
+    //@ts-ignore
+    session.user.role === "Regular" ||
+    //@ts-ignore
+    (!session.user.actif && session.user.role !== "Admin")
+  ) {
+    redirect("/restreint");
+  }
   const dictionary = await getDictionary(params.lang);
   const candidat = await getDataSingleCandidat(params.id);
   return (

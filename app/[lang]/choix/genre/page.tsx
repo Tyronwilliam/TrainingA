@@ -6,6 +6,7 @@ import { authOptions } from "@/utils/auth";
 import { getServerSession } from "next-auth";
 import React from "react";
 import PreviousNavHistory from "../../components/PreviousNavHistory";
+import { redirect } from "next/navigation";
 
 const ChoixPage = async ({
   params: { lang },
@@ -14,6 +15,17 @@ const ChoixPage = async ({
 }) => {
   const dictionary = await getDictionary(lang);
   const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect("/restreint");
+  }
+  if (
+    //@ts-ignore
+    session.user.role === "Regular" ||
+    //@ts-ignore
+    (!session.user.actif && session.user.role !== "Admin")
+  ) {
+    redirect("/restreint");
+  }
   return (
     <>
       <PreviousNavHistory />

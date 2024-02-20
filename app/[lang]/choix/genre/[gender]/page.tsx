@@ -6,6 +6,9 @@ import React from "react";
 import GenreLayout from "./GenreLayout";
 import { getCandidat } from "./action";
 import { Gender } from "@/hooks/Filter/useFilter";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/auth";
+import { redirect } from "next/navigation";
 
 const GenrePage = async ({
   params,
@@ -21,6 +24,19 @@ const GenrePage = async ({
     Role: string;
   };
 }) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/restreint");
+  }
+  if (
+    //@ts-ignore
+    session.user.role === "Regular" ||
+    //@ts-ignore
+    (!session.user.actif && session.user.role !== "Admin")
+  ) {
+    redirect("/restreint");
+  }
   const dictionary = await getDictionary(params.lang);
   const talents = await getCandidat({
     gender: params?.gender,
