@@ -5,14 +5,14 @@ import { Locale } from "@/i18n-config";
 import React from "react";
 import GenreLayout from "./GenreLayout";
 import { getCandidat } from "./action";
+import { Gender } from "@/hooks/Filter/useFilter";
 
 const GenrePage = async ({
   params,
   searchParams,
 }: {
-  params: { gender: string; lang: Locale };
+  params: { gender: Gender; lang: Locale };
   searchParams: {
-    pagination: string;
     Compétence: string;
     Age: string;
     Taille: string;

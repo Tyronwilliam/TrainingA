@@ -4,7 +4,7 @@ import Modal from "@/app/[lang]/components/package/Modal";
 import PackageListLayout from "@/app/[lang]/components/package/PackageListLayout";
 import Formulaire from "@/app/[lang]/components/package/form/Formulaire";
 import useToggle from "@/hooks/Basic/useToggle";
-import useFilter from "@/hooks/Filter/useFilter";
+import useFilter, { Gender } from "@/hooks/Filter/useFilter";
 import { usePackage } from "@/hooks/Package/usePackage";
 import { Dictionary } from "@/types/dictionary";
 import { usePathname } from "next/navigation";
@@ -23,7 +23,7 @@ const GenreLayout = ({
   talents: any;
   metaInitial: any;
   dictionary: Dictionary;
-  gender: string;
+  gender: Gender;
 }) => {
   const { data: session } = useSession();
   const {
@@ -38,7 +38,7 @@ const GenreLayout = ({
     candidat,
     router,
     valuePhysio,
-  } = useFilter(talents, metaInitial);
+  } = useFilter(talents, metaInitial, gender);
   const {
     allPack,
     candidatId,
