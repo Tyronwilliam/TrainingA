@@ -5,6 +5,7 @@ import NewItemForm from "./NewItemForm";
 import { PackSchema } from "@/types/package";
 import { usePackage } from "@/hooks/Package/usePackage";
 import classNames from "classnames";
+import { Dictionary } from "@/types/dictionary";
 interface PackageItemProps {
   pack: PackSchema;
   openPackId: number | null;
@@ -13,6 +14,7 @@ interface PackageItemProps {
   useUpdatePackageName: (packId: number) => void; // Adjust the type as per your function signature
   handleTogglePack: (packId: number) => void;
   packName: string;
+  dictionary: Dictionary;
 }
 const PackageItem = ({
   pack,
@@ -22,6 +24,7 @@ const PackageItem = ({
   useUpdatePackageName,
   handleTogglePack,
   packName,
+  dictionary,
 }: PackageItemProps) => {
   const {
     currentTable,
@@ -51,6 +54,7 @@ const PackageItem = ({
           label=""
           isUpdate={true}
           buttonText={pack.attributes.Nom}
+          dictionary={dictionary}
         />
         <div onClick={() => handleTogglePack(pack.id)}>
           {currentTable === pack?.id ? (
@@ -62,7 +66,10 @@ const PackageItem = ({
       </div>
       {currentTable === pack?.id && (
         <>
-          <CandidateTable candidates={pack.attributes.candidats?.data} />
+          <CandidateTable
+            candidates={pack.attributes.candidats?.data}
+            dictionary={dictionary}
+          />
           <div className="flex flex-col gap-4 w-fit">
             <button
               className="boutonSlideCommon p-2 radius w-fit uppercase"
@@ -73,17 +80,17 @@ const PackageItem = ({
                 )
               }
             >
-              GéNéRER LE LIEN
+              {dictionary?.genre?.page?.package?.cta[0]}
             </button>
             {/* SEULEMENT POUR ADMIN */}
             <button className="boutonSlideCommon p-2 radius w-fit uppercase">
-              GéNéRER LES CONTRATS
+              {dictionary?.genre?.page?.package?.cta[1]}
             </button>
             <button
               onClick={() => useDeletePackage(pack?.id)}
               className="boutonSlideCommon p-2 radius w-fit uppercase"
             >
-              SUPPRIMER LE PACKAGE
+              {dictionary?.genre?.page?.package?.cta[2]}
             </button>
           </div>
         </>

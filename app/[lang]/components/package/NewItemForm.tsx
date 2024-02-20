@@ -1,3 +1,4 @@
+import { Dictionary } from "@/types/dictionary";
 import React, { FormEvent } from "react";
 import { CgFolderAdd } from "react-icons/cg";
 import { MdEdit, MdEditOff } from "react-icons/md";
@@ -59,6 +60,7 @@ interface NewItemFormProps<T> {
   label: string;
   placeholder: string;
   isUpdate: boolean;
+  dictionary: Dictionary;
 }
 
 const NewItemForm = <T,>({
@@ -71,6 +73,7 @@ const NewItemForm = <T,>({
   label,
   placeholder,
   isUpdate,
+  dictionary,
 }: NewItemFormProps<T>) => {
   return isOpen ? (
     <form
@@ -94,7 +97,9 @@ const NewItemForm = <T,>({
       </div>
       <div className="flex items-center gap-2">
         <button type="submit" className="boutonSlideCommon p-2 radius">
-          {isUpdate ? "Mettre à jour" : "Créer"}
+          {isUpdate
+            ? dictionary?.genre?.page?.package?.form?.buttonUpdate
+            : dictionary?.genre?.page?.package?.form?.buttonCreate}
         </button>
         <button onClick={toggle} type="button">
           <MdEditOff className="w-5 h-5 hover:opacity-55" />
@@ -116,9 +121,8 @@ const NewItemForm = <T,>({
       ) : (
         <div className="flex items-center gap-2 text-lg h-fit">
           <CgFolderAdd className="w-6 h-6" />
-          {/* @ts-ignore */}
           <button type="button" className="hover:underline" onClick={toggle}>
-            Créer un package
+            {buttonText}
           </button>
         </div>
       )}

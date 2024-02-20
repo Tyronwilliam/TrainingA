@@ -1,11 +1,14 @@
+import { Dictionary } from "@/types/dictionary";
 import React from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 
 const CandidateTable = ({
   candidates,
+  dictionary,
   onDeleteCandidate,
 }: {
   candidates: any;
+  dictionary: Dictionary;
   onDeleteCandidate?: () => void;
 }) => {
   return (
@@ -13,10 +16,13 @@ const CandidateTable = ({
       <table className="table-auto w-full ">
         <thead className="text-left font-bold uppercase">
           <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Genre</th>
-            <th className="text-center">Supprimer</th>
+            <th> {dictionary?.genre?.page?.package?.table?.name}</th>
+            <th> {dictionary?.genre?.page?.package?.table?.firstname}</th>
+            <th> {dictionary?.genre?.page?.package?.table?.gender}</th>
+            <th className="text-center">
+              {" "}
+              {dictionary?.genre?.page?.package?.table?.delete}
+            </th>
           </tr>
         </thead>
         <tbody>

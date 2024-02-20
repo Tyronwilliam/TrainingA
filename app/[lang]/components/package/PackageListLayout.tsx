@@ -1,6 +1,7 @@
 import React, { FormEvent } from "react";
 import PackageItem from "./PackageItem"; // Adjust the import path
 import { PackSchema } from "@/types/package";
+import { Dictionary } from "@/types/dictionary";
 interface PackageListProps {
   allPack: Array<PackSchema>;
   openPackId: number | null;
@@ -9,6 +10,7 @@ interface PackageListProps {
   useUpdatePackageName: () => void; // Adjust the type as per your function signature
   handleTogglePack: (packId: number) => void;
   packName: string;
+  dictionary: Dictionary;
 }
 const PackageListLayout = ({
   allPack,
@@ -18,11 +20,12 @@ const PackageListLayout = ({
   useUpdatePackageName,
   handleTogglePack,
   packName,
+  dictionary,
 }: PackageListProps) => {
   return (
     <>
       {allPack?.length === 0 ? (
-        <p className="text-center">Vous n'avez créé aucun package.</p>
+        <p className="text-center">{dictionary?.genre?.page?.package?.empty}</p>
       ) : (
         allPack?.length > 0 && (
           <div className="flex flex-col gap-3 max-h-80 overflow-y-scroll">
@@ -36,6 +39,7 @@ const PackageListLayout = ({
                 useUpdatePackageName={useUpdatePackageName}
                 handleTogglePack={handleTogglePack}
                 packName={packName}
+                dictionary={dictionary}
               />
             ))}
           </div>

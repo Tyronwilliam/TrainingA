@@ -126,13 +126,25 @@
         }
       },
       "package": {
+        "save": "Enregistrer dans ...",
         "empty": "Vous n'avez créé aucun package.",
         "create": "Créer un package",
         "cta": [
           "GéNéRER LE LIEN",
           "GéNéRER LES CONTRATS",
           "SUPPRIMER LE PACKAGE"
-        ]
+        ],
+        "form": {
+          "label": "Nom:*",
+          "buttonUpdate": "Mettre à jour",
+          "buttonCreate": "Créer"
+        },
+        "table": {
+          "name": "Nom",
+          "firstname": "Prénom",
+          "gender": "Genre",
+          "delete": "SUPPRIMER"
+        }
       }
     }
   },

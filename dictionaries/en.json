@@ -124,6 +124,23 @@
         "unique": {
           "title": { "Unique": "Unique" }
         }
+      },
+      "package": {
+        "save": "Save in ...",
+        "empty": "You have not created any packages.",
+        "create": "Create a package",
+        "cta": ["MANAGE LINK", "MANAGE CONTRACTS", "DELETE THE PACKAGE"],
+        "form": {
+          "label": "Name:*",
+          "buttonUpdate": "Update",
+          "buttonCreate": "Create"
+        },
+        "table": {
+          "name": "lastname",
+          "firstname": "firstname",
+          "gender": "gender",
+          "delete": "delete"
+        }
       }
     }
   },

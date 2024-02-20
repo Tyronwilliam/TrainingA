@@ -106,6 +106,7 @@ const GenreLayout = ({
         handleInputChange={handleInputChange}
         packName={packName}
         useCreatePackage={useCreatePackage}
+        dictionary={dictionary}
       />
       <Modal
         open={openModalOne}
@@ -122,6 +123,7 @@ const GenreLayout = ({
           useUpdatePackageName={useUpdatePackageName}
           handleTogglePack={handleTogglePack}
           packName={packName}
+          dictionary={dictionary}
         />
       </Modal>
     </section>
