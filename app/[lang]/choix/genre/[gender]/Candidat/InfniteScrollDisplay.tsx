@@ -1,6 +1,7 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import TalentsLayout from "./TalentsLayout";
 import { Dictionary } from "@/types/dictionary";
+import { comparerPrenom } from "@/app/[lang]/package/function";
 
 const InfniteScrollDisplay = ({
   candidat,
@@ -17,6 +18,8 @@ const InfniteScrollDisplay = ({
   toggleModal: () => void;
   dictionary: Dictionary;
 }) => {
+  const sortedCandidat = candidat?.slice()?.sort(comparerPrenom);
+
   return (
     <section className="flex flex-col mt-6">
       <InfiniteScroll
@@ -31,7 +34,7 @@ const InfniteScrollDisplay = ({
         }
       >
         <TalentsLayout
-          candidat={candidat}
+          candidat={sortedCandidat}
           pathname={pathname}
           toggle={toggleModal}
           isPackagePage={false}

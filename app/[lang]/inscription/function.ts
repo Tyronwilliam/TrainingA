@@ -11,6 +11,7 @@ import {
 } from "@/services/formulaire/stepOne";
 import { sendStepThreeData } from "@/services/formulaire/stepThree";
 import { sendStepTwoData } from "@/services/formulaire/stepTwo";
+import { addToSendinblue } from "@/services/mailing/mail";
 import { FormikInscriptionProps } from "@/types/formulaire";
 import { handleResponse } from "@/utils/apiObject";
 import { sendToast } from "@/utils/toast";
@@ -45,6 +46,11 @@ export const handleApi = async (
         } else {
           const responseCreateUser = await createUser(values);
           await handleResponse(responseCreateUser);
+          await addToSendinblue(
+            values.email,
+            values?.nomDeNaissance,
+            values.firstname
+          );
           userId = await responseCreateUser?.data?.user?.id;
           jwtRes = await responseCreateUser?.data?.jwt;
         }

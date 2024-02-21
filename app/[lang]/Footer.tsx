@@ -16,7 +16,9 @@ const Footer = ({
       <div className="flex justify-between gap-10">
         <div className="flex items-center opacity-60 hover:opacity-100">
           <BiCopyright />
-          <Link href={"/"}>{dictionary?.home?.footer?.termcondition}</Link>
+          <Link href={"/mentions-legales"}>
+            {dictionary?.home?.footer?.termcondition}
+          </Link>
         </div>
         <div className="opacity-60 hover:opacity-100">
           <Link href={"/"}>{dictionary?.header?.title}</Link>

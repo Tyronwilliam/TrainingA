@@ -13,6 +13,7 @@ import PackageButton from "./Filter/PackageButton";
 import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
 import { useSession } from "next-auth/react";
+import BackToTop from "./BackToTop";
 
 const GenreLayout = ({
   talents,
@@ -71,6 +72,7 @@ const GenreLayout = ({
   };
   return (
     <section className="min-h-[400px]">
+      <BackToTop />
       <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
         <RoleFilter
           dictionary={dictionary}
