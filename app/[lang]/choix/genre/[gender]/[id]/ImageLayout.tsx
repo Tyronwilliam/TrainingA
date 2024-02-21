@@ -16,13 +16,14 @@ const ImageLayout = ({
   return (
     <div
       onClick={toggleModal2}
-      className="relative max-h-[540px] w-full max-w-[333.3px] shrink-0 grow"
+      className="relative max-h-[540px] w-full max-w-[333.3px] shrink-0 grow apparition__opacity"
     >
       <CardCandidat
         talent={candidat}
         nom={letterLastName}
         showName={false}
         showFolio={true}
+        isPackagePage={false}
       >
         <ImageCandidat image={image} />
       </CardCandidat>

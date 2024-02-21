@@ -27,11 +27,7 @@ import Success from "./Success";
 import cookieCutter from "@boiseitguru/cookie-cutter";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
-  const {
-    isSubmitting,
-    isLoadInput,
-    setIsLoadInput,
-  } = useFormSubmission();
+  const { isSubmitting, isLoadInput, setIsLoadInput } = useFormSubmission();
 
   const jwt = cookieCutter.get("jwt");
   const candidatIdCookie = cookieCutter.get("candidatId");
@@ -72,10 +68,6 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
         }
       }
     }
-  };
-  const handlePrev = async () => {
-    const stepMoinsUn = currentStep - 1;
-    setCurrentStep(stepMoinsUn);
   };
   const stepComponents = [
     <Disclaimer dictionary={dictionary} />,
@@ -148,16 +140,6 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       {currentStep < 7 && (
         <div className="shrink-0 grow basis-full text-center flex flex-wrap items-center justify-center mt-6 gap-4">
           <>
-            {currentStep > 1 && (
-              <ButtonForm
-                isSubmitting={isSubmitting}
-                formik={formik}
-                dictionary={dictionary}
-                content={dictionary?.cta?.formEvent?.previous}
-                type="button"
-                handleClick={handlePrev}
-              />
-            )}
             {currentStep === 0 && (
               <button
                 type="button"

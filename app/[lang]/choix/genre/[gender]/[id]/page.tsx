@@ -56,7 +56,6 @@ const SingleCandidatPage = async ({
   params: { id: string; lang: Locale };
 }) => {
   const session = await getServerSession(authOptions);
-
   if (!session) {
     redirect("/restreint");
   }

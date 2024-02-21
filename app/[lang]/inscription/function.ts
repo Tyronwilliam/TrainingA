@@ -1,9 +1,14 @@
+import { sendLoginRequest } from "@/services/auth/auth";
 import {
   promisesUpload,
   uploadFileInCandidat,
 } from "@/services/formulaire/photo";
 import { sendStepFourAndFive } from "@/services/formulaire/stepFour";
-import { createCandidat, createUser } from "@/services/formulaire/stepOne";
+import {
+  createCandidat,
+  createUser,
+  getUserByEmail,
+} from "@/services/formulaire/stepOne";
 import { sendStepThreeData } from "@/services/formulaire/stepThree";
 import { sendStepTwoData } from "@/services/formulaire/stepTwo";
 import { FormikInscriptionProps } from "@/types/formulaire";
@@ -26,10 +31,23 @@ export const handleApi = async (
 
     switch (step) {
       case 1:
-        const responseCreateUser = await createUser(values);
-        await handleResponse(responseCreateUser);
-        const userId = await responseCreateUser?.data?.user?.id;
-        let jwtRes = await responseCreateUser?.data?.jwt;
+        let userId: number;
+        let jwtRes: string;
+        const userExist = await getUserByEmail(values?.email.toLowerCase());
+        if (userExist?.data?.length > 0) {
+          userId = await userExist?.data[0]?.id;
+          const data = {
+            identifier: values.email,
+            password: values.password,
+          };
+          const res = await sendLoginRequest(data);
+          jwtRes = await res?.data.jwt;
+        } else {
+          const responseCreateUser = await createUser(values);
+          await handleResponse(responseCreateUser);
+          userId = await responseCreateUser?.data?.user?.id;
+          jwtRes = await responseCreateUser?.data?.jwt;
+        }
         cookieCutter.set("jwt", jwtRes);
         const responseCreateCandidat = await createCandidat(values, userId);
         const candidatIdRes = await responseCreateCandidat.data.data.id;

@@ -1,0 +1,123 @@
+.apparition__opacity {
+  animation: 0.6s ease-in apparition;
+}
+@keyframes apparition {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.container__talents-all {
+  width: 100%;
+  padding: 80px 0 0 0;
+  margin: 0 auto;
+  h1 {
+    font-weight: 400;
+    font-size: 55px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+.entete__image {
+  width: 100%;
+  max-width: 629px;
+  margin: 0 auto;
+}
+.container__filter_layout {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+  padding: 20px 40px;
+}
+.container__role-filter {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 100%;
+  flex-shrink: 0;
+}
+.container__role-filter ul {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 360px;
+}
+.main__single_talent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.container__card {
+  width: 100%;
+  max-width: 333.3px;
+  flex-basis: calc(33.33% - 20px);
+}
+.container__image-card {
+  position: relative;
+  width: 100%;
+  max-width: 333.3px;
+  max-height: 435px;
+  height: auto;
+}
+.container_cards-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  row-gap: 50px;
+}
+@media screen and (min-width: 768px) {
+  .container__talents-all {
+    h1 {
+      font-size: 64px;
+    }
+  }
+  .container__filter_layout {
+    padding: 20px 40px;
+  }
+}
+.container__single_talent {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 584px;
+  height: 100%;
+  padding: 60px 20px 20px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: auto;
+}
+.container__image-card {
+  position: relative;
+  height: 538px;
+}
+.container__infos_candidat {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  max-width: 400px;
+  height: 100%;
+  gap: 25px;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
+.container__box-physionomie {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  gap: 20px;
+}

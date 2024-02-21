@@ -6,6 +6,7 @@ import CarouselLayout from "./CarouselLayout";
 import DetailsLayout from "./DetailsLayout";
 import ImageLayout from "./ImageLayout";
 import { combineArrays } from "./function";
+import useZipDownload from "@/hooks/Zip/useZipDownload";
 
 const SingleCandidatLayout = ({
   candidat,
@@ -26,7 +27,7 @@ const SingleCandidatLayout = ({
   const photoPresention =
     candidat?.attributes?.Photo_de_presentation?.data?.attributes?.url;
   const portfolio = candidat?.attributes?.Portfolio?.Portfolio?.data;
-
+  const { downloadAllFiles } = useZipDownload();
   return (
     <section className="flex flex-wrap w-full max-w-6xl min-h-[590px] justify-center items-center shrink-0 gap-6 m-auto pt-14 pb-5 px-5 md:items-start lg:gap-24">
       <ImageLayout
@@ -54,6 +55,7 @@ const SingleCandidatLayout = ({
         letterLastName={letterLastName}
         candidat={candidat}
       />
+      <button onClick={() => downloadAllFiles(candidat)}>DOWNLOAD FILE</button>
     </section>
   );
 };

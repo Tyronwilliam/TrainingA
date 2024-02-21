@@ -12,18 +12,15 @@ import {
   initialValuesConnexion,
 } from "@/utils/validationConnexion";
 import { useFormik } from "formik";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ButtonForm from "../../components/ButtonForm";
 import { handleSubmission } from "./function";
-import useToggle from "@/hooks/Basic/useToggle";
 
 const LoginForm = ({ dictionary }: { dictionary: Dictionary }) => {
   const { isSubmitting, submitError, startSubmission, finishSubmission } =
     useFormSubmission();
   const { router } = useCustomRouter();
-  const { toggle, open } = useToggle();
   const formik = useFormik({
     initialValues: initialValuesConnexion,
     validationSchema: ConnexionSchema,

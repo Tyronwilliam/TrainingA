@@ -24,7 +24,7 @@ const CardCandidat = ({
   return (
     <div
       style={{ flexBasis: "calc(33.33% - 20px)" }}
-      className="flex flex-col items-center justify-center gap-4 "
+      className="flex flex-col items-center justify-center gap-4 apparition__opacity"
       key={talent?.id}
     >
       <div
