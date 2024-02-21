@@ -70,7 +70,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     }
   };
   const stepComponents = [
-    <Disclaimer dictionary={dictionary} />,
+    <Disclaimer dictionary={dictionary} key={"StepZero"} />,
     <StepOne formik={formik} dictionary={dictionary} key={"StepOne"} />,
     <StepTwo
       formik={formik}
@@ -112,7 +112,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       candidatId={candidatId}
       jwt={jwt}
     />,
-    <Success dictionary={dictionary} />,
+    <Success dictionary={dictionary} key={"StepSeven"} />,
   ];
   useEffect(() => {
     window.scrollTo({

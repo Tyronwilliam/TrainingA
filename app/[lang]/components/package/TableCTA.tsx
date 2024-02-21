@@ -7,7 +7,7 @@ interface TableCTAProps {
   pack: PackSchema;
   dictionary: Dictionary;
   handleCopyUrlClipBoard: (pack: any, packName: string) => void;
-  useDeletePackage: (packId: number) => void;
+  trashPackage: (packId: number) => void;
   toggleModalForm: () => void;
   setCurrentPack: (pack: PackSchema) => void;
   downloadAllFiles: (candidat: any, packName: string | null) => void;
@@ -16,7 +16,7 @@ const TableCTA = ({
   pack,
   dictionary,
   handleCopyUrlClipBoard,
-  useDeletePackage,
+  trashPackage,
   toggleModalForm,
   setCurrentPack,
   downloadAllFiles,
@@ -66,7 +66,7 @@ const TableCTA = ({
       )}
 
       <button
-        onClick={() => useDeletePackage(pack?.id)}
+        onClick={() => trashPackage(pack?.id)}
         className="boutonSlideCommon p-2 radius w-fit uppercase"
       >
         {dictionary?.genre?.page?.package?.cta[2]}

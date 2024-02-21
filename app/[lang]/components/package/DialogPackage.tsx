@@ -10,7 +10,7 @@ interface DialogPackageProps {
   toggleInput: () => void;
   allPack: any[];
   candidatId: number | null;
-  useAssociateCandidatsWithPackage: (
+  connectCandidatsAndPackage: (
     packageId: number,
     candidatId: number
   ) => void;
@@ -26,7 +26,7 @@ const DialogPackage = ({
   toggleInput,
   allPack,
   candidatId,
-  useAssociateCandidatsWithPackage,
+  connectCandidatsAndPackage,
   handleInputChange,
   packName,
   useCreatePackage,
@@ -50,7 +50,7 @@ const DialogPackage = ({
       <PacksDisplay
         candidatId={candidatId}
         allPack={allPack}
-        useAssociateCandidatsWithPackage={useAssociateCandidatsWithPackage}
+        connectCandidatsAndPackage={connectCandidatsAndPackage}
       />
       <NewItemForm
         isOpen={openInput}

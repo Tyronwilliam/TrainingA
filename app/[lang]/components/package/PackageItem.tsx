@@ -12,7 +12,7 @@ interface PackageItemProps {
   handleToggle: (packId: number, packNom?: string) => void;
   handleInputChange: () => void;
   toggleModalForm: () => void;
-  useUpdatePackageName: (packId: number) => void; // Adjust the type as per your function signature
+  editPackageName: (packId: number) => void; // Adjust the type as per your function signature
   handleTogglePack: (packId: number) => void;
   packName: string;
   dictionary: Dictionary;
@@ -22,7 +22,7 @@ const PackageItem = ({
   openPackId,
   handleToggle,
   handleInputChange,
-  useUpdatePackageName,
+  editPackageName,
   handleTogglePack,
   packName,
   dictionary,
@@ -32,8 +32,8 @@ const PackageItem = ({
     currentTable,
     handleCurrentTable,
     handleCopyUrlClipBoard,
-    useDeletePackage,
-    useDeleteCandidat,
+    trashPackage,
+    detachCandidat,
     setCurrentPack,
     downloadAllFiles,
   } = usePackage();
@@ -54,7 +54,7 @@ const PackageItem = ({
           toggle={() => handleToggle(pack.id, pack.attributes.Nom)}
           handleInputChange={handleInputChange}
           itemValue={packName}
-          onSubmit={() => useUpdatePackageName(pack.id)}
+          onSubmit={() => editPackageName(pack.id)}
           placeholder={pack.attributes.Nom}
           label=""
           isUpdate={true}
@@ -74,7 +74,7 @@ const PackageItem = ({
           <CandidateTable
             candidates={pack.attributes.candidats?.data}
             dictionary={dictionary}
-            useDeleteCandidat={useDeleteCandidat}
+            detachCandidat={detachCandidat}
             packId={pack?.id}
             packName={pack.attributes.Nom}
             downloadAllFiles={downloadAllFiles}
@@ -83,7 +83,7 @@ const PackageItem = ({
             dictionary={dictionary}
             pack={pack}
             handleCopyUrlClipBoard={handleCopyUrlClipBoard}
-            useDeletePackage={useDeletePackage}
+            trashPackage={trashPackage}
             toggleModalForm={toggleModalForm}
             setCurrentPack={setCurrentPack}
             downloadAllFiles={downloadAllFiles}

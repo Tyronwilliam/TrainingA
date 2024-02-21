@@ -42,13 +42,13 @@ const GenreLayout = ({
   const {
     allPack,
     candidatId,
-    useAssociateCandidatsWithPackage,
+    connectCandidatsAndPackage,
     handleInputChange,
     packName,
     setPackName,
     useCreatePackage,
     fetchPackageById,
-    useUpdatePackageName,
+    editPackageName,
     openPackId,
     setOpenPackId,
     handleTogglePack,
@@ -110,7 +110,7 @@ const GenreLayout = ({
         toggleInput={toggleInput}
         allPack={allPack}
         candidatId={candidatId}
-        useAssociateCandidatsWithPackage={useAssociateCandidatsWithPackage}
+        connectCandidatsAndPackage={connectCandidatsAndPackage}
         handleInputChange={handleInputChange}
         packName={packName}
         useCreatePackage={useCreatePackage}
@@ -128,7 +128,7 @@ const GenreLayout = ({
           openPackId={openPackId}
           handleToggle={handleToggle}
           handleInputChange={handleInputChange}
-          useUpdatePackageName={useUpdatePackageName}
+          editPackageName={editPackageName}
           handleTogglePack={handleTogglePack}
           packName={packName}
           dictionary={dictionary}

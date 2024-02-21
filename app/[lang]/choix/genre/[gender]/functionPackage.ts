@@ -12,16 +12,13 @@ export const handleAddToPack = (
   checked: boolean,
   candidatId: number,
   packId: number,
-  useAssociateCandidatsWithPackage: (
-    packageId: number,
-    candidatId: number
-  ) => void
+  connectCandidatsAndPackage: (packageId: number, candidatId: number) => void
 ) => {
   if (checked) {
     sendToast(true, "Talent already in package");
     return;
   } else {
-    useAssociateCandidatsWithPackage(packId, candidatId);
+    connectCandidatsAndPackage(packId, candidatId);
   }
 };
 export const generateUrlFromCandidats = (

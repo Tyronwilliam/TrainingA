@@ -76,7 +76,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       sendToast(true, "An error occurred");
     }
   };
-  const useAssociateCandidatsWithPackage = async (
+  const connectCandidatsAndPackage = async (
     packageId: number,
     candidatId: number
   ) => {
@@ -112,7 +112,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       if (response?.status === 200) {
         const id = await response?.data?.data?.id;
         if (candidatId !== null) {
-          await useAssociateCandidatsWithPackage(id, candidatId);
+          await connectCandidatsAndPackage(id, candidatId);
           await fetchPackageById();
           sendToast(false, "Package crée");
           setPackName("");
@@ -129,7 +129,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const useUpdatePackageName = async (packId: number) => {
+  const editPackageName = async (packId: number) => {
     try {
       const response = await updatePackageName(packId, packName, jwt);
 
@@ -149,7 +149,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const useDeletePackage = async (packId: number) => {
+  const trashPackage = async (packId: number) => {
     try {
       const response = await deletePackage(packId, jwt);
       if (response?.status === 200) {
@@ -166,7 +166,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       sendToast(true, "An error occured");
     }
   };
-  const useDeleteCandidat = async (id: number, candidatId: number) => {
+  const detachCandidat = async (id: number, candidatId: number) => {
     const data = {
       candidats: [candidatId],
     };
@@ -191,12 +191,12 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     allPack,
     candidatId,
     setCandidatId,
-    useAssociateCandidatsWithPackage,
+    connectCandidatsAndPackage,
     handleInputChange,
     useCreatePackage,
     packName,
     setPackName,
-    useUpdatePackageName,
+    editPackageName,
     openPackId,
     setOpenPackId,
     handleTogglePack,
@@ -204,8 +204,8 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     setCurrentTable,
     handleCurrentTable,
     handleCopyUrlClipBoard,
-    useDeletePackage,
-    useDeleteCandidat,
+    trashPackage,
+    detachCandidat,
     currentPack,
     setCurrentPack,
     downloadAllFiles,

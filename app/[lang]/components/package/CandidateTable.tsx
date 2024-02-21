@@ -6,14 +6,14 @@ import DownloadButton from "../../choix/genre/[gender]/DownloadButton";
 const CandidateTable = ({
   candidates,
   dictionary,
-  useDeleteCandidat,
+  detachCandidat,
   packId,
   packName,
   downloadAllFiles,
 }: {
   candidates: any;
   dictionary: Dictionary;
-  useDeleteCandidat: (packId: number, candidatId: number) => void;
+  detachCandidat: (packId: number, candidatId: number) => void;
   packId: number;
   packName: string;
   downloadAllFiles: (candidat: any, packName: string | null) => void;
@@ -69,7 +69,7 @@ const CandidateTable = ({
                   <td>
                     <BsFillTrashFill
                       className="mx-auto cursor-pointer hover:opacity-55"
-                      onClick={() => useDeleteCandidat(packId, candidat.id)}
+                      onClick={() => detachCandidat(packId, candidat.id)}
                     />
                   </td>
                 </tr>

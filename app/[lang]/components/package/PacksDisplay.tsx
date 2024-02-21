@@ -7,14 +7,11 @@ import {
 const PacksDisplay = ({
   allPack,
   candidatId,
-  useAssociateCandidatsWithPackage,
+  connectCandidatsAndPackage,
 }: {
   allPack: any[];
   candidatId: number | null;
-  useAssociateCandidatsWithPackage: (
-    packageId: number,
-    candidatId: number
-  ) => void;
+  connectCandidatsAndPackage: (packageId: number, candidatId: number) => void;
 }) => {
   return (
     <div className="flex flex-col gap-4 max-h-40 overflow-y-scroll">
@@ -34,7 +31,7 @@ const PacksDisplay = ({
                       checked,
                       candidatId,
                       pack.id,
-                      useAssociateCandidatsWithPackage
+                      connectCandidatsAndPackage
                     );
                 }}
               />
@@ -45,7 +42,9 @@ const PacksDisplay = ({
           );
         })
       ) : (
-        <p className="text-center text-lg">Création de "Package" requis</p>
+        <p className="text-center text-lg">
+          Création de &quot;Package&quot; requis
+        </p>
       )}
     </div>
   );
