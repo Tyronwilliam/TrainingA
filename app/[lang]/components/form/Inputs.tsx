@@ -22,8 +22,8 @@ type InputProps = {
   toggle?: () => void;
   isCurrentlyEditing?: string;
   setIsCurrentlyEditing?: (id: string) => void;
-  candidatId?: number | "" | undefined;
-  jwt?: string;
+  candidatId: number | "" | undefined;
+  jwt: string | undefined;
 };
 const Inputs = ({
   inputs,
@@ -138,6 +138,8 @@ const Inputs = ({
                 toggle={toggle}
                 isCurrentlyEditing={isCurrentlyEditing}
                 setIsCurrentlyEditing={setIsCurrentlyEditing}
+                jwt={jwt}
+                candidatId={candidatId}
               />
             )}
           </React.Fragment>

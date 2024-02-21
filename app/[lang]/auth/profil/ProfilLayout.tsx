@@ -41,11 +41,9 @@ const ProfilLayout = ({
   const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
   const { toggle, open } = useToggle();
   const { data: session } = useSession();
-  const {
-    isSubmitting,
-    isLoadInput,
-    setIsLoadInput,
-  } = useFormSubmission();
+  //@ts-ignore
+  const jwt = session?.user?.jwt;
+  const { isSubmitting, isLoadInput, setIsLoadInput } = useFormSubmission();
 
   const mergedStepSix = {
     ...dictionary?.inscription?.stepSix?.default,
@@ -104,6 +102,8 @@ const ProfilLayout = ({
         isCurrentlyEditing={isCurrentlyEditing}
         mergedStepSix={mergedStepSix}
         isSubmitting={isSubmitting}
+        jwt={jwt}
+        candidatId={candidat?.id}
       />
     </section>
   );

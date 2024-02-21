@@ -15,10 +15,10 @@ export type TabsLayoutProps = {
   toggle: () => void;
   isCurrentlyEditing: string;
   setIsCurrentlyEditing: (id: string) => void;
-  candidatId?: number | "" | undefined;
-  jwt?: string;
+  candidatId: number | "" | undefined;
   mergedStepSix: Record<string, StepType>;
   isSubmitting: boolean;
+  jwt: string | undefined;
 };
 
 export type TabProps = {

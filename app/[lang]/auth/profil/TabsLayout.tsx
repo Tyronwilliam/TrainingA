@@ -23,6 +23,8 @@ const TabsLayout = ({
   isCurrentlyEditing,
   mergedStepSix,
   isSubmitting,
+  jwt,
+  candidatId,
 }: TabsLayoutProps) => {
   return (
     <form
@@ -117,6 +119,8 @@ const TabsLayout = ({
           inputs={mergedStepSix}
           isCurrentlyEditing={isCurrentlyEditing}
           setIsCurrentlyEditing={setIsCurrentlyEditing}
+          candidatId={candidatId}
+          jwt={jwt}
           key={"StepSix"}
         />
       </Tab>
