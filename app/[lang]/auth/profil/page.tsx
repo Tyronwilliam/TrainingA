@@ -50,7 +50,6 @@ const ProfilPage = async ({
   //@ts-ignore
   const candidat = await getSingleTalent(session?.user?.jwt);
   const dictionary = await getDictionary(lang);
-  console.log();
   return (
     <>
       <PreviousNavHistory />

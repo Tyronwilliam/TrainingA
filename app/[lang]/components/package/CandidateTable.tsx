@@ -1,9 +1,7 @@
 import { Dictionary } from "@/types/dictionary";
-import React from "react";
+import { useSession } from "next-auth/react";
 import { BsFillTrashFill } from "react-icons/bs";
 import DownloadButton from "../../choix/genre/[gender]/DownloadButton";
-import { useSession } from "next-auth/react";
-import useZipDownload from "@/hooks/Zip/useZipDownload";
 
 const CandidateTable = ({
   candidates,

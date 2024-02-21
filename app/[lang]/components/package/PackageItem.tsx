@@ -1,11 +1,10 @@
-import React, { FormEvent } from "react";
+import { usePackage } from "@/hooks/Package/usePackage";
+import { Dictionary } from "@/types/dictionary";
+import { PackSchema } from "@/types/package";
+import classNames from "classnames";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import CandidateTable from "./CandidateTable"; // Adjust the import path
 import NewItemForm from "./NewItemForm";
-import { PackSchema } from "@/types/package";
-import { usePackage } from "@/hooks/Package/usePackage";
-import classNames from "classnames";
-import { Dictionary } from "@/types/dictionary";
 import TableCTA from "./TableCTA";
 interface PackageItemProps {
   pack: PackSchema;
