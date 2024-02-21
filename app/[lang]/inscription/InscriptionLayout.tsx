@@ -82,6 +82,8 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       toggle={toggle}
       isCurrentlyEditing={isCurrentlyEditing}
       setIsCurrentlyEditing={setIsCurrentlyEditing}
+      candidatId={candidatId}
+      jwt={jwt}
     />,
     <StepThree formik={formik} dictionary={dictionary} key={"StepThree"} />,
     <StepFour formik={formik} dictionary={dictionary} key={"StepFour"} />,
