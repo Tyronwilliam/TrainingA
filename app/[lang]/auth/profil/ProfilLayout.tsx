@@ -43,7 +43,13 @@ const ProfilLayout = ({
   const { data: session } = useSession();
   //@ts-ignore
   const jwt = session?.user?.jwt;
-  const { isSubmitting, isLoadInput, setIsLoadInput } = useFormSubmission();
+  const {
+    isSubmitting,
+    isLoadInput,
+    setIsLoadInput,
+    startSubmission,
+    finishSubmission,
+  } = useFormSubmission();
 
   const mergedStepSix = {
     ...dictionary?.inscription?.stepSix?.default,
@@ -54,6 +60,7 @@ const ProfilLayout = ({
     initialValues: profilInitialValues,
     validationSchema: SchemaValidationProfil,
     onSubmit: async (values) => {
+      startSubmission();
       const response = await updateProfil(
         values,
         //@ts-ignore
@@ -62,11 +69,14 @@ const ProfilLayout = ({
       );
       if (response?.status === 200) {
         sendToast(false, dictionary?.general?.success);
+        finishSubmission("");
       } else {
         if (response?.response?.data?.error?.message) {
           sendToast(true, response?.response?.data?.error?.message);
+          finishSubmission("");
         } else {
           sendToast(true, "An error occurred");
+          finishSubmission("");
         }
       }
     },

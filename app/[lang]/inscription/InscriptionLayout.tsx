@@ -27,7 +27,13 @@ import Success from "./Success";
 import cookieCutter from "@boiseitguru/cookie-cutter";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
-  const { isSubmitting, isLoadInput, setIsLoadInput } = useFormSubmission();
+  const {
+    isSubmitting,
+    isLoadInput,
+    setIsLoadInput,
+    startSubmission,
+    finishSubmission,
+  } = useFormSubmission();
 
   const jwt = cookieCutter.get("jwt");
   const candidatIdCookie = cookieCutter.get("candidatId");
@@ -61,10 +67,14 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
         const stepPlusUn = currentStep + 1;
         setCurrentStep(stepPlusUn);
       } else {
+        startSubmission();
         const response = await handleApi(currentStep, formik?.values);
         if (response?.status === 200) {
+          finishSubmission("");
           const stepPlusUn = currentStep + 1;
           setCurrentStep(stepPlusUn);
+        } else {
+          finishSubmission("");
         }
       }
     }
