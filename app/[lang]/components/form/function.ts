@@ -123,7 +123,7 @@ export const handlePutPortfolioPhoto = async ({
     id,
   });
   if (response?.status === 200) {
-    sendToast(false, "Photos ajouté");
+    sendToast(false, "Media ajouté");
     setIsLoadInput(false);
   } else {
     const error = response?.response?.data?.error?.message

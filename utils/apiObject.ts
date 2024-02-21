@@ -33,7 +33,14 @@ export const apiObject = (id: string, data: any) => {
         },
       };
       break;
-
+    case "newPhotos":
+      return {
+        data: {
+          Photo_Candidature: {
+            Nouvelle_photos: data,
+          },
+        },
+      };
     default:
       break;
   }

@@ -1,4 +1,3 @@
-import { useCallback, useMemo } from "react";
 import Spinner from "../Spinner";
 import { Dialog } from "./Dialog";
 import Helpers from "./Helpers";
@@ -10,9 +9,7 @@ import {
   handlePutPortfolioPhoto,
 } from "./function";
 import { InputPhotoProps } from "./type";
-import { useSession } from "next-auth/react";
 
-// PASSER LE JWT EN PROPS
 
 const InputPhoto = ({
   id,
