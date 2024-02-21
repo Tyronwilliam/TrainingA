@@ -43,6 +43,7 @@ const SingleCandidatLayout = ({
         competence={competence}
         toggleModal1={toggleModal1}
         videos={videos}
+        downloadAllFiles={downloadAllFiles}
       />
       <CarouselLayout
         toggleModal1={toggleModal1}
@@ -55,7 +56,6 @@ const SingleCandidatLayout = ({
         letterLastName={letterLastName}
         candidat={candidat}
       />
-      <button onClick={() => downloadAllFiles(candidat)}>DOWNLOAD FILE</button>
     </section>
   );
 };

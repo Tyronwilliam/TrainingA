@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL_IMG}/api/candidats/${id}?populate=Physionomie.Confection_Haut,Physionomie.Taille,Physionomie.Confection_Bas,Physionomie.Chaussures,Physionomie.Poids,Portfolio.Portfolio,Role_Candidat.Competence,Photo_de_presentation,demos`
+      `${process.env.NEXT_PUBLIC_URL_IMG}/api/candidats/${id}?populate=Physionomie.Confection_Haut,Physionomie.Taille,Physionomie.Confection_Bas,Physionomie.Chaussures,Physionomie.Poids,Portfolio.Portfolio,Role_Candidat.Competence,Photo_de_presentation`
     );
 
     if (!response.ok) {
@@ -61,9 +61,9 @@ const SingleCandidatPage = async ({
   }
   if (
     //@ts-ignore
-    session.user.role === "Regular" ||
+    session?.user?.role === "Regular" ||
     //@ts-ignore
-    (!session.user.actif && session.user.role !== "Admin")
+    (!session?.user?.actif && session?.user?.role !== "Admin")
   ) {
     redirect("/restreint");
   }

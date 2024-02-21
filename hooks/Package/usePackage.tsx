@@ -67,7 +67,6 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
         const packages = response?.data?.data;
         setAllPack(packages);
       } else {
-        console.log(response);
         sendToast(true, response?.response?.data?.error?.message);
       }
     } catch (err) {

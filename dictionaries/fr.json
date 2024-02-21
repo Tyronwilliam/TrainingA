@@ -319,7 +319,8 @@
       "p": "Pour voir tout notre catalogue de talents, merci de prendre contact avec nous",
       "link": "Ici"
     },
-    "candidatEmmpty": "Votre fiche n'a pas pu être créée, veuillez-nous contacter."
+    "candidatEmmpty": "Votre fiche n'a pas pu être créée, veuillez-nous contacter.",
+    "zipHelper": "Télécharger média"
   },
 
   "connexion": {

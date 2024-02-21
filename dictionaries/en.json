@@ -315,7 +315,8 @@
       "p": "To see our full catalogue of talent, please contact us",
       "link": "Here"
     },
-    "candidatEmmpty": "Your file could not be created, please contact us."
+    "candidatEmmpty": "Your file could not be created, please contact us.",
+    "zipHelper": "Download media"
   },
 
   "connexion": {

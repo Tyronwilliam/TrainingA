@@ -26,9 +26,10 @@ export const createPackage = async (data: Record<string, any>, jwt: string) => {
   }
 };
 export const getPackagesById = async (id: string, jwt: string) => {
+  // &[populate][Portfolio][populate][Portfolio]=*&[populate][Photo_de_presentation]=*&[populate][Bande_Demo]=*&[populate][Video_Presentation]=*
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/packages?filters[users_permissions_user]=${id}&populate=*`,
+      `${process.env.NEXT_PUBLIC_API_URL}/packages?filters[users_permissions_user]=${id}&populate[0]=candidats.Portfolio.Portfolio&populate[1]=candidats.Photo_de_presentation&populate[2]=candidats.Bande_Demo&populate[3]=candidats.Video_Presentation`,
       {
         headers: {
           Authorization: `Bearer ${jwt}`,
