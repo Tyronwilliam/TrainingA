@@ -37,7 +37,6 @@ const InscriptionPage = async ({
   const dictionary = await getDictionary(lang);
   return (
     <>
-      <PreviousNavHistory />
       <main
         className="w-full  h-fit m-auto pt-5  flex flex-col "
         style={{ minHeight: "calc(100vh - 48px)" }}

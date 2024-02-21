@@ -10,8 +10,9 @@ import {
 import { useEffect, useState } from "react";
 import useCustomRouter from "../Basic/useCustomRouter";
 import { PhysioState } from "@/app/[lang]/choix/genre/[gender]/type";
+export type Gender = "Men" | "Women" | "Kids";
 
-const useFilter = (talents: any, metaInitial: any) => {
+const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
   const { router, pathname, searchParams } = useCustomRouter();
 
   const [candidat, setCandidat] = useState(talents);
@@ -42,7 +43,7 @@ const useFilter = (talents: any, metaInitial: any) => {
   };
   useEffect(() => {
     fetchData({
-      gender: "Men",
+      gender: gender,
       properStart: 0,
       role: role !== null ? role : undefined,
       competence: compétence !== null ? compétence : undefined,
@@ -154,7 +155,7 @@ const useFilter = (talents: any, metaInitial: any) => {
     unique: uniqueParams,
   }: getCandidatParams) => {
     const queryParams = {
-      gender: "Men",
+      gender: gender,
       properStart: 0,
       role,
       competence: compétence,
@@ -163,11 +164,10 @@ const useFilter = (talents: any, metaInitial: any) => {
       type,
       unique: uniqueParams,
     };
-
+    ("use server");
     const response = await getCandidat(queryParams);
     const data = response?.data;
     const metaRes = response?.meta?.pagination?.total;
-    console.log("RUNNING");
     setMeta(metaRes);
     setCandidat(data);
   };
@@ -181,7 +181,7 @@ const useFilter = (talents: any, metaInitial: any) => {
         await fetchData({
           role: "Acteur",
           properStart: 0,
-          gender: "Men",
+          gender: gender,
           competence: compétence !== null ? compétence : undefined,
           age: age !== null ? age : undefined,
           taille: taille !== null ? taille : undefined,
@@ -196,7 +196,7 @@ const useFilter = (talents: any, metaInitial: any) => {
         await fetchData({
           role: "Modele",
           properStart: 0,
-          gender: "Men",
+          gender: gender,
           competence: compétence !== null ? compétence : undefined,
           age: age !== null ? age : undefined,
           taille: taille !== null ? taille : undefined,
@@ -209,7 +209,7 @@ const useFilter = (talents: any, metaInitial: any) => {
           `${pathname}?Role=Figurant${queryToString ? `&${queryToString}` : ""}`
         );
         await fetchData({
-          gender: "Men",
+          gender: gender,
           role: "Figurant",
           properStart: 0,
           competence: compétence !== null ? compétence : undefined,
@@ -222,7 +222,7 @@ const useFilter = (talents: any, metaInitial: any) => {
       case "Tous":
         router.push(`${pathname}`);
         await fetchData({
-          gender: "Men",
+          gender: gender,
           properStart: 0,
           competence: compétence !== null ? compétence : undefined,
           age: age !== null ? age : undefined,
@@ -241,7 +241,7 @@ const useFilter = (talents: any, metaInitial: any) => {
     const startParams = meta >= candidat.length ? candidat.length : 0;
     if (role || compétence || age || taille || type || uniqueParams) {
       const response = await getCandidat({
-        gender: "Men",
+        gender: gender,
         properStart: startParams,
         competence: compétence !== null ? compétence : undefined,
         age: age !== null ? age : undefined,
@@ -255,7 +255,7 @@ const useFilter = (talents: any, metaInitial: any) => {
       setCandidat((prev: []) => [...prev, ...data]);
     } else {
       const response = await getCandidat({
-        gender: "Men",
+        gender: gender,
         properStart,
         competence: compétence !== null ? compétence : undefined,
         age: age !== null ? age : undefined,

@@ -6,6 +6,7 @@ import ProfilLayout from "./ProfilLayout";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/auth";
 import PreviousNavHistory from "../../components/PreviousNavHistory";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Mon profil - Agence Graziani",
@@ -40,6 +41,12 @@ const ProfilPage = async ({
   params: { lang: Locale };
 }) => {
   const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect("/restreint");
+  } //@ts-ignore
+  if (session && session.user.role !== "Regular") {
+    redirect("/restreint");
+  }
   //@ts-ignore
   const candidat = await getSingleTalent(session?.user?.jwt);
   const dictionary = await getDictionary(lang);
@@ -47,10 +54,19 @@ const ProfilPage = async ({
     <>
       <PreviousNavHistory />
       <main className="w-full min-h-full h-fit m-auto pt-5 mb-10 flex flex-col items-center justify-center">
-        <h1 className="text-3xl mb-6 uppercase">
-          {dictionary?.general?.greeting} {candidat?.candidat?.Prenom}
-        </h1>
-        <ProfilLayout dictionary={dictionary} candidat={candidat?.candidat} />
+        {candidat?.candidat === null ? (
+          <p className="text-2xl">{dictionary?.general?.candidatEmmpty}</p>
+        ) : (
+          <>
+            <h1 className="text-3xl mb-6 uppercase">
+              {dictionary?.general?.greeting} {candidat?.candidat?.Prenom}
+            </h1>
+            <ProfilLayout
+              dictionary={dictionary}
+              candidat={candidat?.candidat}
+            />
+          </>
+        )}
       </main>
     </>
   );

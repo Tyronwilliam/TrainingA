@@ -1,6 +1,17 @@
 import { FormikInscriptionProps } from "@/types/formulaire";
 import axios from "axios";
 
+export const getUserByEmail = async (email: string) => {
+  const res = await axios
+    .get(
+      `${process.env.NEXT_PUBLIC_API_URL}/users?filters[email][$eq]=${email}&populate=candidat`
+    )
+    .then((res) => res)
+    .catch((err) => err);
+
+  return res;
+};
+
 export const createUser = async (values: FormikInscriptionProps) => {
   const userName = `${values.firstname}${values?.nomDeNaissance}`;
   const cleanedUserName = userName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();

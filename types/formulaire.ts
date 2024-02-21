@@ -93,7 +93,6 @@ export interface StepType {
   pattern?: string;
 }
 
-
 export type FormikInscriptionWithoutExcluded = Omit<
   FormikInscriptionProps,
   | "email"
@@ -111,4 +110,20 @@ export type FormikInscriptionWithoutExcluded = Omit<
 > & {
   newPhotos: [];
   unique: boolean;
+};
+export type ContractInitialValues = {
+  nameOfFilm: string;
+  prodNameField: string;
+  adresse: string;
+  siret: number | null;
+  assedic: string;
+  apec: string;
+  realisateur: string;
+  role: string;
+  remuneration: number | null;
+  heureTravail: number | null;
+  duree: Date | null;
+  jours: number | null;
+  lieuDeTravail: string;
+  faitLe: Date | null;
 };

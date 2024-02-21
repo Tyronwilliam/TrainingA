@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Name from "./Name";
 import classNames from "classnames";
+import { useSession } from "next-auth/react";
 
 const CardCandidat = ({
   talent,
@@ -8,17 +9,22 @@ const CardCandidat = ({
   nom,
   showName,
   showFolio,
+  toggle,
+  isPackagePage,
 }: {
   talent: any;
   children: ReactNode;
   nom: string | undefined;
   showName: boolean;
+  isPackagePage: boolean;
   showFolio?: boolean;
+  toggle?: () => void;
 }) => {
+  const { data: session } = useSession();
   return (
     <div
       style={{ flexBasis: "calc(33.33% - 20px)" }}
-      className="flex flex-col items-center justify-center gap-4 "
+      className="flex flex-col items-center justify-center gap-4 apparition__opacity"
       key={talent?.id}
     >
       <div
@@ -44,6 +50,14 @@ const CardCandidat = ({
           nom={nom}
           classStyle="max-w-[163px] text-3xl"
           containerStyle="justify-center items-center"
+          isPackage={
+            //@ts-ignore
+            (session?.user?.role === "Admin" && !isPackagePage) ||
+            //@ts-ignore
+            (session?.user.filtre && !isPackagePage)
+          }
+          toggle={toggle}
+          candidatId={talent?.id}
         />
       )}
     </div>

@@ -1,7 +1,8 @@
+@import "./loader.css";
+@import "./utility.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body,
 html {
   width: 100%;
@@ -133,6 +134,16 @@ html {
       rgb(38, 38, 38) 0%,
       rgb(15, 15, 15) 100%
     );
+  }
+  .custom__hover {
+    &:hover {
+      background: rgb(38, 38, 38);
+      background: linear-gradient(
+        149deg,
+        rgb(38, 38, 38) 100%,
+        rgb(15, 15, 15) 0%
+      );
+    }
   }
   .dialog__portfolio {
     width: 100%;

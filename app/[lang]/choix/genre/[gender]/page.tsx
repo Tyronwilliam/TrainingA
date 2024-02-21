@@ -5,14 +5,17 @@ import { Locale } from "@/i18n-config";
 import React from "react";
 import GenreLayout from "./GenreLayout";
 import { getCandidat } from "./action";
+import { Gender } from "@/hooks/Filter/useFilter";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/auth";
+import { redirect } from "next/navigation";
 
 const GenrePage = async ({
   params,
   searchParams,
 }: {
-  params: { gender: string; lang: Locale };
+  params: { gender: Gender; lang: Locale };
   searchParams: {
-    pagination: string;
     Compétence: string;
     Age: string;
     Taille: string;
@@ -21,6 +24,20 @@ const GenrePage = async ({
     Role: string;
   };
 }) => {
+
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/restreint");
+  }
+  if (
+    //@ts-ignore
+    session.user.role === "Regular" ||
+    //@ts-ignore
+    (!session.user.actif && session.user.role !== "Admin")
+  ) {
+    redirect("/restreint");
+  }
   const dictionary = await getDictionary(params.lang);
   const talents = await getCandidat({
     gender: params?.gender,
@@ -36,7 +53,7 @@ const GenrePage = async ({
   return (
     <>
       <PreviousNavHistory />
-      <main className="pt-[80px]">
+      <main className="pt-[80px] relative">
         <HeaderImage
           filename="https://lula-aws-s3-bucket.s3.eu-west-3.amazonaws.com/%24R6JJ7JQ.png"
           alt="Talents"
