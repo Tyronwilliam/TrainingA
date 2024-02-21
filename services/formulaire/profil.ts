@@ -72,6 +72,13 @@ export const updateProfil = async (values: any, jwt: string, id: number) => {
       values?.videodepresentation?.name
     );
   }
+  if (values?.cmb instanceof File) {
+    formData.append(
+      `files.Data_intermittent.CMB`,
+      values?.cmb,
+      values?.cmb?.name
+    );
+  }
 
   const json = dataProfil(values);
   formData.append("data", JSON.stringify(json));
