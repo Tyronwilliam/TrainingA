@@ -17,9 +17,6 @@ import { handleResponse } from "@/utils/apiObject";
 import { sendToast } from "@/utils/toast";
 import cookieCutter from "@boiseitguru/cookie-cutter";
 
-// Gerer le cas ou l'user existe deja
-// Connecter l'user + renvoyer JWt + id
-// FInd User avant de creér l'user
 
 export const handleApi = async (
   step: number,
