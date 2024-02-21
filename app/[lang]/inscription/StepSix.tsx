@@ -11,8 +11,8 @@ type StepFiveProps = {
   isCurrentlyEditing: string;
   setIsCurrentlyEditing: (id: string) => void;
   inputs: Record<string, StepType>;
-  candidatId?: number | "" | undefined;
-  jwt?: string;
+  candidatId: number | "" | undefined;
+  jwt: string | undefined;
 };
 const StepSix = ({
   dictionary,

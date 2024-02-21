@@ -38,7 +38,8 @@ export type InputPhotoProps = Omit<InputLabelProps, "placeholder"> & {
   toggle?: () => void;
   isCurrentlyEditing?: string;
   setIsCurrentlyEditing?: (id: string) => void;
-  candidatId?: string;
+  candidatId: number | "" | undefined;
+  jwt: string | undefined;
 };
 export type ErrorInputProps = {
   errorText: string | undefined;
