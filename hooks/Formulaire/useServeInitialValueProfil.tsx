@@ -16,7 +16,6 @@ const useServeInitialValueProfil = (candidat: any) => {
     Bande_Demo,
     Agence,
   } = candidat || {};
-
   const profilInitialValues: FormikInscriptionWithoutExcluded = {
     phone: Telephone ? `0${Telephone}` : "",
     age: Age ? Age : "",

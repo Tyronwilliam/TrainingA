@@ -22,8 +22,8 @@ type InputProps = {
   toggle?: () => void;
   isCurrentlyEditing?: string;
   setIsCurrentlyEditing?: (id: string) => void;
-  candidatId: number | "" | undefined;
-  jwt: string | undefined;
+  candidatId?: number | "" | undefined;
+  jwt?: string | undefined;
 };
 const Inputs = ({
   inputs,
