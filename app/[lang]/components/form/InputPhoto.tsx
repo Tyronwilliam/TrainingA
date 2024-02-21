@@ -10,6 +10,7 @@ import {
   handlePutPortfolioPhoto,
 } from "./function";
 import { InputPhotoProps } from "./type";
+import { useSession } from "next-auth/react";
 
 // PASSER LE JWT EN PROPS
 
@@ -30,8 +31,10 @@ const InputPhoto = ({
   open,
   toggle,
   candidatId,
-  jwt,
 }: InputPhotoProps) => {
+  const { data: session } = useSession();
+  //@ts-ignore
+  const jwt = session?.user?.jwt;
   const errorText = checkError(formik, id);
   const value = formik.values[id];
   const length = Array.isArray(value) ? value.length : value !== null ? 1 : 0;
