@@ -176,10 +176,9 @@ export const SchemaRole = Yup.object().shape({
 export const StepFiveSchema = SchemaRole.concat(SchemaPhotoInscription);
 
 export const SchemaVideoInscription = Yup.object().shape({
-  videodepresentation: Yup.mixed().required("Presentation Video Required"),
+  // videodepresentation: Yup.mixed().required("Presentation Video Required"),
   bandeDemo: Yup.array()
-    .min(1, "At least one vidéo is required")
-    .max(15, "3 vidéos max")
+    .max(3, "3 vidéos max")
     .test("file-instance", "Please save your file", (value) => {
       // Check if any item in the array is not an instance of File
       return (

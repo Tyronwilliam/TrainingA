@@ -19,8 +19,13 @@ const useZipDownload = () => {
 
   const downloadAllFiles = async (candidates: any, packName: string | null) => {
     const globalZip = new JSZip();
-    const nameZip = packName !== null ? packName : "All_talents";
     const candidatArray = Array.isArray(candidates) ? candidates : [candidates];
+    const nameZip =
+      packName !== null
+        ? packName
+        : candidatArray.length === 1
+        ? `${candidatArray[0].prenom} ${candidatArray[0].nom}`
+        : "All_talents";
 
     for (const candidate of candidatArray) {
       const candidateFolderName: string = `${
