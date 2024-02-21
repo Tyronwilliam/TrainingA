@@ -1,11 +1,9 @@
-import React from "react";
+import { Dictionary } from "@/types/dictionary";
+import { useSession } from "next-auth/react";
 import Name from "../Candidat/Name";
+import DownloadButton from "../DownloadButton";
 import PhysonomieInfos from "./components/PhysonomieInfos";
 import Skills from "./components/Skills";
-import { Dictionary } from "@/types/dictionary";
-import { FaDownload } from "react-icons/fa";
-import { useSession } from "next-auth/react";
-import DownloadButton from "../DownloadButton";
 
 const DetailsLayout = ({
   candidat,
@@ -22,7 +20,7 @@ const DetailsLayout = ({
   competence: string | null;
   videos: any[];
   toggleModal1: () => void;
-  downloadAllFiles: (candidat: any) => void;
+  downloadAllFiles: (candidat: any, packName: string | null) => void;
 }) => {
   const { data: session } = useSession();
   return (
@@ -36,22 +34,13 @@ const DetailsLayout = ({
         />
         {/* @ts-ignore */}
         {session?.user?.role === "Admin" && (
-          // <DownloadButton
-          //   dictionary={dictionary}
-          //   candidat={candidat}
-          //   downloadAllFiles={downloadAllFiles}
-          // />
-          <button
-            className="relative group"
-            onClick={() =>
-              downloadAllFiles !== undefined && downloadAllFiles(candidat)
-            }
-          >
-            <FaDownload className="w-6 h-6 hover:opacity-55" />
-            <span className="hidden group-hover:block radius text-sm top-full left-[-20%]  bg-white text-black p-2 absolute z-50 text-center">
-              {dictionary?.general?.zipHelper}
-            </span>
-          </button>
+          <DownloadButton
+            dictionary={dictionary}
+            candidat={candidat}
+            downloadAllFiles={downloadAllFiles}
+            packName={null}
+            iconeClass="w-6 h-6"
+          />
         )}
       </div>
       <PhysonomieInfos dictionary={dictionary} candidat={candidat} />

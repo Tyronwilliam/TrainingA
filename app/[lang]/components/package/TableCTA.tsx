@@ -10,6 +10,7 @@ interface TableCTAProps {
   useDeletePackage: (packId: number) => void;
   toggleModalForm: () => void;
   setCurrentPack: (pack: PackSchema) => void;
+  downloadAllFiles: (candidat: any, packName: string | null) => void;
 }
 const TableCTA = ({
   pack,
@@ -18,6 +19,7 @@ const TableCTA = ({
   useDeletePackage,
   toggleModalForm,
   setCurrentPack,
+  downloadAllFiles,
 }: TableCTAProps) => {
   const { data: session } = useSession();
   return (
@@ -37,15 +39,28 @@ const TableCTA = ({
           </button>
           {/* @ts-ignore */}
           {session?.user.role === "Admin" && (
-            <button
-              className="boutonSlideCommon p-2 radius w-fit uppercase"
-              onClick={() => {
-                toggleModalForm();
-                setCurrentPack(pack);
-              }}
-            >
-              {dictionary?.genre?.page?.package?.cta[1]}
-            </button>
+            <>
+              <button
+                className="boutonSlideCommon p-2 radius w-fit uppercase"
+                onClick={() => {
+                  toggleModalForm();
+                  setCurrentPack(pack);
+                }}
+              >
+                {dictionary?.genre?.page?.package?.cta[1]}
+              </button>
+              <button
+                className="boutonSlideCommon p-2 radius w-fit uppercase"
+                onClick={() =>
+                  downloadAllFiles(
+                    pack.attributes.candidats?.data,
+                    pack.attributes.Nom
+                  )
+                }
+              >
+                Download media
+              </button>
+            </>
           )}
         </>
       )}

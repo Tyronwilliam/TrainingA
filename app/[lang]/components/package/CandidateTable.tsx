@@ -10,15 +10,17 @@ const CandidateTable = ({
   dictionary,
   useDeleteCandidat,
   packId,
+  packName,
+  downloadAllFiles,
 }: {
   candidates: any;
   dictionary: Dictionary;
   useDeleteCandidat: (packId: number, candidatId: number) => void;
   packId: number;
+  packName: string;
+  downloadAllFiles: (candidat: any, packName: string | null) => void;
 }) => {
   const { data: session } = useSession();
-  const { downloadAllFiles } = useZipDownload();
-  console.log(candidates);
 
   return (
     <div className="max-h-36 overflow-y-scroll my-4 overflow-x-scroll md:overflow-x-hidden">
@@ -61,6 +63,8 @@ const CandidateTable = ({
                         dictionary={dictionary}
                         candidat={candidat}
                         downloadAllFiles={downloadAllFiles}
+                        packName={packName}
+                        iconeClass="w-4 h-4"
                       />
                     </td>
                   )}

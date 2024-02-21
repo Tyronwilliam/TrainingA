@@ -12,6 +12,7 @@ import { PackSchema } from "@/types/package";
 import { sendToast } from "@/utils/toast";
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useState } from "react";
+import useZipDownload from "../Zip/useZipDownload";
 
 type GenericContextType = {
   [key: string]: any;
@@ -21,6 +22,8 @@ export const PackageContext = createContext<GenericContextType>({});
 export const usePackage = () => useContext(PackageContext);
 const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
+  const { downloadAllFiles } = useZipDownload();
+
   // @ts-ignore
   const userId = session?.user?.id; // @ts-ignore
   const jwt = session?.user?.jwt;
@@ -205,6 +208,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     useDeleteCandidat,
     currentPack,
     setCurrentPack,
+    downloadAllFiles,
   };
   return (
     <PackageContext.Provider value={exposed}>

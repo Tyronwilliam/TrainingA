@@ -36,6 +36,7 @@ const PackageItem = ({
     useDeletePackage,
     useDeleteCandidat,
     setCurrentPack,
+    downloadAllFiles,
   } = usePackage();
   return (
     <div
@@ -76,6 +77,8 @@ const PackageItem = ({
             dictionary={dictionary}
             useDeleteCandidat={useDeleteCandidat}
             packId={pack?.id}
+            packName={pack.attributes.Nom}
+            downloadAllFiles={downloadAllFiles}
           />
           <TableCTA
             dictionary={dictionary}
@@ -84,6 +87,7 @@ const PackageItem = ({
             useDeletePackage={useDeletePackage}
             toggleModalForm={toggleModalForm}
             setCurrentPack={setCurrentPack}
+            downloadAllFiles={downloadAllFiles}
           />
         </>
       )}
