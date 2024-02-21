@@ -25,7 +25,7 @@ export const PreferencesContext = createContext<PreferencesContextType>({
 export const usePreferences = () => useContext(PreferencesContext);
 
 export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
-  const [isMute, setIsMute] = useState(true);
+  const [isMute, setIsMute] = useState(false);
   const [split, setSplit] = useState(false);
 
   const handleSplit = () => {
