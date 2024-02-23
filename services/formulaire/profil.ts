@@ -90,6 +90,7 @@ export const updateProfil = async (values: any, jwt: string, id: number) => {
       {
         headers: {
           Authorization: `Bearer ${jwt}`,
+          "Content-Type": "multipart/form-data",
         },
       }
     );
