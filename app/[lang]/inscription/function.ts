@@ -32,25 +32,8 @@ export const handleApi = async (
         let jwtRes: string;
         const userExist = await getUserByEmail(values?.email.toLowerCase());
         if (userExist?.data?.length > 0) {
-          userId = await userExist?.data[0]?.id;
-          const data = {
-            identifier: values.email,
-            password: values.password,
-          };
-          const res = await sendLoginRequest(data);
-          jwtRes = await res?.data.jwt;
-          const resDataUser = await getUserProfile(jwtRes);
-          await handleResponse(resDataUser);
-          if (resDataUser?.data?.candidat !== null) {
-            const candidatIdRes = await resDataUser.data.candidat.id;
-            cookieCutter.set("candidatId", candidatIdRes);
-            return await handleResponse(resDataUser);
-          } else {
-            const responseCreateCandidat = await createCandidat(values, userId);
-            const candidatIdRes = await responseCreateCandidat.data.data.id;
-            cookieCutter.set("candidatId", candidatIdRes);
-            return await handleResponse(responseCreateCandidat);
-          }
+          sendToast(true, "You already have an account, please log in");
+          return;
         } else {
           const responseCreateUser = await createUser(values);
           await handleResponse(responseCreateUser);
@@ -113,18 +96,23 @@ export const handleApi = async (
         break;
       case 6:
         if (jwt && candidatId) {
-          const promisesSix = await promisesUpload(
-            values?.videodepresentation,
-            jwt
-          );
-          const promisesResolvedSix = await Promise.all(promisesSix);
-          const responseStepSixFile = await uploadFileInCandidat(
-            promisesResolvedSix,
-            candidatId,
-            "videodepresentation",
-            jwt
-          );
-          return await handleResponse(responseStepSixFile);
+          if (values?.videodepresentation !== null) {
+            const promisesSix = await promisesUpload(
+              values?.videodepresentation,
+              jwt
+            );
+            const promisesResolvedSix = await Promise.all(promisesSix);
+            const responseStepSixFile = await uploadFileInCandidat(
+              promisesResolvedSix,
+              candidatId,
+              "videodepresentation",
+              jwt
+            );
+            return await handleResponse(responseStepSixFile);
+          } else {
+            // Return a response with a status of 200
+            return { res: { status: 200 } };
+          }
         }
         break;
 

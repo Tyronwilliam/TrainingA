@@ -69,7 +69,12 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       } else {
         startSubmission();
         const response = await handleApi(currentStep, formik?.values);
-        if (response?.status === 200) {
+        if (currentStep === 6 && formik?.values?.videodepresentation === null) {
+          // If current step is 6 and videodepresentation is null, move to the next step
+          finishSubmission("");
+          const stepPlusUn = currentStep + 1;
+          setCurrentStep(stepPlusUn);
+        } else if (response?.status === 200) {
           finishSubmission("");
           const stepPlusUn = currentStep + 1;
           setCurrentStep(stepPlusUn);
@@ -79,6 +84,27 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       }
     }
   };
+
+  // const handleNext = async () => {
+  //   await formik.validateForm();
+  //   if (Object.keys(formik?.errors)?.length === 0) {
+  //     if (currentStep === 4 || currentStep === 0) {
+  //       const stepPlusUn = currentStep + 1;
+  //       setCurrentStep(stepPlusUn);
+  //     } else {
+  //       startSubmission();
+  //       const response = await handleApi(currentStep, formik?.values);
+  //       console.log(response, " HELLO WORLD");
+  //       if (response?.status === 200) {
+  //         finishSubmission("");
+  //         const stepPlusUn = currentStep + 1;
+  //         setCurrentStep(stepPlusUn);
+  //       } else {
+  //         finishSubmission("");
+  //       }
+  //     }
+  //   }
+  // };
   const stepComponents = [
     <Disclaimer dictionary={dictionary} key={"StepZero"} />,
     <StepOne formik={formik} dictionary={dictionary} key={"StepOne"} />,
