@@ -40,14 +40,14 @@ const PackageItem = ({
   return (
     <div
       key={pack.id}
-      className="border-[1px] w-[95%] border-white border-opacity-55 radius cursor-pointer p-4 background__grey custom__hover"
-      onClick={() => handleCurrentTable(pack?.id)}
+      className=" border-[1px] w-[95%] border-white border-opacity-55 radius cursor-pointer p-4 background__grey custom__hover"
     >
       <div
         className={classNames({
           "flex justify-between   font-bold gap-4 items-center": true,
           "border-b-[1px] border-white pb-2": currentTable === pack?.id,
         })}
+        onClick={() => handleCurrentTable(pack?.id)}
       >
         <NewItemForm
           isOpen={openPackId === pack.id}
@@ -61,7 +61,13 @@ const PackageItem = ({
           buttonText={pack.attributes.Nom}
           dictionary={dictionary}
         />
-        <div onClick={() => handleTogglePack(pack.id)}>
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            handleCurrentTable(pack?.id);
+            // handleTogglePack(pack.id);
+          }}
+        >
           {currentTable === pack?.id ? (
             <FaChevronDown className="w-4 h-4" />
           ) : (
