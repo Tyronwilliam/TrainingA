@@ -24,7 +24,7 @@ import { handleApi } from "./function";
 import Disclaimer from "./Disclaimer";
 import classNames from "classnames";
 import Success from "./Success";
-import cookieCutter from "@boiseitguru/cookie-cutter";
+import { getCookie } from "cookies-next";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const {
@@ -35,10 +35,10 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     finishSubmission,
   } = useFormSubmission();
 
-  const jwt = cookieCutter.get("jwt");
-  const candidatIdCookie = cookieCutter.get("candidatId");
-  const candidatId: number | "" | undefined =
-    candidatIdCookie && parseInt(candidatIdCookie);
+  const jwt: number | string | undefined = getCookie("jwt");
+  const candidatIdCookie: string | undefined = getCookie("candidatId");
+
+  const candidatId = candidatIdCookie && parseInt(candidatIdCookie);
 
   const { toggle, open } = useToggle();
   const [currentStep, setCurrentStep] = useState(0);
@@ -69,7 +69,12 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       } else {
         startSubmission();
         const response = await handleApi(currentStep, formik?.values);
-        if (response?.status === 200) {
+        if (currentStep === 6 && formik?.values?.videodepresentation === null) {
+          // If current step is 6 and videodepresentation is null, move to the next step
+          finishSubmission("");
+          const stepPlusUn = currentStep + 1;
+          setCurrentStep(stepPlusUn);
+        } else if (response?.status === 200) {
           finishSubmission("");
           const stepPlusUn = currentStep + 1;
           setCurrentStep(stepPlusUn);
@@ -79,6 +84,8 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       }
     }
   };
+
+
   const stepComponents = [
     <Disclaimer dictionary={dictionary} key={"StepZero"} />,
     <StepOne formik={formik} dictionary={dictionary} key={"StepOne"} />,

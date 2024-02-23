@@ -69,6 +69,7 @@ export const uploadFileInCandidat = (
       {
         headers: {
           Authorization: `Bearer ${jwt}`,
+          "Content-Type": "multipart/form-data",
         },
       }
     )

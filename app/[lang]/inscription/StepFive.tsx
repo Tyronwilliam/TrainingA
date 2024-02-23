@@ -12,7 +12,7 @@ export type StepFiveProps = {
   isCurrentlyEditing: string;
   setIsCurrentlyEditing: (id: string) => void;
   candidatId?: number | "" | undefined;
-  jwt?: string;
+  jwt?: string | undefined;
 };
 const StepFive = ({
   dictionary,
