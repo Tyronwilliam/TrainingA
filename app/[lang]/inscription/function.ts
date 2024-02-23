@@ -1,4 +1,4 @@
-import { sendLoginRequest } from "@/services/auth/auth";
+import { getUserProfile, sendLoginRequest } from "@/services/auth/auth";
 import {
   promisesUpload,
   uploadFileInCandidat,
@@ -16,7 +16,6 @@ import { FormikInscriptionProps } from "@/types/formulaire";
 import { handleResponse } from "@/utils/apiObject";
 import { sendToast } from "@/utils/toast";
 import cookieCutter from "@boiseitguru/cookie-cutter";
-
 
 export const handleApi = async (
   step: number,
@@ -40,6 +39,18 @@ export const handleApi = async (
           };
           const res = await sendLoginRequest(data);
           jwtRes = await res?.data.jwt;
+          const resDataUser = await getUserProfile(jwtRes);
+          await handleResponse(resDataUser);
+          if (resDataUser?.data?.candidat !== null) {
+            const candidatIdRes = await resDataUser.data.candidat.id;
+            cookieCutter.set("candidatId", candidatIdRes);
+            return await handleResponse(resDataUser);
+          } else {
+            const responseCreateCandidat = await createCandidat(values, userId);
+            const candidatIdRes = await responseCreateCandidat.data.data.id;
+            cookieCutter.set("candidatId", candidatIdRes);
+            return await handleResponse(responseCreateCandidat);
+          }
         } else {
           const responseCreateUser = await createUser(values);
           await handleResponse(responseCreateUser);
@@ -50,12 +61,12 @@ export const handleApi = async (
           );
           userId = await responseCreateUser?.data?.user?.id;
           jwtRes = await responseCreateUser?.data?.jwt;
+          cookieCutter.set("jwt", jwtRes);
+          const responseCreateCandidat = await createCandidat(values, userId);
+          const candidatIdRes = await responseCreateCandidat.data.data.id;
+          cookieCutter.set("candidatId", candidatIdRes);
+          return await handleResponse(responseCreateCandidat);
         }
-        cookieCutter.set("jwt", jwtRes);
-        const responseCreateCandidat = await createCandidat(values, userId);
-        const candidatIdRes = await responseCreateCandidat.data.data.id;
-        cookieCutter.set("candidatId", candidatIdRes);
-        return await handleResponse(responseCreateCandidat);
         break;
       case 2:
         if (jwt && candidatId) {

@@ -20,6 +20,7 @@ export const authOptions: AuthOptions = {
           password: credentials.password,
         };
         const res = await sendLoginRequest(data);
+
         if (res.status !== 200) {
           throw new Error(res?.response?.data?.error?.message);
         }
