@@ -62,7 +62,7 @@ const GenreLayout = ({
   const pathname = usePathname();
 
   const handleToggle = (packId: number, packNom?: string) => {
-    packNom && setPackName(packNom);
+    packNom && setPackName("");
     toggleInput();
     setOpenPackId(openPackId === packId ? null : packId);
   };
