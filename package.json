@@ -12,10 +12,10 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
-    "@boiseitguru/cookie-cutter": "^0.2.3",
     "@formatjs/intl-localematcher": "^0.5.4",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",
+    "cookies-next": "^4.1.1",
     "formik": "^2.4.5",
     "jszip": "^3.10.1",
     "negotiator": "^0.6.3",

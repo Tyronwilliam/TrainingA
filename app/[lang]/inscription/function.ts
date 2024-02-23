@@ -15,15 +15,16 @@ import { addToSendinblue } from "@/services/mailing/mail";
 import { FormikInscriptionProps } from "@/types/formulaire";
 import { handleResponse } from "@/utils/apiObject";
 import { sendToast } from "@/utils/toast";
-import cookieCutter from "@boiseitguru/cookie-cutter";
+import { getCookie } from "cookies-next";
+import { setCookie } from "cookies-next";
 
 export const handleApi = async (
   step: number,
   values: FormikInscriptionProps
 ) => {
   try {
-    const candidatIdCookie = cookieCutter.get("candidatId");
-    const jwt = cookieCutter.get("jwt");
+    const candidatIdCookie = getCookie("candidatId");
+    const jwt = getCookie("jwt");
     const candidatId = candidatIdCookie && parseInt(candidatIdCookie);
 
     switch (step) {
@@ -37,17 +38,17 @@ export const handleApi = async (
         } else {
           const responseCreateUser = await createUser(values);
           await handleResponse(responseCreateUser);
+          userId = await responseCreateUser?.data?.user?.id;
+          jwtRes = await responseCreateUser?.data?.jwt;
+          setCookie("jwt", jwtRes);
+          const responseCreateCandidat = await createCandidat(values, userId);
+          const candidatIdRes = await responseCreateCandidat.data.data.id;
+          setCookie("candidatId", candidatIdRes);
           await addToSendinblue(
             values.email,
             values?.nomDeNaissance,
             values.firstname
           );
-          userId = await responseCreateUser?.data?.user?.id;
-          jwtRes = await responseCreateUser?.data?.jwt;
-          cookieCutter.set("jwt", jwtRes);
-          const responseCreateCandidat = await createCandidat(values, userId);
-          const candidatIdRes = await responseCreateCandidat.data.data.id;
-          cookieCutter.set("candidatId", candidatIdRes);
           return await handleResponse(responseCreateCandidat);
         }
         break;
