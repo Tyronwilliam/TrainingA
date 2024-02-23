@@ -51,5 +51,6 @@ export const handleResponse = (res: any) => {
     return res;
   } else {
     sendToast(true, res?.response?.data?.error?.message);
+    return;
   }
 };
