@@ -85,7 +85,6 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     }
   };
 
-
   const stepComponents = [
     <Disclaimer dictionary={dictionary} key={"StepZero"} />,
     <StepOne formik={formik} dictionary={dictionary} key={"StepOne"} />,
@@ -145,7 +144,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     <form
       onSubmit={formik.handleSubmit}
       className={classNames({
-        "flex flex-col flex-wrap justify-center h-full  w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-6":
+        "flex flex-col flex-wrap justify-center items-center h-full  w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-6":
           true,
         "items-center justify-center  shrink-0 ": currentStep === 0,
         "items-center justify-center mb-0 mt-0 shrink-0 grow":
