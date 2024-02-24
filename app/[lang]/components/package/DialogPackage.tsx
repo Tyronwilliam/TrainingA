@@ -10,10 +10,7 @@ interface DialogPackageProps {
   toggleInput: () => void;
   allPack: any[];
   candidatId: number | null;
-  connectCandidatsAndPackage: (
-    packageId: number,
-    candidatId: number
-  ) => void;
+  connectCandidatsAndPackage: (packageId: number, candidatId: number) => void;
   packName: string;
   useCreatePackage: () => void;
   handleInputChange: () => void;
@@ -41,7 +38,7 @@ const DialogPackage = ({
       open={openModal}
       toggle={handleToggle}
       classSection="fixed w-full h-full top-0 left-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
-      classDialog="text-white background__grey w-[90%] max-w-md min-w-64 flex flex-col gap-4 p-5"
+      classDialog="text-white background__grey w-[90%] max-w-md min-w-64 flex flex-col gap-4 p-5 translate-y-[-40%] md:translate-y-0"
       classIcone="z-50 absolute right-4 top-3 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
     >
       <div className="">

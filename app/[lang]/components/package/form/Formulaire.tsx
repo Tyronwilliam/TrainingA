@@ -44,7 +44,7 @@ const Formulaire = ({
         e.preventDefault();
         formik.handleSubmit(e);
       }}
-      className="flex flex-col flex-wrap justify-center h-full  w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-5  "
+      className="flex flex-col flex-wrap justify-center  items-center h-full  w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-5  "
     >
       <Inputs formik={formik} dictionary={dictionary} inputs={inputs} />
       <ButtonForm
