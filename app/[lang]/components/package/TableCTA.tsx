@@ -1,7 +1,6 @@
 import { Dictionary } from "@/types/dictionary";
 import { PackSchema } from "@/types/package";
 import { useSession } from "next-auth/react";
-import React from "react";
 
 interface TableCTAProps {
   pack: PackSchema;
@@ -9,6 +8,7 @@ interface TableCTAProps {
   handleCopyUrlClipBoard: (pack: any, packName: string) => void;
   trashPackage: (packId: number) => void;
   toggleModalForm: () => void;
+  toggleModalTable: () => void;
   setCurrentPack: (pack: PackSchema) => void;
   downloadAllFiles: (candidat: any, packName: string | null) => void;
 }
@@ -20,8 +20,10 @@ const TableCTA = ({
   toggleModalForm,
   setCurrentPack,
   downloadAllFiles,
+  toggleModalTable,
 }: TableCTAProps) => {
   const { data: session } = useSession();
+
   return (
     <div className="flex flex-col gap-4 w-fit">
       {pack?.attributes?.candidats?.data?.length > 0 && (
@@ -59,6 +61,15 @@ const TableCTA = ({
                 }
               >
                 Download media
+              </button>
+              <button
+                className="boutonSlideCommon p-2 radius w-fit uppercase"
+                onClick={() => {
+                  setCurrentPack(pack);
+                  toggleModalTable();
+                }}
+              >
+                {dictionary?.genre?.page?.package?.cta[3]}
               </button>
             </>
           )}

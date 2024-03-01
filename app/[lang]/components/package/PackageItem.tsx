@@ -16,6 +16,7 @@ interface PackageItemProps {
   handleTogglePack: (packId: number) => void;
   packName: string;
   dictionary: Dictionary;
+  toggleModalTable: () => void;
 }
 const PackageItem = ({
   pack,
@@ -27,6 +28,7 @@ const PackageItem = ({
   packName,
   dictionary,
   toggleModalForm,
+  toggleModalTable,
 }: PackageItemProps) => {
   const {
     currentTable,
@@ -93,6 +95,7 @@ const PackageItem = ({
             toggleModalForm={toggleModalForm}
             setCurrentPack={setCurrentPack}
             downloadAllFiles={downloadAllFiles}
+            toggleModalTable={toggleModalTable}
           />
         </>
       )}

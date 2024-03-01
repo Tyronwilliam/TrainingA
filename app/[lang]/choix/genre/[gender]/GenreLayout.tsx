@@ -3,18 +3,19 @@ import DialogPackage from "@/app/[lang]/components/package/DialogPackage";
 import Modal from "@/app/[lang]/components/package/Modal";
 import PackageListLayout from "@/app/[lang]/components/package/PackageListLayout";
 import Formulaire from "@/app/[lang]/components/package/form/Formulaire";
+import TrombiLayout from "@/app/[lang]/components/package/trombi/TrombiLayout";
 import useToggle from "@/hooks/Basic/useToggle";
 import useFilter, { Gender } from "@/hooks/Filter/useFilter";
 import { usePackage } from "@/hooks/Package/usePackage";
 import { Dictionary } from "@/types/dictionary";
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import BackToTop from "./BackToTop";
 import InfniteScrollDisplay from "./Candidat/InfniteScrollDisplay";
 import PackageButton from "./Filter/PackageButton";
 import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
-import { useSession } from "next-auth/react";
-import BackToTop from "./BackToTop";
-
 const GenreLayout = ({
   talents,
   metaInitial,
@@ -59,8 +60,10 @@ const GenreLayout = ({
   const { open: openInput, toggle: toggleInput } = useToggle();
   const { open: openModalOne, toggle: toggleModalOne } = useToggle();
   const { open: openModalForm, toggle: toggleModalForm } = useToggle();
+  const { open: openModalTable, toggle: toggleModalTable } = useToggle();
+  const { open: isCasting, toggle: toggleIsCasting } = useToggle();
   const pathname = usePathname();
-
+  const tableTh = dictionary?.genre?.page?.table;
   const handleToggle = (packId: number, packNom?: string) => {
     packNom && setPackName("");
     toggleInput();
@@ -70,16 +73,22 @@ const GenreLayout = ({
     fetchPackageById();
     toggleModalOne();
   };
+  useEffect(() => {
+    fetchPackageById();
+  }, []);
   return (
     <section className="min-h-[400px]">
       <BackToTop />
+
       <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
-        <RoleFilter
-          dictionary={dictionary}
-          currentRole={currentRole}
-          handleClick={handleRole}
-          handleFilter={handleFilter}
-        />
+        <div>
+          <RoleFilter
+            dictionary={dictionary}
+            currentRole={currentRole}
+            handleClick={handleRole}
+            handleFilter={handleFilter}
+          />
+        </div>
         {/* @ts-ignore */}
         {session?.user?.role === "Admin" || session?.user.filtre ? (
           <div className="flex justify-between flex-wrap gap-2">
@@ -135,6 +144,7 @@ const GenreLayout = ({
           packName={packName}
           dictionary={dictionary}
           toggleModalForm={toggleModalForm}
+          toggleModalTable={toggleModalTable}
         />
       </Modal>
       <Modal
@@ -146,6 +156,14 @@ const GenreLayout = ({
       >
         <Formulaire dictionary={dictionary} currentPack={currentPack} />
       </Modal>
+      <TrombiLayout
+        openModalTable={openModalTable}
+        toggleModalTable={toggleModalTable}
+        tableTh={tableTh}
+        currentPack={currentPack}
+        toggleIsCasting={toggleIsCasting}
+        isCasting={isCasting}
+      />
     </section>
   );
 };

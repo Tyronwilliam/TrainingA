@@ -133,7 +133,8 @@
         "cta": [
           "GéNéRER LE LIEN",
           "GéNéRER LES CONTRATS",
-          "SUPPRIMER LE PACKAGE"
+          "SUPPRIMER LE PACKAGE",
+          "Générer Trombi"
         ],
         "form": {
           "label": "Nom:*",
@@ -268,6 +269,64 @@
             "placeholder": "",
             "id": "faitLe"
           }
+        }
+      },
+      "table": {
+        "hour": {
+          "label": "Heure de convocation",
+          "admin": false
+        },
+        "role": {
+          "label": "Rôle",
+          "admin": false
+        },
+        "photo": {
+          "label": "Photo",
+          "admin": false
+        },
+        "firstname": {
+          "label": "Prénom",
+          "admin": false
+        },
+        "lastname": {
+          "label": "Nom",
+          "admin": false
+        },
+        "age": {
+          "label": "Age",
+          "admin": false
+        },
+        "birthAndDate": {
+          "label": "Date et Lieu de naissance",
+          "admin": false
+        },
+        "height": {
+          "label": "Taille",
+          "admin": false
+        },
+        "mensuration": {
+          "label": "mensuration (Haut,Bas,Chaussures)",
+          "admin": false
+        },
+        "city": {
+          "label": "Ville",
+          "admin": false
+        },
+        "phone": {
+          "label": "Téléphone",
+          "admin": true
+        },
+        "email": {
+          "label": "Email",
+          "admin": true
+        },
+        "agence": {
+          "label": "Agence",
+          "admin": false
+        },
+        "secu": {
+          "label": "N° de sécurité social",
+          "admin": true
         }
       }
     }

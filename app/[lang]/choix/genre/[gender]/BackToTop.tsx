@@ -7,7 +7,7 @@ const BackToTop = () => {
   };
   return (
     <button
-      className="rounded-full fixed bottom-5 right-5 z-50 border-[1px] border-white bg-black p-2 group"
+      className="rounded-full fixed bottom-5 right-5 z-40 border-[1px] border-white bg-black p-2 group"
       onClick={scrollToTop}
     >
       <FaChevronUp className="w-4 h-4 fill-white group-hover:opacity-50" />
