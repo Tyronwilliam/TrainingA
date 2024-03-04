@@ -124,6 +124,151 @@
         "unique": {
           "title": { "Unique": "Unique" }
         }
+      },
+      "infiniteScroll": "Vous avez parcouru tous les candidats disponibles",
+      "package": {
+        "save": "Enregistrer dans ...",
+        "empty": "Vous n'avez créé aucun package.",
+        "create": "Créer un package",
+        "cta": [
+          "GéNéRER LE LIEN",
+          "GéNéRER LES CONTRATS",
+          "SUPPRIMER LE PACKAGE"
+        ],
+        "form": {
+          "label": "Nom:*",
+          "buttonUpdate": "Mettre à jour",
+          "buttonCreate": "Créer"
+        },
+        "table": {
+          "name": "Nom",
+          "firstname": "Prénom",
+          "gender": "Genre",
+          "delete": "SUPPRIMER"
+        },
+        "contract": {
+          "nameOfFilm": {
+            "label": "Nom du film",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Validé",
+            "id": "nameOfFilm"
+          },
+          "prodNameField": {
+            "label": "Boite de production",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Ava Studio",
+            "id": "prodNameField"
+          },
+          "adresse": {
+            "label": "Adresse",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "130 rue de l'exemple",
+            "id": "adresse"
+          },
+          "siret": {
+            "label": "siret",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "siret",
+            "limit": 14
+          },
+          "assedic": {
+            "label": "N°Assedic",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "assedic"
+          },
+          "apec": {
+            "label": "N°Apec",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "apec"
+          },
+          "realisateur": {
+            "label": "réalisateur",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nais Graziani",
+            "id": "realisateur"
+          },
+          "role": {
+            "label": "Role des talents",
+            "helper": "",
+            "type": "select",
+            "required": true,
+            "placeholder": "",
+            "id": "role",
+            "options": {
+              "Acteur": "Acteur",
+              "Modèle": "Modèle",
+              "Figurant": "Figurant"
+            }
+          },
+          "remuneration": {
+            "label": "rémunération",
+            "helper": "",
+            "type": "number",
+            "required": true,
+            "placeholder": "1200",
+            "id": "remuneration",
+            "limit": 10
+          },
+          "heureTravail": {
+            "label": "heure de Travail",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "500",
+            "id": "heureTravail",
+            "limit": 10
+          },
+          "duree": {
+            "label": "Date d'effet",
+            "helper": "",
+            "type": "date",
+            "required": true,
+            "placeholder": "",
+            "id": "duree"
+          },
+          "jours": {
+            "label": "Nombre de jours",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "40",
+            "id": "jours",
+            "limit": 10
+          },
+          "lieuDeTravail": {
+            "label": "Lieu de travail",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "Marseille",
+            "id": "lieuDeTravail"
+          },
+          "faitLe": {
+            "label": "Fait le",
+            "helper": "",
+            "type": "date",
+            "required": true,
+            "placeholder": "",
+            "id": "faitLe"
+          }
+        }
       }
     }
   },
@@ -169,7 +314,13 @@
       "errors": {
         "autresphotos": "3 photos max par ajout"
       }
-    }
+    },
+    "restricted": {
+      "p": "Pour voir tout notre catalogue de talents, merci de prendre contact avec nous",
+      "link": "Ici"
+    },
+    "candidatEmmpty": "Votre fiche n'a pas pu être créée, veuillez-nous contacter.",
+    "zipHelper": "Télécharger média"
   },
 
   "connexion": {
@@ -927,7 +1078,7 @@
           "label": "Vidéo de présentation",
           "helper": "Fortement recommandée. Vidéo d'1min max, faite avec un téléphone, dans laquelle vous vous présentez. Si vous n'avez pas le temps de la faire immédiatement, pensez à la rajouter plus tard sur votre compte svp.",
           "type": "photo",
-          "required": true,
+          "required": false,
           "placeholder": "",
           "id": "videodepresentation",
           "limit": 1,
@@ -938,7 +1089,7 @@
           "label": "Bande démo",
           "helper": "Maximum 3 vidéos. Merci de renommer la ou les vidéos par \"N. Prénom\".",
           "type": "photo",
-          "required": true,
+          "required": false,
           "placeholder": "",
           "id": "bandeDemo",
           "limit": 3,

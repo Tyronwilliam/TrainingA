@@ -16,7 +16,6 @@ const useServeInitialValueProfil = (candidat: any) => {
     Bande_Demo,
     Agence,
   } = candidat || {};
-
   const profilInitialValues: FormikInscriptionWithoutExcluded = {
     phone: Telephone ? `0${Telephone}` : "",
     age: Age ? Age : "",
@@ -101,7 +100,7 @@ const useServeInitialValueProfil = (candidat: any) => {
     abattement: Data_intermittent?.Abattement
       ? Data_intermittent?.Abattement
       : false,
-    cmb: Data_intermittent?.CMB ? Data_intermittent?.CMB : "",
+    cmb: Data_intermittent?.CMB ? Data_intermittent?.CMB : null,
     agenceInfos: Agence?.Agence_Infos ? Agence?.Agence_Infos : "",
     agence: Agence?.En_Agence ? Agence?.En_Agence : false,
   };

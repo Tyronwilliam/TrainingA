@@ -83,9 +83,9 @@
     ],
     "page": {
       "role": {
-        "Tous": "Tous",
-        "Acteur": "Acteur",
-        "Modele": "Modèle",
+        "Tous": "ALL",
+        "Acteur": "Actor",
+        "Modele": "Model",
         "Figurant": "Extra"
       },
       "filter": {
@@ -123,6 +123,147 @@
 
         "unique": {
           "title": { "Unique": "Unique" }
+        }
+      },
+      "infiniteScroll": "You have scrolled through all the available candidates",
+      "package": {
+        "save": "Save in ...",
+        "empty": "You have not created any packages.",
+        "create": "Create a package",
+        "cta": ["MANAGE LINK", "MANAGE CONTRACTS", "DELETE PACKAGE"],
+        "form": {
+          "label": "Name:*",
+          "buttonUpdate": "Update",
+          "buttonCreate": "Create"
+        },
+        "table": {
+          "name": "lastname",
+          "firstname": "firstname",
+          "gender": "gender",
+          "delete": "delete"
+        },
+        "contract": {
+          "nameOfFilm": {
+            "label": "Movie name",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Validé",
+            "id": "nameOfFilm"
+          },
+          "prodNameField": {
+            "label": "Production box",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Ava Studio",
+            "id": "prodNameField"
+          },
+          "adresse": {
+            "label": "Address",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "130 rue de l'exemple",
+            "id": "adresse"
+          },
+          "siret": {
+            "label": "siret",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "siret",
+            "limit": 14
+          },
+          "assedic": {
+            "label": "N°Assedic",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "assedic"
+          },
+          "apec": {
+            "label": "N°Apec",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "14 numéro",
+            "id": "apec"
+          },
+          "realisateur": {
+            "label": "director",
+            "helper": "",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nais Graziani",
+            "id": "realisateur"
+          },
+          "role": {
+            "label": "Talent roles",
+            "helper": "",
+            "type": "select",
+            "required": true,
+            "placeholder": "",
+            "id": "role",
+            "options": {
+              "Acteur": "Actor",
+              "Modèle": "Model",
+              "Figurant": "Extra"
+            }
+          },
+          "remuneration": {
+            "label": "compensation",
+            "helper": "",
+            "type": "number",
+            "required": true,
+            "placeholder": "1200",
+            "id": "remuneration",
+            "limit": 10
+          },
+          "heureTravail": {
+            "label": "hour of Work",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "500",
+            "id": "heureTravail",
+            "limit": 10
+          },
+          "duree": {
+            "label": "Effective date",
+            "helper": "",
+            "type": "date",
+            "required": true,
+            "placeholder": "",
+            "id": "duree"
+          },
+          "jours": {
+            "label": "Number of days",
+            "helper": "",
+            "type": "number",
+            "required": false,
+            "placeholder": "40",
+            "id": "jours",
+            "limit": 10
+          },
+          "lieuDeTravail": {
+            "label": "Work location",
+            "helper": "",
+            "type": "text",
+            "required": false,
+            "placeholder": "Marseille",
+            "id": "lieuDeTravail"
+          },
+          "faitLe": {
+            "label": "Done on",
+            "helper": "",
+            "type": "date",
+            "required": true,
+            "placeholder": "",
+            "id": "faitLe"
+          }
         }
       }
     }
@@ -169,7 +310,13 @@
       "errors": {
         "autresphotos": "3 photos max per add-on"
       }
-    }
+    },
+    "restricted": {
+      "p": "To see our full catalogue of talent, please contact us",
+      "link": "Here"
+    },
+    "candidatEmmpty": "Your file could not be created, please contact us.",
+    "zipHelper": "Download media"
   },
 
   "connexion": {

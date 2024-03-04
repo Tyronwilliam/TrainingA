@@ -10,9 +10,6 @@ const Tab = ({
   title,
   formik,
 }: TabProps) => {
-  const currentStepErrors =
-    //@ts-ignore
-    currentTab !== null && formik.errors && formik.errors[currentTab];
 
   return (
     <section className="w-full max-w-[700px]  px-4 md:px-0  radius custom__border">

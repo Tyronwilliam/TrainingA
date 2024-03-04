@@ -15,7 +15,7 @@ export default async function Home({
   return (
     <>
       <main
-        className="relative w-full h-screen min-h-[400px] "
+        className="relative w-full h-screen min-h-[400px] mb-4"
         style={{ height: "100vh" }}
       >
         <NavBar lang={lang} />

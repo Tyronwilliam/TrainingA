@@ -1,4 +1,3 @@
-import { useCallback, useMemo } from "react";
 import Spinner from "../Spinner";
 import { Dialog } from "./Dialog";
 import Helpers from "./Helpers";
@@ -11,7 +10,6 @@ import {
 } from "./function";
 import { InputPhotoProps } from "./type";
 
-// PASSER LE JWT EN PROPS
 
 const InputPhoto = ({
   id,

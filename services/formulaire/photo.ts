@@ -55,15 +55,15 @@ export const promisesUpload = async (
   });
 };
 
-export const uploadFileInCandidat = (
+export const uploadFileInCandidat = async (
   promisesResolved: {}[] | {},
   candidatId: number,
   id: string,
   jwt?: string
 ) => {
   const data = apiObject(id, promisesResolved);
-  return axios
-    .put(
+  try {
+    const res = await axios.put(
       `${process.env.NEXT_PUBLIC_API_URL}/candidats/${candidatId}?populate=Portfolio.Portfolio&populate=Bande_Demo`,
       data,
       {
@@ -71,12 +71,12 @@ export const uploadFileInCandidat = (
           Authorization: `Bearer ${jwt}`,
         },
       }
-    )
-    .then((res) => res)
-    .catch((err: any) => {
-      console.error(err);
-      return err;
-    });
+    );
+    return res;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
 };
 export const putDataPortfolio = async ({
   candidatId,

@@ -25,13 +25,14 @@ export const sendStepTwoData = async (
       Abattement: values?.abattement,
     },
   };
-  if (values?.cmb) {
+  if (values?.cmb && values?.cmb instanceof File) {
     formData.append(
-      `files.Data_intermittent.CMB`,
+      "files.Data_intermittent.CMB",
       values?.cmb,
       values?.cmb?.name
     );
   }
+
   formData.append("data", JSON.stringify(data));
 
   return await axios
@@ -41,6 +42,7 @@ export const sendStepTwoData = async (
       {
         headers: {
           Authorization: `Bearer ${jwt}`,
+          "Content-Type": "multipart/form-data",
         },
       }
     )

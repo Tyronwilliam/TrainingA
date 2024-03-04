@@ -1,14 +1,14 @@
+import { getDictionary } from "@/get-disctionary";
+import Provider from "@/hooks/Authentification/client-provider";
+import { PreferencesProvider } from "@/hooks/Basic/usePreferencesProvider";
+import PackageProvider from "@/hooks/Package/usePackage";
+import { Locale } from "@/i18n-config";
+import { authOptions } from "@/utils/auth";
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
 import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
-import { Locale } from "@/i18n-config";
-import { PreferencesProvider } from "@/hooks/Basic/usePreferencesProvider";
-import Provider from "@/hooks/Authentification/client-provider";
-import { getServerSession } from "next-auth";
 import { GoogleProvider } from "./provider/GoogleProvider";
-import { getDictionary } from "@/get-disctionary";
-import Footer from "./[lang]/Footer";
-import { authOptions } from "@/utils/auth";
 
 const Roboto = Roboto_Condensed({
   subsets: ["latin"],
@@ -29,10 +29,11 @@ export default async function RootLayout({
   return (
     <html lang={params.lang} className={Roboto.className}>
       <body>
-        {" "}
         <GoogleProvider dictionary={dictionary} params={params}>
           <Provider session={session}>
-            <PreferencesProvider>{children}</PreferencesProvider>
+            <PackageProvider>
+              <PreferencesProvider>{children}</PreferencesProvider>
+            </PackageProvider>
           </Provider>{" "}
         </GoogleProvider>
       </body>

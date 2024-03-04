@@ -3,7 +3,7 @@ import { PhysionomieProps } from "../type";
 import { CtaList } from "./CtaList";
 import ListSubFilter from "./ListSubFilter";
 
-export const Physionomie = ({
+export const PhysionomieFilter = ({
   dictionary,
   valuePhysio,
   currentList,

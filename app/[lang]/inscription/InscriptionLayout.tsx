@@ -24,24 +24,21 @@ import { handleApi } from "./function";
 import Disclaimer from "./Disclaimer";
 import classNames from "classnames";
 import Success from "./Success";
-import cookieCutter from "@boiseitguru/cookie-cutter";
+import { getCookie } from "cookies-next";
 
 const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
   const {
     isSubmitting,
-    submitError,
-    startSubmission,
-    finishSubmission,
-    submitSuccess,
-    setSubmitSuccess,
     isLoadInput,
     setIsLoadInput,
+    startSubmission,
+    finishSubmission,
   } = useFormSubmission();
 
-  const jwt = cookieCutter.get("jwt");
-  const candidatIdCookie = cookieCutter.get("candidatId");
-  const candidatId: number | "" | undefined =
-    candidatIdCookie && parseInt(candidatIdCookie);
+  const jwt: number | string | undefined = getCookie("jwt");
+  const candidatIdCookie: string | undefined = getCookie("candidatId");
+
+  const candidatId = candidatIdCookie && parseInt(candidatIdCookie);
 
   const { toggle, open } = useToggle();
   const [currentStep, setCurrentStep] = useState(0);
@@ -70,20 +67,26 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
         const stepPlusUn = currentStep + 1;
         setCurrentStep(stepPlusUn);
       } else {
+        startSubmission();
         const response = await handleApi(currentStep, formik?.values);
-        if (response?.status === 200) {
+        if (currentStep === 6 && formik?.values?.videodepresentation === null) {
+          // If current step is 6 and videodepresentation is null, move to the next step
+          finishSubmission("");
           const stepPlusUn = currentStep + 1;
           setCurrentStep(stepPlusUn);
+        } else if (response?.status === 200) {
+          finishSubmission("");
+          const stepPlusUn = currentStep + 1;
+          setCurrentStep(stepPlusUn);
+        } else {
+          finishSubmission("");
         }
       }
     }
   };
-  const handlePrev = async () => {
-    const stepMoinsUn = currentStep - 1;
-    setCurrentStep(stepMoinsUn);
-  };
+
   const stepComponents = [
-    <Disclaimer dictionary={dictionary} />,
+    <Disclaimer dictionary={dictionary} key={"StepZero"} />,
     <StepOne formik={formik} dictionary={dictionary} key={"StepOne"} />,
     <StepTwo
       formik={formik}
@@ -95,6 +98,8 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       toggle={toggle}
       isCurrentlyEditing={isCurrentlyEditing}
       setIsCurrentlyEditing={setIsCurrentlyEditing}
+      candidatId={candidatId}
+      jwt={jwt}
     />,
     <StepThree formik={formik} dictionary={dictionary} key={"StepThree"} />,
     <StepFour formik={formik} dictionary={dictionary} key={"StepFour"} />,
@@ -125,7 +130,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       candidatId={candidatId}
       jwt={jwt}
     />,
-    <Success dictionary={dictionary} />,
+    <Success dictionary={dictionary} key={"StepSeven"} />,
   ];
   useEffect(() => {
     window.scrollTo({
@@ -139,7 +144,7 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
     <form
       onSubmit={formik.handleSubmit}
       className={classNames({
-        "flex flex-col flex-wrap justify-center h-full  w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-6":
+        "flex flex-col flex-wrap justify-center items-center h-full  w-full max-w-[700px] mt-7 m-auto mb-10 md:flex-row md:flex-wrap gap-6":
           true,
         "items-center justify-center  shrink-0 ": currentStep === 0,
         "items-center justify-center mb-0 mt-0 shrink-0 grow":
@@ -153,16 +158,6 @@ const InscriptionLayout = ({ dictionary }: { dictionary: Dictionary }) => {
       {currentStep < 7 && (
         <div className="shrink-0 grow basis-full text-center flex flex-wrap items-center justify-center mt-6 gap-4">
           <>
-            {currentStep > 1 && (
-              <ButtonForm
-                isSubmitting={isSubmitting}
-                formik={formik}
-                dictionary={dictionary}
-                content={dictionary?.cta?.formEvent?.previous}
-                type="button"
-                handleClick={handlePrev}
-              />
-            )}
             {currentStep === 0 && (
               <button
                 type="button"

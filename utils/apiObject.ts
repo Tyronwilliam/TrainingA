@@ -33,7 +33,14 @@ export const apiObject = (id: string, data: any) => {
         },
       };
       break;
-
+    case "newPhotos":
+      return {
+        data: {
+          Photo_Candidature: {
+            Nouvelle_photos: data,
+          },
+        },
+      };
     default:
       break;
   }
@@ -44,5 +51,6 @@ export const handleResponse = (res: any) => {
     return res;
   } else {
     sendToast(true, res?.response?.data?.error?.message);
+    return;
   }
 };

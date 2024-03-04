@@ -12,7 +12,7 @@ type StepFiveProps = {
   setIsCurrentlyEditing: (id: string) => void;
   inputs: Record<string, StepType>;
   candidatId?: number | "" | undefined;
-  jwt?: string;
+  jwt: string | undefined;
 };
 const StepSix = ({
   dictionary,

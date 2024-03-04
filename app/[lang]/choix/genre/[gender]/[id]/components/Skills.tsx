@@ -9,7 +9,8 @@ const Skills = ({
   competence: string | null;
 }) => {
   return (
-    competence !== null && (
+    competence &&
+    competence !== "" && (
       <div>
         <span>{dictionary?.singleTalent?.page?.skills}:</span>
         <p>{competence}</p>

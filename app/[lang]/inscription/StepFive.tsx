@@ -12,7 +12,7 @@ export type StepFiveProps = {
   isCurrentlyEditing: string;
   setIsCurrentlyEditing: (id: string) => void;
   candidatId?: number | "" | undefined;
-  jwt?: string;
+  jwt?: string | undefined;
 };
 const StepFive = ({
   dictionary,
@@ -34,7 +34,13 @@ const StepFive = ({
   return (
     <>
       <div className="flex flex-col md:flex-row md:flex-wrap w-fit items-center px-3 justify-center ">
-        <Inputs formik={formik} dictionary={dictionary} inputs={checkBox} />
+        <Inputs
+          formik={formik}
+          dictionary={dictionary}
+          inputs={checkBox}
+          candidatId={candidatId}
+          jwt={jwt}
+        />
       </div>
       <Inputs
         formik={formik}

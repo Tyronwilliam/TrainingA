@@ -2,7 +2,6 @@ import { StepType } from "@/types/formulaire";
 import Inputs from "../components/form/Inputs";
 import { StepFiveProps } from "./StepFive";
 
-
 const StepTwo = ({
   dictionary,
   formik,
@@ -12,6 +11,8 @@ const StepTwo = ({
   toggle,
   setIsCurrentlyEditing,
   isCurrentlyEditing,
+  jwt,
+  candidatId,
 }: StepFiveProps) => {
   const intermittentFalse = dictionary?.inscription?.stepTwo.default;
   const intermittentContent = dictionary?.inscription?.stepTwo.content;
@@ -31,6 +32,8 @@ const StepTwo = ({
       toggle={toggle}
       isCurrentlyEditing={isCurrentlyEditing}
       setIsCurrentlyEditing={setIsCurrentlyEditing}
+      candidatId={candidatId}
+      jwt={jwt}
     />
   );
 };

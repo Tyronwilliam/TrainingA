@@ -10,14 +10,14 @@ const Curtain = () => {
     <>
       <div
         className={classNames({
-          "absolute w-full top-0 left-0  h-2/4  bg-blue-400 z-50": !split,
+          "absolute w-full top-0 left-0  h-2/4  bg-black z-50": !split,
           "absolute w-full top-0 left-0 h-0 transition-all duration-1000 ease-in-out -z-0":
             split,
         })}
       ></div>
       <div
         className={classNames({
-          "absolute w-full bottom-0 left-0 h-2/4 bg-red-400 z-50 transition-height duration-150 ease-in-out":
+          "absolute w-full bottom-0 left-0 h-2/4 bg-black z-50 transition-height duration-150 ease-in-out":
             !split,
           "absolute w-full h-0 bottom-0 left-0 transition-all duration-1000 ease-in-out -z-0":
             split,
