@@ -176,7 +176,7 @@ export const SchemaRole = Yup.object().shape({
 export const StepFiveSchema = SchemaRole.concat(SchemaPhotoInscription);
 
 export const SchemaVideoInscription = Yup.object().shape({
-  // videodepresentation: Yup.mixed().required("Presentation Video Required"),
+  videodepresentation: Yup.mixed().nullable(),
   bandeDemo: Yup.array()
     .max(3, "3 vidéos max")
     .test("file-instance", "Please save your file", (value) => {
