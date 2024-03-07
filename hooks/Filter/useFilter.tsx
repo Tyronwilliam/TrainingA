@@ -20,12 +20,15 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
   const [currentPhysio, setCurrentPhysio] = useState<string[]>([]);
   const [currentList, setCurrentList] = useState("");
   const [meta, setMeta] = useState(metaInitial);
+  const [searchPrenom, setSearchPrenom] = useState("");
+  const [showResetButton, setShowResetButton] = useState(false);
   const [valuePhysio, setValuePhysio] = useState<PhysioState>({
     Age: [],
     Taille: "",
     Type: [],
     Compétence: [],
     Unique: false,
+    Prenom: "",
   });
   const compétence = searchParams.get("Compétence");
   const age = searchParams.get("Age");
@@ -33,14 +36,17 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
   const type = searchParams.get("Type");
   const uniqueParams = searchParams.get("Unique");
   const role = searchParams.get("Role");
-
+  const prenom = searchParams.get("Prenom");
   const queryParams = {
     Compétence: compétence,
     Age: age,
     Taille: taille,
     Type: type,
     Unique: uniqueParams,
+    Prenom: prenom,
   };
+  const paramsFiltered = filterParams(queryParams);
+  const queryToString = new URLSearchParams(paramsFiltered).toString();
   useEffect(() => {
     fetchData({
       gender: gender,
@@ -51,10 +57,12 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
       taille: taille !== null ? taille : undefined,
       type: type !== null ? type : undefined,
       unique: uniqueParams !== null ? uniqueParams : undefined,
+      prenom: prenom !== null ? prenom : undefined,
     });
-
     handleRole(role);
-  }, [role, compétence, age, taille, type, uniqueParams]);
+    const isPrenom = prenom === null ? false : true;
+    setShowResetButton(isPrenom);
+  }, [role, compétence, age, taille, type, uniqueParams, prenom]);
 
   useEffect(() => {
     const newObject = {
@@ -63,9 +71,31 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
       Type: type ? type.split(",") : [],
       Compétence: compétence ? compétence.split(",") : [],
       Unique: uniqueParams !== null && JSON.parse(uniqueParams),
+      Prenom: prenom || "",
     };
     setValuePhysio(newObject);
   }, []);
+  ////////////////////
+  const handleSubmitSearch = async (e: any, prenom: string) => {
+    e.preventDefault();
+    await handlePhysioQuery(prenom, "Prenom");
+    setSearchPrenom("");
+  };
+  //////////////////////
+  const handleResetSearch = () => {
+    const { Prenom, ...queryParamsCopy } = queryParams;
+    const queryToString = new URLSearchParams(
+      filterParams(queryParamsCopy)
+    ).toString();
+    const link = `${pathname}?${queryToString}`;
+    return router.push(link);
+  };
+
+  ////////////////////
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setSearchPrenom(newValue);
+  };
   ////////////////////
   const handleRole = (role: string | null) => {
     if (role === null) {
@@ -83,8 +113,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
     }
   };
   //////////////////////
-  const paramsFiltered = filterParams(queryParams);
-  const queryToString = new URLSearchParams(paramsFiltered).toString();
+
   const handlePhysioQuery = async (value: string | boolean, key: string) => {
     const queryInUrl = new URLSearchParams(queryToString);
     const queryValue = queryInUrl.get(key as string);
@@ -92,7 +121,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
 
     let newQueryInUrl: any;
 
-    if (key === "Taille") {
+    if (key === "Taille" || (key === "Prenom" && value !== "")) {
       newQueryInUrl = handleQueryTaille(
         queryValueToArray,
         value,
@@ -153,6 +182,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
     taille,
     type,
     unique: uniqueParams,
+    prenom: prenom,
   }: getCandidatParams) => {
     const queryParams = {
       gender: gender,
@@ -163,6 +193,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
       taille,
       type,
       unique: uniqueParams,
+      prenom: prenom,
     };
     ("use server");
     const response = await getCandidat(queryParams);
@@ -187,6 +218,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
           taille: taille !== null ? taille : undefined,
           type: type !== null ? type : undefined,
           unique: uniqueParams !== null ? uniqueParams : undefined,
+          prenom: prenom !== null ? prenom : undefined,
         });
         break;
       case "Modele":
@@ -202,6 +234,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
           taille: taille !== null ? taille : undefined,
           type: type !== null ? type : undefined,
           unique: uniqueParams !== null ? uniqueParams : undefined,
+          prenom: prenom !== null ? prenom : undefined,
         });
         break;
       case "Figurant":
@@ -217,6 +250,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
           taille: taille !== null ? taille : undefined,
           type: type !== null ? type : undefined,
           unique: uniqueParams !== null ? uniqueParams : undefined,
+          prenom: prenom !== null ? prenom : undefined,
         });
         break;
       case "Tous":
@@ -229,8 +263,10 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
           taille: taille !== null ? taille : undefined,
           type: type !== null ? type : undefined,
           unique: uniqueParams !== null ? uniqueParams : undefined,
+          prenom: prenom !== null ? prenom : undefined,
         });
         break;
+
       default:
         break;
     }
@@ -239,7 +275,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
   const loadMoreUsers = async () => {
     const properStart = candidat?.length;
     const startParams = meta >= candidat.length ? candidat.length : 0;
-    if (role || compétence || age || taille || type || uniqueParams) {
+    if (role || compétence || age || taille || type || uniqueParams || prenom) {
       const response = await getCandidat({
         gender: gender,
         properStart: startParams,
@@ -248,6 +284,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
         taille: taille !== null ? taille : undefined,
         type: type !== null ? type : undefined,
         unique: uniqueParams !== null ? uniqueParams : undefined,
+        prenom: prenom !== null ? prenom : undefined,
       });
       const data = response?.data;
       const metaRes = response?.meta?.pagination?.total;
@@ -262,6 +299,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
         taille: taille !== null ? taille : undefined,
         type: type !== null ? type : undefined,
         unique: uniqueParams !== null ? uniqueParams : undefined,
+        prenom: prenom !== null ? prenom : undefined,
       });
       const data = response?.data;
       const metaRes = response?.meta?.pagination?.total;
@@ -289,6 +327,11 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
     router,
     pathname,
     valuePhysio,
+    handleSearchInputChange,
+    handleSubmitSearch,
+    searchPrenom,
+    showResetButton,
+    handleResetSearch,
   };
 };
 

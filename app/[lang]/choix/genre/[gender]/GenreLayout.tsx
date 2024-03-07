@@ -10,12 +10,14 @@ import { usePackage } from "@/hooks/Package/usePackage";
 import { Dictionary } from "@/types/dictionary";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import BackToTop from "./BackToTop";
 import InfniteScrollDisplay from "./Candidat/InfniteScrollDisplay";
 import PackageButton from "./Filter/PackageButton";
 import { PhysionomieFilter } from "./Filter/PhysionomieFilter";
 import RoleFilter from "./Filter/RoleFilter";
+import { FaSearch } from "react-icons/fa";
+
 const GenreLayout = ({
   talents,
   metaInitial,
@@ -40,6 +42,11 @@ const GenreLayout = ({
     candidat,
     router,
     valuePhysio,
+    handleSearchInputChange,
+    handleSubmitSearch,
+    searchPrenom,
+    showResetButton,
+    handleResetSearch,
   } = useFilter(talents, metaInitial, gender);
   const {
     allPack,
@@ -79,7 +86,6 @@ const GenreLayout = ({
   return (
     <section className="min-h-[400px]">
       <BackToTop />
-
       <section className="w-full px-3 flex flex-col gap-8 max-w-[1100px] mx-auto md:px-8">
         <div>
           <RoleFilter
@@ -105,6 +111,37 @@ const GenreLayout = ({
             <PackageButton onClick={handlePackageButton} />
           </div>
         ) : null}
+        <form
+          className="flex items-end h-14 gap-2"
+          onSubmit={(e) => handleSubmitSearch(e, searchPrenom)}
+        >
+          <div className="relative h-fit">
+            <FaSearch className="fill-white opacity-55 w-4 h-4 absolute top-[35%] left-0" />
+            <input
+              type="text"
+              placeholder="Recherchez par prénom"
+              className="pl-6"
+              value={searchPrenom}
+              onChange={(e) => handleSearchInputChange(e)}
+            />
+          </div>
+          <button
+            type="submit"
+            className="boutonSlideCommon border w-fit p-2 radius flex items-center justify-center text-sm"
+            disabled={searchPrenom === ""}
+          >
+            Recherchez
+          </button>
+          {showResetButton && (
+            <button
+              type="button"
+              className="boutonSlideCommon border w-fit p-2 radius flex items-center justify-center text-sm"
+              onClick={handleResetSearch}
+            >
+              Reset
+            </button>
+          )}
+        </form>
       </section>
       <InfniteScrollDisplay
         candidat={candidat}
@@ -156,14 +193,16 @@ const GenreLayout = ({
       >
         <Formulaire dictionary={dictionary} currentPack={currentPack} />
       </Modal>
-      <TrombiLayout
-        openModalTable={openModalTable}
-        toggleModalTable={toggleModalTable}
-        tableTh={tableTh}
-        currentPack={currentPack}
-        toggleIsCasting={toggleIsCasting}
-        isCasting={isCasting}
-      />
+      <Suspense fallback={<p>Loading...</p>}>
+        <TrombiLayout
+          openModalTable={openModalTable}
+          toggleModalTable={toggleModalTable}
+          tableTh={tableTh}
+          currentPack={currentPack}
+          toggleIsCasting={toggleIsCasting}
+          isCasting={isCasting}
+        />
+      </Suspense>
     </section>
   );
 };

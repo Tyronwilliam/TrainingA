@@ -142,7 +142,10 @@ export const handleQueryTaille = (
   key: string,
   queryInUrl: URLSearchParams
 ) => {
-  if (!queryValueToArray?.includes(value.toString()) && key === "Taille") {
+  if (
+    !queryValueToArray?.includes(value.toString()) &&
+    (key === "Taille" || key === "Prenom")
+  ) {
     // Supprime tous les paramètres existants avec la même clé que le titre
     queryInUrl.delete(key);
 
@@ -172,7 +175,9 @@ export const handleQuery = (
     if (updatedParamValues.length > 0) {
       queryInUrl.append(key, updatedParamValues.join(","));
     }
+
   } else {
+
     // Si la valeur n'est pas déjà présente, ajoutez-la comme avant
     if (queryValueToArray.length === 2) {
       queryValueToArray[1] = value.toString();

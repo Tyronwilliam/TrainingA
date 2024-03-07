@@ -15,6 +15,7 @@ export interface getCandidatParams {
   type?: string;
   unique?: string;
   role?: string;
+  prenom?: string;
 }
 export async function getCandidat({
   gender,
@@ -25,6 +26,7 @@ export async function getCandidat({
   type,
   unique,
   role,
+  prenom,
 }: getCandidatParams) {
   try {
     const start = `&pagination[start]=${properStart}`;
@@ -62,7 +64,9 @@ export async function getCandidat({
     if (unique !== undefined) {
       filters += `&filters[Role_Candidat][Unique][$eq]=true`;
     }
-
+    if (prenom !== undefined) {
+      filters += `&filters[Prenom][$contains]=${prenom}`;
+    }
     const url = `${process.env.NEXT_PUBLIC_API_URL}/candidats?filters[Sexe][$eq]=${gender}&filters[valide][$eq]=true[populate][Physionomie]=*&[populate][Role_Candidat][populate][Competence]=*&[populate][Photo_de_presentation]=*&[populate][Portfolio][populate][Portfolio]=*${filters}&sort[0]=Prenom:asc${start}&pagination[limit]=21`;
     const response = await fetch(url, { next: { revalidate: 60 * 1 } });
     if (!response.ok) {
