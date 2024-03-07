@@ -22,7 +22,6 @@ export const excludeField = [
   "birthPostal",
   "birthCountry",
   "nationality",
-  "yeux",
   "origine",
   "photodepresentation",
   "autresphotos",
