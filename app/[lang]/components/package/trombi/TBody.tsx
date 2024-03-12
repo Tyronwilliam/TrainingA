@@ -40,7 +40,7 @@ const TBody = ({
                   placeholder="Rôle"
                 />
               </td>
-              <td className="p-[5px] border-[1px]">
+              <td className="p-[5px] border-[1px] max-h-28 max-w-20">
                 {candidat?.attributes?.Photo_de_presentation?.data?.attributes
                   ?.formats?.medium?.url ? (
                   <ImageCandidat

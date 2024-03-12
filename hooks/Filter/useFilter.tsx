@@ -78,7 +78,7 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
   ////////////////////
   const handleSubmitSearch = async (e: any, prenom: string) => {
     e.preventDefault();
-    await handlePhysioQuery(prenom, "Prenom");
+    await handlePhysioQuery(prenom.trim(), "Prenom");
     setSearchPrenom("");
   };
   //////////////////////

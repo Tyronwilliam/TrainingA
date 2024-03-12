@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 interface Candidate {
   id: number;
   heure: string;
   role: string;
 }
 
-interface YourComponentProps {
-  currentPack?: Candidate[];
-}
 const useTrombi = () => {
   const [editedCandidates, setEditedCandidates] = useState<
     Record<number, Partial<Candidate>>
@@ -28,7 +25,6 @@ const useTrombi = () => {
   };
 
   const saveChanges = () => {
-    // Implement the logic to save the edited candidates (editedCandidates) to your backend or state
     console.log("Edited Candidates:", editedCandidates);
   };
 
