@@ -2,7 +2,7 @@ import JSZip from "jszip";
 
 const useZipDownload = () => {
   const fetchData = async (url: string) => {
-    const response = await fetch(url);
+    const response = await fetch(url, { mode: "no-cors" });
     const data = await response.blob();
     return data;
   };
@@ -20,12 +20,7 @@ const useZipDownload = () => {
   const downloadAllFiles = async (candidates: any, packName: string | null) => {
     const globalZip = new JSZip();
     const candidatArray = Array.isArray(candidates) ? candidates : [candidates];
-    const nameZip =
-      packName !== null
-        ? packName
-        : candidatArray.length === 1
-        ? `${candidatArray[0].prenom} ${candidatArray[0].nom}`
-        : "All_talents";
+    const nameZip = packName !== null ? packName : "Talents";
 
     for (const candidate of candidatArray) {
       const candidateFolderName: string = `${
