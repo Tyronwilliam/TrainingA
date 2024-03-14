@@ -299,6 +299,7 @@
   "general": {
     "greeting": "Hello",
     "success": "Successful",
+    "previewProfil": "View my talent profile",
     "form": {
       "password": "Password",
       "passwordConfirmation": "Confirm password",
@@ -316,7 +317,13 @@
       "link": "Here"
     },
     "candidatEmmpty": "Your file could not be created, please contact us.",
-    "zipHelper": "Download"
+    "zipHelper": "Download",
+    "profil": [
+      "New photos will be added by casting directors to your Portfolio.",
+      "Add your new photos 3 by 3",
+      "You do not have the option of choosing your presentation photo.",
+      "All submitted photos are sorted and chosen to showcase your profile by casting professionals."
+    ]
   },
 
   "connexion": {

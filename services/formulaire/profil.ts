@@ -5,6 +5,11 @@ const dataProfil = (values: FormikInscriptionWithoutExcluded) => {
   const json = {
     Telephone: values?.phone,
     Age: values.age,
+    Lieu_de_Naissance: {
+      Ville: values?.birthCity,
+      Pays: values?.birthCountry,
+      Code_postal: values?.birthPostal,
+    },
     Physionomie: {
       Confection_Haut: values?.confectionHaut,
       Confection_Bas: values?.confectionBas,
@@ -77,6 +82,13 @@ export const updateProfil = async (values: any, jwt: string, id: number) => {
       `files.Data_intermittent.CMB`,
       values?.cmb,
       values?.cmb?.name
+    );
+  }
+  if (values?.photodepresentation instanceof File) {
+    formData.append(
+      `files.Photo_de_presentation`,
+      values?.photodepresentation,
+      values?.photodepresentation?.name
     );
   }
 

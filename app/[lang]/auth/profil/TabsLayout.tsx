@@ -121,6 +121,7 @@ const TabsLayout = ({
           setIsCurrentlyEditing={setIsCurrentlyEditing}
           candidatId={candidatId}
           jwt={jwt}
+          excludeField={excludeField}
           key={"StepSix"}
         />
       </Tab>
