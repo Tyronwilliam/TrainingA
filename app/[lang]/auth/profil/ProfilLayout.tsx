@@ -4,12 +4,15 @@ import useFormSubmission from "@/hooks/Formulaire/useFormSubmission";
 import useServeInitialValueProfil from "@/hooks/Formulaire/useServeInitialValueProfil";
 import { updateProfil } from "@/services/formulaire/profil";
 import { Dictionary } from "@/types/dictionary";
+import { sendToast } from "@/utils/toast";
 import { SchemaValidationProfil } from "@/utils/validationProfil";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import TabsLayout from "./TabsLayout";
-import { sendToast } from "@/utils/toast";
+import SingleCandidatLayout from "../../choix/genre/[gender]/[id]/SingleCandidatLayout";
+import { AiFillCloseCircle } from "react-icons/ai";
+import Spinner from "../../components/Spinner";
 
 export const excludeField = [
   "email",
@@ -17,13 +20,6 @@ export const excludeField = [
   "nomDeNaissance",
   "firstname",
   "gender",
-  "dateOfBirth",
-  "birthCity",
-  "birthPostal",
-  "birthCountry",
-  "nationality",
-  "origine",
-  "photodepresentation",
   "autresphotos",
   "marital",
 ];
@@ -31,14 +27,18 @@ export const excludeField = [
 const ProfilLayout = ({
   dictionary,
   candidat,
+  getCandidatPreview,
 }: {
   dictionary: Dictionary;
   candidat: any;
+  getCandidatPreview: (id: string) => void;
 }) => {
   const { profilInitialValues } = useServeInitialValueProfil(candidat);
   const [currentTab, setCurrentTab] = useState<number | null>(null);
   const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
+  const [previewCandidat, setPreviewCandidat] = useState(null);
   const { toggle, open } = useToggle();
+  const { open: openPreview, toggle: togglePreview } = useToggle();
   const { data: session } = useSession();
   //@ts-ignore
   const jwt = session?.user?.jwt;
@@ -51,6 +51,7 @@ const ProfilLayout = ({
   } = useFormSubmission();
 
   const mergedStepSix = {
+    ...dictionary?.inscription?.stepFive?.default,
     ...dictionary?.inscription?.stepSix?.default,
     ...dictionary?.inscription?.stepSix?.content,
   };
@@ -88,6 +89,22 @@ const ProfilLayout = ({
       setCurrentTab(tab);
     }
   };
+  const handleCandidatPreview = async (id: string) => {
+    try {
+      const response = await getCandidatPreview(id);
+      //@ts-ignore
+      if (response?.error) {
+        //@ts-ignore
+        sendToast(true, response?.error?.message || "An error occurred");
+      } else {
+        //@ts-ignore
+        setPreviewCandidat(response);
+        sendToast(false, "Data load");
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -96,25 +113,55 @@ const ProfilLayout = ({
     (() => formik.validateForm())();
   }, []);
   return (
-    <section className="flex flex-col w-full items-center justify-center ">
-      <TabsLayout
-        currentTab={currentTab}
-        handleClick={handleTab}
-        dictionary={dictionary}
-        formik={formik}
-        excludeField={excludeField}
-        isLoadInput={isLoadInput}
-        setIsLoadInput={setIsLoadInput}
-        open={open}
-        toggle={toggle}
-        setIsCurrentlyEditing={setIsCurrentlyEditing}
-        isCurrentlyEditing={isCurrentlyEditing}
-        mergedStepSix={mergedStepSix}
-        isSubmitting={isSubmitting}
-        jwt={jwt}
-        candidatId={candidat?.id}
-      />
-    </section>
+    <>
+      <section className="flex flex-col w-full items-center justify-center ">
+        <div className="text-center italic my-3 mx-auto flex flex-col gap-2 w-full p-1">
+          {dictionary?.general?.profil?.map((text: string, index: number) => {
+            return <p key={index}>{text}</p>;
+          })}
+        </div>
+        <button
+          className="boutonSlideCommon shrink-0 text-lg max-w-[190px] w-full radius p-2.5 border-[1px] border-white"
+          onClick={() => {
+            handleCandidatPreview(candidat?.id);
+            togglePreview();
+          }}
+        >
+          {dictionary?.general?.previewProfil}
+        </button>
+        <TabsLayout
+          currentTab={currentTab}
+          handleClick={handleTab}
+          dictionary={dictionary}
+          formik={formik}
+          excludeField={excludeField}
+          isLoadInput={isLoadInput}
+          setIsLoadInput={setIsLoadInput}
+          open={open}
+          toggle={toggle}
+          setIsCurrentlyEditing={setIsCurrentlyEditing}
+          isCurrentlyEditing={isCurrentlyEditing}
+          mergedStepSix={mergedStepSix}
+          isSubmitting={isSubmitting}
+          jwt={jwt}
+          candidatId={candidat?.id}
+        />
+      </section>
+      {openPreview && previewCandidat !== null && (
+        <section className="absolute top-0 left-0 z-50 bg-black w-full  min-h-screnn h-full md:flex items-center justify-center border border-white">
+          <Suspense fallback={<Spinner />}>
+            <AiFillCloseCircle
+              className="z-50 absolute right-6 top-6 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
+              onClick={togglePreview}
+            />
+            <SingleCandidatLayout
+              candidat={previewCandidat}
+              dictionary={dictionary}
+            />
+          </Suspense>
+        </section>
+      )}
+    </>
   );
 };
 

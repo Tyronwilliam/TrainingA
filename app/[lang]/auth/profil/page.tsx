@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/auth";
 import PreviousNavHistory from "../../components/PreviousNavHistory";
 import { redirect } from "next/navigation";
+import { getCandidatPreview } from "./actions";
 
 export const metadata: Metadata = {
   title: "Mon profil - Agence Graziani",
@@ -53,7 +54,7 @@ const ProfilPage = async ({
   return (
     <>
       <PreviousNavHistory />
-      <main className="w-full min-h-full h-fit m-auto pt-5 mb-10 flex flex-col items-center justify-center">
+      <main className=" relative w-full min-h-full h-fit m-auto pt-5 mb-10 flex flex-col items-center justify-center">
         {candidat?.candidat === null ? (
           <p className="text-2xl">{dictionary?.general?.candidatEmmpty}</p>
         ) : (
@@ -64,6 +65,7 @@ const ProfilPage = async ({
             <ProfilLayout
               dictionary={dictionary}
               candidat={candidat?.candidat}
+              getCandidatPreview={getCandidatPreview}
             />
           </>
         )}

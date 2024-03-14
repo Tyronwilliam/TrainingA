@@ -100,11 +100,6 @@ export type FormikInscriptionWithoutExcluded = Omit<
   | "nomDeNaissance"
   | "firstname"
   | "gender"
-  | "dateOfBirth"
-  | "birthCity"
-  | "birthPostal"
-  | "birthCountry"
-  | "photodepresentation"
   | "autresphotos"
   | "marital"
 > & {
