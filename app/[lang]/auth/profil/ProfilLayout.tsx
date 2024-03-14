@@ -97,8 +97,7 @@ const ProfilLayout = ({
         //@ts-ignore
         sendToast(true, response?.error?.message || "An error occurred");
       } else {
-        console.log(response); //@ts-ignore
-
+        //@ts-ignore
         setPreviewCandidat(response);
         sendToast(false, "Data load");
       }
@@ -114,45 +113,47 @@ const ProfilLayout = ({
     (() => formik.validateForm())();
   }, []);
   return (
-    <section className="flex flex-col w-full items-center justify-center ">
-      <div className="text-center italic my-3 mx-auto flex flex-col gap-2 w-full p-1">
-        {dictionary?.general?.profil?.map((text: string, index: number) => {
-          return <p key={index}>{text}</p>;
-        })}
-      </div>{" "}
-      <button
-        className="boutonSlideCommon shrink-0 text-lg max-w-[190px] w-full radius p-2.5 border-[1px] border-white"
-        onClick={() => {
-          handleCandidatPreview(candidat?.id);
-          togglePreview();
-        }}
-      >
-        {dictionary?.general?.previewProfil}
-      </button>{" "}
-      <TabsLayout
-        currentTab={currentTab}
-        handleClick={handleTab}
-        dictionary={dictionary}
-        formik={formik}
-        excludeField={excludeField}
-        isLoadInput={isLoadInput}
-        setIsLoadInput={setIsLoadInput}
-        open={open}
-        toggle={toggle}
-        setIsCurrentlyEditing={setIsCurrentlyEditing}
-        isCurrentlyEditing={isCurrentlyEditing}
-        mergedStepSix={mergedStepSix}
-        isSubmitting={isSubmitting}
-        jwt={jwt}
-        candidatId={candidat?.id}
-      />
+    <>
+      <section className="flex flex-col w-full items-center justify-center ">
+        <div className="text-center italic my-3 mx-auto flex flex-col gap-2 w-full p-1">
+          {dictionary?.general?.profil?.map((text: string, index: number) => {
+            return <p key={index}>{text}</p>;
+          })}
+        </div>
+        <button
+          className="boutonSlideCommon shrink-0 text-lg max-w-[190px] w-full radius p-2.5 border-[1px] border-white"
+          onClick={() => {
+            handleCandidatPreview(candidat?.id);
+            togglePreview();
+          }}
+        >
+          {dictionary?.general?.previewProfil}
+        </button>
+        <TabsLayout
+          currentTab={currentTab}
+          handleClick={handleTab}
+          dictionary={dictionary}
+          formik={formik}
+          excludeField={excludeField}
+          isLoadInput={isLoadInput}
+          setIsLoadInput={setIsLoadInput}
+          open={open}
+          toggle={toggle}
+          setIsCurrentlyEditing={setIsCurrentlyEditing}
+          isCurrentlyEditing={isCurrentlyEditing}
+          mergedStepSix={mergedStepSix}
+          isSubmitting={isSubmitting}
+          jwt={jwt}
+          candidatId={candidat?.id}
+        />
+      </section>
       {openPreview && previewCandidat !== null && (
-        <section className="absolute top-0 left-0 z-50 bg-black w-full h-screen min-h-[800px] md:flex items-center justify-center">
+        <section className="absolute top-0 left-0 z-50 bg-black w-full  min-h-screnn h-full md:flex items-center justify-center border border-white">
           <Suspense fallback={<Spinner />}>
             <AiFillCloseCircle
               className="z-50 absolute right-6 top-6 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
               onClick={togglePreview}
-            />{" "}
+            />
             <SingleCandidatLayout
               candidat={previewCandidat}
               dictionary={dictionary}
@@ -160,7 +161,7 @@ const ProfilLayout = ({
           </Suspense>
         </section>
       )}
-    </section>
+    </>
   );
 };
 
