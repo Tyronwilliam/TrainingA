@@ -148,7 +148,7 @@ const ProfilLayout = ({
         />
       </section>
       {openPreview && previewCandidat !== null && (
-        <section className="absolute top-0 left-0 z-50 bg-black w-full  min-h-screnn h-full md:flex items-center justify-center border border-white">
+        <section className="absolute top-0 left-0 z-50 bg-black w-full  min-h-screnn h-full md:flex items-center justify-center ">
           <Suspense fallback={<Spinner />}>
             <AiFillCloseCircle
               className="z-50 absolute right-6 top-6 fill-white w-6 h-6 cursor-pointer hover:opacity-50 transition-all duration-200 ease-out"
