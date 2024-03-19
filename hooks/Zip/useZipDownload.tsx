@@ -1,20 +1,23 @@
+import { capitalizeFirstLetter } from "@/app/[lang]/choix/genre/[gender]/function";
 import JSZip from "jszip";
 
 const useZipDownload = () => {
-  const fetchData = async (url: string) => {
-    const response = await fetch(url, { mode: "no-cors" });
-    const data = await response.blob();
-    return data;
-  };
+
 
   const downloadFile = async (
     url: string,
     name: string,
-    zip: any,
-    folder: string
+    folder: any // Remove 'zip' and 'folder' parameters since 'folder' contains the destination folder for the file
   ) => {
-    const fileData = await fetchData(url);
-    zip.folder(folder).file(name, fileData);
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+
+      // Append the blob to the specified folder
+      folder.file(name, blob);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
   };
 
   const downloadAllFiles = async (candidates: any, packName: string | null) => {
@@ -23,20 +26,21 @@ const useZipDownload = () => {
     const nameZip = packName !== null ? packName : "Talents";
 
     for (const candidate of candidatArray) {
-      const candidateFolderName: string = `${
-        candidate?.attributes?.Nom || "NomInconnu"
-      }-${candidate?.attributes?.Prenom || "PrenomInconnu"}`;
+      const letterLastName = capitalizeFirstLetter(candidate?.attributes?.Nom);
+
+      const candidateFolderName: string = `${letterLastName || "NomInconnu"}-${
+        candidate?.attributes?.Prenom || "PrenomInconnu"
+      }`;
 
       const candidateFolder = globalZip.folder(candidateFolderName);
 
-      const photosFolder = candidateFolder!.folder("Photos");
-      const videosFolder = candidateFolder!.folder("Videos");
+      const photosFolder = candidateFolder?.folder("Photos");
+      const videosFolder = candidateFolder?.folder("Videos");
 
       await downloadFile(
         candidate?.attributes?.Photo_de_presentation?.data?.attributes?.url,
         candidate?.attributes?.Photo_de_presentation?.data?.attributes?.name,
-        photosFolder,
-        ""
+        photosFolder
       );
 
       if (candidate?.attributes?.Portfolio?.Portfolio?.data?.length > 0) {
@@ -44,8 +48,7 @@ const useZipDownload = () => {
           await downloadFile(
             photo?.attributes?.url,
             photo?.attributes?.name,
-            photosFolder,
-            ""
+            photosFolder
           );
         }
       }
@@ -55,8 +58,7 @@ const useZipDownload = () => {
           await downloadFile(
             video?.attributes?.url,
             video?.attributes?.name,
-            videosFolder,
-            ""
+            videosFolder
           );
         }
       }
@@ -65,8 +67,7 @@ const useZipDownload = () => {
         await downloadFile(
           candidate?.attributes?.Video_Presentation?.data?.attributes?.url,
           candidate?.attributes?.Video_Presentation?.data?.attributes?.name,
-          videosFolder,
-          ""
+          videosFolder
         );
       }
     }
