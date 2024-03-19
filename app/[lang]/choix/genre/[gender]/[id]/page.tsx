@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
- async function getDataSingleCandidat(id: string) {
+async function getDataSingleCandidat(id: string) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_URL_IMG}/api/candidats/${id}?populate=Physionomie.Confection_Haut,Physionomie.Taille,Physionomie.Confection_Bas,Physionomie.Chaussures,Physionomie.Poids,Portfolio.Portfolio,Role_Candidat.Competence,Photo_de_presentation,Bande_Demo,Video_Presentation`,
@@ -58,18 +58,18 @@ const SingleCandidatPage = async ({
 }: {
   params: { id: string; lang: Locale };
 }) => {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/restreint");
-  }
-  if (
-    //@ts-ignore
-    session?.user?.role === "Regular" ||
-    //@ts-ignore
-    (!session?.user?.actif && session?.user?.role !== "Admin")
-  ) {
-    redirect("/restreint");
-  }
+  // const session = await getServerSession(authOptions);
+  // if (!session) {
+  //   redirect("/restreint");
+  // }
+  // if (
+  //   //@ts-ignore
+  //   session?.user?.role === "Regular" ||
+  //   //@ts-ignore
+  //   (!session?.user?.actif && session?.user?.role !== "Admin")
+  // ) {
+  //   redirect("/restreint");
+  // }
   const dictionary = await getDictionary(params.lang);
   const candidat = await getDataSingleCandidat(params.id);
   return (
