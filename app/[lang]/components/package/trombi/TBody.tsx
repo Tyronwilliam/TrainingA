@@ -1,6 +1,6 @@
 import ImageCandidat from "@/app/[lang]/choix/genre/[gender]/Candidat/ImageCandidat";
 import useTrombi from "@/hooks/Zip/useTrombi";
-import React, { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { CurrentPackProps } from "./TrombiLayout";
 
 const TBody = ({
@@ -43,14 +43,14 @@ const TBody = ({
               <td className="p-[5px] border-[1px] max-h-28 max-w-20">
                 {candidat?.attributes?.Photo_de_presentation?.data?.attributes
                   ?.formats?.medium?.url ? (
-                  <ImageCandidat
+                  <FetchImage
                     image={
                       candidat?.attributes?.Photo_de_presentation?.data
                         ?.attributes?.formats?.medium?.url
                     }
                   />
                 ) : (
-                  <ImageCandidat
+                  <FetchImage
                     image={
                       candidat?.attributes?.Photo_de_presentation?.data
                         ?.attributes?.url
@@ -124,3 +124,20 @@ const TBody = ({
 };
 
 export default TBody;
+function FetchImage({ image }: { image: string }) {
+  const [imageSrc, setImageSrc] = useState<undefined | string>(undefined);
+
+  useEffect(() => {
+    fetch(image, {
+      method: "GET",
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        const source = URL.createObjectURL(blob);
+        setImageSrc(source);
+      })
+      .catch((error) => console.error("Error fetching image:", error));
+  }, [image]);
+
+  return imageSrc && <ImageCandidat image={imageSrc} />;
+}

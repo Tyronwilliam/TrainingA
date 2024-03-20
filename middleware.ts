@@ -26,7 +26,6 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
