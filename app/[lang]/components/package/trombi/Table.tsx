@@ -12,8 +12,7 @@ const Table = ({
 }) => {
   return (
     <table className="table-fixed	border-[1px]" id="pdf-content">
-      <caption className="text-center uppercase text-2xl mx-auto font-bold border w-full">
-        {" "}
+      <caption className="text-center uppercase text-2xl mx-auto font-bold border w-full p-2">
         {currentPack?.attributes?.Nom
           ? `${currentPack?.attributes?.Nom}`
           : "Packages"}
