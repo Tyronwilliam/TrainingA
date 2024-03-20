@@ -28,6 +28,7 @@ export const sendStepFourAndFive = async (
       En_Agence: values?.agence,
       Agence_Infos: values?.agenceInfos,
     },
+    inscription_Termine: true,
     Experience_tournage: values?.experiencesTournage,
     Instagram: values?.instagram,
   };

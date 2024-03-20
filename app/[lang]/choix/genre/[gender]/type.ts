@@ -5,6 +5,7 @@ export interface PhysioState {
   Taille: string; // Change 'any' to the actual type of your Taille array elements
   Type: string[]; // Change 'any' to the actual type of your Type array elements
   Compétence: string[];
+  Prenom: string;
   Unique: boolean; // Change 'any' to the actual type of your Compétence array elements
   [key: string]: string[] | string | boolean;
 }

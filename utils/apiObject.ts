@@ -23,7 +23,6 @@ export const apiObject = (id: string, data: any) => {
       return {
         data: {
           Photo_de_presentation: data,
-          inscription_Termine: true,
         },
       };
       break;
