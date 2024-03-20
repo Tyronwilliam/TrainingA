@@ -59,6 +59,14 @@ const TableCTA = ({
                 }
               >
                 Download media
+              </button>{" "}
+              <button
+                className="boutonSlideCommon p-2 radius w-fit uppercase"
+                onClick={() => {
+                  toggleModalTable();
+                }}
+              >
+                {dictionary?.genre?.page?.package?.cta[3]}
               </button>
               <button
                 className="boutonSlideCommon p-2 radius w-fit uppercase"
