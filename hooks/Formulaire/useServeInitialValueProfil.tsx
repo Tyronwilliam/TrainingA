@@ -15,8 +15,19 @@ const useServeInitialValueProfil = (candidat: any) => {
     Video_Presentation,
     Bande_Demo,
     Agence,
+    Photo_de_presentation,
+    Date_de_naissance,
+    Lieu_de_Naissance,
   } = candidat || {};
   const profilInitialValues: FormikInscriptionWithoutExcluded = {
+    dateOfBirth: Date_de_naissance ? Date_de_naissance : null,
+    birthCity: Lieu_de_Naissance?.Ville ? Lieu_de_Naissance?.Ville : null,
+    birthPostal: Lieu_de_Naissance?.Code_postal
+      ? Lieu_de_Naissance?.Code_postal
+      : null,
+    birthCountry: Lieu_de_Naissance?.Pays ? Lieu_de_Naissance?.Pays : null,
+    photodepresentation:
+      Photo_de_presentation !== null ? Photo_de_presentation : null,
     phone: Telephone ? `0${Telephone}` : "",
     age: Age ? Age : "",
     address: Location?.adresse ? Location?.adresse : "",

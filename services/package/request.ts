@@ -152,3 +152,18 @@ export const deleteCandidat = async (
     return error;
   }
 };
+export const getOnePackageById = async (id: string) => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate[0]=candidats`
+    );
+
+    return response;
+  } catch (error: any) {
+    console.error(
+      "Une erreur s'est produite lors de la requête :",
+      error.message
+    );
+    return error;
+  }
+};

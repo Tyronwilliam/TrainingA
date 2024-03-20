@@ -52,7 +52,7 @@ const GenrePage = async ({
   return (
     <>
       <PreviousNavHistory />
-      <main className="pt-[80px] relative">
+      <main className="pt-[80px] relative min-h-full">
         <HeaderImage
           filename="https://lula-aws-s3-bucket.s3.eu-west-3.amazonaws.com/%24R6JJ7JQ.png"
           alt="Talents"

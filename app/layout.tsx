@@ -28,7 +28,7 @@ export default async function RootLayout({
 
   return (
     <html lang={params.lang} className={Roboto.className}>
-      <body>
+      <body className="relative">
         <GoogleProvider dictionary={dictionary} params={params}>
           <Provider session={session}>
             <PackageProvider>

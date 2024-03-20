@@ -5,12 +5,14 @@ import { useSession } from "next-auth/react";
 interface TableCTAProps {
   pack: PackSchema;
   dictionary: Dictionary;
-  handleCopyUrlClipBoard: (pack: any, packName: string) => void;
+  // handleCopyUrlClipBoard: (pack: any, packName: string) => void;
+  handleCopyUrlClipBoard: (pack: any) => void;
   trashPackage: (packId: number) => void;
   toggleModalForm: () => void;
   toggleModalTable: () => void;
   setCurrentPack: (pack: PackSchema) => void;
   downloadAllFiles: (candidat: any, packName: string | null) => void;
+  handleCopyAllEmail: (candidats: any) => void;
 }
 const TableCTA = ({
   pack,
@@ -21,6 +23,7 @@ const TableCTA = ({
   setCurrentPack,
   downloadAllFiles,
   toggleModalTable,
+  handleCopyAllEmail,
 }: TableCTAProps) => {
   const { data: session } = useSession();
 
@@ -30,12 +33,7 @@ const TableCTA = ({
         <>
           <button
             className="boutonSlideCommon p-2 radius w-fit uppercase"
-            onClick={() =>
-              handleCopyUrlClipBoard(
-                pack.attributes.candidats?.data,
-                pack.attributes.Nom
-              )
-            }
+            onClick={() => handleCopyUrlClipBoard(pack?.id)}
           >
             {dictionary?.genre?.page?.package?.cta[0]}
           </button>
@@ -64,12 +62,11 @@ const TableCTA = ({
               </button>
               <button
                 className="boutonSlideCommon p-2 radius w-fit uppercase"
-                onClick={() => {
-                  setCurrentPack(pack);
-                  toggleModalTable();
-                }}
+                onClick={() =>
+                  handleCopyAllEmail(pack.attributes.candidats?.data)
+                }
               >
-                {dictionary?.genre?.page?.package?.cta[3]}
+                Liste des emails
               </button>
             </>
           )}

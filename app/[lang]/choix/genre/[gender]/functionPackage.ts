@@ -21,13 +21,10 @@ export const handleAddToPack = (
     connectCandidatsAndPackage(packId, candidatId);
   }
 };
-export const generateUrlFromCandidats = (
-  candidats: [candidats: { id: number }],
-  packName: string
+export const generateTextFromCandidats = (
+  candidats: [candidats: { attributes: { Email: string } }]
 ) => {
-  const talentIDs = candidats?.map((candidat) => candidat?.id);
-  const talentIDsString = talentIDs.join(",");
-  const baseURL = `${process.env.NEXT_PUBLIC_FRONT_URL}/fr/package?`;
-  const url = baseURL + "talentIds=" + talentIDsString + "&name=" + packName;
-  return url;
+  const emails = candidats?.map((candidat) => candidat?.attributes?.Email);
+  const allEmail = emails.join(",");
+  return allEmail;
 };
