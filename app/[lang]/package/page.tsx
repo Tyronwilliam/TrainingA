@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-disctionary";
 import PackageLayout from "./PackageLayout";
-import axios from "axios";
 import { getOnePackageById } from "@/services/package/request";
 import { getAllCandidatsByIds } from "./function";
 
