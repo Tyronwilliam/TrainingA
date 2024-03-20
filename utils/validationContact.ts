@@ -34,6 +34,6 @@ export const ContactSchema = Yup.object().shape({
     .required("Required"),
   message: Yup.string()
     .min(2, "Too Short!")
-    .max(50, "Too Long!")
+    .max(350, "Too Long!")
     .required("Required"),
 });

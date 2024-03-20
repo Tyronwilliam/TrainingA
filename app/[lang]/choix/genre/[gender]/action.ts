@@ -65,7 +65,7 @@ export async function getCandidat({
       filters += `&filters[Role_Candidat][Unique][$eq]=true`;
     }
     if (prenom !== undefined) {
-      filters += `&filters[Prenom][$contains]=${prenom}`;
+      filters += `&filters[Prenom][$containsi]=${prenom}`;
     }
 
     const url = `${process.env.NEXT_PUBLIC_API_URL}/candidats?filters[Sexe][$eq]=${gender}&filters[valide][$eq]=true[populate][Physionomie]=*&[populate][Role_Candidat][populate][Competence]=*&[populate][Photo_de_presentation]=*&[populate][Portfolio][populate][Portfolio]=*${filters}&sort[0]=Prenom:asc${start}&pagination[limit]=21`;
