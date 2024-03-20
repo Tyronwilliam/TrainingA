@@ -1,9 +1,23 @@
 import { capitalizeFirstLetter } from "@/app/[lang]/choix/genre/[gender]/function";
-import { downloadFile } from "@/utils/apiObject";
-import axios from "axios";
 import JSZip from "jszip";
 
 const useZipDownload = () => {
+  const downloadFile = async (
+    url: string,
+    name: string,
+    folder: any // Remove 'zip' and 'folder' parameters since 'folder' contains the destination folder for the file
+  ) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+
+      // Append the blob to the specified folder
+      folder.file(name, blob);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
+
   const downloadAllFiles = async (candidates: any, packName: string | null) => {
     const globalZip = new JSZip();
     const candidatArray = Array.isArray(candidates) ? candidates : [candidates];
@@ -29,8 +43,6 @@ const useZipDownload = () => {
 
       if (candidate?.attributes?.Portfolio?.Portfolio?.data?.length > 0) {
         for (const photo of candidate?.attributes?.Portfolio?.Portfolio?.data) {
-          console.log(photo?.attributes?.mime);
-
           await downloadFile(
             photo?.attributes?.url,
             photo?.attributes?.name,
@@ -50,8 +62,6 @@ const useZipDownload = () => {
       }
 
       if (candidate?.attributes?.Video_Presentation?.data) {
-        console.log(candidate?.attributes?.Video_Presentation?.data);
-
         await downloadFile(
           candidate?.attributes?.Video_Presentation?.data?.attributes?.url,
           candidate?.attributes?.Video_Presentation?.data?.attributes?.name,
@@ -60,10 +70,7 @@ const useZipDownload = () => {
       }
     }
 
-    const globalBlob = await globalZip.generateAsync({
-      type: "blob",
-      streamFiles: true,
-    });
+    const globalBlob = await globalZip.generateAsync({ type: "blob" });
 
     // Create a temporary link element to trigger the download
     const link = document.createElement("a");

@@ -12,6 +12,7 @@ interface PackageListProps {
   handleTogglePack: (packId: number) => void;
   packName: string;
   dictionary: Dictionary;
+  toggleModalTable: () => void;
 }
 const PackageListLayout = ({
   allPack,
@@ -23,6 +24,7 @@ const PackageListLayout = ({
   packName,
   dictionary,
   toggleModalForm,
+  toggleModalTable,
 }: PackageListProps) => {
   return (
     <>
@@ -43,6 +45,7 @@ const PackageListLayout = ({
                 packName={packName}
                 dictionary={dictionary}
                 toggleModalForm={toggleModalForm}
+                toggleModalTable={toggleModalTable}
               />
             ))}
           </div>
