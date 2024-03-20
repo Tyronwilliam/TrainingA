@@ -59,6 +59,7 @@ const TrombiLayout = ({
       },
     },
   };
+
   return (
     openModalTable && (
       <section className="fixed top-0 left-0 bg-white text-black w-full h-full overflow-x-scroll  p-9 z-50">
