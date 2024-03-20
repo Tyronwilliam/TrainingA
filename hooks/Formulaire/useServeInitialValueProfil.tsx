@@ -55,8 +55,8 @@ const useServeInitialValueProfil = (candidat: any) => {
     nationality: Infos_Administrative?.Nationalite
       ? Infos_Administrative?.Nationalite
       : "",
-    defile: Role_Candidat?.Competence?.Defile_de_mode
-      ? Role_Candidat?.Competence?.Defile_de_mode
+    defile: Role_Candidat?.Competence?.Mannequin_Pro
+      ? Role_Candidat?.Competence?.Mannequin_Pro
       : false,
     danseClassique: Role_Candidat?.Competence?.Danse_Classique
       ? Role_Candidat?.Competence?.Danse_Classique
@@ -95,8 +95,8 @@ const useServeInitialValueProfil = (candidat: any) => {
     unique: Role_Candidat?.Unique ? Role_Candidat?.Unique : false,
     acteur: Role_Candidat?.Acteur ? Role_Candidat?.Acteur : false,
     modele: Role_Candidat?.Modele ? Role_Candidat?.Modele : false,
-    figuration: Role_Candidat?.Figurant ? Role_Candidat?.Figurant : false,
-    silhouette: Role_Candidat?.Silhouette ? Role_Candidat?.Silhouette : false,
+    figuration: Role_Candidat?.Accepte_Figuration ? Role_Candidat?.Accepte_Figuration : false,
+    silhouette: Role_Candidat?.Accepte_Silhouette ? Role_Candidat?.Accepte_Silhouette : false,
     bandeDemo: Bande_Demo ? Bande_Demo : [],
     videodepresentation: Video_Presentation ? Video_Presentation : null,
     newPhotos: Photo_Candidature?.Nouvelle_photos

@@ -86,7 +86,7 @@
         "Tous": "ALL",
         "Acteur": "Actor",
         "Modele": "Model",
-        "Figurant": "Extra"
+        "Accepte_Figuration": "Extra"
       },
       "filter": {
         "age": {
@@ -100,7 +100,7 @@
         "skills": {
           "title": { "Compétence": "Skills" },
           "value": {
-            "Defile_de_mode": "Catwalk",
+            "Mannequin_Pro": "Catwalk",
             "Danse_Classique": "Classical Dance",
             "Danse_Contemporaine": "Contemporary Dance",
             "HipHop": "HipHop",
@@ -215,7 +215,7 @@
             "options": {
               "Acteur": "Actor",
               "Modèle": "Model",
-              "Figurant": "Extra"
+              "Accepte_Figuration": "Extra"
             }
           },
           "remuneration": {

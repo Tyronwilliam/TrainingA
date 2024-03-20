@@ -86,7 +86,7 @@
         "Tous": "Tous",
         "Acteur": "Acteur",
         "Modele": "Modèle",
-        "Figurant": "Extra"
+        "Accepte_Figuration": "Extra"
       },
       "filter": {
         "age": {
@@ -100,7 +100,7 @@
         "skills": {
           "title": { "Compétence": "Compétence" },
           "value": {
-            "Defile_de_mode": "Défilé",
+            "Mannequin_Pro": "Défilé",
             "Danse_Classique": "Danse Classique",
             "Danse_Contemporaine": "Danse Contemporaine",
             "HipHop": "HipHop",
@@ -215,7 +215,7 @@
             "options": {
               "Acteur": "Acteur",
               "Modèle": "Modèle",
-              "Figurant": "Figurant"
+              "Accepte_Figuration": "Figurant"
             }
           },
           "remuneration": {

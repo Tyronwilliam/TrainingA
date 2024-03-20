@@ -30,12 +30,12 @@ const dataProfil = (values: FormikInscriptionWithoutExcluded) => {
     },
     Role_Candidat: {
       Acteur: values?.acteur,
-      Figurant: values?.figuration,
+      Accepte_Figuration: values?.figuration,
       Modele: values?.modele,
-      Silhouette: values?.silhouette,
+      Accepte_Silhouette: values?.silhouette,
       Unique: values?.unique,
       Competence: {
-        Defile_de_mode: values?.defile,
+        Mannequin_Pro: values?.defile,
         Danse_Classique: values?.danseClassique,
         Danse_Contemporaine: values?.danseContemporaine,
         HipHop: values?.hipHop,
