@@ -41,19 +41,19 @@ export function generateAgeFilter(ageRanges: string[]) {
 
     if (i === 0) {
       if (ageRange.startsWith(">")) {
-        ageFilter += `&filters[$and][0][Age][$between][0]=6&filters[$and][0][Age][$between][1]=16`;
+        ageFilter += `&filters[$or][0][Age][$between][0]=6&filters[$or][0][Age][$between][1]=16`;
       } else if (ageRange === "60+") {
-        ageFilter += `&filters[$and][0][Age][$between][0]=61&filters[$and][0][Age][$between][1]=100`;
+        ageFilter += `&filters[$or][0][Age][$between][0]=61&filters[$or][0][Age][$between][1]=100`;
       } else {
-        ageFilter += `&filters[$and][0][Age][$between][0]=${start}&filters[$and][0][Age][$between][1]=${end}`;
+        ageFilter += `&filters[$or][0][Age][$between][0]=${start}&filters[$or][0][Age][$between][1]=${end}`;
       }
     } else {
       if (ageRange.startsWith(">")) {
-        ageFilter += `&filters[$and][1][Age][$between][0]=6&filters[$and][1][Age][$between][1]=16`;
+        ageFilter += `&filters[$or][1][Age][$between][0]=6&filters[$or][1][Age][$between][1]=16`;
       } else if (ageRange === "60+") {
-        ageFilter += `&filters[$and][1][Age][$between][0]=61&filters[$and][1][Age][$between][1]=100`;
+        ageFilter += `&filters[$or][1][Age][$between][0]=61&filters[$or][1][Age][$between][1]=100`;
       } else {
-        ageFilter += `&filters[$and][1][Age][$between][0]=${start}&filters[$and][1][Age][$between][1]=${end}`;
+        ageFilter += `&filters[$or][1][Age][$between][0]=${start}&filters[$or][1][Age][$between][1]=${end}`;
       }
     }
   }
@@ -67,9 +67,9 @@ export function generateFilterQuery(values: string) {
   const competenceFilters = encodedValues?.map(
     (encodedValue: string, index: number) => {
       if (index === 0) {
-        return `&filters[$or][${index}][Role_Candidat][Competence][${encodedValue}][$eq]=true`;
+        return `&filters[$and][${index}][Role_Candidat][Competence][${encodedValue}][$eq]=true`;
       } else {
-        return `&filters[$or][${index}][Role_Candidat][Competence][${encodedValue}][$eq]=true`;
+        return `&filters[$and][${index}][Role_Candidat][Competence][${encodedValue}][$eq]=true`;
       }
     }
   );
@@ -175,9 +175,7 @@ export const handleQuery = (
     if (updatedParamValues.length > 0) {
       queryInUrl.append(key, updatedParamValues.join(","));
     }
-
   } else {
-
     // Si la valeur n'est pas déjà présente, ajoutez-la comme avant
     if (queryValueToArray.length === 2) {
       queryValueToArray[1] = value.toString();
