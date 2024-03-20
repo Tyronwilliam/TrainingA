@@ -1,5 +1,4 @@
 "use client";
-import { generateUrlFromCandidats } from "@/app/[lang]/choix/genre/[gender]/functionPackage";
 import {
   associateCandidatsWithPackage,
   createPackage,
@@ -13,6 +12,7 @@ import { sendToast } from "@/utils/toast";
 import { useSession } from "next-auth/react";
 import { createContext, useContext, useState } from "react";
 import useZipDownload from "../Zip/useZipDownload";
+import { generateTextFromCandidats } from "@/app/[lang]/choix/genre/[gender]/functionPackage";
 
 type GenericContextType = {
   [key: string]: any;
@@ -49,10 +49,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     setPackName(value);
   };
 
-  const handleCopyUrlClipBoard = async (
-    packId: number
-  ) => {
-    // const url = generateUrlFromCandidats(candidats, packName);
+  const handleCopyUrlClipBoard = async (packId: number) => {
     const baseURL = `${process.env.NEXT_PUBLIC_FRONT_URL}/fr/package?`;
     const url = baseURL + "pack=" + packId;
     await navigator.clipboard
@@ -62,6 +59,19 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       })
       .catch((error) => {
         sendToast(true, "FAIL TO COPY URL");
+      });
+  };
+  const handleCopyAllEmail = async (
+    candidats: [candidats: { attributes: { Email: string } }]
+  ) => {
+    const allEmail = generateTextFromCandidats(candidats);
+    await navigator.clipboard
+      .writeText(allEmail)
+      .then(() => {
+        sendToast(false, "EMAILS COPIED");
+      })
+      .catch((error) => {
+        sendToast(true, "FAIL TO COPY EMAILS");
       });
   };
   const fetchPackageById = async () => {
@@ -210,6 +220,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
     currentPack,
     setCurrentPack,
     downloadAllFiles,
+    handleCopyAllEmail,
   };
   return (
     <PackageContext.Provider value={exposed}>

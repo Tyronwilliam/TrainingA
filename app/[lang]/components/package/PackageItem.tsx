@@ -36,6 +36,7 @@ const PackageItem = ({
     detachCandidat,
     setCurrentPack,
     downloadAllFiles,
+    handleCopyAllEmail,
   } = usePackage();
   return (
     <div
@@ -93,6 +94,7 @@ const PackageItem = ({
             toggleModalForm={toggleModalForm}
             setCurrentPack={setCurrentPack}
             downloadAllFiles={downloadAllFiles}
+            handleCopyAllEmail={handleCopyAllEmail}
           />
         </>
       )}

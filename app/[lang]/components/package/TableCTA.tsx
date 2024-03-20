@@ -12,6 +12,7 @@ interface TableCTAProps {
   toggleModalForm: () => void;
   setCurrentPack: (pack: PackSchema) => void;
   downloadAllFiles: (candidat: any, packName: string | null) => void;
+  handleCopyAllEmail: (candidats: any) => void;
 }
 const TableCTA = ({
   pack,
@@ -21,6 +22,7 @@ const TableCTA = ({
   toggleModalForm,
   setCurrentPack,
   downloadAllFiles,
+  handleCopyAllEmail,
 }: TableCTAProps) => {
   const { data: session } = useSession();
   return (
@@ -59,10 +61,7 @@ const TableCTA = ({
               <button
                 className="boutonSlideCommon p-2 radius w-fit uppercase"
                 onClick={() =>
-                  downloadAllFiles(
-                    pack.attributes.candidats?.data,
-                    pack.attributes.Nom
-                  )
+                  handleCopyAllEmail(pack.attributes.candidats?.data)
                 }
               >
                 Liste des emails
