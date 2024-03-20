@@ -41,19 +41,19 @@ export function generateAgeFilter(ageRanges: string[]) {
 
     if (i === 0) {
       if (ageRange.startsWith(">")) {
-        ageFilter += `&filters[$or][0][Age][$between][0]=6&filters[$or][0][Age][$between][1]=16`;
+        ageFilter += `&filters[$and][0][Age][$between][0]=6&filters[$and][0][Age][$between][1]=16`;
       } else if (ageRange === "60+") {
-        ageFilter += `&filters[$or][0][Age][$between][0]=61&filters[$or][0][Age][$between][1]=100`;
+        ageFilter += `&filters[$and][0][Age][$between][0]=61&filters[$and][0][Age][$between][1]=100`;
       } else {
-        ageFilter += `&filters[$or][0][Age][$between][0]=${start}&filters[$or][0][Age][$between][1]=${end}`;
+        ageFilter += `&filters[$and][0][Age][$between][0]=${start}&filters[$and][0][Age][$between][1]=${end}`;
       }
     } else {
       if (ageRange.startsWith(">")) {
-        ageFilter += `&filters[$or][1][Age][$between][0]=6&filters[$or][1][Age][$between][1]=16`;
+        ageFilter += `&filters[$and][1][Age][$between][0]=6&filters[$and][1][Age][$between][1]=16`;
       } else if (ageRange === "60+") {
-        ageFilter += `&filters[$or][1][Age][$between][0]=61&filters[$or][1][Age][$between][1]=100`;
+        ageFilter += `&filters[$and][1][Age][$between][0]=61&filters[$and][1][Age][$between][1]=100`;
       } else {
-        ageFilter += `&filters[$or][1][Age][$between][0]=${start}&filters[$or][1][Age][$between][1]=${end}`;
+        ageFilter += `&filters[$and][1][Age][$between][0]=${start}&filters[$and][1][Age][$between][1]=${end}`;
       }
     }
   }
@@ -82,9 +82,9 @@ export function generateTypeFilter(types: string[]) {
   for (let i = 0; i < types.length; i++) {
     const typeRange = types[i];
     if (i === 0) {
-      typeFilter += `&filters[$or][${i}][Physionomie][Origin][$eq]=${typeRange}`;
+      typeFilter += `&filters[$and][${i}][Physionomie][Origin][$eq]=${typeRange}`;
     } else {
-      typeFilter += `&filters[$or][${i}][Physionomie][Origin][$eq]=${typeRange}`;
+      typeFilter += `&filters[$and][${i}][Physionomie][Origin][$eq]=${typeRange}`;
     }
   }
   return typeFilter;

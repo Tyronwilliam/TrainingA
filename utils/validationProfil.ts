@@ -55,6 +55,11 @@ export const profilInitialValues: FormikInscriptionWithoutExcluded = {
   videodepresentation: null,
   newPhotos: [],
   unique: false,
+  dateOfBirth: null, 
+  birthPostal: "",
+  birthCity: "",
+  birthCountry: "",
+  photodepresentation: null,
 };
 export const SchemaNewPhoto = Yup.object().shape({
   newPhotos: Yup.array()
