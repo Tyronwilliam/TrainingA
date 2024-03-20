@@ -55,6 +55,7 @@ const TrombiLayout = ({
       canvas: {
         mimeType: "image/jpeg",
         qualityRatio: 1,
+        useCORS: true,
       },
     },
   };
