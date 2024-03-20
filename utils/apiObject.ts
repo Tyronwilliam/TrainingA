@@ -54,23 +54,3 @@ export const handleResponse = (res: any) => {
     return;
   }
 };
-export const downloadFile = async (url: string, name: string, folder: any) => {
-  try {
-    const response = await axios
-      .post(`/api/filedownload`, { params: { urlImage: url } })
-      .then((res) => res)
-      .catch((err) => err);
-
-    if (response.status !== 200) {
-      console.log(response);
-    }
-
-    const blob = await response.blob();
-
-    // Append the blob to the specified folder
-    folder.file(name, blob);
-    console.log(blob);
-  } catch (error) {
-    console.error("Error downloading file:", error);
-  }
-};

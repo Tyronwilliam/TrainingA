@@ -63,6 +63,7 @@ const TableCTA = ({
               <button
                 className="boutonSlideCommon p-2 radius w-fit uppercase"
                 onClick={() => {
+                  setCurrentPack(pack);
                   toggleModalTable();
                 }}
               >
