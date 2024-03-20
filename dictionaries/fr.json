@@ -323,8 +323,8 @@
     "candidatEmmpty": "Votre fiche n'a pas pu être créée, veuillez-nous contacter.",
     "zipHelper": "Télécharger",
     "profil": [
-      "Les nouvelles photos seront ajoutées par les directeurs de casting dans votre Portfolio.",
-      " Ajouter vos nouvelles photos 3 par 3",
+      "Les nouvelles photos seront ajoutées par les directeurs de casting dans sur votre profil visible. Vous ne pouvez pas ajouter de photos sur votre profil visible !",
+      "Ajoutez vos nouvelles photos 3 par 3",
       "Vous n'avez pas la possibilité de choisir votre photo de présentation.",
       "Toutes les photos soumises sont triées et choisies pour mettre en valeur votre profil par des professionnels de casting."
     ]
