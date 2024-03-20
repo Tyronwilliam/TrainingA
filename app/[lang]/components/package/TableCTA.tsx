@@ -6,7 +6,8 @@ import React from "react";
 interface TableCTAProps {
   pack: PackSchema;
   dictionary: Dictionary;
-  handleCopyUrlClipBoard: (pack: any, packName: string) => void;
+  // handleCopyUrlClipBoard: (pack: any, packName: string) => void;
+  handleCopyUrlClipBoard: (pack: any) => void;
   trashPackage: (packId: number) => void;
   toggleModalForm: () => void;
   setCurrentPack: (pack: PackSchema) => void;
@@ -28,12 +29,7 @@ const TableCTA = ({
         <>
           <button
             className="boutonSlideCommon p-2 radius w-fit uppercase"
-            onClick={() =>
-              handleCopyUrlClipBoard(
-                pack.attributes.candidats?.data,
-                pack.attributes.Nom
-              )
-            }
+            onClick={() => handleCopyUrlClipBoard(pack?.id)}
           >
             {dictionary?.genre?.page?.package?.cta[0]}
           </button>
@@ -59,6 +55,17 @@ const TableCTA = ({
                 }
               >
                 Download media
+              </button>
+              <button
+                className="boutonSlideCommon p-2 radius w-fit uppercase"
+                onClick={() =>
+                  downloadAllFiles(
+                    pack.attributes.candidats?.data,
+                    pack.attributes.Nom
+                  )
+                }
+              >
+                Liste des emails
               </button>
             </>
           )}

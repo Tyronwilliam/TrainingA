@@ -50,10 +50,11 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handleCopyUrlClipBoard = async (
-    candidats: [candidats: { id: number }],
-    packName: string
+    packId: number
   ) => {
-    const url = generateUrlFromCandidats(candidats, packName);
+    // const url = generateUrlFromCandidats(candidats, packName);
+    const baseURL = `${process.env.NEXT_PUBLIC_FRONT_URL}/fr/package?`;
+    const url = baseURL + "pack=" + packId;
     await navigator.clipboard
       .writeText(url)
       .then(() => {
