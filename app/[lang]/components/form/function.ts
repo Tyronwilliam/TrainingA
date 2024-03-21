@@ -122,12 +122,16 @@ export const handlePutPortfolioPhoto = async ({
     formik,
     id,
   });
+  //@ts-ignore
   if (response?.status === 200) {
     sendToast(false, "Media ajouté");
     setIsLoadInput(false);
   } else {
+    //@ts-ignore
+
     const error = response?.response?.data?.error?.message
-      ? response?.response?.data?.error?.message
+      ? //@ts-ignore
+        response?.response?.data?.error?.message
       : "An error occurred";
     sendToast(true, error);
     setIsLoadInput(false);

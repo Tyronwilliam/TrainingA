@@ -130,7 +130,7 @@ const GenreLayout = ({
             className="boutonSlideCommon border w-fit p-2 radius flex items-center justify-center text-sm"
             disabled={searchPrenom === ""}
           >
-            Recherchez
+            GO
           </button>
           {showResetButton && (
             <button

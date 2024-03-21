@@ -14,7 +14,8 @@ const StepFour = ({
 
   const checkbox: Record<string, StepType> =
     dictionary?.inscription?.stepFour.default?.checkbox;
-
+  const physique: Record<string, StepType> =
+    dictionary?.inscription?.stepFour.default?.checkboxPhysique;
   const agenceContent = dictionary?.inscription?.stepFour.content;
   const enAgenceTrue = { ...enAgenceFalse, ...agenceContent };
   const inputs: Record<string, StepType> = !formik?.values?.agence
@@ -22,9 +23,22 @@ const StepFour = ({
     : enAgenceTrue;
   return (
     <>
-      <div className="flex flex-col md:flex-row md:flex-wrap w-fit items-center px-3 justify-center box__lastChild">
-        <Inputs formik={formik} dictionary={dictionary} inputs={checkbox} />
-      </div>
+      <section>
+        <h2 className="text-center text-2xl mb-5 font-bold uppercase">
+          {dictionary?.inscription?.stepFour?.section[0]}
+        </h2>
+        <div className="flex flex-col md:flex-row md:flex-wrap w-fit items-center px-3 justify-center box__lastChild">
+          <Inputs formik={formik} dictionary={dictionary} inputs={checkbox} />
+        </div>
+      </section>
+      <section>
+        <h2 className="text-center text-2xl mb-5 font-bold uppercase">
+          {dictionary?.inscription?.stepFour?.section[1]}
+        </h2>
+        <div className="flex flex-col md:flex-row md:flex-wrap w-fit items-center px-3 justify-center box__lastChild ">
+          <Inputs formik={formik} dictionary={dictionary} inputs={physique} />
+        </div>
+      </section>
       <Inputs formik={formik} dictionary={dictionary} inputs={inputs} />
     </>
   );

@@ -44,7 +44,7 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   chaussures: "",
   origine: "",
   //
-  defile: false,
+  mannequinPro: false,
   danseClassique: false,
   danseContemporaine: false,
   hipHop: false,
@@ -64,6 +64,29 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   autresphotos: [],
   bandeDemo: [],
   videodepresentation: null,
+  //
+  humoristeStandUp: false,
+  chant: false,
+  rap: false,
+  guitare: false,
+  batterie: false,
+  piano: false,
+  violon: false,
+  autreInstrument: false,
+  circassien: false,
+  poleDance: false,
+  foot: false,
+  tennis: false,
+  basket: false,
+  boxe: false,
+  yoga: false,
+  equitation: false,
+  //
+  tatoo: false,
+  muscle: false,
+  skinny: false,
+  plusSize: false,
+  //
 };
 
 export const baseStepOneSchema = Yup.object().shape({
@@ -138,7 +161,7 @@ export const StepThreeSchema = Yup.object().shape({
 });
 
 export const StepFourSchema = Yup.object().shape({
-  defile: Yup.boolean().required("Required"),
+  mannequinPro: Yup.boolean().required("Required"),
   danseClassique: Yup.boolean().required("Required"),
   danseContemporaine: Yup.boolean().required("Required"),
   hipHop: Yup.boolean().required("Required"),

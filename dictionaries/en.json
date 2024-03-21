@@ -86,7 +86,7 @@
         "Tous": "ALL",
         "Acteur": "Actor",
         "Modele": "Model",
-        "Figurant": "Extra"
+        "Accepte_Figuration": "Extra"
       },
       "filter": {
         "age": {
@@ -100,13 +100,29 @@
         "skills": {
           "title": { "Compétence": "Skills" },
           "value": {
-            "Defile_de_mode": "Catwalk",
+            "Mannequin_Pro": "Catwalk",
             "Danse_Classique": "Classical Dance",
             "Danse_Contemporaine": "Contemporary Dance",
             "HipHop": "HipHop",
             "Sportif": "Sporty",
             "Skate": "Skateboarding",
-            "Ski": "Skiing"
+            "Ski": "Skiing",
+            "humoriste_Stand_up": "Humorist/Stand Up",
+            "Chant": "Singer",
+            "Rap": "Rap",
+            "Guitare": "Guitar",
+            "Batterie": "Drums",
+            "Piano": "Piano",
+            "Violon": "Violon",
+            "Autre_instrument": "Other Instrument",
+            "Circassien": "Circus Performer",
+            "Pole_Dance": "Pole Dance",
+            "Foot": "Football",
+            "Tennis": "Tennis",
+            "Basket": "Basketball",
+            "Boxe": "Boxing",
+            "Yoga": "Yoga",
+            "Equitation": "Horse Riding"
           }
         },
         "origine": {
@@ -215,7 +231,7 @@
             "options": {
               "Acteur": "Actor",
               "Modèle": "Model",
-              "Figurant": "Extra"
+              "Accepte_Figuration": "Extra"
             }
           },
           "remuneration": {
@@ -371,7 +387,7 @@
     "General",
     "Administrative",
     "Physionomy",
-    "Skills",
+    "Skills & Physical body",
     "Role",
     "Photos & Videos"
   ],
@@ -932,15 +948,16 @@
       }
     },
     "stepFour": {
+      "section": ["Skills & Physical body"],
       "default": {
         "checkbox": {
-          "defile": {
-            "label": "Catwalk",
+          "mannequinPro": {
+            "label": "Mannequin Pro",
             "helper": "",
             "type": "checkbox",
             "required": false,
             "placeholder": "",
-            "id": "defile"
+            "id": "mannequinPro"
           },
           "danseClassique": {
             "label": "Classical Dance",
@@ -989,6 +1006,169 @@
             "required": false,
             "placeholder": "",
             "id": "ski"
+          },
+
+          "humoristeStandUp": {
+            "label": "Humorist/Stand Up",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "humoristeStandUp"
+          },
+          "chant": {
+            "label": "Singer",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "chant"
+          },
+          "rap": {
+            "label": "Rap",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "rap"
+          },
+          "guitare": {
+            "label": "Guitar",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "guitare"
+          },
+          "batterie": {
+            "label": "Drums",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "batterie"
+          },
+          "piano": {
+            "label": "Piano",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "piano"
+          },
+          "violon": {
+            "label": "Violon",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "violon"
+          },
+          "autreInstrument": {
+            "label": "Other Instrument",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "autreInstrument"
+          },
+          "circassien": {
+            "label": "Circus Performer",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "circassien"
+          },
+          "poleDance": {
+            "label": "Pole Dance",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "poleDance"
+          },
+          "foot": {
+            "label": "Football",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "foot"
+          },
+          "tennis": {
+            "label": "Tennis",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "tennis"
+          },
+          "basket": {
+            "label": "Basketball",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "basket"
+          },
+          "boxe": {
+            "label": "Boxing",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "boxe"
+          },
+          "equitation": {
+            "label": "Horse Riding",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "equitation"
+          },
+          "yoga": {
+            "label": "Yoga",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "yoga"
+          }
+        },
+        "checkboxPhysique": {
+          "tatoo": {
+            "label": "Many tatoo",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "tatoo"
+          },
+          "muscle": {
+            "label": "Very muscular",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "muscle"
+          },
+          "skinny": {
+            "label": "Thin/Lean",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "skinny"
+          },
+          "plusSize": {
+            "label": "Plus Size",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "plusSize"
           }
         },
         "default": {

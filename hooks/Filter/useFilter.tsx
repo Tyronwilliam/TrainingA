@@ -237,13 +237,15 @@ const useFilter = (talents: any, metaInitial: any, gender: Gender) => {
           prenom: prenom !== null ? prenom : undefined,
         });
         break;
-      case "Figurant":
+      case "Accepte_Figuration":
         router.push(
-          `${pathname}?Role=Figurant${queryToString ? `&${queryToString}` : ""}`
+          `${pathname}?Role=Accepte_Figuration${
+            queryToString ? `&${queryToString}` : ""
+          }`
         );
         await fetchData({
           gender: gender,
-          role: "Figurant",
+          role: "Accepte_Figuration",
           properStart: 0,
           competence: compétence !== null ? compétence : undefined,
           age: age !== null ? age : undefined,

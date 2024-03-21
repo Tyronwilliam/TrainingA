@@ -2,9 +2,7 @@ import HeaderImage from "@/app/[lang]/components/HeaderImage";
 import { getDictionary } from "@/get-disctionary";
 import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
-import React from "react";
 import InscriptionLayout from "./InscriptionLayout";
-import PreviousNavHistory from "../components/PreviousNavHistory";
 
 export const metadata: Metadata = {
   title: "Inscription Talent.",

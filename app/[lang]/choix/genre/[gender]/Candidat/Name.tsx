@@ -1,4 +1,5 @@
 import ButtonAdd from "@/app/[lang]/components/package/ButtonAdd";
+import DetachFromPackage from "@/app/[lang]/components/package/DetachFromPackage";
 
 const Name = ({
   prenom,
@@ -8,6 +9,8 @@ const Name = ({
   isPackage,
   toggle,
   candidatId,
+  handleClientDetachPack,
+  packId,
 }: {
   prenom: string;
   nom: string | undefined;
@@ -16,7 +19,10 @@ const Name = ({
   isPackage?: boolean;
   toggle?: () => void;
   candidatId?: number;
+  handleClientDetachPack?: (packId: number, candidatId: number) => void;
+  packId?: string;
 }) => {
+  const packIdToNumber = packId ? parseInt(packId) : null;
   return (
     <div className={`flex gap-2 ${containerStyle}`}>
       <span
@@ -29,7 +35,18 @@ const Name = ({
       >
         {nom && nom}.
       </span>
-      {isPackage && <ButtonAdd toggle={toggle!} candidatId={candidatId!} />}
+      {isPackage ? (
+        <ButtonAdd toggle={toggle!} candidatId={candidatId!} />
+      ) : (
+        packId && (
+          <DetachFromPackage
+            detachCandidat={handleClientDetachPack!}
+            candidatId={candidatId}
+            packId={packIdToNumber}
+            isPack={true}
+          />
+        )
+      )}
     </div>
   );
 };

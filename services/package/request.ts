@@ -48,6 +48,38 @@ export const getPackagesById = async (id: string, jwt: string) => {
 export const associateCandidatsWithPackage = async (
   id: number,
   data: Record<string, any>,
+  jwt: string,
+  isDislike: boolean
+) => {
+  const connectProperty = isDislike ? "dislikes" : "candidats";
+  try {
+    const response = await axios.put(
+      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate=*`,
+      {
+        data: {
+          [connectProperty]: {
+            connect: data.candidats,
+          },
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    return response;
+  } catch (error: any) {
+    console.error(
+      "Une erreur s'est produite lors de la requête :",
+      error.message
+    );
+    return error;
+  }
+};
+export const associateCandidatsToDislike = async (
+  id: number,
+  data: Record<string, any>,
   jwt: string
 ) => {
   try {
@@ -55,7 +87,7 @@ export const associateCandidatsWithPackage = async (
       `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate=*`,
       {
         data: {
-          candidats: {
+          dislikes: {
             connect: data.candidats,
           },
         },
@@ -125,14 +157,17 @@ export const deletePackage = async (id: number, jwt: string) => {
 export const deleteCandidat = async (
   id: number,
   data: Record<string, any>,
-  jwt: string
+  jwt: string,
+  isDislike: boolean
 ) => {
+  const connectProperty = isDislike ? "dislikes" : "candidats";
+
   try {
     const response = await axios.put(
       `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate=*`,
       {
         data: {
-          candidats: {
+          [connectProperty]: {
             disconnect: data.candidats,
           },
         },
@@ -155,7 +190,7 @@ export const deleteCandidat = async (
 export const getOnePackageById = async (id: string) => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate[0]=candidats`
+      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate[0]=candidats&populate[1]=dislikes`
     );
 
     return response;

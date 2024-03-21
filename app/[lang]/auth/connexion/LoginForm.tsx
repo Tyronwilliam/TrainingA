@@ -17,7 +17,15 @@ import { useEffect } from "react";
 import ButtonForm from "../../components/ButtonForm";
 import { handleSubmission } from "./function";
 
-const LoginForm = ({ dictionary }: { dictionary: Dictionary }) => {
+const LoginForm = ({
+  dictionary,
+  isPack,
+  toggle,
+}: {
+  dictionary: Dictionary;
+  isPack: boolean;
+  toggle?: () => void;
+}) => {
   const { isSubmitting, submitError, startSubmission, finishSubmission } =
     useFormSubmission();
   const { router } = useCustomRouter();
@@ -25,7 +33,14 @@ const LoginForm = ({ dictionary }: { dictionary: Dictionary }) => {
     initialValues: initialValuesConnexion,
     validationSchema: ConnexionSchema,
     onSubmit: async (values) => {
-      handleSubmission(startSubmission, values, finishSubmission, router);
+      handleSubmission(
+        startSubmission,
+        values,
+        finishSubmission,
+        router,
+        isPack,
+        toggle
+      );
     },
   });
   useEffect(() => {

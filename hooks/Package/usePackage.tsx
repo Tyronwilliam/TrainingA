@@ -89,7 +89,8 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
   };
   const connectCandidatsAndPackage = async (
     packageId: number,
-    candidatId: number
+    candidatId: number,
+    isDislike: boolean
   ) => {
     const data = {
       candidats: [candidatId],
@@ -98,11 +99,12 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await associateCandidatsWithPackage(
         packageId,
         data,
-        jwt
+        jwt,
+        isDislike
       );
       if (response?.status === 200) {
         await fetchPackageById();
-        sendToast(false, "Talent ajouté");
+        sendToast(false, "Updated");
       } else {
         sendToast(true, response?.response?.data?.error?.message);
       }
@@ -123,7 +125,7 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       if (response?.status === 200) {
         const id = await response?.data?.data?.id;
         if (candidatId !== null) {
-          await connectCandidatsAndPackage(id, candidatId);
+          await connectCandidatsAndPackage(id, candidatId, false);
           await fetchPackageById();
           sendToast(false, "Package crée");
           setPackName("");
@@ -177,15 +179,19 @@ const PackageProvider = ({ children }: { children: React.ReactNode }) => {
       sendToast(true, "An error occured");
     }
   };
-  const detachCandidat = async (id: number, candidatId: number) => {
+  const detachCandidat = async (
+    id: number,
+    candidatId: number,
+    isDislike: boolean
+  ) => {
     const data = {
       candidats: [candidatId],
     };
     try {
-      const response = await deleteCandidat(id, data, jwt);
+      const response = await deleteCandidat(id, data, jwt, isDislike);
       if (response?.status === 200) {
         await fetchPackageById();
-        sendToast(false, "Talent deleted");
+        sendToast(false, "Updated");
       } else {
         sendToast(true, response?.response?.data?.error?.message);
       }

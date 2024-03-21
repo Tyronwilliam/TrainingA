@@ -51,6 +51,7 @@ export type LabelProps = {
   value: string | number | undefined | boolean | null;
   length?: number;
   limit?: number;
+  isCheckbox?: boolean;
 };
 export interface HandlePutPortfolioPhotoParams {
   candidatId: number;

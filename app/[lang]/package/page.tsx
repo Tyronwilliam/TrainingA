@@ -16,24 +16,23 @@ export default async function PackagePage({
   params,
 }: {
   searchParams: { pack: string };
-  // searchParams: { talentIds: string; name: string };
   params: { lang: Locale };
 }) {
   const dictionary = await getDictionary(params.lang);
-  // Fetch candidatId
   const packResponse = await getOnePackageById(searchParams?.pack)
     .then((res) => {
       return res?.data?.data?.attributes;
     })
     .catch((err) => {
       console.error("Error fetching candidatId:", err);
-      return []; // Return an empty array if there's an error
+      return [];
     });
-
-  // Check if candidatIdResponse is not null or undefined
-  const candidatId = packResponse?.candidats?.data || [];
+  const dislikesCandidat = packResponse?.dislikes?.data ?? [];
+  const candidatId = [
+    ...(packResponse?.candidats?.data ?? []),
+    ...(packResponse?.dislikes?.data ?? []),
+  ];
   const packName = packResponse?.Nom || "Package";
-  // If candidatId is not empty, fetch allCandidats
   let allCandidats = [];
   if (candidatId.length > 0) {
     allCandidats = await Promise?.all(
@@ -48,8 +47,10 @@ export default async function PackagePage({
     <main className="pt-[80px] relative mx-auto w-full min-h-full">
       <PackageLayout
         candidats={allCandidats}
+        dislikesCandidat={dislikesCandidat}
         dictionary={dictionary}
         packName={packName}
+        packId={searchParams?.pack}
       />
     </main>
   );

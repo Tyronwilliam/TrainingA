@@ -40,7 +40,7 @@ const ConnexionPage = async ({
       <PreviousNavHistory />
       <main className="w-full h-full m-auto pt-5 mb-10 flex flex-col items-center justify-center">
         {CurrentView}
-        <LoginForm dictionary={dictionary} />
+        <LoginForm dictionary={dictionary} isPack={false} />
       </main>
     </>
   );

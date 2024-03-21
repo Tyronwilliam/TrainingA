@@ -205,12 +205,6 @@ export const InputCheckBox = ({
   return (
     <div className={specificTarget} data-cy="input">
       <div className="w-full flex gap-2">
-        <Label
-          requis={requis}
-          label={label}
-          errorText={errorText}
-          value={value}
-        />{" "}
         <input
           type={"checkbox"}
           id={id}
@@ -220,6 +214,13 @@ export const InputCheckBox = ({
           checked={value}
           onBlur={formik.handleBlur}
         />
+        <Label
+          requis={requis}
+          label={label}
+          errorText={errorText}
+          value={value}
+          isCheckbox={true}
+        />{" "}
       </div>
       {helper && <Helpers classStyle="text-sm italic" helper={helper} />}
       <ErrorInput errorText={errorText} />
@@ -286,10 +287,11 @@ export const Label = ({
   value,
   length,
   limit,
+  isCheckbox,
 }: LabelProps) => {
   return (
     <label>
-      {label}:
+      {isCheckbox ? `${label}` : `${label}:`}
       {requis && (
         <span
           className={classNames({

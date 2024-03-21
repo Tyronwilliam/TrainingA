@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
-import Name from "./Name";
 import classNames from "classnames";
 import { useSession } from "next-auth/react";
+import { ReactNode } from "react";
+import Name from "./Name";
 
 const CardCandidat = ({
   talent,
@@ -11,6 +11,9 @@ const CardCandidat = ({
   showFolio,
   toggle,
   isPackagePage,
+  handleClientDetachPack,
+  packId,
+  existsInDislikes,
 }: {
   talent: any;
   children: ReactNode;
@@ -19,12 +22,19 @@ const CardCandidat = ({
   isPackagePage: boolean;
   showFolio?: boolean;
   toggle?: () => void;
+  handleClientDetachPack?: (packId: number, candidatId: number) => void;
+  packId?: string;
+  existsInDislikes: boolean;
 }) => {
   const { data: session } = useSession();
+
   return (
     <div
       style={{ flexBasis: "calc(33.33% - 20px)" }}
-      className="flex flex-col items-center justify-center gap-4 apparition__opacity"
+      className={classNames({
+        "flex flex-col items-center justify-center gap-4 apparition__opacity relative":
+          true,
+      })}
       key={talent?.id}
     >
       <div
@@ -33,6 +43,7 @@ const CardCandidat = ({
             true,
           "max-h-[435px]": showName,
           "max-h-[540px] grow": !showName,
+          cross: existsInDislikes,
         })}
       >
         {showFolio && (
@@ -56,6 +67,8 @@ const CardCandidat = ({
             //@ts-ignore
             (session?.user.filtre && !isPackagePage)
           }
+          handleClientDetachPack={handleClientDetachPack!}
+          packId={packId!}
           toggle={toggle}
           candidatId={talent?.id}
         />

@@ -10,7 +10,11 @@ interface DialogPackageProps {
   toggleInput: () => void;
   allPack: any[];
   candidatId: number | null;
-  connectCandidatsAndPackage: (packageId: number, candidatId: number) => void;
+  connectCandidatsAndPackage: (
+    packageId: number,
+    candidatId: number,
+    isDislike: boolean
+  ) => void;
   packName: string;
   useCreatePackage: () => void;
   handleInputChange: () => void;

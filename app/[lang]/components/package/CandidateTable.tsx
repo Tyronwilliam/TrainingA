@@ -1,7 +1,7 @@
 import { Dictionary } from "@/types/dictionary";
 import { useSession } from "next-auth/react";
-import { BsFillTrashFill } from "react-icons/bs";
 import DownloadButton from "../../choix/genre/[gender]/DownloadButton";
+import DetachFromPackage from "./DetachFromPackage";
 
 const CandidateTable = ({
   candidates,
@@ -67,9 +67,11 @@ const CandidateTable = ({
                     </td>
                   )}
                   <td>
-                    <BsFillTrashFill
-                      className="mx-auto cursor-pointer hover:opacity-55"
-                      onClick={() => detachCandidat(packId, candidat.id)}
+                    <DetachFromPackage
+                      detachCandidat={detachCandidat}
+                      candidatId={candidat?.id}
+                      packId={packId}
+                      isPack={false}
                     />
                   </td>
                 </tr>

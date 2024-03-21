@@ -43,7 +43,7 @@ export function generateAgeFilter(ageRanges: string[]) {
       if (ageRange.startsWith(">")) {
         ageFilter += `&filters[$or][0][Age][$between][0]=6&filters[$or][0][Age][$between][1]=16`;
       } else if (ageRange === "60+") {
-        ageFilter += `&filters[$or][0][Age][$between][0]=61&filters[$or][0][Age][$between][1]=100`;
+        ageFilter += `&filters[$or][0][Age][$between][0]=60&filters[$or][0][Age][$between][1]=100`;
       } else {
         ageFilter += `&filters[$or][0][Age][$between][0]=${start}&filters[$or][0][Age][$between][1]=${end}`;
       }
@@ -51,7 +51,7 @@ export function generateAgeFilter(ageRanges: string[]) {
       if (ageRange.startsWith(">")) {
         ageFilter += `&filters[$or][1][Age][$between][0]=6&filters[$or][1][Age][$between][1]=16`;
       } else if (ageRange === "60+") {
-        ageFilter += `&filters[$or][1][Age][$between][0]=61&filters[$or][1][Age][$between][1]=100`;
+        ageFilter += `&filters[$or][1][Age][$between][0]=60&filters[$or][1][Age][$between][1]=100`;
       } else {
         ageFilter += `&filters[$or][1][Age][$between][0]=${start}&filters[$or][1][Age][$between][1]=${end}`;
       }
