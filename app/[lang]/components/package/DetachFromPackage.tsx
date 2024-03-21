@@ -1,5 +1,3 @@
-import { useRouter } from "next/navigation";
-import React from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 import { CiCircleMinus } from "react-icons/ci";
 

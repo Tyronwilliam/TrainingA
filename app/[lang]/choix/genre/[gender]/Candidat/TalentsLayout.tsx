@@ -16,8 +16,8 @@ const TalentsLayout = ({
   pathname: string;
   toggle?: () => void;
   isPackagePage: boolean;
-  handleClientDetachPack: (packId: number, candidatId: number) => void;
-  packId: string;
+  handleClientDetachPack?: (packId: number, candidatId: number) => void;
+  packId?: string;
 }) => {
   return (
     <section className="flex flex-wrap justify-center items-center flex-col md:flex-row w-full h-fit gap-10 md:gap-5 md:justify-start p-5 md:gap-y-[50px] max-w-[1100px] mx-auto">

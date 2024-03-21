@@ -21,8 +21,8 @@ const Name = ({
   isPackage?: boolean;
   toggle?: () => void;
   candidatId?: number;
-  handleClientDetachPack: (packId: number, candidatId: number) => void;
-  packId: string;
+  handleClientDetachPack?: (packId: number, candidatId: number) => void;
+  packId?: string;
 }) => {
   const packIdToNumber = packId ? parseInt(packId) : null;
   return (
@@ -41,7 +41,7 @@ const Name = ({
         <ButtonAdd toggle={toggle!} candidatId={candidatId!} />
       ) : (
         <DetachFromPackage
-          detachCandidat={handleClientDetachPack}
+          detachCandidat={handleClientDetachPack!}
           candidatId={candidatId}
           packId={packIdToNumber}
           isPack={true}

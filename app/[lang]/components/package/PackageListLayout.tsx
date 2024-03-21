@@ -1,7 +1,6 @@
-import React, { FormEvent } from "react";
-import PackageItem from "./PackageItem"; // Adjust the import path
-import { PackSchema } from "@/types/package";
 import { Dictionary } from "@/types/dictionary";
+import { PackSchema } from "@/types/package";
+import PackageItem from "./PackageItem"; // Adjust the import path
 interface PackageListProps {
   allPack: Array<PackSchema>;
   openPackId: number | null;
