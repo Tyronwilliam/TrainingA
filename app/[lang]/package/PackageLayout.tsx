@@ -1,31 +1,32 @@
 "use client";
-import { Dictionary } from "@/types/dictionary";
-import { usePathname, useRouter } from "next/navigation";
-import React from "react";
-import TalentsLayout from "../choix/genre/[gender]/Candidat/TalentsLayout";
-import { comparerPrenom } from "./function";
 import useToggle from "@/hooks/Basic/useToggle";
 import { usePackage } from "@/hooks/Package/usePackage";
+import { Dictionary } from "@/types/dictionary";
 import { useSession } from "next-auth/react";
-import Modal from "../components/package/Modal";
+import { usePathname, useRouter } from "next/navigation";
 import LoginForm from "../auth/connexion/LoginForm";
+import TalentsLayout from "../choix/genre/[gender]/Candidat/TalentsLayout";
+import Modal from "../components/package/Modal";
+import { comparerPrenom } from "./function";
 
 const PackageLayout = ({
   packName,
   candidats,
   dictionary,
   packId,
+  dislikesCandidat,
 }: {
   packName: string;
   candidats: any[];
   dictionary: Dictionary;
   packId: string;
+  dislikesCandidat: any[];
 }) => {
   const { data: session } = useSession();
   const router = useRouter();
   const pathname = usePathname();
   const { open, toggle } = useToggle();
-  const { detachCandidat } = usePackage();
+  const { detachCandidat, connectCandidatsAndPackage } = usePackage();
 
   const sortedCandidat = candidats?.slice()?.sort(comparerPrenom);
 
@@ -33,10 +34,27 @@ const PackageLayout = ({
     if (!session) {
       toggle();
     } else {
-      await detachCandidat(packId!, candidatId!);
-      router.refresh();
+      const candidatToDetache = candidats.find(
+        (candidat) => candidat.id === candidatId
+      );
+      if (candidatToDetache) {
+        const isDisliked = dislikesCandidat.some(
+          (dislike) => dislike.id === candidatId
+        );
+        if (isDisliked) {
+          await detachCandidat(packId!, candidatId!, true);
+          await connectCandidatsAndPackage(packId!, candidatId!, false);
+        } else {
+          await detachCandidat(packId!, candidatId!, false);
+          await connectCandidatsAndPackage(packId!, candidatId!, true);
+        }
+        router.refresh();
+      } else {
+        console.error("Candidat non trouvé.");
+      }
     }
   };
+
   return (
     <section>
       <h1 className="text-center text-5xl mb-12 font-bold">{packName}</h1>
@@ -57,6 +75,7 @@ const PackageLayout = ({
           isPackagePage={true}
           handleClientDetachPack={handleClientDetachPack}
           packId={packId}
+          dislikesCandidat={dislikesCandidat}
         />
       ) : (
         <p className="text-center text-3xl font-bold uppercase">

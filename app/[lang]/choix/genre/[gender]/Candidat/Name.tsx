@@ -1,7 +1,5 @@
 import ButtonAdd from "@/app/[lang]/components/package/ButtonAdd";
 import DetachFromPackage from "@/app/[lang]/components/package/DetachFromPackage";
-import { usePackage } from "@/hooks/Package/usePackage";
-import { useSearchParams } from "next/navigation";
 
 const Name = ({
   prenom,
@@ -40,12 +38,14 @@ const Name = ({
       {isPackage ? (
         <ButtonAdd toggle={toggle!} candidatId={candidatId!} />
       ) : (
-        <DetachFromPackage
-          detachCandidat={handleClientDetachPack!}
-          candidatId={candidatId}
-          packId={packIdToNumber}
-          isPack={true}
-        />
+        packId && (
+          <DetachFromPackage
+            detachCandidat={handleClientDetachPack!}
+            candidatId={candidatId}
+            packId={packIdToNumber}
+            isPack={true}
+          />
+        )
       )}
     </div>
   );

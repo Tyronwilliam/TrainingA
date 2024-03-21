@@ -1,5 +1,6 @@
 import { BsFillTrashFill } from "react-icons/bs";
 import { CiCircleMinus } from "react-icons/ci";
+import { RiExchangeFill } from "react-icons/ri";
 
 const DetachFromPackage = ({
   detachCandidat,
@@ -22,9 +23,9 @@ const DetachFromPackage = ({
     />
   ) : (
     <button type="button" className="relative group" onClick={handleDetach}>
-      <CiCircleMinus className="w-6 h-6 hover:opacity-55" />
+      <RiExchangeFill className="w-6 h-6 hover:opacity-55" />
       <span className="group-hover:block radius hidden w-[120px] p-1 absolute text-black bg-white z-50 text-sm">
-        Supprimer
+        Oui/Non
       </span>
     </button>
   );

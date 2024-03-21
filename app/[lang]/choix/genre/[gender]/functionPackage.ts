@@ -12,13 +12,17 @@ export const handleAddToPack = (
   checked: boolean,
   candidatId: number,
   packId: number,
-  connectCandidatsAndPackage: (packageId: number, candidatId: number) => void
+  connectCandidatsAndPackage: (
+    packageId: number,
+    candidatId: number,
+    isDislike: boolean
+  ) => void
 ) => {
   if (checked) {
     sendToast(true, "Talent already in package");
     return;
   } else {
-    connectCandidatsAndPackage(packId, candidatId);
+    connectCandidatsAndPackage(packId, candidatId, false);
   }
 };
 export const generateTextFromCandidats = (

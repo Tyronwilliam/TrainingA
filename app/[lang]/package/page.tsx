@@ -27,8 +27,11 @@ export default async function PackagePage({
       console.error("Error fetching candidatId:", err);
       return [];
     });
-
-  const candidatId = packResponse?.candidats?.data || [];
+  const dislikesCandidat = packResponse?.dislikes?.data ?? [];
+  const candidatId = [
+    ...(packResponse?.candidats?.data ?? []),
+    ...(packResponse?.dislikes?.data ?? []),
+  ];
   const packName = packResponse?.Nom || "Package";
   let allCandidats = [];
   if (candidatId.length > 0) {
@@ -44,6 +47,7 @@ export default async function PackagePage({
     <main className="pt-[80px] relative mx-auto w-full min-h-full">
       <PackageLayout
         candidats={allCandidats}
+        dislikesCandidat={dislikesCandidat}
         dictionary={dictionary}
         packName={packName}
         packId={searchParams?.pack}

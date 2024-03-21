@@ -11,7 +11,11 @@ const PacksDisplay = ({
 }: {
   allPack: any[];
   candidatId: number | null;
-  connectCandidatsAndPackage: (packageId: number, candidatId: number) => void;
+  connectCandidatsAndPackage: (
+    packageId: number,
+    candidatId: number,
+    isDislike: boolean
+  ) => void;
 }) => {
   return (
     <div className="flex flex-col gap-4 max-h-40 overflow-y-scroll">
