@@ -11,6 +11,8 @@ const CardCandidat = ({
   showFolio,
   toggle,
   isPackagePage,
+  handleClientDetachPack,
+  packId,
 }: {
   talent: any;
   children: ReactNode;
@@ -19,6 +21,8 @@ const CardCandidat = ({
   isPackagePage: boolean;
   showFolio?: boolean;
   toggle?: () => void;
+  handleClientDetachPack: (packId: number, candidatId: number) => void;
+  packId: string;
 }) => {
   const { data: session } = useSession();
   return (
@@ -56,6 +60,8 @@ const CardCandidat = ({
             //@ts-ignore
             (session?.user.filtre && !isPackagePage)
           }
+          handleClientDetachPack={handleClientDetachPack}
+          packId={packId}
           toggle={toggle}
           candidatId={talent?.id}
         />
