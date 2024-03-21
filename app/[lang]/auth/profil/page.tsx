@@ -36,6 +36,33 @@ async function getSingleTalent(jwt: string) {
     return err;
   }
 }
+async function getAllCasting(jwt: string) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/castings?populate=*`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data?.data;
+  } catch (error: any) {
+    console.error(
+      "Une erreur s'est produite lors de la requête :",
+      error.message
+    );
+    return error;
+  }
+}
+
 const ProfilPage = async ({
   params: { lang },
 }: {
@@ -50,6 +77,8 @@ const ProfilPage = async ({
   }
   //@ts-ignore
   const candidat = await getSingleTalent(session?.user?.jwt);
+  //@ts-ignore
+  const castings = await getAllCasting(session?.user?.jwt);
   const dictionary = await getDictionary(lang);
   return (
     <>
@@ -66,6 +95,7 @@ const ProfilPage = async ({
               dictionary={dictionary}
               candidat={candidat?.candidat}
               getCandidatPreview={getCandidatPreview}
+              castings={castings}
             />
           </>
         )}
