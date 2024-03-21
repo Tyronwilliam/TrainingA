@@ -387,7 +387,7 @@
     "General",
     "Administrative",
     "Physionomy",
-    "Skills",
+    "Skills & Physical body",
     "Role",
     "Photos & Videos"
   ],
@@ -948,6 +948,7 @@
       }
     },
     "stepFour": {
+      "section": ["Skills & Physical body"],
       "default": {
         "checkbox": {
           "mannequinPro": {
@@ -1134,6 +1135,40 @@
             "required": false,
             "placeholder": "",
             "id": "yoga"
+          }
+        },
+        "checkboxPhysique": {
+          "tatoo": {
+            "label": "Many tatoo",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "tatoo"
+          },
+          "muscle": {
+            "label": "Very muscular",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "muscle"
+          },
+          "skinny": {
+            "label": "Thin/Lean",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "skinny"
+          },
+          "plusSize": {
+            "label": "Plus Size",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "plusSize"
           }
         },
         "default": {

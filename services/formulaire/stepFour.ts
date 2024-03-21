@@ -39,6 +39,12 @@ export const sendStepFourAndFive = async (
         Boxe: values?.boxe,
         Yoga: values?.yoga,
       },
+      PHYSIQUE: {
+        nombreux_tatouage: values?.tatoo,
+        tres_muscle: values?.muscle,
+        skinny: values?.skinny,
+        plus_size: values?.plusSize,
+      },
     },
     Agence: {
       En_Agence: values?.agence,

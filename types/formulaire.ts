@@ -95,6 +95,11 @@ export interface FormikInscriptionProps {
   boxe: boolean;
   yoga: boolean;
   equitation: boolean;
+  //
+  tatoo: boolean;
+  muscle: boolean;
+  skinny: boolean;
+  plusSize: boolean;
 }
 export interface StepType {
   label: string;

@@ -81,6 +81,12 @@ export const inscriptionInitialValues: FormikInscriptionProps = {
   boxe: false,
   yoga: false,
   equitation: false,
+  //
+  tatoo: false,
+  muscle: false,
+  skinny: false,
+  plusSize: false,
+  //
 };
 
 export const baseStepOneSchema = Yup.object().shape({

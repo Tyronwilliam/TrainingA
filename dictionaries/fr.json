@@ -426,7 +426,7 @@
     "Général",
     "Administratif",
     "Physionomie",
-    "Compétences",
+    "Compétences & Physique",
     "Rôle",
     "Photos & Vidéos"
   ],
@@ -988,6 +988,7 @@
       }
     },
     "stepFour": {
+      "section": ["Compétences", "Physique"],
       "default": {
         "checkbox": {
           "mannequinPro": {
@@ -1174,6 +1175,40 @@
             "required": false,
             "placeholder": "",
             "id": "yoga"
+          }
+        },
+        "checkboxPhysique": {
+          "tatoo": {
+            "label": "Nombreux tatouage",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "tatoo"
+          },
+          "muscle": {
+            "label": "Très musclé",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "muscle"
+          },
+          "skinny": {
+            "label": "Fin/Maigre",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "skinny"
+          },
+          "plusSize": {
+            "label": "Plus Size",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "plusSize"
           }
         },
         "default": {

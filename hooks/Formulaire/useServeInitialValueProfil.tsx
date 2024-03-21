@@ -129,6 +129,19 @@ const useServeInitialValueProfil = (candidat: any) => {
       ? Role_Candidat?.Competence?.Yoga
       : false,
     //
+    tatoo: Role_Candidat?.PHYSIQUE?.nombreux_tatouage
+      ? Role_Candidat?.PHYSIQUE?.nombreux_tatouage
+      : false,
+    muscle: Role_Candidat?.PHYSIQUE?.tres_muscle
+      ? Role_Candidat?.PHYSIQUE?.tres_muscle
+      : false,
+    skinny: Role_Candidat?.PHYSIQUE?.skinny
+      ? Role_Candidat?.PHYSIQUE?.skinny
+      : false,
+    plusSize: Role_Candidat?.PHYSIQUE?.plus_size
+      ? Role_Candidat?.PHYSIQUE?.plus_size
+      : false,
+    //
     experiencesTournage: Experience_tournage ? Experience_tournage : "",
     instagram: Instagram ? Instagram : "",
     cheveux: Physionomie?.Cheveux ? Physionomie?.Cheveux : "",
