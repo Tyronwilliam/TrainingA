@@ -11,11 +11,11 @@ export const filterObject = (
   }
 };
 export const checkFileSize = (file: File) => {
-  const maxSizeInBytes = 100 * 1024 * 1024;
+  const maxSizeInBytes = 200 * 1024 * 1024;
   if (file.size <= maxSizeInBytes) {
     return file;
   } else {
-    sendToast(true, "File size exceeds the maximum allowed size (100MB)");
+    sendToast(true, "File size exceeds the maximum allowed size (200MB)");
     return;
   }
 };

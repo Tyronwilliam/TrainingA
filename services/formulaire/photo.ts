@@ -18,10 +18,11 @@ const axiosMutationFile = async (
 };
 export const uploadFile = async (file: any, url: string, jwt: string) => {
   const formData = new FormData();
-
-  if (file instanceof File) {
-    formData.append("files", file);
-  }
+  file?.forEach((item: any) => {
+    if (item instanceof File) {
+      formData.append("files", item);
+    }
+  });
 
   const headers = {
     "Content-Type": "multipart/form-data",
@@ -40,39 +41,14 @@ export const promisesUpload = async (
   files: File[] | File | null,
   jwt: string
 ) => {
-  return (Array.isArray(files) ? files : [files]).map(async (file) => {
-    try {
-      const res = await uploadFile(
-        file,
-        `${process.env.NEXT_PUBLIC_API_URL}/upload`,
-        jwt
-      );
-      return res?.data[0];
-    } catch (err) {
-      console.error(err);
-      return err;
-    }
-  });
-};
-
-export const uploadFileInCandidat = async (
-  promisesResolved: {}[] | {},
-  candidatId: number,
-  id: string,
-  jwt?: string
-) => {
-  const data = apiObject(id, promisesResolved);
+  const arrayOfFile = Array.isArray(files) ? files : [files];
   try {
-    const res = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/candidats/${candidatId}?populate=Portfolio.Portfolio&populate=Bande_Demo`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      }
+    const res = await uploadFile(
+      arrayOfFile,
+      `${process.env.NEXT_PUBLIC_API_URL}/upload`,
+      jwt
     );
-    return res;
+    return res?.data;
   } catch (err) {
     console.error(err);
     return err;
@@ -99,6 +75,30 @@ export const putDataPortfolio = async ({
     jwt
   );
   return response;
+};
+
+export const uploadFileInCandidat = async (
+  promisesResolved: {}[] | {},
+  candidatId: number,
+  id: string,
+  jwt?: string
+) => {
+  const data = apiObject(id, promisesResolved);
+  try {
+    const res = await axios.put(
+      `${process.env.NEXT_PUBLIC_API_URL}/candidats/${candidatId}?populate=Portfolio.Portfolio&populate=Bande_Demo`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    return res;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
 };
 
 export const deletePhotos = async ({ file, jwt }: DeletePhotoParams) => {

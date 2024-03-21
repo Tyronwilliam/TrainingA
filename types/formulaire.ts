@@ -58,7 +58,7 @@ export interface FormikInscriptionProps {
   taille: string;
   chaussures: string;
   origine: string;
-  defile: boolean;
+  mannequinPro: boolean;
   danseClassique: boolean;
   danseContemporaine: boolean;
   hipHop: boolean;
@@ -78,6 +78,23 @@ export interface FormikInscriptionProps {
   autresphotos: [];
   videodepresentation: File | null;
   bandeDemo: [];
+  //
+  humoristeStandUp: boolean;
+  chant: boolean;
+  rap: boolean;
+  guitare: boolean;
+  batterie: boolean;
+  piano: boolean;
+  violon: boolean;
+  autreInstrument: boolean;
+  circassien: boolean;
+  poleDance: boolean;
+  foot: boolean;
+  tennis: boolean;
+  basket: boolean;
+  boxe: boolean;
+  yoga: boolean;
+  equitation: boolean;
 }
 export interface StepType {
   label: string;

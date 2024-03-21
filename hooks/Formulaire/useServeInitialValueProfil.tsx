@@ -55,7 +55,7 @@ const useServeInitialValueProfil = (candidat: any) => {
     nationality: Infos_Administrative?.Nationalite
       ? Infos_Administrative?.Nationalite
       : "",
-    defile: Role_Candidat?.Competence?.Mannequin_Pro
+    mannequinPro: Role_Candidat?.Competence?.Mannequin_Pro
       ? Role_Candidat?.Competence?.Mannequin_Pro
       : false,
     danseClassique: Role_Candidat?.Competence?.Danse_Classique
@@ -79,6 +79,56 @@ const useServeInitialValueProfil = (candidat: any) => {
     autres: Role_Candidat?.Competence?.Autres
       ? Role_Candidat?.Competence?.Autres
       : "",
+    //
+    humoristeStandUp: Role_Candidat?.Competence?.humoriste_Stand_up
+      ? Role_Candidat?.Competence?.humoriste_Stand_up
+      : false,
+    chant: Role_Candidat?.Competence?.Chant
+      ? Role_Candidat?.Competence?.Chant
+      : false,
+    rap: Role_Candidat?.Competence?.Rap
+      ? Role_Candidat?.Competence?.Rap
+      : false,
+    guitare: Role_Candidat?.Competence?.Guitare
+      ? Role_Candidat?.Competence?.Guitare
+      : false,
+    batterie: Role_Candidat?.Competence?.Batterie
+      ? Role_Candidat?.Competence?.Batterie
+      : false,
+    piano: Role_Candidat?.Competence?.Piano
+      ? Role_Candidat?.Competence?.Piano
+      : false,
+    violon: Role_Candidat?.Competence?.Violon
+      ? Role_Candidat?.Competence?.Violon
+      : false,
+    autreInstrument: Role_Candidat?.Competence?.Autre_instrument
+      ? Role_Candidat?.Competence?.Autre_instrument
+      : false,
+    circassien: Role_Candidat?.Competence?.Circassien
+      ? Role_Candidat?.Competence?.Circassien
+      : false,
+    poleDance: Role_Candidat?.Competence?.Pole_dance
+      ? Role_Candidat?.Competence?.Pole_dance
+      : false,
+    foot: Role_Candidat?.Competence?.Foot
+      ? Role_Candidat?.Competence?.Foot
+      : false,
+    tennis: Role_Candidat?.Competence?.Tennis
+      ? Role_Candidat?.Competence?.Tennis
+      : false,
+    basket: Role_Candidat?.Competence?.Basket
+      ? Role_Candidat?.Competence?.Basket
+      : false,
+    equitation: Role_Candidat?.Competence?.Equitation
+      ? Role_Candidat?.Competence?.Equitation
+      : false,
+    boxe: Role_Candidat?.Competence?.Boxe
+      ? Role_Candidat?.Competence?.Boxe
+      : false,
+    yoga: Role_Candidat?.Competence?.Yoga
+      ? Role_Candidat?.Competence?.Yoga
+      : false,
+    //
     experiencesTournage: Experience_tournage ? Experience_tournage : "",
     instagram: Instagram ? Instagram : "",
     cheveux: Physionomie?.Cheveux ? Physionomie?.Cheveux : "",
@@ -95,8 +145,12 @@ const useServeInitialValueProfil = (candidat: any) => {
     unique: Role_Candidat?.Unique ? Role_Candidat?.Unique : false,
     acteur: Role_Candidat?.Acteur ? Role_Candidat?.Acteur : false,
     modele: Role_Candidat?.Modele ? Role_Candidat?.Modele : false,
-    figuration: Role_Candidat?.Accepte_Figuration ? Role_Candidat?.Accepte_Figuration : false,
-    silhouette: Role_Candidat?.Accepte_Silhouette ? Role_Candidat?.Accepte_Silhouette : false,
+    figuration: Role_Candidat?.Accepte_Figuration
+      ? Role_Candidat?.Accepte_Figuration
+      : false,
+    silhouette: Role_Candidat?.Accepte_Silhouette
+      ? Role_Candidat?.Accepte_Silhouette
+      : false,
     bandeDemo: Bande_Demo ? Bande_Demo : [],
     videodepresentation: Video_Presentation ? Video_Presentation : null,
     newPhotos: Photo_Candidature?.Nouvelle_photos

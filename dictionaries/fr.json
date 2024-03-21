@@ -106,7 +106,23 @@
             "HipHop": "HipHop",
             "Sportif": "Sportif",
             "Skate": "Skate",
-            "Ski": "Ski"
+            "Ski": "Ski",
+            "humoriste_Stand_up": "Humoriste/Stand Up",
+            "Chant": "Chant",
+            "Rap": "Rap",
+            "Guitare": "Guitare",
+            "Batterie": "Batterie",
+            "Piano": "Piano",
+            "Violon": "Violon",
+            "Autre_instrument": "Autre Instrument",
+            "Circassien": "Circassien",
+            "Pole_Dance": "Pole Dance",
+            "Foot": "Foot",
+            "Tennis": "Tennis",
+            "Basket": "Basket",
+            "Boxe": "Boxe",
+            "Yoga": "Yoga",
+            "Equitation": "équitation"
           }
         },
         "origine": {
@@ -974,13 +990,13 @@
     "stepFour": {
       "default": {
         "checkbox": {
-          "defile": {
-            "label": "Défilé",
+          "mannequinPro": {
+            "label": "Mannequin Pro",
             "helper": "",
             "type": "checkbox",
             "required": false,
             "placeholder": "",
-            "id": "defile"
+            "id": "mannequinPro"
           },
           "danseClassique": {
             "label": "Danse classique",
@@ -1029,6 +1045,135 @@
             "required": false,
             "placeholder": "",
             "id": "ski"
+          },
+
+          "humoristeStandUp": {
+            "label": "Humoriste/Stand Up",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "humoristeStandUp"
+          },
+          "chant": {
+            "label": "Chant",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "chant"
+          },
+          "rap": {
+            "label": "Rap",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "rap"
+          },
+          "guitare": {
+            "label": "Guitare",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "guitare"
+          },
+          "batterie": {
+            "label": "Batterie",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "batterie"
+          },
+          "piano": {
+            "label": "Piano",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "piano"
+          },
+          "violon": {
+            "label": "Violon",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "violon"
+          },
+          "autreInstrument": {
+            "label": "Autre instrument",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "autreInstrument"
+          },
+          "circassien": {
+            "label": "Circassien",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "circassien"
+          },
+          "poleDance": {
+            "label": "Pole Dance",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "poleDance"
+          },
+          "foot": {
+            "label": "Foot",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "foot"
+          },
+          "tennis": {
+            "label": "Tennis",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "tennis"
+          },
+          "basket": {
+            "label": "Basket",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "basket"
+          },
+          "boxe": {
+            "label": "Boxe",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "boxe"
+          },
+          "equitation": {
+            "label": "Equitation",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "equitation"
+          },
+          "yoga": {
+            "label": "Yoga",
+            "helper": "",
+            "type": "checkbox",
+            "required": false,
+            "placeholder": "",
+            "id": "yoga"
           }
         },
         "default": {

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { sendToast } from "./toast";
 
 export const apiObject = (id: string, data: any) => {
