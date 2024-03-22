@@ -13,6 +13,8 @@ import TabsLayout from "./TabsLayout";
 import SingleCandidatLayout from "../../choix/genre/[gender]/[id]/SingleCandidatLayout";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Spinner from "../../components/Spinner";
+import useCasting from "@/hooks/Casting/useCasting";
+import CastingLayout from "./castingComponent/CastingLayout";
 
 export const excludeField = [
   "email",
@@ -36,6 +38,14 @@ const ProfilLayout = ({
   castings: any;
 }) => {
   const { profilInitialValues } = useServeInitialValueProfil(candidat);
+  const {
+    isSubmitting,
+    isLoadInput,
+    setIsLoadInput,
+    startSubmission,
+    finishSubmission,
+  } = useFormSubmission();
+  const { connectCandidat, dissociateCandidat } = useCasting();
   const [currentTab, setCurrentTab] = useState<number | null>(null);
   const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
   const [previewCandidat, setPreviewCandidat] = useState(null);
@@ -44,13 +54,6 @@ const ProfilLayout = ({
   const { data: session } = useSession();
   //@ts-ignore
   const jwt = session?.user?.jwt;
-  const {
-    isSubmitting,
-    isLoadInput,
-    setIsLoadInput,
-    startSubmission,
-    finishSubmission,
-  } = useFormSubmission();
 
   const mergedStepSix = {
     ...dictionary?.inscription?.stepFive?.default,
@@ -108,7 +111,6 @@ const ProfilLayout = ({
     }
   };
   useEffect(() => {
-    console.log(castings, "CASTING");
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -166,57 +168,12 @@ const ProfilLayout = ({
         </section>
       )}
 
-      <section className="w-full h-fit max-w-[730px] mt-6">
-        <h2 className="text-2xl font-bold mb-4">Casting</h2>
-        <section className="w-full h-full flex flex-wrap gap-4 ">
-          {castings &&
-            castings.length > 0 &&
-            castings.map((casting: any) => {
-              return (
-                <div
-                  className="flex flex-col gap-4 border-[1px] border-white w-full h-fit p-5 radius max-w-[230px] grow shrink-0"
-                  key={casting?.id}
-                >
-                  <div>
-                    <h2 className="text-xl font-bold mb-2">
-                      {casting?.attributes?.Titre}
-                    </h2>
-                  </div>
-                  {casting?.attributes?.Informations?.length > 0 &&
-                    casting?.attributes?.Informations?.map((infos: any) => {
-                      const dateString = infos?.Date_Casting;
-                      const formattedDate = dateString
-                        .split("-")
-                        .reverse()
-                        .join("/");
-                      return (
-                        <React.Fragment key={infos?.id}>
-                          <div className="flex gap-2 items-center">
-                            <span className="italic text-sm opacity-55">
-                              {casting?.attributes?.Lieu}
-                            </span>
-                            <span className="italic text-sm opacity-55">-</span>
-                            <span className="italic text-sm opacity-55">
-                              {formattedDate}
-                            </span>
-                          </div>
-
-                          <div className="w-full flex flex-wrap gap-2 justify-center">
-                            <button className="boutonSlideCommon radius w-44 p-2">
-                              {infos?.Disponible}
-                            </button>
-                            <button className="boutonSlideCommon radius w-44 p-2">
-                              {infos?.Indisponible}
-                            </button>
-                          </div>
-                        </React.Fragment>
-                      );
-                    })}
-                </div>
-              );
-            })}
-        </section>
-      </section>
+      <CastingLayout
+        castings={castings}
+        candidat={candidat}
+        connectCandidat={connectCandidat}
+        dissociateCandidat={dissociateCandidat}
+      />
     </>
   );
 };
