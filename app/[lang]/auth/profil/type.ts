@@ -29,3 +29,57 @@ export type TabProps = {
   title: string;
   formik: FormikProps<FormikInscriptionWithoutExcluded>;
 };
+export interface Casting {
+  id: number;
+  attributes: {
+    Titre: string;
+    Lieu: string;
+    Informations: {
+      id: number;
+      Date_Casting: string;
+      disponibles: {
+        data: { id: number }[];
+      };
+      indisponibles: {
+        data: { id: number }[];
+      };
+      Disponible: string;
+      Indisponible: string;
+    }[];
+  };
+}
+export interface CastingInfos {
+  id: number;
+  Date_Casting: string;
+  disponibles: {
+    data: { id: number }[];
+  };
+  indisponibles: {
+    data: { id: number }[];
+  };
+  Disponible: string;
+  Indisponible: string;
+}
+
+export interface Candidat {
+  id: number;
+}
+
+export interface CastingLayoutProps {
+  castings: Casting[];
+  candidat: Candidat;
+  connectCandidat: (
+    castingId: number,
+    candidatId: number,
+    dateString: string,
+    Informations: CastingInfos[],
+    infosId: number
+  ) => void;
+  dissociateCandidat: (
+    castingId: number,
+    candidatId: number,
+    dateString: string,
+    Informations: CastingInfos[],
+    infosId: number
+  ) => void;
+}

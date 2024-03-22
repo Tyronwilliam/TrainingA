@@ -8,11 +8,13 @@ import { sendToast } from "@/utils/toast";
 import { SchemaValidationProfil } from "@/utils/validationProfil";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
-import { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import TabsLayout from "./TabsLayout";
 import SingleCandidatLayout from "../../choix/genre/[gender]/[id]/SingleCandidatLayout";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Spinner from "../../components/Spinner";
+import useCasting from "@/hooks/Casting/useCasting";
+import CastingLayout from "./castingComponent/CastingLayout";
 
 export const excludeField = [
   "email",
@@ -28,12 +30,22 @@ const ProfilLayout = ({
   dictionary,
   candidat,
   getCandidatPreview,
+  castings,
 }: {
   dictionary: Dictionary;
   candidat: any;
   getCandidatPreview: (id: string) => void;
+  castings: any;
 }) => {
   const { profilInitialValues } = useServeInitialValueProfil(candidat);
+  const {
+    isSubmitting,
+    isLoadInput,
+    setIsLoadInput,
+    startSubmission,
+    finishSubmission,
+  } = useFormSubmission();
+  const { connectCandidat, dissociateCandidat } = useCasting();
   const [currentTab, setCurrentTab] = useState<number | null>(null);
   const [isCurrentlyEditing, setIsCurrentlyEditing] = useState("");
   const [previewCandidat, setPreviewCandidat] = useState(null);
@@ -42,13 +54,6 @@ const ProfilLayout = ({
   const { data: session } = useSession();
   //@ts-ignore
   const jwt = session?.user?.jwt;
-  const {
-    isSubmitting,
-    isLoadInput,
-    setIsLoadInput,
-    startSubmission,
-    finishSubmission,
-  } = useFormSubmission();
 
   const mergedStepSix = {
     ...dictionary?.inscription?.stepFive?.default,
@@ -112,10 +117,11 @@ const ProfilLayout = ({
     });
     (() => formik.validateForm())();
   }, []);
+
   return (
     <>
       <section className="flex flex-col w-full items-center justify-center ">
-        <div className="text-center italic my-3 mx-auto flex flex-col gap-2 w-full p-1">
+        <div className="text-center italic my-3 mx-auto flex flex-col gap-2 w-full p-1 max-w-[700px]">
           {dictionary?.general?.profil?.map((text: string, index: number) => {
             return <p key={index}>{text}</p>;
           })}
@@ -161,6 +167,13 @@ const ProfilLayout = ({
           </Suspense>
         </section>
       )}
+
+      <CastingLayout
+        castings={castings}
+        candidat={candidat}
+        connectCandidat={connectCandidat}
+        dissociateCandidat={dissociateCandidat}
+      />
     </>
   );
 };
