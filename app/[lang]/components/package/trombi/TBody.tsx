@@ -61,7 +61,9 @@ const TBody = ({
               <td className="p-4 border-[1px]">
                 {candidat?.attributes?.Prenom}
               </td>
-              <td className="p-4 border-[1px]">{candidat?.attributes?.Nom}</td>
+              <td className="p-4 border-[1px]">
+                {candidat?.attributes?.Nom && candidat.attributes.Nom.charAt(0)}
+              </td>
               <td className="p-4 border-[1px] text-nowrap">
                 {candidat?.attributes?.Age} ans/years
               </td>
@@ -126,18 +128,26 @@ const TBody = ({
 export default TBody;
 function FetchImage({ image }: { image: string }) {
   const [imageSrc, setImageSrc] = useState<undefined | string>(undefined);
-
   useEffect(() => {
-    fetch(image, {
-      method: "GET",
-    })
-      .then((response) => response.blob())
-      .then((blob) => {
-        const source = URL.createObjectURL(blob);
-        setImageSrc(source);
+    if (image) {
+      fetch("/api/fetchImage", {
+        method: "POST",
+        body: JSON.stringify({ body: { image } }), // Assuming your server expects a JSON body
+        headers: {
+          "Content-Type": "application/json", // Specify the content type as JSON
+        },
       })
-      .catch((error) => console.error("Error fetching image:", error));
-  }, [image]);
+        .then(async (response) => {
+          const data = await response.json();
 
+          if (!response.ok) {
+            throw new Error(data.error || "Failed to fetch image");
+          }
+
+          setImageSrc(data.res);
+        })
+        .catch((error) => console.error("Error fetching image:", error));
+    }
+  }, [image]);
   return imageSrc && <ImageCandidat image={imageSrc} />;
 }
