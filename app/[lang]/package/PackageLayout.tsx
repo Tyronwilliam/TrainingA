@@ -11,6 +11,7 @@ import TalentsLayout from "../choix/genre/[gender]/Candidat/TalentsLayout";
 import Modal from "../components/package/Modal";
 import { comparerPrenom } from "./function";
 import { ImFire } from "react-icons/im";
+import { sendToast } from "@/utils/toast";
 const PackageLayout = ({
   packName,
   candidats,
@@ -32,7 +33,7 @@ const PackageLayout = ({
   const { open, toggle } = useToggle();
   const { clientLikeCandidat } = usePackagePage();
   const sortedCandidat = candidats?.slice()?.sort(comparerPrenom);
-
+  console.log(currentClient);
   const handleClientDetachPack = async (
     packId: number,
     candidatId: number,
@@ -41,6 +42,13 @@ const PackageLayout = ({
     if (!session) {
       toggle();
     } else {
+      if (
+        currentClient?.client === undefined || //@ts-ignore
+        currentClient?.data?.id !== session?.user?.id
+      ) {
+        sendToast(true, "Ce package ne vous ai pas assigné ");
+        return;
+      }
       await clientLikeCandidat(
         packId,
         candidatId,
