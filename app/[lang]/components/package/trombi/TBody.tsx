@@ -1,30 +1,30 @@
 import ImageCandidat from "@/app/[lang]/choix/genre/[gender]/Candidat/ImageCandidat";
-import useTrombi from "@/hooks/Zip/useTrombi";
 import { ChangeEvent, useEffect, useState } from "react";
-import { CurrentPackProps } from "./TrombiLayout";
 
 const TBody = ({
-  currentPack,
   isCasting,
+  editedCandidates,
+  handleTimeChange,
+  handleRoleChange,
 }: {
-  currentPack: CurrentPackProps;
   isCasting: boolean;
+  editedCandidates: any;
+  handleTimeChange: any;
+  handleRoleChange: any;
 }) => {
-  const { handleTimeChange, handleRoleChange, saveChanges, editedCandidates } =
-    useTrombi();
   return (
     <tbody>
-      {currentPack?.attributes?.candidats?.data?.length > 0 &&
-        currentPack?.attributes?.candidats?.data?.map((candidat: any) => {
+      {editedCandidates.length > 0 &&
+        editedCandidates.map((candidat: any) => {
           return (
             <tr key={candidat?.id}>
               <td className="p-4 border-[1px]">
                 <input
                   className="text-black max-w-20 placeholder:text-gray-500 focus:text-black"
-                  type="text"
-                  value={editedCandidates[candidat.id]?.heure || ""}
+                  type="time"
+                  value={candidat?.heure || ""}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleTimeChange(candidat.id, e.target.value)
+                    handleTimeChange(e, candidat?.id, e.target.value)
                   }
                   placeholder="Heure"
                 />
@@ -33,9 +33,9 @@ const TBody = ({
                 <input
                   className="text-black max-w-20 placeholder:text-gray-500 focus:text-black"
                   type="text"
-                  value={editedCandidates[candidat.id]?.role || ""}
+                  value={candidat?.role || ""}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    handleRoleChange(candidat.id, e.target.value)
+                    handleRoleChange(e, candidat.id)
                   }
                   placeholder="Rôle"
                 />
@@ -62,7 +62,9 @@ const TBody = ({
                 {candidat?.attributes?.Prenom}
               </td>
               <td className="p-4 border-[1px]">
-                {candidat?.attributes?.Nom && candidat.attributes.Nom.charAt(0)}
+                {isCasting
+                  ? candidat?.attributes?.Nom
+                  : candidat.attributes.Nom.charAt(0)}
               </td>
               <td className="p-4 border-[1px] text-nowrap">
                 {candidat?.attributes?.Age} ans/years

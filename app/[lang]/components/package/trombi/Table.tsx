@@ -1,3 +1,4 @@
+import useTrombi from "@/hooks/Zip/useTrombi";
 import TBody from "./TBody";
 import { CurrentPackProps, TableTh } from "./TrombiLayout";
 
@@ -10,6 +11,12 @@ const Table = ({
   tableTh: TableTh;
   currentPack: CurrentPackProps;
 }) => {
+  const {
+    handleTimeChange,
+    editedCandidates,
+    sortCandidatesByTime,
+    handleRoleChange,
+  } = useTrombi(currentPack?.attributes?.candidats?.data);
   return (
     <table className="table-fixed	border-[1px]" id="pdf-content">
       <caption className="text-center uppercase text-2xl mx-auto font-bold border w-full p-2">
@@ -23,8 +30,13 @@ const Table = ({
           {Object.keys(tableTh).map((keyName, i) => {
             const label = tableTh[keyName].label;
             const isAdmin = tableTh[keyName].admin;
-
-            if (!isCasting && !isAdmin) {
+            if (keyName === "hour") {
+              return (
+                <th className="w-max p-4 border-[1px]" key={i}>
+                  <button onClick={sortCandidatesByTime}>{label}</button>
+                </th>
+              );
+            } else if (!isCasting && !isAdmin) {
               return (
                 <th className="w-max p-4 border-[1px]" key={i}>
                   {label}
@@ -42,7 +54,12 @@ const Table = ({
           })}
         </tr>
       </thead>
-      <TBody currentPack={currentPack} isCasting={isCasting} />
+      <TBody
+        isCasting={isCasting}
+        editedCandidates={editedCandidates}
+        handleTimeChange={handleTimeChange}
+        handleRoleChange={handleRoleChange}
+      />
     </table>
   );
 };
