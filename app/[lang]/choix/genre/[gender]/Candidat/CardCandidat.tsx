@@ -71,6 +71,8 @@ const CardCandidat = ({
           packId={packId!}
           toggle={toggle}
           candidatId={talent?.id}
+          existsInDislikes={existsInDislikes}
+
         />
       )}
     </div>

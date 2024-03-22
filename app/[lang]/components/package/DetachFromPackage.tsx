@@ -1,17 +1,19 @@
 import { BsFillTrashFill } from "react-icons/bs";
-import { CiCircleMinus } from "react-icons/ci";
-import { RiExchangeFill } from "react-icons/ri";
+import { FaHeart } from "react-icons/fa";
+import { FaHeartBroken } from "react-icons/fa";
 
 const DetachFromPackage = ({
   detachCandidat,
   packId,
   candidatId,
   isPack,
+  existsInDislikes,
 }: {
   detachCandidat: (packId: number, candidatId: number) => void;
   packId: number | null;
   candidatId?: number;
   isPack: boolean;
+  existsInDislikes?: boolean;
 }) => {
   const handleDetach = async () => {
     detachCandidat(packId!, candidatId!);
@@ -23,10 +25,11 @@ const DetachFromPackage = ({
     />
   ) : (
     <button type="button" className="relative group" onClick={handleDetach}>
-      <RiExchangeFill className="w-6 h-6 hover:opacity-55" />
-      <span className="group-hover:block radius hidden w-[120px] p-1 absolute text-black bg-white z-50 text-sm">
-        Oui/Non
-      </span>
+      {existsInDislikes ? (
+        <FaHeart className="w-5 h-5 hover:opacity-55" />
+      ) : (
+        <FaHeartBroken className="w-5 h-5 hover:opacity-55" />
+      )}
     </button>
   );
 };
