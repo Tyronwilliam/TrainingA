@@ -33,7 +33,6 @@ const PackageLayout = ({
   const { open, toggle } = useToggle();
   const { clientLikeCandidat } = usePackagePage();
   const sortedCandidat = candidats?.slice()?.sort(comparerPrenom);
-  console.log(currentClient);
   const handleClientDetachPack = async (
     packId: number,
     candidatId: number,
@@ -44,9 +43,9 @@ const PackageLayout = ({
     } else {
       if (
         currentClient?.client === undefined || //@ts-ignore
-        currentClient?.data?.id !== session?.user?.id
+        currentClient?.client?.data?.id !== session?.user?.id
       ) {
-        sendToast(true, "Ce package ne vous ai pas assigné ");
+        sendToast(true, "Ce package ne vous a pas été attribué");
         return;
       }
       await clientLikeCandidat(

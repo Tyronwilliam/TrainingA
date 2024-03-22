@@ -28,7 +28,6 @@ export const associateToLikes = async (
     } else {
       allClient.push(infosToAdd);
     }
-    console.log(allClient);
     const response = await axios.put(
       `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate=*`,
       {

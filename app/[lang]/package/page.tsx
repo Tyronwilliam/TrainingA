@@ -20,7 +20,7 @@ export default async function PackagePage({
   searchParams: { pack: string };
   params: { lang: Locale };
 }) {
-  const session = getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   const dictionary = await getDictionary(params.lang);
   const packResponse = await getOnePackageById(searchParams?.pack)
     .then((res) => {
@@ -32,11 +32,10 @@ export default async function PackagePage({
     });
 
   const allClient = packResponse?.Client || [];
-  const currentClient = allClient.find(
+  const currentClient = allClient.find((item: any) => {
     //@ts-ignore
-    (item: any) => item.client?.id === session?.user?.id
-  );
-  console.log(allClient);
+    return item.client?.data?.id === session?.user?.id;
+  });
   const candidatId = [
     ...(packResponse?.candidats?.data ?? []),
     ...(packResponse?.dislikes?.data ?? []),
