@@ -11,10 +11,10 @@ export const associateToCasting = async (
 ) => {
   const infosToAdd = {
     id: infosId,
-    disponibles: {
+    liste_dispo: {
       connect: data.candidats,
     },
-    indisponibles: {
+    liste_indispo: {
       disconnect: data.candidats,
     },
     Date_Casting: Date_Casting,
@@ -30,7 +30,7 @@ export const associateToCasting = async (
       newInfos.push(infosToAdd);
     }
     const response = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/castings/${id}?populate=*`,
+      `${process.env.NEXT_PUBLIC_API_URL}/castings/${id}?populate[0]=Informations.liste_dispo&populate[1]=Informations.liste_indispo`,
       {
         data: {
           Informations: newInfos,
@@ -61,10 +61,10 @@ export const dissociateToCasting = async (
 ) => {
   const infosToAdd = {
     id: infosId,
-    disponibles: {
+    liste_dispo: {
       disconnect: data.candidats,
     },
-    indisponibles: {
+    liste_indispo: {
       connect: data.candidats,
     },
     Date_Casting: Date_Casting,
@@ -80,7 +80,7 @@ export const dissociateToCasting = async (
     }
 
     const response = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/castings/${id}?populate=*`,
+      `${process.env.NEXT_PUBLIC_API_URL}/castings/${id}?populate[0]=Informations.liste_dispo&populate[1]=Informations.liste_indispo`,
       {
         data: {
           Informations: newInfos,

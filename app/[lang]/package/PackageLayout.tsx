@@ -1,63 +1,79 @@
 "use client";
 import useToggle from "@/hooks/Basic/useToggle";
-import { usePackage } from "@/hooks/Package/usePackage";
+import usePackagePage from "@/hooks/Package/usePackagePage";
 import { Dictionary } from "@/types/dictionary";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { FaHeart, FaHeartBroken } from "react-icons/fa";
+import { FaFire } from "react-icons/fa6";
 import LoginForm from "../auth/connexion/LoginForm";
 import TalentsLayout from "../choix/genre/[gender]/Candidat/TalentsLayout";
 import Modal from "../components/package/Modal";
 import { comparerPrenom } from "./function";
-
+import { ImFire } from "react-icons/im";
 const PackageLayout = ({
   packName,
   candidats,
   dictionary,
   packId,
-  dislikesCandidat,
+  allClient,
+  currentClient,
 }: {
   packName: string;
   candidats: any[];
   dictionary: Dictionary;
   packId: string;
-  dislikesCandidat: any[];
+  allClient: any;
+  currentClient: any;
 }) => {
   const { data: session } = useSession();
   const router = useRouter();
   const pathname = usePathname();
   const { open, toggle } = useToggle();
-  const { detachCandidat, connectCandidatsAndPackage } = usePackage();
-
+  const { clientLikeCandidat } = usePackagePage();
   const sortedCandidat = candidats?.slice()?.sort(comparerPrenom);
 
-  const handleClientDetachPack = async (packId: number, candidatId: number) => {
+  const handleClientDetachPack = async (
+    packId: number,
+    candidatId: number,
+    isLike?: boolean
+  ) => {
     if (!session) {
       toggle();
     } else {
-      const candidatToDetache = candidats.find(
-        (candidat) => candidat.id === candidatId
+      await clientLikeCandidat(
+        packId,
+        candidatId,
+        //@ts-ignore
+        session?.user?.jwt,
+        currentClient,
+        allClient,
+        isLike!, //@ts-ignore
+        session?.user?.id
       );
-      if (candidatToDetache) {
-        const isDisliked = dislikesCandidat.some(
-          (dislike) => dislike.id === candidatId
-        );
-        if (isDisliked) {
-          await detachCandidat(packId!, candidatId!, true);
-          await connectCandidatsAndPackage(packId!, candidatId!, false);
-        } else {
-          await detachCandidat(packId!, candidatId!, false);
-          await connectCandidatsAndPackage(packId!, candidatId!, true);
-        }
-        router.refresh();
-      } else {
-        console.error("Candidat non trouvé.");
-      }
+      router.refresh();
     }
   };
 
   return (
     <section>
       <h1 className="text-center text-5xl mb-12 font-bold">{packName}</h1>
+      {sortedCandidat?.length > 0 && (
+        <div className="flex flex-col mx-auto w-full  gap-2 items-center justify-center">
+          <div className="flex  items-center justify-center gap-2">
+            <ImFire className="w-5 h-5 hover:opacity-55 fill-green-500" />:
+            <span>Coup de coeur</span>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <FaHeart className="w-5 h-5 hover:opacity-55 fill-blue-300" />:
+            <span>Neutre</span>
+          </div>
+          <div className="flex  items-center justify-center gap-2">
+            <FaHeartBroken className="w-5 h-5 hover:opacity-55 fill-red-500" />:
+            <span>Ne me convient pas</span>
+          </div>
+        </div>
+      )}
       <Modal
         open={open}
         toggle={toggle}
@@ -75,7 +91,7 @@ const PackageLayout = ({
           isPackagePage={true}
           handleClientDetachPack={handleClientDetachPack}
           packId={packId}
-          dislikesCandidat={dislikesCandidat}
+          currentClient={currentClient}
         />
       ) : (
         <p className="text-center text-3xl font-bold uppercase">

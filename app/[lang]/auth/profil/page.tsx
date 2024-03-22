@@ -39,7 +39,7 @@ async function getSingleTalent(jwt: string) {
 async function getAllCasting(jwt: string) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/castings?populate[0]=Informations.disponibles&populate[1]=Informations.indisponibles`,
+      `${process.env.NEXT_PUBLIC_API_URL}/castings?populate[0]=Informations.liste_dispo&populate[1]=Informations.liste_indispo`,
       {
         method: "GET",
         headers: {

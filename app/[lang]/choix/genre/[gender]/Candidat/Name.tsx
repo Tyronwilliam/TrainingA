@@ -12,6 +12,7 @@ const Name = ({
   handleClientDetachPack,
   packId,
   existsInDislikes,
+  existsInLikes,
 }: {
   prenom: string;
   nom: string | undefined;
@@ -20,13 +21,18 @@ const Name = ({
   isPackage?: boolean;
   toggle?: () => void;
   candidatId?: number;
-  handleClientDetachPack?: (packId: number, candidatId: number) => void;
+  handleClientDetachPack?: (
+    packId: number,
+    candidatId: number,
+    isLike?: boolean
+  ) => void;
   packId?: string;
   existsInDislikes?: boolean;
+  existsInLikes?: boolean;
 }) => {
   const packIdToNumber = packId ? parseInt(packId) : null;
   return (
-    <div className={`flex gap-2 ${containerStyle}`}>
+    <div className={`flex gap-2 flex-wrap ${containerStyle}`}>
       <span
         className={`${classStyle} text-white select-none  uppercase font-bold inline-block  truncate whitespace-nowrap text-ellipsis`}
       >
@@ -47,6 +53,7 @@ const Name = ({
             packId={packIdToNumber}
             isPack={true}
             existsInDislikes={existsInDislikes}
+            existsInLikes={existsInLikes}
           />
         )
       )}
