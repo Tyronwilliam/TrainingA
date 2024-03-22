@@ -77,36 +77,7 @@ export const associateCandidatsWithPackage = async (
     return error;
   }
 };
-export const associateCandidatsToDislike = async (
-  id: number,
-  data: Record<string, any>,
-  jwt: string
-) => {
-  try {
-    const response = await axios.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate=*`,
-      {
-        data: {
-          dislikes: {
-            connect: data.candidats,
-          },
-        },
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      }
-    );
-    return response;
-  } catch (error: any) {
-    console.error(
-      "Une erreur s'est produite lors de la requête :",
-      error.message
-    );
-    return error;
-  }
-};
+
 export const updatePackageName = async (
   id: number,
   packName: string,

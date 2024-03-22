@@ -11,6 +11,7 @@ const Name = ({
   candidatId,
   handleClientDetachPack,
   packId,
+  existsInDislikes,
 }: {
   prenom: string;
   nom: string | undefined;
@@ -21,6 +22,7 @@ const Name = ({
   candidatId?: number;
   handleClientDetachPack?: (packId: number, candidatId: number) => void;
   packId?: string;
+  existsInDislikes?: boolean;
 }) => {
   const packIdToNumber = packId ? parseInt(packId) : null;
   return (
@@ -44,6 +46,7 @@ const Name = ({
             candidatId={candidatId}
             packId={packIdToNumber}
             isPack={true}
+            existsInDislikes={existsInDislikes}
           />
         )
       )}
