@@ -12,8 +12,8 @@ const useZipDownload = () => {
       const response = await fetch(`/api/fetchBlob?image=${url}?name=${name}`, {
         headers: {
           "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "https://agencegraziani.fr",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT",
+          "Access-Control-Allow-Origin": "https://agencegraziani.fr/",
+          "Access-Control-Allow-Methods": "GET,POST, OPTIONS",
           "Content-Type": fileType,
         },
       });
