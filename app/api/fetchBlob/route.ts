@@ -6,10 +6,18 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const image = searchParams?.get("image");
     const name = searchParams?.get("name");
+    const fileType = searchParams?.get("type")!;
     if (!image) {
       throw new Error("Image URL not provided");
     }
-    const response = await fetch(image);
+    const response = await fetch(image, {
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST, OPTIONS",
+        "Content-Type": fileType,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch image: ${response.statusText}`);
