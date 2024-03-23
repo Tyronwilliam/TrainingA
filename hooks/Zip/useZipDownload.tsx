@@ -16,7 +16,7 @@ const useZipDownload = () => {
             "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET,POST, OPTIONS",
-            "Content-Type": fileType,
+            "Content-Type": "application/octet-stream",
           },
         }
       );
