@@ -5,6 +5,8 @@ import { getDictionary } from "@/get-disctionary";
 import PackageLayout from "./PackageLayout";
 import { getOnePackageById } from "@/services/package/request";
 import { getAllCandidatsByIds } from "./function";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/auth";
 
 export const metadata: Metadata = {
   title: "Package - Agence Graziani",
@@ -18,6 +20,7 @@ export default async function PackagePage({
   searchParams: { pack: string };
   params: { lang: Locale };
 }) {
+  const session = await getServerSession(authOptions);
   const dictionary = await getDictionary(params.lang);
   const packResponse = await getOnePackageById(searchParams?.pack)
     .then((res) => {
@@ -27,7 +30,12 @@ export default async function PackagePage({
       console.error("Error fetching candidatId:", err);
       return [];
     });
-  const dislikesCandidat = packResponse?.dislikes?.data ?? [];
+
+  const allClient = packResponse?.Client || [];
+  const currentClient = allClient.find((item: any) => {
+    //@ts-ignore
+    return item.client?.data?.id === session?.user?.id;
+  });
   const candidatId = [
     ...(packResponse?.candidats?.data ?? []),
     ...(packResponse?.dislikes?.data ?? []),
@@ -44,13 +52,14 @@ export default async function PackagePage({
   }
 
   return (
-    <main className="pt-[80px] relative mx-auto w-full min-h-full">
+    <main className="pt-[50px] relative mx-auto w-full min-h-full">
       <PackageLayout
         candidats={allCandidats}
-        dislikesCandidat={dislikesCandidat}
         dictionary={dictionary}
         packName={packName}
         packId={searchParams?.pack}
+        allClient={allClient}
+        currentClient={currentClient}
       />
     </main>
   );

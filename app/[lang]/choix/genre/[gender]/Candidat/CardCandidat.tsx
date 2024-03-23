@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
+import { FaHeartBroken } from "react-icons/fa";
+import { ImFire } from "react-icons/im";
 import Name from "./Name";
 
 const CardCandidat = ({
@@ -14,6 +16,7 @@ const CardCandidat = ({
   handleClientDetachPack,
   packId,
   existsInDislikes,
+  existsInLikes,
 }: {
   talent: any;
   children: ReactNode;
@@ -22,9 +25,14 @@ const CardCandidat = ({
   isPackagePage: boolean;
   showFolio?: boolean;
   toggle?: () => void;
-  handleClientDetachPack?: (packId: number, candidatId: number) => void;
+  handleClientDetachPack?: (
+    packId: number,
+    candidatId: number,
+    isLike?: boolean
+  ) => void;
   packId?: string;
-  existsInDislikes: boolean;
+  existsInDislikes?: boolean;
+  existsInLikes?: boolean;
 }) => {
   const { data: session } = useSession();
 
@@ -43,9 +51,20 @@ const CardCandidat = ({
             true,
           "max-h-[435px]": showName,
           "max-h-[540px] grow": !showName,
-          cross: existsInDislikes,
         })}
       >
+        <FaHeartBroken
+          className={classNames({
+            "icone_hide red_heart": true,
+            icone_show: existsInDislikes,
+          })}
+        />
+        <ImFire
+          className={classNames({
+            "icone_hide green_heart": true,
+            "icone_show green_heart": existsInLikes,
+          })}
+        />
         {showFolio && (
           <div className="group absolute z-50 w-full h-full top-0 left-0 flex items-center justify-center bg-white bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-300 group-hover:bg-opacity-10">
             <span className="text-3xl font-bold text-center text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -72,7 +91,7 @@ const CardCandidat = ({
           toggle={toggle}
           candidatId={talent?.id}
           existsInDislikes={existsInDislikes}
-
+          existsInLikes={existsInLikes}
         />
       )}
     </div>

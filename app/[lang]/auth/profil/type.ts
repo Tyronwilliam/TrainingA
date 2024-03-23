@@ -37,28 +37,28 @@ export interface Casting {
     Informations: {
       id: number;
       Date_Casting: string;
-      disponibles: {
+      liste_dispo: {
         data: { id: number }[];
       };
-      indisponibles: {
+      liste_indispo: {
         data: { id: number }[];
       };
-      Disponible: string;
-      Indisponible: string;
+      Texte_Dispo: string;
+      Texte_Indispo: string;
     }[];
   };
 }
 export interface CastingInfos {
   id: number;
   Date_Casting: string;
-  disponibles: {
+  liste_dispo: {
     data: { id: number }[];
   };
-  indisponibles: {
+  liste_indispo: {
     data: { id: number }[];
   };
-  Disponible: string;
-  Indisponible: string;
+  Texte_Dispo: string;
+  Texte_Indispo: string;
 }
 
 export interface Candidat {

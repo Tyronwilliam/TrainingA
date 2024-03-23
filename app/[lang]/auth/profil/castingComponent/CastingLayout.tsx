@@ -32,11 +32,11 @@ const CastingLayout: React.FC<CastingLayoutProps> = ({
                         ?.split("-")
                         ?.reverse()
                         ?.join("/");
-                      const alreadyDisponible = infos?.disponibles?.data?.some(
+                      const alreadyDisponible = infos?.liste_dispo?.data?.some(
                         (talent) => talent?.id === candidat?.id
                       );
                       const alreadyIndisponible =
-                        infos?.indisponibles?.data?.some(
+                        infos?.liste_indispo?.data?.some(
                           (talent) => talent?.id === candidat?.id
                         );
 
@@ -49,8 +49,8 @@ const CastingLayout: React.FC<CastingLayoutProps> = ({
                           alreadyIndisponible={alreadyIndisponible}
                           connectCandidat={connectCandidat}
                           dissociateCandidat={dissociateCandidat}
-                          disponibleText={infos?.Disponible}
-                          indisponibleText={infos?.Indisponible}
+                          disponibleText={infos?.Texte_Dispo}
+                          indisponibleText={infos?.Texte_Indispo}
                           castingId={casting?.id}
                           candidatId={candidat?.id}
                           dateString={dateString}

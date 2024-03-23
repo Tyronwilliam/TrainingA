@@ -161,7 +161,7 @@ export const deleteCandidat = async (
 export const getOnePackageById = async (id: string) => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate[0]=candidats&populate[1]=dislikes`
+      `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}?populate[0]=candidats&populate[1]=dislikes&populate[2]=Client.client&populate[3]=Client.likes&populate[4]=Client.dislikes`
     );
 
     return response;

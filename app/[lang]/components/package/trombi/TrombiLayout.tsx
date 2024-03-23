@@ -74,7 +74,7 @@ const TrombiLayout = ({
               <ToggleSwitch
                 isCasting={isCasting}
                 toggleIsCasting={toggleIsCasting}
-              />
+              />{" "}
             </div>
             <AiFillCloseCircle
               onClick={toggleModalTable}

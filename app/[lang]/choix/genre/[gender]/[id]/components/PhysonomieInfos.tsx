@@ -12,7 +12,7 @@ const PhysonomieInfos = ({
     <div className="flex flex-col gap-5">
       {Object.entries(dictionary?.singleTalent.page.physionomie)?.map(
         ([key, value]) =>
-          candidat.attributes?.Physionomie[key] !== undefined && (
+          candidat?.attributes?.Physionomie[key] !== undefined && (
             <div
               key={key}
               className="flex justify-between items-center text-lg select-none"
