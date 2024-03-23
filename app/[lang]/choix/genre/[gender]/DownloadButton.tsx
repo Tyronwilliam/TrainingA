@@ -1,3 +1,4 @@
+import Spinner from "@/app/[lang]/components/Spinner";
 import { Dictionary } from "@/types/dictionary";
 import React from "react";
 import { FaDownload } from "react-icons/fa";
@@ -8,14 +9,16 @@ const DownloadButton = ({
   dictionary,
   packName,
   iconeClass,
+  isLoadFile,
 }: {
   candidat: any;
   dictionary: Dictionary;
   downloadAllFiles: (candidat: any, packName: string | null) => void;
   packName: string | null;
   iconeClass: string;
+  isLoadFile: boolean;
 }) => {
-  return (
+  return !isLoadFile ? (
     <button
       className="relative group"
       onClick={() =>
@@ -27,6 +30,8 @@ const DownloadButton = ({
         {dictionary?.general?.zipHelper}
       </span>
     </button>
+  ) : (
+    <Spinner />
   );
 };
 

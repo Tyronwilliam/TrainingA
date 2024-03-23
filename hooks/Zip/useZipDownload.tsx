@@ -1,7 +1,9 @@
 import { capitalizeFirstLetter } from "@/app/[lang]/choix/genre/[gender]/function";
 import JSZip from "jszip";
+import { useState } from "react";
 
 const useZipDownload = () => {
+  const [isLoadFile, setIsLoadFile] = useState(false);
   const downloadFile = async (
     image: string,
     name: string,
@@ -58,6 +60,7 @@ const useZipDownload = () => {
   };
 
   const downloadAllFiles = async (candidates: any, packName: string | null) => {
+    setIsLoadFile(true);
     const globalZip = new JSZip();
     const candidatArray = Array.isArray(candidates) ? candidates : [candidates];
     const nameZip = packName !== null ? packName : "Talents";
@@ -118,7 +121,7 @@ const useZipDownload = () => {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(globalBlob);
     link.download = `${nameZip}.zip`;
-
+    setIsLoadFile(false);
     // Append the link to the document, trigger a click, and remove the link
     document.body.appendChild(link);
     link.click();
@@ -127,6 +130,8 @@ const useZipDownload = () => {
 
   return {
     downloadAllFiles,
+    isLoadFile,
+    setIsLoadFile,
   };
 };
 
