@@ -12,7 +12,7 @@ const useZipDownload = () => {
       const response = await fetch(`/api/fetchBlob?image=${url}?name=${name}`, {
         headers: {
           "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Origin": "https://agencegraziani.fr",
           "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT",
           "Content-Type": fileType,
         },
@@ -43,9 +43,7 @@ const useZipDownload = () => {
       const candidateFolder = await globalZip.folder(candidateFolderName);
 
       const photosFolder = candidateFolder?.folder("Photos");
-      console.log(
-        candidate?.attributes?.Photo_de_presentation?.data?.attributes
-      );
+
       await downloadFile(
         candidate?.attributes?.Photo_de_presentation?.data?.attributes?.url,
         candidate?.attributes?.Photo_de_presentation?.data?.attributes?.name,
