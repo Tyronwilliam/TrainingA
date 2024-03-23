@@ -9,24 +9,50 @@ const useZipDownload = () => {
     fileType: string
   ) => {
     try {
-      const response = await fetch(
-        `/api/fetchBlob?image=${url}?name=${name}?type=${fileType}`,
-        {
-          headers: {
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,POST, OPTIONS",
-            "Content-Type": "application/octet-stream",
-          },
-        }
-      );
+      const response = await fetch("/api/fetchImage", {
+        method: "POST",
+        body: JSON.stringify({ body: { url } }), // Assuming your server expects a JSON body
+        headers: {
+          "Content-Type": "application/json", // Specify the content type as JSON
+        },
+      });
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error("Fail");
+        throw new Error(data.error || "Failed to fetch image");
       }
 
-      const blob = await response.blob();
+      // const response = await fetch(
+      //   `/api/fetchBlob?image=${url}?name=${name}?type=${fileType}`,
+      //   {
+      //     headers: {
+      //       "Access-Control-Allow-Headers": "Content-Type",
+      //       "Access-Control-Allow-Origin": "*",
+      //       "Access-Control-Allow-Methods": "GET,POST, OPTIONS",
+      //       "Content-Type": "application/octet-stream",
+      //     },
+      //   }
+      // );
+      // const response = await fetch(url, {
+      //   headers: {
+      //     "Access-Control-Allow-Headers": "Content-Type",
+      //     "Access-Control-Allow-Origin": "http://localhost:3000/",
+      //     "Access-Control-Allow-Methods": "GET",
+      //     "Content-Type": "application/octet-stream",
+      //   },
+      // });
+
+      const imageUrl = data.res;
+
+      // Decode base64 image data
+      const binaryImageData = atob(imageUrl.split(",")[1]);
+      const imageBuffer = new Uint8Array(binaryImageData.length);
+      for (let i = 0; i < binaryImageData.length; i++) {
+        imageBuffer[i] = binaryImageData.charCodeAt(i);
+      }
+
+      // Append the image data to the specified folder
+      folder.file(name, imageBuffer, { binary: true });
       // Append the blob to the specified folder
-      folder.file(name, blob);
     } catch (error) {
       console.error("Error downloading file:", error);
     }
