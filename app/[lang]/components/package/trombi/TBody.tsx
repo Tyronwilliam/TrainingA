@@ -141,7 +141,6 @@ function FetchImage({ image }: { image: string }) {
       })
         .then(async (response) => {
           const data = await response.json();
-
           if (!response.ok) {
             throw new Error(data.error || "Failed to fetch image");
           }
