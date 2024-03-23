@@ -13,6 +13,7 @@ const DetailsLayout = ({
   videos,
   toggleModal1,
   downloadAllFiles,
+  isLoadFile,
 }: {
   candidat: any;
   letterLastName: string | undefined;
@@ -21,6 +22,7 @@ const DetailsLayout = ({
   videos: any[];
   toggleModal1: () => void;
   downloadAllFiles: (candidat: any, packName: string | null) => void;
+  isLoadFile: boolean;
 }) => {
   const { data: session } = useSession();
   return (
@@ -40,6 +42,7 @@ const DetailsLayout = ({
             downloadAllFiles={downloadAllFiles}
             packName={null}
             iconeClass="w-6 h-6"
+            isLoadFile={isLoadFile}
           />
         )}
       </div>

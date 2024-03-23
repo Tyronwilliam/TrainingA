@@ -27,7 +27,7 @@ const SingleCandidatLayout = ({
   const photoPresention =
     candidat?.attributes?.Photo_de_presentation?.data?.attributes?.url;
   const portfolio = candidat?.attributes?.Portfolio?.Portfolio?.data;
-  const { downloadAllFiles } = useZipDownload();
+  const { downloadAllFiles, isLoadFile } = useZipDownload();
   return (
     <section className="flex flex-wrap w-full max-w-6xl min-h-[590px] justify-center items-center shrink-0 gap-6 m-auto pt-14 pb-5 px-5 md:items-start lg:gap-24">
       <ImageLayout
@@ -44,6 +44,7 @@ const SingleCandidatLayout = ({
         toggleModal1={toggleModal1}
         videos={videos}
         downloadAllFiles={downloadAllFiles}
+        isLoadFile={isLoadFile}
       />
       <CarouselLayout
         toggleModal1={toggleModal1}
