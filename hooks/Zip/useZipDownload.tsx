@@ -3,7 +3,7 @@ import JSZip from "jszip";
 
 const useZipDownload = () => {
   const downloadFile = async (
-    url: string,
+    image: string,
     name: string,
     folder: any, // Remove 'zip' and 'folder' parameters since 'folder' contains the destination folder for the file
     fileType: string
@@ -11,7 +11,7 @@ const useZipDownload = () => {
     try {
       const response = await fetch("/api/fetchImage", {
         method: "POST",
-        body: JSON.stringify({ body: { url } }), // Assuming your server expects a JSON body
+        body: JSON.stringify({ body: { image } }), // Assuming your server expects a JSON body
         headers: {
           "Content-Type": "application/json", // Specify the content type as JSON
         },
@@ -42,9 +42,8 @@ const useZipDownload = () => {
       // });
 
       const imageUrl = data.res;
-
       // Decode base64 image data
-      const binaryImageData = atob(imageUrl.split(",")[1]);
+      const binaryImageData = atob(imageUrl?.split(",")[1]);
       const imageBuffer = new Uint8Array(binaryImageData.length);
       for (let i = 0; i < binaryImageData.length; i++) {
         imageBuffer[i] = binaryImageData.charCodeAt(i);
