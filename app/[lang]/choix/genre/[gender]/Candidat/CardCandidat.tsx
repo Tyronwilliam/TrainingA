@@ -1,10 +1,9 @@
 import classNames from "classnames";
 import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
-import Name from "./Name";
 import { FaHeartBroken } from "react-icons/fa";
-import { FaFire } from "react-icons/fa6";
 import { ImFire } from "react-icons/im";
+import Name from "./Name";
 
 const CardCandidat = ({
   talent,

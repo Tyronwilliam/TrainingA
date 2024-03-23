@@ -2,16 +2,15 @@
 import useToggle from "@/hooks/Basic/useToggle";
 import usePackagePage from "@/hooks/Package/usePackagePage";
 import { Dictionary } from "@/types/dictionary";
+import { sendToast } from "@/utils/toast";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { FaHeart, FaHeartBroken } from "react-icons/fa";
-import { FaFire } from "react-icons/fa6";
+import { ImFire } from "react-icons/im";
 import LoginForm from "../auth/connexion/LoginForm";
 import TalentsLayout from "../choix/genre/[gender]/Candidat/TalentsLayout";
 import Modal from "../components/package/Modal";
 import { comparerPrenom } from "./function";
-import { ImFire } from "react-icons/im";
-import { sendToast } from "@/utils/toast";
 const PackageLayout = ({
   packName,
   candidats,
@@ -31,7 +30,8 @@ const PackageLayout = ({
   const router = useRouter();
   const pathname = usePathname();
   const { open, toggle } = useToggle();
-  const { clientLikeCandidat } = usePackagePage();
+  const { clientLikeCandidat, currentClientEtat, setCurrentClientEtat } =
+    usePackagePage(currentClient);
   const sortedCandidat = candidats?.slice()?.sort(comparerPrenom);
   const handleClientDetachPack = async (
     packId: number,
@@ -42,8 +42,8 @@ const PackageLayout = ({
       toggle();
     } else {
       if (
-        currentClient?.client === undefined || //@ts-ignore
-        currentClient?.client?.data?.id !== session?.user?.id
+        currentClientEtat?.client === undefined || //@ts-ignore
+        currentClientEtat?.client?.data?.id !== session?.user?.id
       ) {
         sendToast(true, "Ce package ne vous a pas été attribué");
         return;
@@ -61,7 +61,6 @@ const PackageLayout = ({
       router.refresh();
     }
   };
-
   return (
     <section>
       <h1 className="text-center text-5xl mb-12 font-bold">{packName}</h1>
@@ -81,6 +80,23 @@ const PackageLayout = ({
           </div>
         </div>
       )}
+      {/* @ts-ignore */}
+      {session?.user?.role === "Admin" && allClient?.length > 0 && (
+        <div className="flex gap-2 w-full max-w-[1100px] mx-auto p-5 flex-wrap">
+          {allClient.map((client: any) => {
+            return currentClientEtat?.id !== client?.id ? (
+              <button
+                key={client?.id}
+                className="boutonSlideCommon p-2 radius"
+                onClick={() => setCurrentClientEtat(client)}
+              >
+                {client?.client?.data?.attributes?.username}
+              </button>
+            ) : null;
+          })}
+        </div>
+      )}
+
       <Modal
         open={open}
         toggle={toggle}
@@ -98,7 +114,7 @@ const PackageLayout = ({
           isPackagePage={true}
           handleClientDetachPack={handleClientDetachPack}
           packId={packId}
-          currentClient={currentClient}
+          currentClient={currentClientEtat}
         />
       ) : (
         <p className="text-center text-3xl font-bold uppercase">

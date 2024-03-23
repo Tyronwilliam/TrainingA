@@ -4,8 +4,14 @@ import {
   dissociateToAll,
 } from "@/services/package/pageRequest";
 import { sendToast } from "@/utils/toast";
+import { useEffect, useState } from "react";
 
-const usePackagePage = () => {
+const usePackagePage = (currentClient: any) => {
+  const [currentClientEtat, setCurrentClientEtat] = useState(currentClient);
+
+  useEffect(() => {
+    setCurrentClientEtat(currentClient);
+  }, [currentClient]);
   const clientLikeCandidat = async (
     packId: number,
     candidatId: number,
@@ -69,7 +75,7 @@ const usePackagePage = () => {
     }
   };
 
-  return { clientLikeCandidat };
+  return { clientLikeCandidat, currentClientEtat, setCurrentClientEtat };
 };
 
 export default usePackagePage;
