@@ -9,17 +9,21 @@ const useZipDownload = () => {
     fileType: string
   ) => {
     try {
-      const response = await fetch(`/api/fetchBlob?image=${url}?name=${name}`, {
-        headers: {
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "https://agencegraziani.fr/",
-          "Access-Control-Allow-Methods": "GET,POST, OPTIONS",
-          "Content-Type": fileType,
-        },
-      });
+      const response = await fetch(
+        `/api/fetchBlob?image=${url}?name=${name}?type=${fileType}`,
+        {
+          headers: {
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,POST, OPTIONS",
+            "Content-Type": fileType,
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Fail");
       }
+
       const blob = await response.blob();
       // Append the blob to the specified folder
       folder.file(name, blob);
